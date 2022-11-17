@@ -32,5 +32,6 @@ export default defineComponent({
   text-align: left;
   margin-top: 200px;
   margin-left: 50px;
+  color: black;
 }
 </style>
