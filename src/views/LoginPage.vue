@@ -56,8 +56,7 @@ export default defineComponent({
           if (response.data.returnCode == 0) {
             // alert("登入成功");
             // console.log("a:",user.notesId);
-            const lohs = user.notesId;
-            localStorage.setItem("username", JSON.stringify(lohs));
+            localStorage.setItem("username", user.notesId);
             router.push({ path: "/LoginView" });
           } else {
             alert("請輸入正確的USERNAME");
