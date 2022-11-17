@@ -1,5 +1,47 @@
 <template>
-  <ul class="drop-down-menu">
+  <nav id="navigation">
+    <!-- <a href="#" class="logo">Studio<span>+<span></a> -->
+    <ul class="links">
+      <li class="dropdown">
+        <a href="#" class="trigger-drop">數字一▼<i class="arrow"></i></a>
+        <ul class="drop">
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="trigger-drop">數字二▼<i class="arrow"></i></a>
+        <ul class="drop">
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="trigger-drop">數字三▼<i class="arrow"></i></a>
+        <ul class="drop">
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="trigger-drop">數字四▼<i class="arrow"></i></a>
+        <ul class="drop">
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- <ul class="drop-down-menu">
     <li>
       <a href="#">數字一▼</a>
       <ul>
@@ -36,7 +78,7 @@
         <li><a href="#">4</a></li>
       </ul>
     </li>
-  </ul>
+  </ul> -->
 </template>
 
 <script lang="ts">
@@ -46,123 +88,140 @@ export default {
 </script>
 
 <style>
-/* 取消ul預設的內縮及樣式 */
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+* {
+  box-sizing: border-box;
 }
 
-ul.drop-down-menu li p {
-  width: 200px;
-  font-size: 20px;
-  line-height: 40px;
-  color: rgb(255, 255, 255);
-  margin: auto;
+body {
+  background: #33334d;
+  color: #222;
+  line-height: normal;
+  font-size: 16px;
+  font-family: sans-serif;
 }
 
-/* 橫幅整體 */
-ul.drop-down-menu {
-  width: 100%;
-  font-size: 20px;
-  line-height: 40px;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* color: white; */
-  /* border: rgb(0, 0, 0) 1px solid; */
-  display: inline-block;
-  font-family: "Open Sans", Arial, sans-serif;
-}
-
-/* navbar各別按鈕 */
-ul.drop-down-menu li {
-  position: relative;
-  white-space: nowrap;
-  transition: 0.3s;
-  /* border-right: #ccc 1px solid; */
-}
-
-ul.drop-down-menu li:hover {
-  border-top: rgb(135, 217, 255) 3px solid;
-}
-
-/* navbar 最右邊按鈕右邊邊緣 */
-ul.drop-down-menu > li:last-child {
-  border-right: none;
-}
-
-/* 第一層按鈕靠左對齊*/
-ul.drop-down-menu > li {
-  float: left;
-}
-
-/* 第二層按鈕*/
-ul.drop-down-menu ul {
-  border: #ccc 1px solid;
-  position: absolute;
-  z-index: 99;
-  left: -1px;
-  top: 100%;
-  min-width: 200px;
-  display: none;
-  /*隱藏次選單*/
-  /* transition: 0.5s; */
-}
-
-/* 第二層按鈕滑鼠滑入展開次選單*/
-ul.drop-down-menu li:hover > ul {
-  display: block;
-}
-
-/* 第二層各別按鈕*/
-ul.drop-down-menu ul li {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  /* border-bottom: rgb(39, 31, 31) 1px solid; */
-}
-
-/* 第二層選單下方邊緣*/
-ul.drop-down-menu ul li:last-child {
-  border-bottom: none;
-}
-
-ul.drop-down-menu ul ul {
-  /*第三層以後的選單出現位置與第二層不同*/
-  z-index: 999;
-  top: 10px;
-  left: 90%;
-}
-
-/* 所有超連結文字 */
-ul.drop-down-menu a {
-  background-color: rgba(255, 255, 255, 0);
-  color: rgb(255, 255, 255);
-  display: block;
-  padding: 0 50px;
+a,
+a:hover {
+  color: #33334d;
   text-decoration: none;
-  line-height: 40px;
+  font-weight: 600;
 }
 
-/* 滑鼠滑入第一層選單按鈕的變化*/
-ul.drop-down-menu a:hover {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
+nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 50px;
+  background: #fff;
+  box-shadow: 0 0px 9px 4px rgba(0, 0, 0, 0.1),
+    0 -5px 2px 2px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 580px;
+}
+nav .logo {
+  position: relative;
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 15px;
+  font-size: 22px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+nav .logo span {
+  display: inline-block;
+  position: relative;
+  top: -8px;
+  font-size: 13pt;
+}
+nav .logo:hover {
+  background: #9494b8;
+}
+nav .links {
+  float: right;
+  margin-right: 30px;
+  position: relative;
+}
+nav .links li {
+  float: left;
+  list-style: none;
+  position: relative;
+  margin: 10px;
+  display: inline-block;
+}
+nav .links li > a {
+  position: relative;
+  display: inline-block;
+  padding: 0 10px;
+  line-height: 30px;
+  height: 30px;
+}
+nav .links li > a:hover {
+  color: #fff;
+  background: #33334d;
+  border-radius: 2px;
+}
+nav .links li > a[class^="trigger-"] {
+  padding-right: 40px;
+}
+nav .links li > a .arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 35%;
+  text-align: center;
+  right: 10px;
+  border-width: 5px 5px 0 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.3) transparent;
+}
+nav .links li > a .arrow:after {
+  content: "";
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  top: -10px;
+  left: -15px;
+  position: absolute;
+  height: 15px;
+}
+nav .links li ul {
+  position: absolute;
+  left: 0;
+  margin: 0;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  display: none;
+}
+nav .links li ul > li {
+  clear: both;
+  list-style: none;
+  display: block;
+  padding: 0 10px;
+  margin: 0;
+  width: 100%;
+}
+nav .links li ul > li:hover {
+  background: #9494b8;
+}
+nav .links li ul > li:hover > a {
+  background: #9494b8;
+  color: #fff;
+}
+nav .links li:hover > .drop {
+  display: block;
+  animation: fadeInRight 0.3s ease;
+  -webkit-animation: fadeInRight 0.3s ease;
 }
 
-/* ul.drop-down-menu li a {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
-} */
-
-/* 滑鼠移入次層選單的變化*/
-ul.drop-down-menu li:hover > a {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
-  /* outline: 1px solid rgb(0, 0, 0); */
-}
-
-.welcomeword {
-  text-align: left;
-  margin-top: 200px;
-  margin-left: 50px;
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
 }
 </style>
