@@ -1,4 +1,4 @@
-<!-- axios 資料傳輸 -->
+<!-- 登入畫面、axios 資料傳輸 -->
 <template>
   <div class="background">
     <div class="gray">
@@ -21,9 +21,7 @@
           placeholder="PASSWORD"
         />
         <button class="button" @click="login()">LOG IN !</button>
-        <p class="forgot">hsieh435 FORGOT PASSWORD ?</p>
-        <!-- <p class="forgot">hsieh435</p> -->
-        <!-- {{ username }} -->
+        <!-- <p class="forgot">FORGOT PASSWORD ?</p> -->
       </div>
     </div>
   </div>
@@ -44,7 +42,7 @@ export default defineComponent({
       const user = {
         notesId: username.value,
       };
-      // console.log(user);
+      // console.log("1:",user.notesId);
 
       axios
         .post("http://localhost:8085/paymentSystem/public/getSystemJWT", {
@@ -56,6 +54,8 @@ export default defineComponent({
           if (response.data.returnCode == 0) {
             // alert("登入成功");
             // console.log("a:",user.notesId);
+            // console.log("a:",response.data.data)
+            localStorage.setItem("userJWT", response.data.data);
             localStorage.setItem("username", user.notesId);
             router.push({ path: "/LoginView" });
           } else {
@@ -170,7 +170,7 @@ export default defineComponent({
 
 .button {
   height: 50px;
-  width: 325px;
+  width: 300px;
   border-radius: 25px;
   margin: 50px 0px 0px 0px;
   /* padding-left: 25px; */
