@@ -7,27 +7,27 @@
   <nav class="nav">
     <ul class="nav__menu">
       <li class="nav__menu-item">
+        <!-- <a>{{ msg.fields1 }}</a> -->
+        <ul class="nav__submenu">
+          <li class="nav__submenu-item"><a>1</a></li>
+        </ul>
+      </li>
+      <li class="nav__menu-item">
         <a>數字一 ▼</a>
         <ul class="nav__submenu">
           <li class="nav__submenu-item"><a>1</a></li>
-          <li class="nav__submenu-item"><a>2</a></li>
-          <li class="nav__submenu-item"><a>3</a></li>
-          <li class="nav__submenu-item"><a>4</a></li>
         </ul>
       </li>
       <li class="nav__menu-item">
         <a>數字二 ▼</a>
         <ul class="nav__submenu">
           <li class="nav__submenu-item"><a>1</a></li>
-          <li class="nav__submenu-item"><a>2</a></li>
-          <li class="nav__submenu-item"><a>3</a></li>
         </ul>
       </li>
       <li class="nav__menu-item">
         <a>數字三 ▼</a>
         <ul class="nav__submenu">
           <li class="nav__submenu-item"><a>1</a></li>
-          <li class="nav__submenu-item"><a>2</a></li>
         </ul>
       </li>
       <li class="nav__menu-item">
@@ -41,9 +41,72 @@
 </template>
 
 <script lang="ts">
+import { reactive } from "vue";
+import axios from "axios";
 export default {
   name: "NavbarFun",
+
+  setup() {
+    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("userJWT");
+
+    // mount(){
+    //   const p =[]
+
+    //   for(let i = 1; i<8;i++){
+    //     p.push(i)
+    //   }
+
+    // this.
+    // }
+    axios
+      .post(
+        "http://localhost:8085/paymentSystem/api/functionGroup/findAllFunctionGroupWhereFunctionIdInPermission",
+        { token: token },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            // Bearer 跟 token 中間有一個空格
+          },
+        }
+      )
+      // post 放三個參數，url、data、config(header)
+
+      .then((response) => {
+        msg.fields = response.data.data;
+        // msg.fields1 = response.data.data[0].functionGroupName;
+        // msg.fields9 = response.data.data[9].functionGroupName;
+        console.log("e1:", msg.fields);
+        // console.log("e2:", response.data.data.length);
+      })
+
+      .catch((error) => {
+        console.log("發生錯誤");
+      });
+
+    const msg = reactive({
+      fields: "",
+      fields1: "",
+      fields9: "",
+    });
+
+    return {
+      msg,
+    };
+  },
 };
+
+// TODO:
+// 1.設一個空陣列
+// 2.承接權限功能的 functionGroupName
+// 3.跑迴圈
+// 4.設定 if 函式，如果 functionModels 為空陣列，則不必顯示
+// 5.跑子迴圈，顯現子目錄
+// 6.設定 v-for 在 css 的 li 中
+// 7.設定 css 中的 ul
+
+// 先試套入簡單的迴圈
+// 參考 https://ithelp.ithome.com.tw/articles/10214837
 </script>
 
 <style>
