@@ -42,12 +42,10 @@ export default defineComponent({
       const user = {
         notesId: username.value,
       };
-      // console.log("1:",user.notesId);
 
       axios
         .post("http://localhost:8085/paymentSystem/public/getSystemJWT", {
           notesId: user.notesId,
-          // password: "",
         })
 
         .then((response) => {
@@ -56,7 +54,7 @@ export default defineComponent({
             // console.log("a:",user.notesId);
             // console.log("a:",response.data.data)
             localStorage.setItem("userJWT", response.data.data);
-            localStorage.setItem("username", user.notesId);
+            localStorage.setItem("userId", user.notesId);
             router.push({ path: "/LoginView" });
           } else {
             alert("請輸入正確的USERNAME");
