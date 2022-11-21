@@ -1,84 +1,43 @@
 <template>
-  <nav id="navigation">
-    <!-- <a href="#" class="logo">Studio<span>+<span></a> -->
-    <ul class="links">
-      <li class="dropdown">
-        <a href="#" class="trigger-drop">數字一▼<i class="arrow"></i></a>
-        <ul class="drop">
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
+  <!-- <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,800,300"
+    rel="stylesheet"
+    type="text/css"
+  /> -->
+  <nav class="nav">
+    <ul class="nav__menu">
+      <li class="nav__menu-item">
+        <a>數字一 ▼</a>
+        <ul class="nav__submenu">
+          <li class="nav__submenu-item"><a>1</a></li>
+          <li class="nav__submenu-item"><a>2</a></li>
+          <li class="nav__submenu-item"><a>3</a></li>
+          <li class="nav__submenu-item"><a>4</a></li>
         </ul>
       </li>
-      <li class="dropdown">
-        <a href="#" class="trigger-drop">數字二▼<i class="arrow"></i></a>
-        <ul class="drop">
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
+      <li class="nav__menu-item">
+        <a>數字二 ▼</a>
+        <ul class="nav__submenu">
+          <li class="nav__submenu-item"><a>1</a></li>
+          <li class="nav__submenu-item"><a>2</a></li>
+          <li class="nav__submenu-item"><a>3</a></li>
         </ul>
       </li>
-      <li class="dropdown">
-        <a href="#" class="trigger-drop">數字三▼<i class="arrow"></i></a>
-        <ul class="drop">
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
+      <li class="nav__menu-item">
+        <a>數字三 ▼</a>
+        <ul class="nav__submenu">
+          <li class="nav__submenu-item"><a>1</a></li>
+          <li class="nav__submenu-item"><a>2</a></li>
         </ul>
       </li>
-      <li class="dropdown">
-        <a href="#" class="trigger-drop">數字四▼<i class="arrow"></i></a>
-        <ul class="drop">
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
+      <li class="nav__menu-item">
+        <a>數字四 ▼</a>
+        <ul class="nav__submenu">
+          <li class="nav__submenu-item"><a>1</a></li>
         </ul>
       </li>
     </ul>
   </nav>
-
-  <!-- <ul class="drop-down-menu">
-    <li>
-      <a href="#">數字一▼</a>
-      <ul>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#">數字二▼</a>
-      <ul>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#">數字三▼</a>
-      <ul>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#">數字四▼</a>
-      <ul>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-      </ul>
-    </li>
-  </ul> -->
 </template>
 
 <script lang="ts">
@@ -88,140 +47,110 @@ export default {
 </script>
 
 <style>
-* {
+/* 整體 */
+html {
   box-sizing: border-box;
+  /* outline: 1px black solid; */
 }
 
+/* 頁面中的所有元素，勿隨意動用 */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  /* outline: 1px black solid; */
+}
+
+/* body整體，包含背景 */
 body {
-  background: #33334d;
-  color: #222;
-  line-height: normal;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
-  font-family: sans-serif;
+  line-height: 1.5;
+  background: rgb(255, 255, 255);
+  /* border: 1px black solid; */
 }
 
-a,
-a:hover {
-  color: #33334d;
-  text-decoration: none;
-  font-weight: 600;
+/* 第一層與第二層按鈕 */
+nav ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  /* outline: 1px black solid; */
 }
 
-nav {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 50px;
-  background: #fff;
-  box-shadow: 0 0px 9px 4px rgba(0, 0, 0, 0.1),
-    0 -5px 2px 2px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  min-width: 580px;
-}
-nav .logo {
-  position: relative;
-  float: left;
-  height: 50px;
-  line-height: 50px;
-  padding: 0 15px;
-  font-size: 22px;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-nav .logo span {
-  display: inline-block;
-  position: relative;
-  top: -8px;
-  font-size: 13pt;
-}
-nav .logo:hover {
-  background: #9494b8;
-}
-nav .links {
-  float: right;
-  margin-right: 30px;
-  position: relative;
-}
-nav .links li {
-  float: left;
-  list-style: none;
-  position: relative;
-  margin: 10px;
-  display: inline-block;
-}
-nav .links li > a {
-  position: relative;
-  display: inline-block;
-  padding: 0 10px;
-  line-height: 30px;
-  height: 30px;
-}
-nav .links li > a:hover {
-  color: #fff;
-  background: #33334d;
-  border-radius: 2px;
-}
-nav .links li > a[class^="trigger-"] {
-  padding-right: 40px;
-}
-nav .links li > a .arrow {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  top: 35%;
-  text-align: center;
-  right: 10px;
-  border-width: 5px 5px 0 5px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.3) transparent;
-}
-nav .links li > a .arrow:after {
-  content: "";
-  border-left: 1px solid rgba(0, 0, 0, 0.15);
-  top: -10px;
-  left: -15px;
-  position: absolute;
-  height: 15px;
-}
-nav .links li ul {
-  position: absolute;
-  left: 0;
-  margin: 0;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  display: none;
-}
-nav .links li ul > li {
-  clear: both;
-  list-style: none;
-  display: block;
-  padding: 0 10px;
-  margin: 0;
+/* 橫幅整體 */
+.nav {
   width: 100%;
-}
-nav .links li ul > li:hover {
-  background: #9494b8;
-}
-nav .links li ul > li:hover > a {
-  background: #9494b8;
-  color: #fff;
-}
-nav .links li:hover > .drop {
-  display: block;
-  animation: fadeInRight 0.3s ease;
-  -webkit-animation: fadeInRight 0.3s ease;
+  /* height: 100%; */
+  margin: 0 auto;
+  background: rgb(46, 189, 89);
+  color: rgb(240, 240, 240);
+  /* outline: 1px black solid; */
 }
 
-@keyframes fadeInRight {
-  0% {
-    opacity: 0;
-    transform: translate3d(100%, 0, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: none;
-  }
+/* 第一層按鍵(超連結部分) */
+.nav a {
+  display: block;
+  padding: 0px 20px;
+  line-height: inherit;
+  cursor: pointer;
+  /* outline: 1px black solid; */
+}
+
+.nav__menu {
+  line-height: 45px;
+  text-transform: uppercase; /* 字母皆以大寫呈現*/
+  font-weight: 700;
+  /* outline: 1px black solid; */
+}
+
+/* 第一層按鍵(按鍵部分) */
+.nav__menu-item {
+  display: inline-block;
+  position: relative;
+  transition: 0.2s;
+  /* outline: 1px black solid; */
+}
+
+/* 第一層按鍵游標觸碰時 */
+.nav__menu-item:hover {
+  border-top: 3px solid rgb(128, 0, 182);
+  /* background-color: #9b59b6; */
+}
+
+/* 第二層選單整體 */
+.nav__menu-item:hover .nav__submenu {
+  display: block;
+  /* outline: 1px black solid; */
+}
+
+/* 第二層選單整體 */
+.nav__submenu {
+  font-weight: 300;
+  text-transform: none;
+  display: none;
+  position: absolute;
+  width: 220px;
+  background-color: rgb(128, 0, 182);
+  z-index: 100;
+  /* outline: 1px black solid; */
+}
+
+.nav__submenu-item {
+  background-color: rgb(128, 0, 182);
+  transition: 0.5s;
+}
+
+/* 第二層選單游標觸碰時 */
+.nav__submenu-item:hover {
+  background: radial-gradient(
+    circle at center,
+    rgb(155, 89, 182),
+    rgb(128, 0, 182)
+  );
+  color: rgb(0, 0, 0);
+  /* border: 3px solid rgb(0, 0, 0); */
 }
 </style>
