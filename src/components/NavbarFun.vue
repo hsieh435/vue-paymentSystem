@@ -6,42 +6,24 @@
   /> -->
   <nav class="nav">
     <ul class="nav__menu">
-      <li class="nav__menu-item">
-        <!-- <a>{{ msg.fields1 }}</a> -->
+      <li
+        class="nav__menu-item"
+        v-for="(item, index) in functionGroups.value"
+        :key="index"
+      >
+        <a>{{ item.functionGroupName }} ▼</a>
         <ul class="nav__submenu">
-          <li class="nav__submenu-item"><a>1</a></li>
+          <li class="nav__submenu-item"><a>{{}}</a></li>
         </ul>
       </li>
-      <li class="nav__menu-item">
-        <a>數字一 ▼</a>
-        <ul class="nav__submenu">
-          <li class="nav__submenu-item"><a>1</a></li>
-        </ul>
-      </li>
-      <li class="nav__menu-item">
-        <a>數字二 ▼</a>
-        <ul class="nav__submenu">
-          <li class="nav__submenu-item"><a>1</a></li>
-        </ul>
-      </li>
-      <li class="nav__menu-item">
-        <a>數字三 ▼</a>
-        <ul class="nav__submenu">
-          <li class="nav__submenu-item"><a>1</a></li>
-        </ul>
-      </li>
-      <li class="nav__menu-item">
-        <a>數字四 ▼</a>
-        <ul class="nav__submenu">
-          <li class="nav__submenu-item"><a>1</a></li>
-        </ul>
-      </li>
+
+      <!-- 分隔線 -->
     </ul>
   </nav>
 </template>
 
 <script lang="ts">
-import { reactive } from "vue";
+import { ref, reactive } from "vue";
 import axios from "axios";
 export default {
   name: "NavbarFun",
@@ -50,15 +32,6 @@ export default {
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("userJWT");
 
-    // mount(){
-    //   const p =[]
-
-    //   for(let i = 1; i<8;i++){
-    //     p.push(i)
-    //   }
-
-    // this.
-    // }
     axios
       .post(
         "http://localhost:8085/paymentSystem/api/functionGroup/findAllFunctionGroupWhereFunctionIdInPermission",
@@ -73,25 +46,35 @@ export default {
       // post 放三個參數，url、data、config(header)
 
       .then((response) => {
-        msg.fields = response.data.data;
-        // msg.fields1 = response.data.data[0].functionGroupName;
-        // msg.fields9 = response.data.data[9].functionGroupName;
-        console.log("e1:", msg.fields);
-        // console.log("e2:", response.data.data.length);
+        // functionGroupName
+        // mainFunction.fields0 = response.data.data;
+        functionGroups.value = response.data.data;
+
+        console.log("D1:", functionGroups);
+
+        // 分隔線
       })
 
       .catch((error) => {
         console.log("發生錯誤");
       });
 
-    const msg = reactive({
-      fields: "",
-      fields1: "",
-      fields9: "",
-    });
+    const functionGroups = reactive({ value: null });
+
+    // console.log("E1:", mainFunction.fields0);
+    // console.log("E2:", mainFunction.fields1);
+    // console.log("E3:", mainFunction.fields2);
+    // console.log("E4:", mainFunction.fields3);
+    // console.log("E5:", mainFunction.fields4);
+    // console.log("E6:", mainFunction.fields5);
+    // console.log("E7:", mainFunction.fields6);
+
+    // class function {
+    //     public functionGroups="",
+    // }
 
     return {
-      msg,
+      functionGroups,
     };
   },
 };
