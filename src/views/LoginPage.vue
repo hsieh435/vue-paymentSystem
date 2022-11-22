@@ -21,7 +21,7 @@
           placeholder="PASSWORD"
         />
         <button class="button" @click="login()">LOG IN !</button>
-        <!-- <p class="forgot">FORGOT PASSWORD ?</p> -->
+        <p class="forgot">FORGOT PASSWORD ?</p>
       </div>
     </div>
   </div>
