@@ -1,9 +1,5 @@
 <template>
-  <!-- <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:400,800,300"
-    rel="stylesheet"
-    type="text/css"
-  /> -->
+  <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800,300" rel="stylesheet" type="text/css"/> -->
   <nav class="nav">
     <ul class="nav__menu">
       <li
@@ -12,12 +8,17 @@
         :key="index"
       >
         <a>{{ item.functionGroupName }} ▼</a>
+
         <ul class="nav__submenu">
-          <li class="nav__submenu-item"><a>{{}}</a></li>
+          <li
+            class="nav__submenu-item"
+            v-for="(func, index) in item.functionModels"
+            :key="index"
+          >
+            <a>{{ func.functionName }}</a>
+          </li>
         </ul>
       </li>
-
-      <!-- 分隔線 -->
     </ul>
   </nav>
 </template>
@@ -46,13 +47,9 @@ export default {
       // post 放三個參數，url、data、config(header)
 
       .then((response) => {
-        // functionGroupName
-        // mainFunction.fields0 = response.data.data;
         functionGroups.value = response.data.data;
 
         console.log("D1:", functionGroups);
-
-        // 分隔線
       })
 
       .catch((error) => {
@@ -60,14 +57,6 @@ export default {
       });
 
     const functionGroups = reactive({ value: null });
-
-    // console.log("E1:", mainFunction.fields0);
-    // console.log("E2:", mainFunction.fields1);
-    // console.log("E3:", mainFunction.fields2);
-    // console.log("E4:", mainFunction.fields3);
-    // console.log("E5:", mainFunction.fields4);
-    // console.log("E6:", mainFunction.fields5);
-    // console.log("E7:", mainFunction.fields6);
 
     // class function {
     //     public functionGroups="",
@@ -78,18 +67,6 @@ export default {
     };
   },
 };
-
-// TODO:
-// 1.設一個空陣列
-// 2.承接權限功能的 functionGroupName
-// 3.跑迴圈
-// 4.設定 if 函式，如果 functionModels 為空陣列，則不必顯示
-// 5.跑子迴圈，顯現子目錄
-// 6.設定 v-for 在 css 的 li 中
-// 7.設定 css 中的 ul
-
-// 先試套入簡單的迴圈
-// 參考 https://ithelp.ithome.com.tw/articles/10214837
 </script>
 
 <style>
