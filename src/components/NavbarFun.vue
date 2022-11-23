@@ -1,5 +1,9 @@
 <template>
-  <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800,300" rel="stylesheet" type="text/css"/> -->
+  <!-- <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,800,300"
+    rel="stylesheet"
+    type="text/css"
+  /> -->
   <nav class="nav">
     <ul class="nav__menu">
       <li
@@ -7,8 +11,9 @@
         v-for="(item, index) in functionGroups.value"
         :key="index"
       >
-        <a>{{ item.functionGroupName }} ▼</a>
-
+        <a v-if="item.functionModels.length > 0"
+          >{{ item.functionGroupName }}▼</a
+        >
         <ul class="nav__submenu">
           <li
             class="nav__submenu-item"
@@ -22,6 +27,13 @@
     </ul>
   </nav>
 </template>
+
+<!-- 
+  TODO:
+  1.將功能按鍵連結到其他頁面
+  2.製作假頁面
+  3.串接其 url 路徑
+-->
 
 <script lang="ts">
 import { ref, reactive } from "vue";
@@ -50,6 +62,7 @@ export default {
         functionGroups.value = response.data.data;
 
         console.log("D1:", functionGroups);
+        // console.log("D2:", functionGroups);
       })
 
       .catch((error) => {
@@ -57,9 +70,11 @@ export default {
       });
 
     const functionGroups = reactive({ value: null });
+    console.log("E1:", functionGroups);
 
     // class function {
     //     public functionGroups="",
+    //     public functionModels="",
     // }
 
     return {
