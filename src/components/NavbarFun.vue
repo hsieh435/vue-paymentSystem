@@ -26,6 +26,13 @@
       </li>
     </ul>
   </nav>
+
+  <!-- 
+    備註：
+    1. v-if 下達的條件式之意思，為符合條件式就顯現該 html 標籤
+    2. 使用 v-for 需先創建一組 reactive，再由個別物件下去渲染，同時須下達 key 值
+    3.
+  -->
 </template>
 
 <!-- 
@@ -61,7 +68,7 @@ export default {
       .then((response) => {
         functionGroups.value = response.data.data;
 
-        console.log("D1:", functionGroups);
+        // console.log("D1:", functionGroups);
         // console.log("D2:", functionGroups);
       })
 
@@ -70,7 +77,7 @@ export default {
       });
 
     const functionGroups = reactive({ value: null });
-    console.log("E1:", functionGroups);
+    // console.log("E1:", functionGroups);
 
     // class function {
     //     public functionGroups="",
