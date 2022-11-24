@@ -81,6 +81,50 @@ const routes: Array<RouteRecordRaw> = [
       }
     ]
   },
+  {
+    path: '/LoginView/companyMaintenance',
+    name: 'CompanyMaintain',
+    component: NormalLayout,
+    children:[
+      {
+        path:"",
+        component: () => import('../views/subfunction/managerGroup/CompanyMaintenance.vue')
+      }
+    ]
+  },
+  {
+    path: '/LoginView/psRoleList',
+    name: 'RoleManagement',
+    component: NormalLayout,
+    children:[
+      {
+        path:"",
+        component: () => import('../views/subfunction//managerGroup/RoleManagement.vue')
+      }
+    ]
+  },
+  {
+    path: '/LoginView/psUserList',
+    name: 'UserMaintain',
+    component: NormalLayout,
+    children:[
+      {
+        path:"",
+        component: () => import('../views/subfunction/managerGroup/UserMaintain.vue')
+      }
+    ]
+  },
+  {
+    path: '/LoginView/userLoginQuery',
+    name: 'LoginRecord',
+    component: NormalLayout,
+    children:[
+      {
+        path:"",
+        component: () => import('../views/subfunction/managerGroup/LoginRecord.vue')
+      }
+    ]
+  },
 ]
 
 const router = createRouter({
