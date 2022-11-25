@@ -1,7 +1,7 @@
 <template>
   <NavbarFun />
   <div>
-    <h1>登入記錄查詢</h1>
+    <h1>專案完工作業</h1>
   </div>
   <backToLoginPage />
 </template>
@@ -9,7 +9,7 @@
 <script lang="ts">
 import backToLoginPage from "../../../components/backToLoginPage.vue";
 export default {
-  name: "LoginRecord",
+  name: "ProjectCompleted",
   components: {
     backToLoginPage,
   },

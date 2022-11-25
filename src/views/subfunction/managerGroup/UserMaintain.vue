@@ -1,13 +1,18 @@
 <template>
   <NavbarFun />
   <div>
-    <h1>這是使用者維護頁面</h1>
+    <h1>使用者維護</h1>
   </div>
+  <backToLoginPage />
 </template>
 
 <script lang="ts">
+import backToLoginPage from "../../../components/backToLoginPage.vue";
 export default {
   name: "UserMaintain",
+  components: {
+    backToLoginPage,
+  },
 };
 </script>
 

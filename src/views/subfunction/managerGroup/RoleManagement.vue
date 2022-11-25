@@ -1,14 +1,18 @@
 <template>
   <NavbarFun />
   <div>
-    <h1>這是角色與權限管理頁面</h1>
+    <h1>角色與權限管理</h1>
   </div>
-  <button>返回</button>
+  <backToLoginPage />
 </template>
 
 <script lang="ts">
+import backToLoginPage from "../../../components/backToLoginPage.vue";
 export default {
   name: "RoleManagement",
+  components: {
+    backToLoginPage,
+  },
 };
 </script>
 

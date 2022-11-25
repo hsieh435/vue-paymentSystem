@@ -1,15 +1,18 @@
 <!-- 登入後的畫面 -->
 <template>
-  <NavbarFun />
   <div>
-    <h1>這是公司別維護頁面</h1>
+    <h1>公司別維護</h1>
   </div>
-  <button>返回</button>
+  <backToLoginPage />
 </template>
 
 <script lang="ts">
+import backToLoginPage from "../../../components/backToLoginPage.vue";
 export default {
   name: "CompanyMaintain",
+  components: {
+    backToLoginPage,
+  },
 };
 </script>
 
