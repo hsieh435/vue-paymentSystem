@@ -1,6 +1,6 @@
 <!-- 登入後的畫面 -->
 <template>
-  <NavbarFun />
+  <LoadingIO v-model="lod" v-if="isLoading"></LoadingIO>
   <h3 class="welcome">
     {{ msg.userName }} 你好 <br />
     USERNAME：{{ msg.userID }} <br />
@@ -11,12 +11,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted } from "vue";
+import { defineComponent, ref, reactive, onMounted } from "vue";
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
+import LoadingIO from "../components/LoadingIO.vue";
+// import VueLoading from "vue"
 export default defineComponent({
   name: "LoginView",
+  components: {
+    LoadingIO,
+  },
 
   setup() {
     const userId = localStorage.getItem("userId");
@@ -24,6 +29,16 @@ export default defineComponent({
     const router = useRouter();
     // console.log("A:", token);
     // console.log("B:", userId);
+
+    const lod = ref({ value: null });
+
+    setTimeout(loadingview, 2000);
+    function loadingview() {
+      // lod.value = false
+      const isLoading: any = false;
+      console.log("K1:", isLoading);
+      console.log("K2:", lod);
+    }
 
     axios
       .post(
@@ -66,9 +81,13 @@ export default defineComponent({
       localStorage.removeItem("userJWT");
       router.push("./");
     }
+
     return {
       msg,
       logout,
+      lod,
+      isLoading: true,
+      // isLoading: false,
     };
   },
 });

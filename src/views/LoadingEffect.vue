@@ -9,24 +9,37 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted } from "vue";
 import LoadingIO from "../components/LoadingIO.vue";
 export default defineComponent({
   name: "LoadingEffect",
+  components: {
+    LoadingIO,
+  },
 
   mounted() {
     setTimeout(() => {
       this.isLoading = false;
-    }, 1000);
+      console.log("M:", this.isLoading);
+    }, 1500);
   },
   data() {
     return {
       isLoading: true,
     };
   },
-  components: {
-    LoadingIO,
-  },
+
+  // setup() {
+  //   onMounted(() => {
+  //     setTimeout(() => {
+  //       this.isLoading = false;
+  //       console.log("M:", this.isLoading);
+  //     }, 1000);
+  //   });
+  //   return {
+  //     isLoading: true,
+  //   };
+  // },
 });
 </script>
 

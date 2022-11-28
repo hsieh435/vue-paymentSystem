@@ -6,11 +6,11 @@
   
   <script lang="ts">
   import { defineComponent } from "vue";
-  // import NavbarFun from "../components/NavbarFun.vue";
+  import NavbarFun from "../components/NavbarFun.vue";
   export default defineComponent({
-    // components: {
-    //   NavbarFun,
-    // },
+    components: {
+      NavbarFun,
+    },
   });
   </script>
   

@@ -14,14 +14,14 @@
           v-model="username"
           placeholder="USERNAME"
         />
-        <input
+        <!-- <input
           class="inputdata"
           type="password"
           id="password"
           placeholder="PASSWORD"
-        />
+        /> -->
         <button class="button" @click="login()">LOG IN !</button>
-        <p class="forgot">FORGOT PASSWORD ?</p>
+        <!-- <p class="forgot">FORGOT PASSWORD ?</p> -->
       </div>
     </div>
   </div>
@@ -137,15 +137,15 @@ export default defineComponent({
 .inputarea {
   width: 70%;
   height: 300px;
-  margin-top: 30px;
+  margin: 30px 0px 0px 0px;
   background-color: rgba(46, 47, 51);
-  /* outline: 1px solid rgb(255, 255, 255); */
   position: absolute;
   top: 100px;
   left: 15%;
   display: flex;
   align-items: center;
   flex-direction: column;
+  /* outline: 1px solid rgb(255, 255, 255); */
 }
 
 .inputdata {
@@ -171,7 +171,6 @@ export default defineComponent({
   width: 300px;
   border-radius: 25px;
   margin: 50px 0px 0px 0px;
-  /* padding-left: 25px; */
   border: 0px;
   font-size: 24px;
   color: rgb(0, 0, 0);

@@ -10,7 +10,6 @@
             <input
                 type="text"
                 v-model="msg"
-                ref="inputDom"
                 class="formcon"
                 placeholder="Username"
                 aria-label="Username"
@@ -19,7 +18,6 @@
             <label class="labelword">請輸入帳號：</label><br />
             <input
                 type="text"
-                ref="inputDom"
                 class="formcon"
                 placeholder="Useraccount"
                 aria-label="Username"
