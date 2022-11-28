@@ -2,7 +2,7 @@
   <div class="loading">
     <img
       class="img"
-      src="../assets/images/Spinner-1s-200px.gif"
+      src="../assets/images/Spinner-2s-200px.gif"
       alt="loading..."
       width="200"
     />
@@ -16,9 +16,10 @@ export default {
 </script>
 
 <style>
+
 .loading {
   position: absolute;
-  z-index: 1000;
+  z-index: 100000;
   background-color: white;
   height: 100%;
   width: 100%;
@@ -28,7 +29,8 @@ export default {
 
 .loading.img {
   position: relative;
-  margin: auto;
-  margin-top: 10%;
+  top: 0px;
+  /* margin: auto; */
+  /* margin-top: 10%; */
 }
 </style>

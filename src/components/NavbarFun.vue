@@ -1,9 +1,5 @@
 <template>
-  <!-- <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:400,800,300"
-    rel="stylesheet"
-    type="text/css"
-  /> -->
+  <router />
   <nav class="nav">
     <ul class="nav__menu">
       <li
@@ -12,7 +8,7 @@
         :key="index"
       >
         <a v-if="item.functionModels.length > 0"
-          >{{ item.functionGroupName }}▼</a
+          >{{ item.functionGroupName }} ▼</a
         >
         <ul class="nav__submenu">
           <li
@@ -20,7 +16,7 @@
             v-for="(func, index) in item.functionModels"
             :key="index"
           >
-            <a>{{ func.functionName }}</a>
+            <a @click="routerTo(func.url)">{{ func.functionName }}</a>
           </li>
         </ul>
       </li>
@@ -30,27 +26,24 @@
   <!-- 
     備註：
     1. v-if 下達的條件式之意思，為符合條件式就顯現該 html 標籤
+    v-if="item.functionModels.length > 0"
     2. 使用 v-for 需先創建一組 reactive，再由個別物件下去渲染，同時須下達 key 值
     3.
   -->
 </template>
 
-<!-- 
-  TODO:
-  1.將功能按鍵連結到其他頁面
-  2.製作假頁面
-  3.串接其 url 路徑
--->
-
 <script lang="ts">
 import { ref, reactive } from "vue";
 import axios from "axios";
+import { useRoute, useRouter } from "vue-router";
+import router from "../router/index";
 export default {
   name: "NavbarFun",
 
   setup() {
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("userJWT");
+    const router = useRouter();
 
     axios
       .post(
@@ -82,10 +75,16 @@ export default {
     // class function {
     //     public functionGroups="",
     //     public functionModels="",
+    //     public url="",
     // }
+
+    function routerTo(url: string) {
+      router.push(url);
+    }
 
     return {
       functionGroups,
+      routerTo,
     };
   },
 };
@@ -160,10 +159,10 @@ nav ul {
 }
 
 /* 第一層按鍵游標觸碰時 */
-.nav__menu-item:hover {
-  border-top: 3px solid rgb(128, 0, 182);
+/* .nav__menu-item:hover { */
+  /* border-top: 3px solid rgb(128, 0, 182); */
   /* background-color: #9b59b6; */
-}
+/* } */
 
 /* 第二層選單整體 */
 .nav__menu-item:hover .nav__submenu {
@@ -195,7 +194,17 @@ nav ul {
     rgb(155, 89, 182),
     rgb(128, 0, 182)
   );
+}
+
+.nav__submenu-item a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  transition: 0.5s;
+  /* border: 1px solid rgb(0, 0, 0); */
+}
+
+.nav__submenu-item a:hover {
   color: rgb(0, 0, 0);
-  /* border: 3px solid rgb(0, 0, 0); */
+  /* border: 1px solid rgb(0, 0, 0); */
 }
 </style>
