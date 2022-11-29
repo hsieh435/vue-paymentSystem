@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import NormalLayout from "../layout/NormalLayout.vue";
 import LoginLayout from "../layout/LoginLayout.vue";
+import NotFound from "../components/NotFound.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -435,8 +436,19 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
-
       // 分隔線，結束
+    ],
+  },
+  {
+    path: "/LoginView",
+    name: "LoginView",
+    component: NormalLayout,
+    children: [
+      {
+        path: "",
+        name:'',
+        component: () => import("../views/LoginView.vue"),
+      },
     ],
   },
   {
@@ -473,15 +485,9 @@ const routes: Array<RouteRecordRaw> = [
     ],
   },
   {
-    path: "/LoginView",
-    name: "LoginView",
-    component: NormalLayout,
-    children: [
-      {
-        path: "",
-        component: () => import("../views/LoginView.vue"),
-      },
-    ],
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: NotFound,
   },
 ];
 

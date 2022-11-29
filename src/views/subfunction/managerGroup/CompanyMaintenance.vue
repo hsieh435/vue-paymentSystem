@@ -7,6 +7,8 @@
 </template>
 
 <script lang="ts">
+import NavbarFun from "../../../components/NavbarFun.vue";
+import LoadingIO from "../../../components/LoadingIO.vue";
 import backToLoginPage from "../../../components/backToLoginPage.vue";
 export default {
   name: "CompanyMaintain",

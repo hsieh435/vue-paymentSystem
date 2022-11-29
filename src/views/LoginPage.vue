@@ -31,6 +31,7 @@
 import { defineComponent, ref } from "vue";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
+import LoadingIO from '../components/LoadingIO.vue'
 export default defineComponent({
   name: "loginpPage",
 

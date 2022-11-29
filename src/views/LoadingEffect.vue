@@ -1,9 +1,5 @@
 <template>
   <div>
-    <LoadingIO v-if="isLoading"></LoadingIO>
-  </div>
-
-  <div>
     <p class="word">Hello World！</p>
   </div>
 </template>
@@ -14,20 +10,20 @@ import LoadingIO from "../components/LoadingIO.vue";
 export default defineComponent({
   name: "LoadingEffect",
   components: {
-    LoadingIO,
+    // NavbarFun,
   },
 
-  mounted() {
-    setTimeout(() => {
-      this.isLoading = false;
-      console.log("M:", this.isLoading);
-    }, 1500);
-  },
-  data() {
-    return {
-      isLoading: true,
-    };
-  },
+  // mounted() {
+  //   setTimeout(() => {
+  //     this.isLoading = false;
+  //     console.log("M:", this.isLoading);
+  //   }, 1500);
+  // },
+  // data() {
+  //   return {
+  //     isLoading: true,
+  //   };
+  // },
 
   // setup() {
   //   onMounted(() => {

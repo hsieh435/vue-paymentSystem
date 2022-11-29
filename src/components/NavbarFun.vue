@@ -39,6 +39,9 @@ import { useRoute, useRouter } from "vue-router";
 import router from "../router/index";
 export default {
   name: "NavbarFun",
+  components: {
+    // router,
+  },
 
   setup() {
     const userId = localStorage.getItem("userId");
@@ -62,7 +65,6 @@ export default {
         functionGroups.value = response.data.data;
 
         // console.log("D1:", functionGroups);
-        // console.log("D2:", functionGroups);
       })
 
       .catch((error) => {
@@ -160,8 +162,8 @@ nav ul {
 
 /* 第一層按鍵游標觸碰時 */
 /* .nav__menu-item:hover { */
-  /* border-top: 3px solid rgb(128, 0, 182); */
-  /* background-color: #9b59b6; */
+/* border-top: 3px solid rgb(128, 0, 182); */
+/* background-color: #9b59b6; */
 /* } */
 
 /* 第二層選單整體 */

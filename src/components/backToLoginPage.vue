@@ -1,6 +1,5 @@
 <template>
   <button class="back" @click="back()">返回主頁面</button>
-  <!-- <button to="/LoginView">返回主頁面</button> -->
 </template>
 
 <script lang="ts">

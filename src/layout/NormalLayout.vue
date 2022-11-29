@@ -1,4 +1,5 @@
 <template>
+  <LoadingIO></LoadingIO>
   <nav>
     <router-link to="/home">Home</router-link> |
     <router-link to="/about">About</router-link> |
@@ -13,10 +14,12 @@
 
 <script lang="ts">
 import NavbarFun from "../components/NavbarFun.vue";
+import LoadingIO from "../components/LoadingIO.vue";
 export default {
   name: "NormalLayout",
   components: {
     NavbarFun,
+    LoadingIO,
   },
 };
 </script>

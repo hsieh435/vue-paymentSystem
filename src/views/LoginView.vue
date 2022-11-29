@@ -1,11 +1,11 @@
 <!-- 登入後的畫面 -->
 <template>
-  <LoadingIO v-model="lod" v-if="isLoading"></LoadingIO>
+  <!-- <h2>{{ msg.userName }} 你好</h2> -->
   <h3 class="welcome">
-    {{ msg.userName }} 你好 <br />
+    {{ msg.userName }} 你好<br />
     USERNAME：{{ msg.userID }} <br />
     部門：{{ msg.userDepartment }} <br />
-    職級：{{ msg.userClass }}
+    職位：{{ msg.userClass }}
   </h3>
   <button class="logout" @click="logout()">登出</button>
 </template>
@@ -15,13 +15,8 @@ import { defineComponent, ref, reactive, onMounted } from "vue";
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
-import LoadingIO from "../components/LoadingIO.vue";
-// import VueLoading from "vue"
 export default defineComponent({
   name: "LoginView",
-  components: {
-    LoadingIO,
-  },
 
   setup() {
     const userId = localStorage.getItem("userId");
@@ -29,16 +24,6 @@ export default defineComponent({
     const router = useRouter();
     // console.log("A:", token);
     // console.log("B:", userId);
-
-    const lod = ref({ value: null });
-
-    setTimeout(loadingview, 2000);
-    function loadingview() {
-      // lod.value = false
-      const isLoading: any = false;
-      console.log("K1:", isLoading);
-      console.log("K2:", lod);
-    }
 
     axios
       .post(
@@ -70,7 +55,6 @@ export default defineComponent({
       userDepartment: "",
       userClass: "",
     });
-
     // console.log("C1:", msg.userName);
     // console.log("C2:", msg.userID);
     // console.log("C3:", msg.userDepartment);
@@ -85,9 +69,6 @@ export default defineComponent({
     return {
       msg,
       logout,
-      lod,
-      isLoading: true,
-      // isLoading: false,
     };
   },
 });
@@ -95,7 +76,7 @@ export default defineComponent({
 
 <style>
 .welcome {
-  line-height: 2em;
+  line-height: 2rem;
   text-align: left;
   margin-top: 100px;
   margin-left: 20px;
