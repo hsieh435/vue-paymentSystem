@@ -1,4 +1,6 @@
 <template>
+  <LoadingIO></LoadingIO>
+  <NormalLayout></NormalLayout>
   <div>
     <p class="word">Hello World！</p>
   </div>
@@ -7,35 +9,13 @@
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
 import LoadingIO from "../components/LoadingIO.vue";
+import NormalLayout from "../layout/NormalLayout.vue";
 export default defineComponent({
   name: "LoadingEffect",
   components: {
-    // NavbarFun,
+    NormalLayout,
+    LoadingIO,
   },
-
-  // mounted() {
-  //   setTimeout(() => {
-  //     this.isLoading = false;
-  //     console.log("M:", this.isLoading);
-  //   }, 1500);
-  // },
-  // data() {
-  //   return {
-  //     isLoading: true,
-  //   };
-  // },
-
-  // setup() {
-  //   onMounted(() => {
-  //     setTimeout(() => {
-  //       this.isLoading = false;
-  //       console.log("M:", this.isLoading);
-  //     }, 1000);
-  //   });
-  //   return {
-  //     isLoading: true,
-  //   };
-  // },
 });
 </script>
 

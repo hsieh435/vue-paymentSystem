@@ -20,8 +20,8 @@
 }
 
 nav {
-  padding-top: 30px;
-  z-index: 10;
+  // padding-top: 30px;
+  // z-index: 10;
   // outline:1px solid black;
 
   a {

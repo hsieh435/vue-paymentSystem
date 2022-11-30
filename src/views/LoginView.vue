@@ -15,8 +15,12 @@ import { defineComponent, ref, reactive, onMounted } from "vue";
 import "bootstrap/dist/css/bootstrap.css";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
+// import LoadingIO from "../components/LoadingIO.vue"
 export default defineComponent({
   name: "LoginView",
+  components:{
+    // LoadingIO,
+  },
 
   setup() {
     const userId = localStorage.getItem("userId");

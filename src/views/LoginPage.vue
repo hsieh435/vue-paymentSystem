@@ -1,6 +1,8 @@
 <!-- 登入畫面、axios 資料傳輸 -->
 <template>
   <div class="background">
+    <!-- <LoadingIO></LoadingIO> -->
+    <!-- <LoadingIO v-if="lod == true"></LoadingIO> -->
     <div class="gray">
       <div class="title">
         <div class="greenball"></div>
@@ -31,13 +33,17 @@
 import { defineComponent, ref } from "vue";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
-import LoadingIO from '../components/LoadingIO.vue'
+import LoadingIO from "../components/LoadingIO.vue";
 export default defineComponent({
   name: "loginpPage",
+  components: {
+    // LoadingIO,
+  },
 
   setup() {
     const router = useRouter();
     const username = ref();
+    const lod = ref();
 
     const login = () => {
       const user = {
@@ -73,6 +79,7 @@ export default defineComponent({
     return {
       username,
       login,
+      lod,
     };
   },
 });
@@ -88,7 +95,6 @@ export default defineComponent({
   background-color: rgb(197, 197, 197);
   width: 100%;
   height: 100vh;
-  /* outline: 1px solid black; */
   position: absolute;
   top: 0px;
 }
