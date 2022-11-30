@@ -1,8 +1,7 @@
 <!-- 登入畫面、axios 資料傳輸 -->
 <template>
   <div class="background">
-    <!-- <LoadingIO></LoadingIO> -->
-    <!-- <LoadingIO v-if="lod == true"></LoadingIO> -->
+    <LoadingIO v-if="lod == false"></LoadingIO>
     <div class="gray">
       <div class="title">
         <div class="greenball"></div>
@@ -37,7 +36,7 @@ import LoadingIO from "../components/LoadingIO.vue";
 export default defineComponent({
   name: "loginpPage",
   components: {
-    // LoadingIO,
+    LoadingIO,
   },
 
   setup() {
@@ -50,6 +49,9 @@ export default defineComponent({
         notesId: username.value,
       };
 
+      lod.value = false;
+      console.log("K2:", lod.value);
+
       axios
         .post("http://localhost:8085/paymentSystem/public/getSystemJWT", {
           notesId: user.notesId,
@@ -58,22 +60,26 @@ export default defineComponent({
         .then((response) => {
           if (response.data.returnCode == 0) {
             // alert("登入成功");
-            // console.log("a:",user.notesId);
-            // console.log("a:",response.data.data)
+            // console.log("A1:",user.notesId);
+            // console.log("A2:",response.data.data)
             localStorage.setItem("userJWT", response.data.data);
             localStorage.setItem("userId", user.notesId);
             router.push({ path: "/LoginView" });
           } else {
             alert("請輸入正確的USERNAME");
           }
-          // alert(JSON.stringify(response.user));
+          // alert("A3:",JSON.stringify(response.user));
         })
         .catch((error) => {
-          // console.log(error);
-          // alert(error);
+          console.log(error);
+          alert(error);
           alert("發生錯誤");
+        })
+        .finally(() => {
+          lod.value = true;
         });
-      // 用.then 和.catch 去處理接收成功和接收失敗結果。
+      // 1.用.then 和.catch 去處理接收成功和接收失敗結果。
+      // 2.".finally" 為 TYPE SCRIPT 之功能，做出結尾之用
     };
 
     return {

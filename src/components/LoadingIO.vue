@@ -7,7 +7,8 @@
       width="200"
     />
   </div> -->
-  <div class="loading" v-if="lod == null">
+  <div class="loading">
+  <!-- <div class="loading" v-if="lod == null"> -->
     <div class="sk-fading-circle">
       <div class="sk-circle1 sk-circle"></div>
       <div class="sk-circle2 sk-circle"></div>
@@ -30,17 +31,17 @@ export default {
   name: "LoadingIO",
 
   setup() {
-    const lod = ref();
-    console.log("K1:", lod.value);
+    // const lod = ref();
+    // console.log("K1:", lod.value);
 
-    setTimeout(loadingview, 1000);
-    function loadingview() {
-      lod.value = false;
-      console.log("K2:", lod.value);
-    }
+    // setTimeout(loadingview, 1000);
+    // function loadingview() {
+    //   lod.value = false;
+    //   console.log("K2:", lod.value);
+    // }
 
     return {
-      lod,
+      // lod,
     };
   },
 };
