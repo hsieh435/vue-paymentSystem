@@ -1,5 +1,4 @@
 <template>
-  <router />
   <nav class="nav">
     <ul class="nav__menu">
       <li
@@ -33,15 +32,12 @@
 </template>
 
 <script lang="ts">
-import { ref, reactive } from "vue";
+import { defineComponent, ref, reactive } from "vue";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
-import router from "../router/index";
-export default {
+export default defineComponent({
   name: "NavbarFun",
-  components: {
-    // router,
-  },
+  components: {},
 
   setup() {
     const userId = localStorage.getItem("userId");
@@ -72,7 +68,7 @@ export default {
       });
 
     const functionGroups = reactive({ value: null });
-    // console.log("E1:", functionGroups);
+    // console.log("D2:", functionGroups);
 
     // class function {
     //     public functionGroups="",
@@ -89,10 +85,10 @@ export default {
       routerTo,
     };
   },
-};
+});
 </script>
 
-<style>
+<style scoped>
 /* 整體 */
 html {
   box-sizing: border-box;

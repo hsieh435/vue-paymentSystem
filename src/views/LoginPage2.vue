@@ -1,5 +1,4 @@
 <!-- ref 寫法 -->
-
 <template>
     <div>
         <div>使用者姓名：{{ msg }}</div>
@@ -57,7 +56,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .group {
     position: relative;
     display: flex;

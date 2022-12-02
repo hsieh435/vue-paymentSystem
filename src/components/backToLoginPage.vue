@@ -3,9 +3,11 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import { useRoute, useRouter } from "vue-router";
-export default {
+export default defineComponent({
   name: "backToLoginPage",
+  components: {},
 
   setup() {
     const router = useRouter();
@@ -16,7 +18,7 @@ export default {
       back,
     };
   },
-};
+});
 </script>
 
 <style>

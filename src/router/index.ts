@@ -1,9 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import NormalLayout from "../layout/NormalLayout.vue";
-import LoginLayout from "../layout/LoginLayout.vue";
+import NormalLayout from "../components/layout/NormalLayout.vue";
+import LoginLayout from "../components/layout/LoginLayout.vue";
 import NotFound from "../components/NotFound.vue";
-import LoadingIO from "../components/LoadingIO.vue"
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -19,7 +18,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/about",
-    name: "about",
+    name: "AboutView",
     component: NormalLayout,
     children: [
       {
@@ -32,7 +31,6 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "loginpage",
     component: LoginLayout,
-    // component: LoadingIO,
     children: [
       {
         path: "",
@@ -448,7 +446,7 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: "",
-        name:'',
+        name: "",
         component: () => import("../views/LoginView.vue"),
       },
     ],
@@ -478,7 +476,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/LoadingEffect",
     name: "LoadingEffect",
-    // component: NormalLayout,
+    component: NormalLayout,
     children: [
       {
         path: "",

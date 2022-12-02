@@ -1,8 +1,7 @@
 <!-- 登入後的畫面 -->
 <template>
-  <!-- <h2>{{ msg.userName }} 你好</h2> -->
   <h3 class="welcome">
-    {{ msg.userName }} 你好<br />
+    {{ msg.userName }} 你好 <br />
     USERNAME：{{ msg.userID }} <br />
     部門：{{ msg.userDepartment }} <br />
     職位：{{ msg.userClass }}
@@ -11,23 +10,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, onMounted } from "vue";
-import "bootstrap/dist/css/bootstrap.css";
+import { defineComponent, ref, reactive } from "vue";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
-// import LoadingIO from "../components/LoadingIO.vue"
 export default defineComponent({
   name: "LoginView",
-  components:{
-    // LoadingIO,
-  },
+  components: {},
 
   setup() {
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("userJWT");
     const router = useRouter();
-    // console.log("A:", token);
-    // console.log("B:", userId);
+
+    // console.log("B1:", token);
+    // console.log("B2:", userId);
 
     axios
       .post(
@@ -78,17 +74,13 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .welcome {
   line-height: 2rem;
   text-align: left;
   margin-top: 100px;
   margin-left: 20px;
   color: black;
-}
-
-nav {
-  padding-top: 0px;
 }
 
 .logout {

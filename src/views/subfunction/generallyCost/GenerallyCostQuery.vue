@@ -1,23 +1,20 @@
+<!-- 個別功能頁面 -->
 <template>
-  <NavbarFun />
-  <div>
-    <h1>一般帳款查詢</h1>
-  </div>
-  <backToLoginPage />
+  <h1 class="subfunctiontitle">一般帳款查詢</h1>
+  <backToLoginPage></backToLoginPage>
 </template>
 
 <script lang="ts">
+import { defineComponent, ref, inject } from "vue";
+import "@/views/subfunction/subfunction.css";
 import backToLoginPage from "../../../components/backToLoginPage.vue";
-export default {
+export default defineComponent({
   name: "GenerallyCostQuery",
   components: {
     backToLoginPage,
   },
-};
+  setup() {
+    return {};
+  },
+});
 </script>
-
-<style>
-nav {
-  padding-top: 0px;
-}
-</style>

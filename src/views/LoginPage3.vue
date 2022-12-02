@@ -63,7 +63,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .group {
     position: relative;
     display: flex;

@@ -1,7 +1,9 @@
 <template>
-  <div class="about">
+  <div>
     <h1>This is an about page</h1>
   </div>
+
+  <p>---------------------------- 分隔線 ----------------------------</p>
 
   <ul>
     <p v-for="(item, index) in foodsArray" :key="item.id">
@@ -10,17 +12,21 @@
   </ul>
   <br />
 
-  <!-- 分隔線 -->
+  <p>---------------------------- 分隔線 ----------------------------</p>
 
   <ul>
     <p v-for="(city, id) in cities" :key="id">{{ city.id }}.{{ city.name }}</p>
   </ul>
+  <br />
+
+  <p>---------------------------- 分隔線 ----------------------------</p>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from "vue";
 export default defineComponent({
-  name: "AboutPage",
+  name: "AboutView",
+  components: {},
 
   setup() {
     // 分隔線
@@ -43,15 +49,15 @@ export default defineComponent({
       },
     ];
 
-    console.log("F1:", foodsArray[0].id);
-    console.log("F2:", foodsArray[0].name);
-    console.log("F3:", foodsArray[0].price);
-    console.log("F4:", foodsArray[1].id);
-    console.log("F5:", foodsArray[1].name);
-    console.log("F6:", foodsArray[1].price);
-    console.log("F7:", foodsArray[2].id);
-    console.log("F8:", foodsArray[2].name);
-    console.log("F9:", foodsArray[2].price);
+    // console.log("F1:", foodsArray[0].id);
+    // console.log("F2:", foodsArray[0].name);
+    // console.log("F3:", foodsArray[0].price);
+    // console.log("F4:", foodsArray[1].id);
+    // console.log("F5:", foodsArray[1].name);
+    // console.log("F6:", foodsArray[1].price);
+    // console.log("F7:", foodsArray[2].id);
+    // console.log("F8:", foodsArray[2].name);
+    // console.log("F9:", foodsArray[2].price);
 
     // 分隔線
 
@@ -71,8 +77,8 @@ export default defineComponent({
     ]);
 
     return {
-      cities,
       foodsArray,
+      cities,
     };
   },
 });

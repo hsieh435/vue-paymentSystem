@@ -1,25 +1,30 @@
-<!-- 登入後的畫面 -->
+<!-- 個別功能頁面 -->
 <template>
-  <div>
-    <h1>公司別維護</h1>
-  </div>
-  <backToLoginPage />
+  <h1 class="subfunctiontitle">公司別維護</h1>
+  <backToLoginPage></backToLoginPage>
 </template>
 
 <script lang="ts">
-import NavbarFun from "../../../components/NavbarFun.vue";
-import LoadingIO from "../../../components/LoadingIO.vue";
+import { defineComponent, ref, inject } from "vue";
+import "@/views/subfunction/subfunction.css";
 import backToLoginPage from "../../../components/backToLoginPage.vue";
-export default {
+export default defineComponent({
   name: "CompanyMaintain",
   components: {
     backToLoginPage,
   },
-};
-</script>
+  setup() {
+    const vol: any = inject("valueoflod");
+    vol.value = null;
+    console.log("N1:", vol.value);
+    // inject("要傳遞的資料名稱");
 
-<style>
-nav {
-  padding-top: 0px;
-}
-</style>
+    setTimeout(loadingview, 1000);
+    function loadingview() {
+      vol.value = false;
+      console.log("N2:", vol.value);
+    }
+    return {};
+  },
+});
+</script>

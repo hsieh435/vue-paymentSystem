@@ -1,7 +1,6 @@
 <!-- 登入畫面、axios 資料傳輸 -->
 <template>
   <div class="background">
-    <LoadingIO v-if="lod == false"></LoadingIO>
     <div class="gray">
       <div class="title">
         <div class="greenball"></div>
@@ -22,35 +21,35 @@
           placeholder="PASSWORD"
         /> -->
         <button class="button" @click="login()">LOG IN !</button>
-        <!-- <p class="forgot">FORGOT PASSWORD ?</p> -->
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, inject } from "vue";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
-import LoadingIO from "../components/LoadingIO.vue";
 export default defineComponent({
   name: "loginpPage",
-  components: {
-    LoadingIO,
-  },
+  components: {},
 
   setup() {
     const router = useRouter();
     const username = ref();
-    const lod = ref();
+
+    const vol: any = inject("valueoflod");
+    // inject("要傳遞的資料名稱");
+    // vol.value = null;
+    // console.log("K1:", vol.value);
 
     const login = () => {
       const user = {
         notesId: username.value,
       };
 
-      lod.value = false;
-      console.log("K2:", lod.value);
+      vol.value = null;
+      // console.log("K2:", vol.value);
 
       axios
         .post("http://localhost:8085/paymentSystem/public/getSystemJWT", {
@@ -68,41 +67,38 @@ export default defineComponent({
           } else {
             alert("請輸入正確的USERNAME");
           }
-          // alert("A3:",JSON.stringify(response.user));
+          // console.log("A3:",JSON.stringify(response.user));
         })
         .catch((error) => {
-          console.log(error);
-          alert(error);
           alert("發生錯誤");
         })
         .finally(() => {
-          lod.value = true;
+          vol.value = true;
         });
       // 1.用.then 和.catch 去處理接收成功和接收失敗結果。
-      // 2.".finally" 為 TYPE SCRIPT 之功能，做出結尾之用
+      // 2.".finally(() => {})" 為 TYPE SCRIPT 之功能，做出結尾之用，以免輸入錯誤時仍持續執行 LoadingForever 畫面
     };
 
     return {
       username,
       login,
-      lod,
     };
   },
 });
 </script>
 
-<style>
-* {
+<style scoped>
+/* * {
   position: relative;
   margin: 0;
-}
+} */
 
 .background {
   background-color: rgb(197, 197, 197);
   width: 100%;
   height: 100vh;
   position: absolute;
-  top: 0px;
+  /* top: 0px; */
 }
 
 .gray {
@@ -111,9 +107,9 @@ export default defineComponent({
   border-radius: 10px;
   margin: 100px auto auto auto;
   background-color: rgba(46, 47, 51);
-  /* outline: white 1px solid; */
   position: relative;
   transition: 0.3s;
+  /* outline: white 1px solid; */
 }
 
 .gray:hover {
@@ -127,8 +123,8 @@ export default defineComponent({
   background-color: rgba(46, 47, 51);
   display: flex;
   justify-content: center;
-  /* outline: 1px solid white; */
   position: absolute;
+  /* outline: 1px solid white; */
 }
 
 .signinword {
