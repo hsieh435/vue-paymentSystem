@@ -1,5 +1,9 @@
 <template>
-  <h1 class="notfoundword">404 NOT FOUND</h1>
+  <h1 class="notfoundword">
+    404 <br />
+    NOT FOUND
+  </h1>
+  <p>The resource requested could not be found on this server!</p>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
