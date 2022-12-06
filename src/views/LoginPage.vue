@@ -47,6 +47,7 @@ export default defineComponent({
       const user = {
         notesId: username.value,
       };
+      // console.log("K1:", username.value);
 
       vol.value = null;
       // console.log("K2:", vol.value);
@@ -75,8 +76,8 @@ export default defineComponent({
         .finally(() => {
           vol.value = true;
         });
-      // 1.用.then 和.catch 去處理接收成功和接收失敗結果。
-      // 2.".finally(() => {})" 為 TYPE SCRIPT 之功能，做出結尾之用，以免輸入錯誤時仍持續執行 LoadingForever 畫面
+      // 1.用.then 和.catch 去處理 axios 傳輸資料後接收成功和接收失敗結果。
+      // 2.".finally(() => {})" 為 TYPE SCRIPT 之語法，做出結尾之用，以輸入結束後仍持續執行 LoadingForever 畫面
     };
 
     return {

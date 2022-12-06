@@ -3,8 +3,8 @@
   <h3 class="welcome">
     {{ msg.userName }} 你好 <br />
     USERNAME：{{ msg.userID }} <br />
-    部門：{{ msg.userDepartment }} <br />
-    職位：{{ msg.userClass }}
+    部門：{{ msg.userOrganization }} <br />
+    職位：{{ msg.userTitle }}
   </h3>
   <button class="logout" @click="logout()">登出</button>
 </template>
@@ -41,8 +41,8 @@ export default defineComponent({
       .then((response) => {
         msg.userName = response.data.data.userInfo.userName;
         msg.userID = response.data.data.userInfo.notesId;
-        msg.userDepartment = response.data.data.userInfo.userOrganization;
-        msg.userClass = response.data.data.userInfo.userTitle;
+        msg.userOrganization = response.data.data.userInfo.userOrganization;
+        msg.userTitle = response.data.data.userInfo.userTitle;
       })
 
       .catch((error) => {
@@ -52,13 +52,13 @@ export default defineComponent({
     const msg = reactive({
       userName: "",
       userID: "",
-      userDepartment: "",
-      userClass: "",
+      userOrganization: "",
+      userTitle: "",
     });
     // console.log("C1:", msg.userName);
     // console.log("C2:", msg.userID);
-    // console.log("C3:", msg.userDepartment);
-    // console.log("C4:", msg.userClass);
+    // console.log("C3:", msg.userOrganization);
+    // console.log("C4:", msg.userTitle);
 
     function logout() {
       localStorage.removeItem("userId");

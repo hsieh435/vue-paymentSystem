@@ -1,4 +1,4 @@
-<!-- 作用域插槽 -->
+<!-- 具名插槽 -->
 <template>
   <div class="myList">
     <ul>

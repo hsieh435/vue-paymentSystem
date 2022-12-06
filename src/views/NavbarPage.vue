@@ -1,6 +1,6 @@
 <!-- 匯入 bootstrap 的 navbar -->
 <template>
-    <NavbarFun1 />
+    <NavbarFun />
     <div>123456789</div>
   </template>
   

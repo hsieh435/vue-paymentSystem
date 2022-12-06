@@ -1,6 +1,5 @@
 <!-- 
-slot 用法
-參考網站：https://ithelp.ithome.com.tw/articles/10273298?sc=iThomeR
+slot 用法，參考網站：https://ithelp.ithome.com.tw/articles/10273298?sc=iThomeR
 -->
 
 <template>
@@ -18,8 +17,8 @@ slot 用法
 
   <p>---------------------------- 分隔線 ----------------------------</p>
 
-  <h1 class="line">Scoped slot 作用域插槽</h1>
-  <div class="about">
+  <h1 class="line">Named slot 具名插槽</h1>
+  <div>
     <ChildInfo2 v-for="bookList in bookLists" :key="bookList.name">
       <template #name>
         <p>{{ bookList.name }}</p>
@@ -48,9 +47,11 @@ slot 用法
       解構寫法。即等於 #result="slotProps"，然後下面寫 slotProps.quantity
     -->
     <template #result="{ quantity }">
-      已選購：{{ item.title }} x {{ quantity }}
+      已選購：{{ item.title }} x {{ quantity }}<br />
+      價格：{{ item.price * quantity * 1 }}
     </template>
   </ChildInfo3>
+  <p>總價：</p>
 
   <p>---------------------------- 分隔線 ----------------------------</p>
 
@@ -59,25 +60,23 @@ slot 用法
     Dynamic slot（動態插槽），使用 dynamic slot（動態插槽）可以在父層動態指定插槽。
   -->
 
-  <!-- <template> -->
   <div v-for="area in areas" :key="area">
     <input type="radio" :id="area" :value="area" v-model="chosenArea" />
-    <label :for="area"> {{ area }} </label>
+    <label :for="area" class="radiocheck"> {{ area }} </label>
   </div>
   <ChildInfo4>
     <template v-slot:[chosenArea]>
       <!-- 在父層使用中括號動態指定 slot -->
-      <span class="">我現在在：{{ chosenArea }}</span>
+      <span>我現在在：{{ chosenArea }}</span>
     </template>
   </ChildInfo4>
-  <!-- </template> -->
 
   <!-- 結束 -->
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { Options, Vue } from "vue-class-component";
+import { defineComponent, ref } from "vue";
+// import { Options, Vue } from "vue-class-component";
 // import HelloWorld from "@/components/HelloWorld.vue";
 import ChildInfo1 from "../components/ChildInfo1.vue";
 import ChildInfo2 from "../components/ChildInfo2.vue";
@@ -126,7 +125,7 @@ export default defineComponent({
       },
       {
         title: "純白 T-shirt",
-        price: 100,
+        price: 150,
         sizes: ["XS", "S"],
       },
       {
@@ -136,8 +135,8 @@ export default defineComponent({
       },
     ];
 
-    const chosenArea = "nav";
-    const areas = ["nav", "main", "footer"];
+    const chosenArea = ref("學校");
+    const areas = ["家裡", "公司", "學校"];
 
     return {
       sections,
@@ -156,22 +155,23 @@ export default defineComponent({
 //   },
 // })
 // export default class HomeView extends Vue {}
-
-// 1. slot（插槽）的作用是把父層內容，塞到子元件裏。有插口才能插，所以，子元件要先建立 slot，父層才可以把資料塞進去。
-// 2. 常用情景是，利用 slot 打造自己的 UI 模版，把靜態資料在父層塞進去這模版中。非常適合用於大量複製同樣樣式元件，以及傳入靜態資料的情況。
-// 3. 使用 named slot（具名插槽）可以把資料分配到指定位置。
-// 4. 使用 scoped slot（作用域插槽）可以把子元件裏的資料，傳出去給父層使用和處理，之後透過插槽塞回到子元件裏。
-// 5. 使用 dynamic slot（動態插槽）可以在父層動態指定插槽。
 </script>
 
-<style>
+<style scoped>
 .line {
   margin-top: 50px;
 }
-</style>
 
+.radiocheck {
+  padding-left: 5px;
+}
+</style>
 <!-- 
-  <template v-slot:footer>我要指定name是footer的slot內容</template>
-  v-slot只能添加在<template>上
-  替換符是 #，v-slot:footer 可改寫為 #footer
+  1. slot（插槽）的作用是把父層內容，塞到子元件裏。有插口才能插，所以，子元件要先建立 slot，父層才可以把資料塞進去。
+  2. 常用情景是，利用 slot 打造自己的 UI 模版，把靜態資料在父層塞進去這模版中。非常適合用於大量複製同樣樣式元件，以及傳入靜態資料的情況。
+  3. 使用 named slot（具名插槽）可以把資料分配到指定位置。
+  4. 使用 scoped slot（作用域插槽）可以把子元件裏的資料，傳出去給父層使用和處理，之後透過插槽塞回到子元件裏。
+  5. 使用 dynamic slot（動態插槽）可以在父層動態指定插槽。
+  6.<template v-slot:footer>我要指定name是footer的slot內容</template>，v-slot只能添加在<template>上，替換符是 #，v-slot:footer 可改寫為 #footer
+  7.設定為 v-slot:default，則渲染出預設模式的內容
 -->

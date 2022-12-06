@@ -1,6 +1,6 @@
-<!-- 作用域插槽 -->
+<!-- 動態插槽 -->
 <template>
-  <p v-for="area in areas" :key="area" :class="area">
+  <p v-for="area in areas" :key="area">
     <slot :name="area"></slot>
   </p>
 </template>
@@ -11,7 +11,7 @@ export default defineComponent({
   name: "ChildInfo4",
 
   setup() {
-    const areas = ["nav", "main", "footer"];
+    const areas = ["家裡", "公司", "學校"];
     return {
       areas,
     };
@@ -19,16 +19,4 @@ export default defineComponent({
 });
 </script>
 
-<style>
-.nav {
-  color: red;
-}
-
-.main {
-  color: black;
-}
-
-.footer {
-  color: blue;
-}
-</style>
+<style></style>
