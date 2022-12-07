@@ -1,0 +1,138 @@
+PostgreSQL 語法
+參考網站：https://docs.postgresql.tw/
+
+
+資料新增
+CREATE TABLE 資料表名稱 (資料表欄位 1, 資料表欄位 2, 資料表欄位 3,...);
+惟建立資料表後需要透過系統做細部欄位設定
+若想要設定 AUTO INCREMENT，可於欄位後方留空格打上 SERIAL，如下
+CREATE TABLE 資料表名稱 (資料表欄位 1 SERIAL, 資料表欄位 2, 資料表欄位 3,...);
+
+
+新增資料列
+INSERT INTO 資料表名稱 VALUES (資料 1, '資料 2', 資料 3...);
+資料需與欄位內容與欄位數量符合，若資料為字串，需加上引號
+
+也可寫成以下形式
+INSERT INTO 資料表名稱 (欄位 1, 欄位 2, 欄位 3) VALUES (資料 1, '資料 2', 資料 3);
+INSERT INTO 資料表名稱 (欄位 2, 欄位 3, 欄位 1) VALUES (資料 2, '資料 3', 資料 1);
+若無資料內容，可寫入 DEFAULT，系統會填入預設值，或空白
+
+需填入多筆資料時可寫成以下形式
+INSERT INTO 資料表名稱 (欄位 1, 欄位 2, 欄位 3) VALUES
+    (資料A, 資料B, 資料C),
+    (資料D, 資料E, 資料F),
+    (資料G, 資料H, 資料I);
+
+
+
+資料更新
+UPDATE 資料表名稱 SET 欄位 1 = 修改資料 WHERE 欄位 2 = 特定條件;
+
+
+UPDATE 資料表名稱 SET 欄位 1 = 欄位 1 * 1.5;
+更新資料表的另一種方式，資料表中欄位 1 的所有數值皆乘以 1.5
+
+UPDATE 資料表名稱 SET 欄位 1 = 修改資料1, 欄位 2 = 修改資料2 WHERE 欄位3 > 0;
+更新資料表的另一種方式，欄位3 中數值大於 0 者，欄位 1 與欄位 2 皆會被修改
+
+
+資料刪除
+DELETE FROM 資料表名稱;
+刪除整個資料表
+
+DELETE FROM 資料表名稱 WHERE 欄位 = 資料;
+刪除符合 WHERE 敘述條件的資料列
+
+
+
+資料查詢
+
+注意：
+1.SELECT 語法用於從資料庫中選取資料。結果被儲存在一個結果表中，稱為結果集。
+2.SELECT 語法中添加 WHERE 子句，從而設定條件過濾不需要之資料，WHERE 語法可搭配 AND、OR、NOT NULL(不為空字串)、LIKE(查詢特定字元)、IN()、NOT IN、BETWEEN 等邏輯運算來設定條件
+3.可利用 ORDER BY 語法設定升冪 ASC 或降冪 DESC
+4.LIMIT 子句用於限制 SELECT 語法中查詢的資料數量。
+
+
+SELECT * FROM 資料表名稱;
+查詢出「資料表名稱」的所有欄位資料
+
+SELECT 欄位 1, 欄位 2,... FROM 資料表名稱;
+查出特定的欄位資料
+
+也可利用 ORDER BY 語法設定升冪或降冪，升冪如下：
+SELECT * FROM 資料表名稱 ORDER BY 欄位 ASC;
+
+降冪如下：
+SELECT * FROM 資料表名稱 ORDER BY 欄位 DESC;
+
+
+
+高級語法
+
+
+邏輯語法
+
+JOIN 操作符
+JOIN 語法是在基於兩個或多個資料表之間有著共同字段，並將其結合。分為以下五種：
+1. CROSS JOIN：交叉連接
+2. INNER JOIN：內部連接
+3. LEFT OUTER JOIN：左外部連接
+4. RIGHT OUTER JOIN：右外部連接
+5. FULL OUTER JOIN：全外部連接
+
+
+CROSS JOIN：交叉連接
+語法：
+SELECT 欄位 1, 欄位 2, 欄位 3,... FROM 資料表名稱1 CROSS JOIN 資料表名稱2;
+
+連結兩資料表
+
+
+INNER JOIN：內部連接
+語法：
+SELECT 欄位 1, 欄位 2,... FROM 資料表名稱1 INNER JOIN 資料表名稱2 ON 資料表名稱1.欄位 A= 資料表名稱2.欄位B;
+
+內部連接根據連接結合的兩個資料表的列值來創建一個新的結果表。查詢會將 table1 中的每一行與 table2 中的每一行進行比較，找到所有滿足連接的行的配對。當滿足連結條件時，A 和 B 行的每個配對的列值會合併成一個結果行。
+
+
+LEFT OUTER JOIN：左外部連接
+語法：
+SELECT 欄位 1, 欄位 2,... FROM 資料表名稱1 LEFT JOIN 資料表名稱2 ON 資料表名稱1.欄位A = 資料表名稱2.欄位B;
+LEFT OUTER JOIN 可以用來建立左外部連接，查詢的 SQL 敘述句 LEFT JOIN 左側資料表 (資料表名稱1) 的所有記錄都會加入到查詢結果中，即使右側資料表 (資料表名稱2) 中的連接欄位沒有符合的值也一樣。
+
+
+RIGHT OUTER JOIN：右外部連接
+語法：
+SELECT 欄位 1, 欄位 2,... FROM 資料表名稱1 RIGHT JOIN 資料表名稱2 ON 資料表名稱1.欄位A = 資料表名稱2.欄位B;
+相對於 LEFT JOIN，RIGHT JOIN 可以用來建立右外部連接，查詢的 SQL 敘述句 RIGHT JOIN 右側資料表 (資料表名稱2) 的所有記錄都會加入到查詢結果中，即使左側資料表 (資料表名稱1) 中的連接欄位沒有符合的值也一樣。
+
+
+FULL OUTER JOIN：全外部連接
+語法：
+SELECT 欄位 1, 欄位 2,... FROM 資料表名稱1 FULL JOIN 資料表名稱2 ON 資料表名稱1.欄位A = 資料表名稱2.欄位B;
+FULL JOIN 即為 LEFT JOIN 與 RIGHT JOIN 的聯集，它會返回左右資料表中所有的紀錄，不論是否符合連接條件。
+
+
+
+
+
+UNION 操作符
+UNION 語法用於合併兩個或多個 SELECT 語法的結果集。
+UNION 内部的每個 SELECT 語法必需擁有相同數量的列。列也必需擁有相似的資料類型。同時每個 SELECT 語法中的列，顺序必需相同。
+
+NULL 值
+
+
+
+LIMIT 和 OFFSET
+LIMIT 和 OFFSET 允許只回傳由查詢生成的一部分資料列，LIMIT 用來限制 SQL 查詢語句最多只影響幾筆資料，OFFSET 指的是在開始回傳資料列之前跳過多少資料列。如果同時出現 LIMIT 和 OFFSET，則在開始計算回傳的 LIMIT 資料列之前，先跳過 OFFSET 數量的資料列。
+
+
+
+
+產成 UUID 的函數
+gen_random_uuid () → uuid
+
+
