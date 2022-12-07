@@ -17,4 +17,11 @@ export default defineComponent({
     return {};
   },
 });
+
+// TODO：
+// 1.連接後台資料庫，連線 function 資料庫?或是 permission 資料庫
+// 2.將後台資料庫資料呈現在頁面上
+// 3.思考修改權限的方式
+// 4.
+// 4.
 </script>
