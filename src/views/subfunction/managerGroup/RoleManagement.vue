@@ -1,17 +1,27 @@
 <!-- 個別功能頁面 -->
 <template>
   <h1 class="subfunctiontitle">角色與權限管理</h1>
-  <backToLoginPage></backToLoginPage>
+  <AddNewRole></AddNewRole>
+  <UserList></UserList>
+  <AuthorityManagement></AuthorityManagement>
+  <BackToLoginPage></BackToLoginPage>
+
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, inject } from "vue";
 import "@/views/subfunction/subfunction.css";
-import backToLoginPage from "../../../components/backToLoginPage.vue";
+import BackToLoginPage from "../../../components/BackToLoginPage.vue";
+import AddNewRole from "../../../components/subfunccomponents/AddNewRole.vue";
+import UserList from "../../../components/subfunccomponents/UserList.vue";
+import AuthorityManagement from "../../../components/subfunccomponents/AuthorityManagement.vue";
 export default defineComponent({
   name: "RoleManagement",
   components: {
-    backToLoginPage,
+    BackToLoginPage,
+    AddNewRole,
+    UserList,
+    AuthorityManagement,
   },
   setup() {
     return {};
@@ -23,5 +33,5 @@ export default defineComponent({
 // 2.將後台資料庫資料呈現在頁面上
 // 3.思考修改權限的方式
 // 4.
-// 4.
+// 5.
 </script>

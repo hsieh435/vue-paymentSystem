@@ -43,6 +43,8 @@ export default defineComponent({
         msg.userID = response.data.data.userInfo.notesId;
         msg.userOrganization = response.data.data.userInfo.userOrganization;
         msg.userTitle = response.data.data.userInfo.userTitle;
+
+        localStorage.setItem("userName", msg.userName);
       })
 
       .catch((error) => {
