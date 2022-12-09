@@ -14,15 +14,15 @@ export default defineComponent({
     BackToLoginPage,
   },
   setup() {
-    const vol: any = inject("valueoflod");
-    vol.value = null;
-    console.log("N1:", vol.value);
+    const loading: any = inject("valueofLoading");
+    loading.value = null;
+    console.log("N1:", loading.value);
     // inject("要傳遞的資料名稱");
 
     setTimeout(loadingview, 1000);
     function loadingview() {
-      vol.value = false;
-      console.log("N2:", vol.value);
+      loading.value = false;
+      console.log("N2:", loading.value);
     }
     return {};
   },

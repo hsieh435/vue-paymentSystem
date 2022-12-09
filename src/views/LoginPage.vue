@@ -38,7 +38,7 @@ export default defineComponent({
     const router = useRouter();
     const username = ref();
 
-    const vol: any = inject("valueoflod");
+    const vol: any = inject("valueofLoading");
     // inject("要傳遞的資料名稱");
     // vol.value = null;
     // console.log("K1:", vol.value);
@@ -61,14 +61,13 @@ export default defineComponent({
           if (response.data.returnCode == 0) {
             // alert("登入成功");
             // console.log("A1:",user.notesId);
-            // console.log("A2:",response.data.data)
+            console.log("A2:", response.data.data);
             localStorage.setItem("userJWT", response.data.data);
             localStorage.setItem("userId", user.notesId);
             router.push({ path: "/LoginView" });
           } else {
             alert("請輸入正確的USERNAME");
           }
-          // console.log("A3:",JSON.stringify(response.user));
         })
         .catch((error) => {
           alert("發生錯誤");
