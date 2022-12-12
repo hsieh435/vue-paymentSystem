@@ -1,24 +1,28 @@
 <!-- 權限列表 -->
 <template>
-  <table>
+  <table class="table">
     <tr>
+      <th>編號</th>
       <th>角色代碼</th>
       <th>角色名稱</th>
       <th>設定</th>
     </tr>
     <tr v-for="(item, index) in userAuthority.value" :key="index">
+      <td>{{ index + 1 }}</td>
       <td>{{ item.roleId }}</td>
       <td>{{ item.roleName }}</td>
       <td>
-        <button class="button" @click="adjustAuthority()">修改權限</button>
+        <button class="button" @click="adjustAuthority(item.roleId)">
+          修改權限
+        </button>
         <button class="button" @click="editRole()">編輯角色</button>
-        <button class="button">刪除</button>
+        <button class="button" @click="deleteThisRole()">刪除</button>
       </td>
     </tr>
   </table>
 </template>
 <script lang="ts">
-import { defineComponent, ref, reactive, inject } from "vue";
+import { defineComponent, ref, reactive, provide, inject } from "vue";
 import axios from "axios";
 import AuthorityManagement from "../../subfunccomponents/aboutrolemanagement/AuthorityManagement.vue";
 export default defineComponent({
@@ -30,6 +34,10 @@ export default defineComponent({
   setup() {
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("userJWT");
+
+    const adjustList: any = inject("adjustAuthority");
+    const adjustRole: any = inject("adjustRole");
+    const deleteRole: any = inject("deleteRole");
 
     axios
       .post(
@@ -45,6 +53,8 @@ export default defineComponent({
 
       .then((response) => {
         userAuthority.value = response.data.data;
+        // console.log("Q1:", userAuthority.value);
+
         // console.log("傳遞成功");
       })
       .catch((error) => {
@@ -53,16 +63,23 @@ export default defineComponent({
       });
 
     const userAuthority = reactive({ value: null });
+    // const userAuthority = reactive({
+    //   roleId: "",
+    //   roleName: "",
+    // });
 
-    const adjustList: any = inject("adjustAuthority");
-    const adjustRole: any = inject("adjustRole");
-
-    function adjustAuthority() {
+    function adjustAuthority(roleId: string) {
       adjustList.value = null;
+      provide("roleID", roleId);
+      // provide("valueofLoading","123")
     }
 
     function editRole() {
       adjustRole.value = null;
+    }
+
+    function deleteThisRole() {
+      deleteRole.value = null;
     }
 
     return {
@@ -70,24 +87,24 @@ export default defineComponent({
       adjustList,
       adjustAuthority,
       editRole,
+      deleteThisRole,
     };
   },
 });
 </script>
 
 <style scoped>
-table {
+.table {
   width: 80%;
-  /* height: 100vw; */
   margin: 0px 10% 0px 10%;
   border-radius: 20px 20px 20px 20px;
   overflow: hidden;
   font-family: "Oswald", sans-serif;
   transition: 0.3s;
-  border: 1px rgb(0, 0, 0) solid;
+  /* border: 1px rgb(0, 0, 0) solid; */
 }
 
-table:hover {
+.table:hover {
   box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.781);
 }
 
@@ -105,9 +122,9 @@ td {
   border: 1px solid black;
 }
 
-tr {
+/* tr {
   border-bottom: 1px solid #dddddd;
-}
+} */
 
 tr:nth-of-type(even) td {
   background-color: #f3f3f3;

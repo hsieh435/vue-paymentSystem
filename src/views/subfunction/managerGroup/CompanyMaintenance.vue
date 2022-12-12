@@ -16,7 +16,7 @@ export default defineComponent({
   setup() {
     const loading: any = inject("valueofLoading");
     loading.value = null;
-    console.log("N1:", loading.value);
+    // console.log("N1:", loading.value);
     // inject("要傳遞的資料名稱");
 
     setTimeout(loadingview, 1000);

@@ -4,25 +4,72 @@
     <form>
       <label class="thislabel"
         >角色代碼：
-        <input type="text" />
+        <input type="text" v-model="newRole.ID" />
       </label>
       <label class="thislabel"
         >角色名稱：
-        <input type="text" />
+        <input type="text" v-model="newRole.name" />
       </label>
     </form>
-    <button class="thisbutton">加入</button>
+    <button class="thisbutton" @click="addNewRole()">加入</button>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
+import axios from "axios";
 export default defineComponent({
   name: "AddNewRole",
   setup() {
-    return {};
+    const newRole = reactive({
+      ID: "",
+      name: "",
+    });
+    const token = localStorage.getItem("userJWT");
+
+    function addNewRole() {
+      // console.log("P1:", newRole.ID);
+      // console.log("P2:", newRole.name);
+      if (newRole.ID.length > 0 && newRole.name.length > 0) {
+        axios
+          .post(
+            "http://localhost:8085/paymentSystem/api/psRole/newPSRole",
+            {
+              roleId: newRole.ID,
+              roleName: newRole.name,
+            },
+            {
+              headers: {
+                Authorization: "Bearer " + token,
+                // Bearer 跟 token 中間有一個空格
+              },
+            }
+          )
+
+          .then((response) => {
+            alert("建立新角色成功");
+          })
+          .catch((error) => {
+            alert("傳遞失敗");
+            // console.log("傳遞失敗");
+          });
+      } else {
+        alert("請確實輸入角色代碼與角色名稱");
+      }
+    }
+    return {
+      newRole,
+      addNewRole,
+    };
   },
 });
 </script>
+<!-- 
+  找到 API
+  傳送參數
+  確認資料
+  該如何處理回應
+  放入新增成功的標語 2 秒
+-->
 
 <style scoped>
 .thisfrom {
@@ -34,7 +81,7 @@ export default defineComponent({
 }
 
 .thislabel {
-  margin-right: 20px;
+  margin: 5px 30px 5px 0px;
 }
 
 .thisbutton {

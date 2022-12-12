@@ -2,38 +2,86 @@
 <template>
   <div class="wholeareaback">
     <div class="wholearea">
-      <br>
       <h2>編輯角色</h2>
       <form class="thisfrom">
         <label class="thislabel">角色代碼：</label>
-        <input class="thisinput" type="text" />
+        <input class="thisinput" type="text" v-model="newRole.ID" />
         <br />
         <label class="thislabel">角色名稱：</label>
-        <input class="thisinput" type="text" />
+        <input class="thisinput" type="text" v-model="newRole.name" />
       </form>
       <div>
-        <button class="updateauthority">修改</button>
-        <button class="updateauthority" @click="cancelEdit()">取消更改</button>
+        <button class="updateauthority" @click="sent()">確定修改</button>
+        <button class="updateauthority" @click="cancelEdit()">取消編輯</button>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, reactive, inject } from "vue";
+import axios from "axios";
 export default defineComponent({
   name: "EditRole",
   setup() {
     const adjustList: any = inject("adjustRole");
+
+    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("userJWT");
+
+    const newRole = reactive({
+      ID: "",
+      name: "",
+    });
+
+    function sent() {
+      if (newRole.ID.length > 0 && newRole.name.length > 0) {
+        axios
+          .post(
+            "http://localhost:8085/paymentSystem/api/psRole/editPSRole",
+            {
+              roleId: newRole.ID,
+              roleName: newRole.name,
+            },
+            {
+              headers: {
+                Authorization: "Bearer " + token,
+                // Bearer 跟 token 中間有一個空格
+              },
+            }
+          )
+
+          .then((response) => {
+            // userAuthority.value = response.data.data;
+            // console.log("Q1:", userAuthority.value);
+            // console.log("傳遞成功");
+          })
+          .catch((error) => {
+            alert("發生錯誤");
+            // console.log("傳遞失敗");
+          });
+      } else {
+        alert("欄位請勿留白");
+      }
+    }
+
     function cancelEdit() {
       adjustList.value = true;
     }
 
     return {
+      sent,
       cancelEdit,
+      newRole,
     };
   },
 });
 </script>
+<!-- 
+  找到 API
+  傳送參數
+  確認資料
+  匯入角色代碼與名稱
+-->
 
 <style scoped>
 .wholeareaback {
@@ -49,8 +97,8 @@ export default defineComponent({
 
 .wholearea {
   width: 60%;
-  height: 60vh;
-  margin: 150px 20% 0px 20%;
+  height: 50vh;
+  margin: 200px 20% 0px 20%;
   padding: 20px 2.5% 20px 2.5%;
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.95);

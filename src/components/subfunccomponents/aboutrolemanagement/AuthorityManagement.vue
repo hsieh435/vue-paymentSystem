@@ -1,181 +1,33 @@
-<!-- 角色與權限管理頁面 -->
+<!-- 修改角色權限頁面 -->
 <template>
   <div class="wholeareaback">
     <div class="wholearea">
       <div class="authmang">
-        <!-- 開始，下為基本資料維護 -->
-        <div class="funcgroupname">
-          <h4>基本資料維護</h4>
-        </div>
-
-        <!-- 分隔線，下為帳號與權限管理 -->
-
-        <div class="funcgroupname">
-          <h4>帳號與權限管理</h4>
-
-          <div class="funcgroup">
+        <h2>更新權限</h2>
+        <div
+          class="funcgroupname"
+          v-for="(item, index) in functionGroups.value"
+          :key="index"
+        >
+          <h4>{{ item.functionGroupName }}</h4>
+          <div
+            class="funcgroup"
+            v-for="(func, index) in item.functionModels"
+            :key="index"
+          >
             <div>
               <input type="checkbox" value="1" name="" />
-              <label class="labeltitle">公司別維護</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="2" name="" />
-              <label class="labeltitle">角色與權限管理</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="3" name="" />
-              <label class="labeltitle">使用者維護</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="4" name="" />
-              <label class="labeltitle">登入記錄查詢</label>
-            </div>
-          </div>
-        </div>
-
-        <!-- 分隔線，下為一般帳款申請作業 -->
-        <div class="funcgroupname">
-          <h4>一般帳款申請作業</h4>
-
-          <div class="funcgroup">
-            <div>
-              <input type="checkbox" value="1" name="" />
-              <label class="labeltitle">帳務別資料維護</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="2" name="" />
-              <label class="labeltitle">一般費用申請</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="3" name="" />
-              <label class="labeltitle">一般費用申請管理作業</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="4" name="" />
-              <label class="labeltitle">彙總前段檢收作業</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="5" name="" />
-              <label class="labeltitle">月結帳款作業</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="6" name="" />
-              <label class="labeltitle">月結帳款管理作業</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="7" name="" />
-              <label class="labeltitle">月結發票管理作業</label>
-            </div>
-          </div>
-        </div>
-
-        <!-- 財會簽核拋轉作業 -->
-        <div class="funcgroupname">
-          <h4>財會簽核拋轉作業</h4>
-        </div>
-
-        <!-- 資財成本結帳作業 -->
-        <div class="funcgroupname">
-          <h4>資財成本結帳作業</h4>
-        </div>
-
-        <!-- 零用金申請作業 -->
-        <div class="funcgroupname">
-          <h4>零用金申請作業</h4>
-
-          <div class="funcgroup">
-            <div>
-              <input type="checkbox" value="1" name="" />
-              <label class="labeltitle">零用金支付廠區別維護</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="2" name="" />
-              <label class="labeltitle">零用金申請作業</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="3" name="" />
-              <label class="labeltitle">零用金申請單管理作業</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="4" name="" />
-              <label class="labeltitle">零用金撥補作業</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="5" name="" />
-              <label class="labeltitle">零用金撥補單管理作業</label>
-            </div>
-          </div>
-        </div>
-
-        <!-- 專案工程作業 -->
-        <div class="funcgroupname">
-          <h4>專案工程作業</h4>
-
-          <div class="funcgroup">
-            <div>
-              <input type="checkbox" value="1" name="" />
-              <label class="labeltitle">新增建廠工程權限</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="2" name="" />
-              <label class="labeltitle">專案分類維護</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="3" name="" />
-              <label class="labeltitle">專案工項單位維護</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="4" name="" />
-              <label class="labeltitle">專案立案作業</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="5" name="" />
-              <label class="labeltitle">專案議價資料維護</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="6" name="" />
-              <label class="labeltitle">專案驗收作業</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="7" name="" />
-              <label class="labeltitle">專案付款作業</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="8" name="" />
-              <label class="labeltitle">專案完工作業</label>
-            </div>
-
-            <div>
-              <input type="checkbox" value="9" name="" />
-              <label class="labeltitle">專案資料管理作業</label>
+              <label class="labeltitle">{{ func.functionName }}</label>
             </div>
           </div>
         </div>
       </div>
       <div>
-        <button class="updateauthority">修改</button>
+        <button class="updateauthority" @click="adjustThisRole()">
+          確定修改
+        </button>
         <button class="updateauthority" @click="cancelAdjust()">
-          取消更改
+          放棄修改
         </button>
       </div>
     </div>
@@ -183,17 +35,81 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, inject, reactive } from "vue";
+import axios from "axios";
 export default defineComponent({
   name: "AuthorityManagement",
   setup() {
     const adjustList: any = inject("adjustAuthority");
+    const roleID: any = inject("roleID");
+
+    console.log("S1:", roleID);
+
+    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("userJWT");
+
+    // 取得角色代碼與角色名稱
+
+    // 取得角色代碼與角色名稱
+
+    const functionGroups = reactive({ value: null });
+
+    axios
+      .post(
+        "http://localhost:8085/paymentSystem/api/functionGroup/findAllFunctionGroupWhereFunctionIdInPermission",
+        { notesId: userId },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            // Bearer 跟 token 中間有一個空格
+          },
+        }
+      )
+
+      .then((response) => {
+        functionGroups.value = response.data.data;
+        // console.log("傳遞成功");
+      })
+      .catch((error) => {
+        alert("發生錯誤");
+        // console.log("傳遞失敗");
+      });
+
+    // 透過傳送角色代碼查詢已開放之權限
+    axios
+      .post(
+        "http://localhost:8085/paymentSystem/api/permission/findAllByRoleId",
+        { roleId: "" },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            // Bearer 跟 token 中間有一個空格
+          },
+        }
+      )
+
+      .then((response) => {
+        // console.log("傳遞成功");
+      })
+      .catch((error) => {
+        alert("發生錯誤");
+      });
+
+    // class function {
+    //     public functionGroups="",
+    //     public functionModels="",
+    // }
+
+    function adjustThisRole() {}
 
     function cancelAdjust() {
       adjustList.value = true;
     }
+
     return {
-      cancelAdjust,
       adjustList,
+      functionGroups,
+      adjustThisRole,
+      cancelAdjust,
     };
   },
 });
@@ -233,6 +149,10 @@ export default defineComponent({
 .authmang {
   text-align: left;
   /* outline: 1px black solid; */
+}
+
+.authmang h2 {
+  text-align: center;
 }
 
 .funcgroupname {

@@ -1,5 +1,5 @@
 <template>
-  <LoadingForever v-if="lod == null"></LoadingForever>
+  <LoadingForever v-if="loading == null"></LoadingForever>
   <router-view />
 </template>
 
@@ -12,14 +12,14 @@ export default defineComponent({
     LoadingForever,
   },
   setup() {
-    const lod = ref();
-    lod.value = true;
+    const loading = ref();
+    loading.value = true;
 
-    provide("valueoflod", lod);
+    provide("valueofLoading", loading);
     // provide("要傳遞的資料名稱", "要傳遞的資料內容");
 
     return {
-      lod,
+      loading,
     };
   },
 });
