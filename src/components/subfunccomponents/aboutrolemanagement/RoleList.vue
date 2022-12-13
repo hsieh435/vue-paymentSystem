@@ -1,5 +1,8 @@
 <!-- 權限列表 -->
 <template>
+  <AuthorityManagement v-if="adjustAuthority == null"></AuthorityManagement>
+  <EditRole v-if="adjustRole == null"></EditRole>
+  <DeleteTheRole v-if="deleteRole == null"></DeleteTheRole>
   <table class="table">
     <tr>
       <th>編號</th>
@@ -12,9 +15,7 @@
       <td>{{ item.roleId }}</td>
       <td>{{ item.roleName }}</td>
       <td>
-        <button class="button" @click="adjustAuthority(item.roleId)">
-          修改權限
-        </button>
+        <button class="button" @click="adjustThisAuth()">修改權限</button>
         <button class="button" @click="editRole()">編輯角色</button>
         <button class="button" @click="deleteThisRole()">刪除</button>
       </td>
@@ -24,20 +25,22 @@
 <script lang="ts">
 import { defineComponent, ref, reactive, provide, inject } from "vue";
 import axios from "axios";
-import AuthorityManagement from "../../subfunccomponents/aboutrolemanagement/AuthorityManagement.vue";
+import AuthorityManagement from "./AuthorityManagement.vue";
+import EditRole from "./EditRole.vue";
+import DeleteTheRole from "./DeleteTheRole.vue";
 export default defineComponent({
-  name: "UserList",
+  name: "RoleList",
   components: {
     AuthorityManagement,
+    EditRole,
+    DeleteTheRole,
   },
 
   setup() {
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("userJWT");
 
-    const adjustList: any = inject("adjustAuthority");
-    const adjustRole: any = inject("adjustRole");
-    const deleteRole: any = inject("deleteRole");
+    // const deleteRole: any = inject("deleteRole");
 
     axios
       .post(
@@ -68,25 +71,41 @@ export default defineComponent({
     //   roleName: "",
     // });
 
-    function adjustAuthority(roleId: string) {
-      adjustList.value = null;
-      provide("roleID", roleId);
-      // provide("valueofLoading","123")
+    // 修改權限功能的 value 值，控制出現與否
+    const adjustAuthority = ref();
+    adjustAuthority.value = true;
+
+    function adjustThisAuth() {
+      adjustAuthority.value = null;
     }
+
+    // 編輯角色功能的 value 值，控制出現與否
+    const adjustRole = ref();
+    adjustRole.value = true;
 
     function editRole() {
       adjustRole.value = null;
     }
 
+    // 刪除角色功能的 value 值，控制出現與否
+    const deleteRole = ref();
+    deleteRole.value = true;
+
     function deleteThisRole() {
       deleteRole.value = null;
     }
 
+    provide("adjustAuthority", adjustAuthority);
+    provide("adjustRole", adjustRole);
+    provide("deleteRole", deleteRole);
+
     return {
       userAuthority,
-      adjustList,
       adjustAuthority,
+      adjustThisAuth,
+      adjustRole,
       editRole,
+      deleteRole,
       deleteThisRole,
     };
   },
@@ -136,6 +155,7 @@ tr:nth-of-type(even) td {
   border: 0;
   border-radius: 3px;
   background-color: rgba(255, 0, 0, 0.5);
+  line-height: 16px;
   margin: 0px 5px 0px 5px;
 }
 
