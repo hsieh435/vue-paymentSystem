@@ -23,7 +23,7 @@ import axios from "axios";
 export default defineComponent({
   name: "EditRole",
   setup() {
-    const adjustList: any = inject("adjustRole");
+    const adjustRole: any = inject("adjustRole");
 
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("userJWT");
@@ -65,7 +65,7 @@ export default defineComponent({
     }
 
     function cancelEdit() {
-      adjustList.value = true;
+      adjustRole.value = true;
     }
 
     return {

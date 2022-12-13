@@ -40,9 +40,6 @@ export default defineComponent({
   name: "AuthorityManagement",
   setup() {
     const adjustList: any = inject("adjustAuthority");
-    const roleID: any = inject("roleID");
-
-    console.log("S1:", roleID);
 
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("userJWT");
@@ -114,14 +111,6 @@ export default defineComponent({
   },
 });
 </script>
-
-<!-- 
-  待辦事項
-  1.取得權限
-  2.連結 API 傳送角色代碼
-  3.
-
--->
 
 <style scoped>
 .wholeareaback {
