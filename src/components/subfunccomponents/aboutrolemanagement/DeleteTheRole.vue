@@ -2,6 +2,7 @@
 <template>
   <div class="wholeareaback">
     <div class="wholearea">
+      <button class="closeit" @click="cancelEdit()">×</button>
       <h2>注意！</h2>
       <h2>角色代碼：{{}}</h2>
       <h2>角色名稱：{{}}</h2>
@@ -57,7 +58,19 @@ h2 {
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.95);
   overflow: auto;
+  position: relative;
   /* outline: 1px black solid; */
+}
+
+.closeit {
+  height: 40px;
+  width: 40px;
+  font-size: 36px;
+  border: 0px;
+  background-color: rgba(255, 255, 255, 0.95);
+  position: absolute;
+  right: 10px;
+  top: 0px;
 }
 
 .updateauthority {

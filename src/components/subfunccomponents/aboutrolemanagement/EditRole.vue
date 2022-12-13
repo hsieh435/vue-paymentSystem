@@ -4,6 +4,7 @@
     <div class="wholearea">
       <h2>編輯角色</h2>
       <form class="thisfrom">
+        <button class="closeit" @click="cancelEdit()">×</button>
         <label class="thislabel">角色代碼：</label>
         <input class="thisinput" type="text" v-model="newRole.ID" />
         <br />
@@ -76,13 +77,6 @@ export default defineComponent({
   },
 });
 </script>
-<!-- 
-  找到 API
-  傳送參數
-  確認資料
-  匯入角色代碼與名稱
--->
-
 <style scoped>
 .wholeareaback {
   width: 100%;
@@ -103,7 +97,19 @@ export default defineComponent({
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.95);
   overflow: auto;
+  position: relative;
   /* outline: 1px black solid; */
+}
+
+.closeit {
+  height: 40px;
+  width: 40px;
+  font-size: 36px;
+  border: 0px;
+  background-color: rgba(255, 255, 255, 0.95);
+  position: absolute;
+  right: 10px;
+  top: 0px;
 }
 
 .thisfrom {

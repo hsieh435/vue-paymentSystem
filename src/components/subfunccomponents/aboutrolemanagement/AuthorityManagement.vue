@@ -2,6 +2,7 @@
 <template>
   <div class="wholeareaback">
     <div class="wholearea">
+      <button class="closeit" @click="cancelAdjust()">×</button>
       <div class="authmang">
         <h2>更新權限</h2>
         <div
@@ -132,7 +133,18 @@ export default defineComponent({
   background-color: rgba(255, 255, 255, 0.8);
   overflow: auto;
   resize: vertical;
+  position: relative;
   outline: 1px black solid;
+}
+
+.closeit {
+  height: 40px;
+  width: 40px;
+  font-size: 36px;
+  border: 0px;
+  position: absolute;
+  right: 10px;
+  top: 0px;
 }
 
 .authmang {
