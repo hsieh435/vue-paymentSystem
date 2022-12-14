@@ -61,7 +61,7 @@ export default defineComponent({
           if (response.data.returnCode == 0) {
             // alert("登入成功");
             // console.log("A1:",user.notesId);
-            console.log("A2:", response.data.data);
+            // console.log("A2:", response.data.data);
             localStorage.setItem("userJWT", response.data.data);
             localStorage.setItem("userId", user.notesId);
             router.push({ path: "/LoginView" });

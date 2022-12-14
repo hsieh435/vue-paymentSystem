@@ -22,7 +22,7 @@ export default defineComponent({
     setTimeout(loadingview, 1000);
     function loadingview() {
       loading.value = false;
-      console.log("N2:", loading.value);
+      // console.log("N2:", loading.value);
     }
     return {};
   },

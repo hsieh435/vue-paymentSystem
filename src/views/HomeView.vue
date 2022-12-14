@@ -3,6 +3,7 @@ slot 用法，參考網站：https://ithelp.ithome.com.tw/articles/10273298?sc=i
 -->
 
 <template>
+  <!-- <HelloWorld msg="{{abcdefghi}}"></HelloWorld> -->
   <h1 class="line">Named slot 具名插槽</h1>
   <!-- Named slot （具名插槽） -->
 
@@ -77,7 +78,7 @@ slot 用法，參考網站：https://ithelp.ithome.com.tw/articles/10273298?sc=i
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 // import { Options, Vue } from "vue-class-component";
-// import HelloWorld from "@/components/HelloWorld.vue";
+import HelloWorld from "@/components/HelloWorld.vue";
 import ChildInfo1 from "../components/ChildInfo1.vue";
 import ChildInfo2 from "../components/ChildInfo2.vue";
 import ChildInfo3 from "../components/ChildInfo3.vue";
@@ -87,7 +88,7 @@ import ChildInfo4 from "../components/ChildInfo4.vue";
 export default defineComponent({
   name: "HomeView",
   components: {
-    // HelloWorld,
+    HelloWorld,
     ChildInfo1,
     ChildInfo2,
     ChildInfo3,

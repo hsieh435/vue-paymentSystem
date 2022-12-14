@@ -28,7 +28,6 @@ export default defineComponent({
     // EditRole,
     // DeleteTheRole,
   },
-  props: {},
   setup() {
     // 修改權限功能的 value 值，控制出現與否
     // const adjustAuthority = ref();

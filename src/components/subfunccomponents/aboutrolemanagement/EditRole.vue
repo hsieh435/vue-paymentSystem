@@ -2,16 +2,18 @@
 <template>
   <div class="wholeareaback">
     <div class="wholearea">
-      <h2>編輯角色</h2>
+      <h2>編輯角色：{{ roleName }}</h2>
+      <h2>角色代碼：{{ roleId }}</h2>
       <form class="thisfrom">
         <button class="closeit" @click="cancelEdit()">×</button>
-        <label class="thislabel">角色代碼：</label>
-        <input class="thisinput" type="text" v-model="newRole.ID" />
+        <!-- <label class="thislabel">角色代碼：</label> -->
+        <!-- <input class="thisinput" type="text" v-model="newRole.ID" /> -->
         <br />
         <label class="thislabel">角色名稱：</label>
-        <input class="thisinput" type="text" v-model="newRole.name" />
+        <input class="thisinput" type="text" v-model="newRole" />
       </form>
       <div>
+        <!-- <button class="updateauthority" @click="abc()">確定修改</button> -->
         <button class="updateauthority" @click="sent()">確定修改</button>
         <button class="updateauthority" @click="cancelEdit()">取消編輯</button>
       </div>
@@ -19,29 +21,37 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, inject } from "vue";
+import { defineComponent, ref, reactive, toRef, toRefs, inject } from "vue";
 import axios from "axios";
 export default defineComponent({
   name: "EditRole",
-  setup() {
+  props: ["roleId", "roleName"],
+  setup(props) {
     const adjustRole: any = inject("adjustRole");
 
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("userJWT");
 
-    const newRole = reactive({
-      ID: "",
-      name: "",
-    });
+    const { roleId, roleName } = toRefs(props);
+    // const roleId = toRef(props, "roleId");
+    // const roleName = toRef(props, "roleName");
+
+    const newRole = ref();
+
+    // function abc() {
+    //   console.log("V1:", newRole.value);
+    //   console.log("V2:", props.roleName);
+    //   console.log("V3:", props.roleId);
+    // }
 
     function sent() {
-      if (newRole.ID.length > 0 && newRole.name.length > 0) {
+      if (newRole.value.length > 0) {
         axios
           .post(
             "http://localhost:8085/paymentSystem/api/psRole/editPSRole",
             {
-              roleId: newRole.ID,
-              roleName: newRole.name,
+              roleId: props.roleId,
+              roleName: newRole,
             },
             {
               headers: {
@@ -53,15 +63,14 @@ export default defineComponent({
 
           .then((response) => {
             // userAuthority.value = response.data.data;
-            // console.log("Q1:", userAuthority.value);
-            // console.log("傳遞成功");
+            // console.log("編輯成功");
           })
           .catch((error) => {
             alert("發生錯誤");
-            // console.log("傳遞失敗");
+            // console.log("編輯失敗");
           });
       } else {
-        alert("欄位請勿留白");
+        alert("本欄位請勿留白");
       }
     }
 
@@ -73,6 +82,7 @@ export default defineComponent({
       sent,
       cancelEdit,
       newRole,
+      // abc,
     };
   },
 });
@@ -93,7 +103,7 @@ export default defineComponent({
   width: 60%;
   height: 50vh;
   margin: 200px 20% 0px 20%;
-  padding: 20px 2.5% 20px 2.5%;
+  padding: 40px 2.5% 0px 2.5%;
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.95);
   overflow: auto;

@@ -4,7 +4,8 @@
     <div class="wholearea">
       <button class="closeit" @click="cancelAdjust()">×</button>
       <div class="authmang">
-        <h2>更新權限</h2>
+        <h2>更新{{ roleName }}權限</h2>
+        <h2>角色代碼：{{ roleId }}</h2>
         <div
           class="funcgroupname"
           v-for="(item, index) in functionGroups.value"
@@ -17,7 +18,7 @@
             :key="index"
           >
             <div>
-              <input type="checkbox" value="1" name="" />
+              <input type="checkbox" />
               <label class="labeltitle">{{ func.functionName }}</label>
             </div>
           </div>
@@ -28,28 +29,35 @@
           確定修改
         </button>
         <button class="updateauthority" @click="cancelAdjust()">
-          放棄修改
+          取消修改
         </button>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, inject, reactive } from "vue";
+import { defineComponent, ref, toRef, toRefs, inject, reactive } from "vue";
 import axios from "axios";
 export default defineComponent({
   name: "AuthorityManagement",
-  setup() {
-    const adjustList: any = inject("adjustAuthority");
-
+  props: ["roleId", "roleName"],
+  // props: {
+  //   roleId: String,
+  //   roleName: String,
+  // },
+  setup(props) {
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("userJWT");
 
-    // 取得角色代碼與角色名稱
+    const adjustList: any = inject("adjustAuthority");
 
-    // 取得角色代碼與角色名稱
+    // 解構 props 傳進來的值
+    // const { roleId, roleName } = toRefs(props);
+    // const roleId = toRef(props, "roleId");
+    // const roleName = toRef(props, "roleName");
 
     const functionGroups = reactive({ value: null });
+    const permissionList = reactive({ value: null });
 
     axios
       .post(
@@ -76,7 +84,7 @@ export default defineComponent({
     axios
       .post(
         "http://localhost:8085/paymentSystem/api/permission/findAllByRoleId",
-        { roleId: "" },
+        { roleId: props.roleId },
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -86,7 +94,10 @@ export default defineComponent({
       )
 
       .then((response) => {
-        // console.log("傳遞成功");
+        permissionList.value = response.data.data.permissionList;
+
+        console.log("U1:", permissionList);
+
       })
       .catch((error) => {
         alert("發生錯誤");
@@ -104,6 +115,7 @@ export default defineComponent({
     }
 
     return {
+      props,
       adjustList,
       functionGroups,
       adjustThisRole,
@@ -117,12 +129,12 @@ export default defineComponent({
 .wholeareaback {
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.25);
   position: fixed;
   left: 0px;
   top: 0px;
   padding-bottom: 100px;
-  z-index: 10000000;
+  z-index: 10000;
 }
 
 .wholearea {
@@ -141,9 +153,11 @@ export default defineComponent({
   height: 40px;
   width: 40px;
   font-size: 36px;
+  line-height: 26px;
   border: 0px;
+  background-color: rgb(255, 255, 255, 0);
   position: absolute;
-  right: 10px;
+  right: 0px;
   top: 0px;
 }
 

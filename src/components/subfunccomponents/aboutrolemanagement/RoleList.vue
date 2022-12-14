@@ -1,8 +1,20 @@
 <!-- 權限列表 -->
 <template>
-  <AuthorityManagement v-if="adjustAuthority == null"></AuthorityManagement>
-  <EditRole v-if="adjustRole == null"></EditRole>
-  <DeleteTheRole v-if="deleteRole == null"></DeleteTheRole>
+  <AuthorityManagement
+    v-if="adjustAuthority == null"
+    :role-id="role.roleId"
+    :role-name="role.roleName"
+  ></AuthorityManagement>
+  <EditRole
+    v-if="adjustRole == null"
+    :role-id="role.roleId"
+    :role-name="role.roleName"
+  ></EditRole>
+  <DeleteTheRole
+    v-if="deleteRole == null"
+    :role-id="role.roleId"
+    :role-name="role.roleName"
+  ></DeleteTheRole>
   <table class="table">
     <tr>
       <th>編號</th>
@@ -10,14 +22,26 @@
       <th>角色名稱</th>
       <th>設定</th>
     </tr>
-    <tr v-for="(item, index) in userAuthority.value" :key="index">
+    <tr v-for="(role, index) in userAuthority.value" :key="index">
       <td>{{ index + 1 }}</td>
-      <td>{{ item.roleId }}</td>
-      <td>{{ item.roleName }}</td>
+      <td>{{ role.roleId }}</td>
+      <td>{{ role.roleName }}</td>
       <td>
-        <button class="button" @click="adjustThisAuth()">修改權限</button>
-        <button class="button" @click="editRole()">編輯角色</button>
-        <button class="button" @click="deleteThisRole()">刪除</button>
+        <button
+          class="button"
+          @click="adjustThisAuth(role.roleId, role.roleName)"
+        >
+          修改權限
+        </button>
+        <button class="button" @click="editRole(role.roleId, role.roleName)">
+          編輯角色
+        </button>
+        <button
+          class="button"
+          @click="deleteThisRole(role.roleId, role.roleName)"
+        >
+          刪除
+        </button>
       </td>
     </tr>
   </table>
@@ -40,8 +64,6 @@ export default defineComponent({
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("userJWT");
 
-    // const deleteRole: any = inject("deleteRole");
-
     axios
       .post(
         "http://localhost:8085/paymentSystem/api/psRole/findAllPSRole",
@@ -56,7 +78,7 @@ export default defineComponent({
 
       .then((response) => {
         userAuthority.value = response.data.data;
-        // console.log("Q1:", userAuthority.value);
+        // userAuthority.value = response.data.data;
 
         // console.log("傳遞成功");
       })
@@ -66,33 +88,39 @@ export default defineComponent({
       });
 
     const userAuthority = reactive({ value: null });
-    // const userAuthority = reactive({
-    //   roleId: "",
-    //   roleName: "",
-    // });
 
     // 修改權限功能的 value 值，控制出現與否
     const adjustAuthority = ref();
     adjustAuthority.value = true;
+    const role = reactive({
+      roleId: "",
+      roleName: "",
+    });
 
-    function adjustThisAuth() {
+    function adjustThisAuth(roleId: string, roleName: string) {
       adjustAuthority.value = null;
+      role.roleId = roleId;
+      role.roleName = roleName;
     }
 
     // 編輯角色功能的 value 值，控制出現與否
     const adjustRole = ref();
     adjustRole.value = true;
 
-    function editRole() {
+    function editRole(roleId: string, roleName: string) {
       adjustRole.value = null;
+      role.roleId = roleId;
+      role.roleName = roleName;
     }
 
     // 刪除角色功能的 value 值，控制出現與否
     const deleteRole = ref();
     deleteRole.value = true;
 
-    function deleteThisRole() {
+    function deleteThisRole(roleId: string, roleName: string) {
       deleteRole.value = null;
+      role.roleId = roleId;
+      role.roleName = roleName;
     }
 
     provide("adjustAuthority", adjustAuthority);
@@ -102,6 +130,7 @@ export default defineComponent({
     return {
       userAuthority,
       adjustAuthority,
+      role,
       adjustThisAuth,
       adjustRole,
       editRole,
@@ -120,7 +149,7 @@ export default defineComponent({
   overflow: hidden;
   font-family: "Oswald", sans-serif;
   transition: 0.3s;
-  /* border: 1px rgb(0, 0, 0) solid; */
+  border: 1px rgb(0, 0, 0) solid;
 }
 
 .table:hover {
@@ -140,10 +169,6 @@ td {
   text-align: center;
   border: 1px solid black;
 }
-
-/* tr {
-  border-bottom: 1px solid #dddddd;
-} */
 
 tr:nth-of-type(even) td {
   background-color: #f3f3f3;

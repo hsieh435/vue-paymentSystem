@@ -1,17 +1,18 @@
 <!-- 新增角色功能 -->
 <template>
   <div class="thisfrom">
-    <form>
+    <form name="form">
       <label class="thislabel"
         >角色代碼：
-        <input type="text" v-model="newRole.ID" />
+        <input type="text" name="code" v-model="newRole.ID" />
       </label>
       <label class="thislabel"
         >角色名稱：
-        <input type="text" v-model="newRole.name" />
+        <input type="text" name="titlename" v-model="newRole.name" />
       </label>
     </form>
     <button class="thisbutton" @click="addNewRole()">加入</button>
+    <button class="thisbutton" @click="cleanIt()">清空</button>
   </div>
 </template>
 <script lang="ts">
@@ -56,21 +57,20 @@ export default defineComponent({
         alert("請確實輸入角色代碼與角色名稱");
       }
     }
+
+    function cleanIt() {
+      newRole.ID = "";
+      newRole.name = "";
+    }
+
     return {
       newRole,
       addNewRole,
+      cleanIt,
     };
   },
 });
 </script>
-<!-- 
-  找到 API
-  傳送參數
-  確認資料
-  該如何處理回應
-  放入新增成功的標語 2 秒
--->
-
 <style scoped>
 .thisfrom {
   width: 80%;
@@ -92,6 +92,7 @@ export default defineComponent({
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .thisbutton:hover {

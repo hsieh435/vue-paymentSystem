@@ -4,8 +4,8 @@
     <div class="wholearea">
       <button class="closeit" @click="cancelEdit()">×</button>
       <h2>注意！</h2>
-      <h2>角色代碼：{{}}</h2>
-      <h2>角色名稱：{{}}</h2>
+      <h2>角色代碼：{{ roleId }}</h2>
+      <h2>角色名稱：{{ roleName }}</h2>
       <h2>將被刪除！</h2>
       <div>
         <button class="updateauthority" @click="deleteThisRole()">
@@ -18,12 +18,39 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, inject } from "vue";
+import axios from "axios";
 export default defineComponent({
   name: "DeleteTheRole",
-  setup() {
+  props: ["roleId", "roleName"],
+  setup(props) {
     const deleteRole: any = inject("deleteRole");
 
-    function deleteThisRole() {}
+    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("userJWT");
+
+    function deleteThisRole() {
+      axios
+        .post(
+          "http://localhost:8085/paymentSystem/api/psRole/deletePSRole",
+          { roleId: props.roleId },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+              // Bearer 跟 token 中間有一個空格
+            },
+          }
+        )
+
+        .then((response) => {
+          console.log("刪除成功");
+          // setTimeout 
+        })
+        .catch((error) => {
+          // alert("發生錯誤");
+          console.log("刪除失敗");
+        });
+    }
+
     function cancelEdit() {
       deleteRole.value = true;
     }
