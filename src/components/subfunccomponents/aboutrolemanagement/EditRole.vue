@@ -2,20 +2,18 @@
 <template>
   <div class="wholeareaback">
     <div class="wholearea">
-      <h2>編輯角色：{{ roleName }}</h2>
-      <h2>角色代碼：{{ roleId }}</h2>
-      <form class="thisfrom">
-        <button class="closeit" @click="cancelEdit()">×</button>
-        <!-- <label class="thislabel">角色代碼：</label> -->
-        <!-- <input class="thisinput" type="text" v-model="newRole.ID" /> -->
-        <br />
-        <label class="thislabel">角色名稱：</label>
-        <input class="thisinput" type="text" v-model="newRole" />
-      </form>
+      <button class="closeit" @click="cancelEdit()">×</button>
       <div>
-        <!-- <button class="updateauthority" @click="abc()">確定修改</button> -->
-        <button class="updateauthority" @click="sent()">確定修改</button>
-        <button class="updateauthority" @click="cancelEdit()">取消編輯</button>
+        <h2>編輯{{ roleName }}角色名稱</h2>
+        <label class="thislabel">角色名稱改為：</label>
+        <input class="thisinput" type="text" v-model="newRole.name" />
+        <div>
+          <!-- <button class="updateauthority" @click="abc()">確定修改</button> -->
+          <button class="updateauthority" @click="sent()">確定修改</button>
+          <button class="updateauthority" @click="cancelEdit()">
+            取消編輯
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -36,22 +34,30 @@ export default defineComponent({
     // const roleId = toRef(props, "roleId");
     // const roleName = toRef(props, "roleName");
 
-    const newRole = ref();
+    const newRole = reactive({
+      name: "",
+    });
 
-    // function abc() {
-    //   console.log("V1:", newRole.value);
-    //   console.log("V2:", props.roleName);
-    //   console.log("V3:", props.roleId);
-    // }
+    function abc() {
+      console.log("V1:", newRole.name);
+      console.log("V2:", props.roleId);
+      console.log("V3:", props.roleName);
+      console.log("V4:", newRole.name.length);
+    }
 
     function sent() {
-      if (newRole.value.length > 0) {
+      console.log("V1:", newRole.name);
+      console.log("V2:", props.roleId);
+      console.log("V3:", props.roleName);
+      console.log("V4:", newRole.name.length);
+      // 會計主管
+      if (newRole.name.length > 0) {
         axios
           .post(
             "http://localhost:8085/paymentSystem/api/psRole/editPSRole",
             {
               roleId: props.roleId,
-              roleName: newRole,
+              roleName: newRole.name,
             },
             {
               headers: {
@@ -62,12 +68,18 @@ export default defineComponent({
           )
 
           .then((response) => {
-            // userAuthority.value = response.data.data;
-            // console.log("編輯成功");
+            if (response.data.returnCode == 0) {
+              console.log(response.data.message);
+            } else {
+              // userAuthority.value = response.data.data;
+              console.log("編輯失敗");
+            }
+            // 轉場回到頁面
           })
           .catch((error) => {
             alert("發生錯誤");
-            // console.log("編輯失敗");
+            console.log("編輯失敗");
+            // 轉場回到頁面
           });
       } else {
         alert("本欄位請勿留白");
@@ -82,7 +94,7 @@ export default defineComponent({
       sent,
       cancelEdit,
       newRole,
-      // abc,
+      abc,
     };
   },
 });
@@ -101,9 +113,9 @@ export default defineComponent({
 
 .wholearea {
   width: 60%;
-  height: 50vh;
+  /* height: 40vh; */
   margin: 200px 20% 0px 20%;
-  padding: 40px 2.5% 0px 2.5%;
+  padding: 50px 2.5% 50px 2.5%;
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.95);
   overflow: auto;
@@ -122,15 +134,10 @@ export default defineComponent({
   top: 0px;
 }
 
-.thisfrom {
-  margin: 5% auto auto auto;
-  /* outline: 1px black solid; */
-}
-
 .thislabel {
   font-size: 24px;
   line-height: 30px;
-  margin: 20px 5px 20px 0px;
+  margin: 30px 5px 30px 0px;
 }
 
 .thisinput {

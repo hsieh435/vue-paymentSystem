@@ -18,13 +18,14 @@
             :key="index"
           >
             <div>
-              <input type="checkbox" />
+              <input type="checkbox"/>
               <label class="labeltitle">{{ func.functionName }}</label>
             </div>
           </div>
         </div>
       </div>
       <div>
+        <button class="updateauthority">確定修改</button>
         <button class="updateauthority" @click="adjustThisRole()">
           確定修改
         </button>
@@ -97,7 +98,7 @@ export default defineComponent({
         permissionList.value = response.data.data.permissionList;
 
         console.log("U1:", permissionList);
-
+        // alert("查詢權限成功");
       })
       .catch((error) => {
         alert("發生錯誤");
@@ -108,7 +109,30 @@ export default defineComponent({
     //     public functionModels="",
     // }
 
-    function adjustThisRole() {}
+    function adjustThisRole() {
+      axios
+        .post(
+          "http://localhost:8085/paymentSystem/api/permission/saveAllPermission",
+          {
+            roleId: props.roleId,
+            permissionList: [],
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+              // Bearer 跟 token 中間有一個空格
+            },
+          }
+        )
+
+        .then((response) => {
+          // console.log("傳遞成功");
+        })
+        .catch((error) => {
+          alert("發生錯誤");
+          // console.log("傳遞失敗");
+        });
+    }
 
     function cancelAdjust() {
       adjustList.value = true;
