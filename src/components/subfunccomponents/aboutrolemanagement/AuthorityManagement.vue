@@ -3,6 +3,7 @@
   <div class="wholeareaback">
     <div class="wholearea">
       <button class="closeit" @click="cancelAdjust()">×</button>
+
       <div class="authmang">
         <h2>更新{{ roleName }}權限</h2>
         <h2>角色代碼：{{ roleId }}</h2>
@@ -18,14 +19,17 @@
             :key="index"
           >
             <div>
-              <input type="checkbox" />
-              <label class="labeltitle">{{ func.functionName }}</label>
+              <!-- v-if="func.functionName == permission" -->
+              <label>
+                <input class="checkBoxSquare" type="checkbox" />
+                {{ func.functionName }}</label
+              >
+              <label class="permission">{{ gotPromission.true }}</label>
             </div>
           </div>
         </div>
       </div>
       <div>
-        <button class="updateauthority">確定修改</button>
         <button class="updateauthority" @click="adjustThisRole()">
           確定修改
         </button>
@@ -52,6 +56,7 @@ export default defineComponent({
     const token = localStorage.getItem("userJWT");
 
     const adjustList: any = inject("adjustAuthority");
+    // const reload: any = inject("reload");
 
     // 解構 props 傳進來的值
     // const { roleId, roleName } = toRefs(props);
@@ -60,6 +65,11 @@ export default defineComponent({
 
     const functionGroups = reactive({ value: null });
     const permissionList = reactive({ value: null });
+
+    const gotPromission = reactive({
+      true: "",
+      false: "",
+    });
 
     // 查詢所有權限選項
     axios
@@ -75,33 +85,40 @@ export default defineComponent({
       )
 
       .then((response) => {
+        abc();
         functionGroups.value = response.data.data;
+
+        console.log("所有權限:", functionGroups.value);
+        // console.log("獲取權限:", abc.response.data.permissionList.value);
+
       })
       .catch((error) => {
         alert("發生錯誤");
       });
 
-    // 透過傳送角色代碼查詢已開放之權限
-    axios
-      .post(
-        "http://localhost:8085/paymentSystem/api/permission/findAllByRoleId",
-        { roleId: props.roleId },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-            // Bearer 跟 token 中間要有一個空格
-          },
-        }
-      )
+    function abc() {
+      // 透過傳送角色代碼查詢已開放之權限
+      axios
+        .post(
+          "http://localhost:8085/paymentSystem/api/permission/findAllByRoleId",
+          { roleId: props.roleId },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+              // Bearer 跟 token 中間要有一個空格
+            },
+          }
+        )
 
-      .then((response) => {
-        permissionList.value = response.data.data.permissionList;
+        .then((response) => {
+          permissionList.value = response.data.data.permissionList;
 
-        console.log("U1:", permissionList);
-      })
-      .catch((error) => {
-        alert("發生錯誤");
-      });
+          console.log("獲取權限:", permissionList.value);
+        })
+        .catch((error) => {
+          alert("發生錯誤");
+        });
+    }
 
     // class function {
     //     public functionGroups="",
@@ -125,11 +142,10 @@ export default defineComponent({
         )
 
         .then((response) => {
-          // console.log("傳遞成功");
+          // alert("修改成功");
         })
         .catch((error) => {
           alert("發生錯誤");
-          // console.log("傳遞失敗");
         });
     }
 
@@ -141,6 +157,8 @@ export default defineComponent({
       props,
       adjustList,
       functionGroups,
+      permissionList,
+      gotPromission,
       adjustThisRole,
       cancelAdjust,
     };
@@ -213,8 +231,12 @@ export default defineComponent({
   /* outline: 1px solid #000; */
 }
 
-.labeltitle {
-  margin: 5px 30px 0px 5px;
+.checkBoxSquare {
+  margin: 5px 5px 0px 5px;
+}
+
+.permission {
+  display: none;
 }
 
 .updateauthority {

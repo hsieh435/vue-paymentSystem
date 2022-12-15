@@ -44,7 +44,7 @@ export default defineComponent({
         msg.userOrganization = response.data.data.userInfo.userOrganization;
         msg.userTitle = response.data.data.userInfo.userTitle;
 
-        localStorage.setItem("userName", msg.userName);
+        // localStorage.setItem("userName", msg.userName);
       })
 
       .catch((error) => {
@@ -63,6 +63,7 @@ export default defineComponent({
     // console.log("C4:", msg.userTitle);
 
     function logout() {
+      // localStorage.removeItem("userName");
       localStorage.removeItem("userId");
       localStorage.removeItem("userJWT");
       router.push("./");

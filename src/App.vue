@@ -1,4 +1,5 @@
 <template>
+  <!-- <LoadingForever v-if="isLoading"></LoadingForever> -->
   <LoadingForever v-if="loading == null"></LoadingForever>
   <!-- <router-view></router-view> -->
   <router-view v-if="isRouterAlive"></router-view>
@@ -18,6 +19,14 @@ export default defineComponent({
     const loading = ref();
     loading.value = true;
 
+    // const isLoading = ref(false);
+    // const loading = () => {
+    //   isLoading.value = true;
+    //   nextTick(() => {
+    //     isLoading.value = true;
+    //   });
+    // };
+
     // 以下為重新刷新頁面相關功能
     const isRouterAlive = ref(true);
     const reload = () => {
@@ -33,7 +42,8 @@ export default defineComponent({
 
     return {
       loading,
-      isRouterAlive,
+      // isLoading,
+      isRouterAlive
     };
   },
 });

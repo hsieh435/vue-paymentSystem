@@ -55,7 +55,7 @@ export default defineComponent({
             alert("傳遞失敗");
           });
       } else {
-        alert("請確實輸入角色代碼與角色名稱");
+        alert("欄位不可留白");
       }
     }
 

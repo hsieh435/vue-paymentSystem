@@ -74,7 +74,7 @@ export default defineComponent({
             adjustRole.value = true;
           });
       } else {
-        alert("欄位請勿留白");
+        alert("欄位不可留白");
       }
     }
 

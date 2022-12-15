@@ -42,9 +42,9 @@ export default defineComponent({
     // inject("要傳遞的資料名稱");
 
     const login = () => {
-      const user = {
-        notesId: username.value,
-      };
+      // const user = {
+      //   notesId: username.value,
+      // };
       // console.log("K1:", username.value);
 
       vol.value = null;
@@ -52,7 +52,7 @@ export default defineComponent({
 
       axios
         .post("http://localhost:8085/paymentSystem/public/getSystemJWT", {
-          notesId: user.notesId,
+          notesId: username.value,
         })
 
         .then((response) => {
@@ -60,7 +60,7 @@ export default defineComponent({
             // console.log("A1:",user.notesId);
             // console.log("A2:", response.data.data);
             localStorage.setItem("userJWT", response.data.data);
-            localStorage.setItem("userId", user.notesId);
+            localStorage.setItem("userId", username.value);
             router.push({ path: "/LoginView" });
           } else {
             alert("請輸入正確的USERNAME");
@@ -72,6 +72,7 @@ export default defineComponent({
         .finally(() => {
           vol.value = true;
         });
+
       // 1.用.then 和.catch 去處理 axios 傳輸資料後接收成功和接收失敗結果。
       // 2.".finally(() => {})" 為 TYPE SCRIPT 之語法，做出結尾之用，以輸入結束後仍持續執行 LoadingForever 畫面
     };
