@@ -51,7 +51,7 @@ export default defineComponent({
         {
           headers: {
             Authorization: "Bearer " + token,
-            // Bearer 跟 token 中間有一個空格
+            // Bearer 跟 token 中間要有一個空格
           },
         }
       )

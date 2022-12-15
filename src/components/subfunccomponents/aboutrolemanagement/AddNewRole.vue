@@ -16,7 +16,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive,inject } from "vue";
 import axios from "axios";
 export default defineComponent({
   name: "AddNewRole",
@@ -25,11 +25,12 @@ export default defineComponent({
       ID: "",
       name: "",
     });
+
     const token = localStorage.getItem("userJWT");
 
+    const reload: any = inject("reload");
+
     function addNewRole() {
-      // console.log("P1:", newRole.ID);
-      // console.log("P2:", newRole.name);
       if (newRole.ID.length > 0 && newRole.name.length > 0) {
         axios
           .post(
@@ -41,17 +42,17 @@ export default defineComponent({
             {
               headers: {
                 Authorization: "Bearer " + token,
-                // Bearer 跟 token 中間有一個空格
+                // Bearer 跟 token 中間要有一個空格
               },
             }
           )
 
           .then((response) => {
             alert("建立新角色成功");
+            reload();
           })
           .catch((error) => {
             alert("傳遞失敗");
-            // console.log("傳遞失敗");
           });
       } else {
         alert("請確實輸入角色代碼與角色名稱");

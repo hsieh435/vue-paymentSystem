@@ -40,8 +40,6 @@ export default defineComponent({
 
     const vol: any = inject("valueofLoading");
     // inject("要傳遞的資料名稱");
-    // vol.value = null;
-    // console.log("K1:", vol.value);
 
     const login = () => {
       const user = {
@@ -59,7 +57,6 @@ export default defineComponent({
 
         .then((response) => {
           if (response.data.returnCode == 0) {
-            // alert("登入成功");
             // console.log("A1:",user.notesId);
             // console.log("A2:", response.data.data);
             localStorage.setItem("userJWT", response.data.data);

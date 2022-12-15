@@ -4,14 +4,13 @@
     <div class="wholearea">
       <button class="closeit" @click="cancelEdit()">×</button>
       <div>
-        <h2>編輯{{ roleName }}角色名稱</h2>
+        <h2>修改{{ roleName }}角色名稱</h2>
         <label class="thislabel">角色名稱改為：</label>
         <input class="thisinput" type="text" v-model="newRole.name" />
         <div>
-          <!-- <button class="updateauthority" @click="abc()">確定修改</button> -->
           <button class="updateauthority" @click="sent()">確定修改</button>
           <button class="updateauthority" @click="cancelEdit()">
-            取消編輯
+            取消修改
           </button>
         </div>
       </div>
@@ -26,6 +25,7 @@ export default defineComponent({
   props: ["roleId", "roleName"],
   setup(props) {
     const adjustRole: any = inject("adjustRole");
+    const reload: any = inject("reload");
 
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("userJWT");
@@ -38,19 +38,11 @@ export default defineComponent({
       name: "",
     });
 
-    function abc() {
-      console.log("V1:", newRole.name);
-      console.log("V2:", props.roleId);
-      console.log("V3:", props.roleName);
-      console.log("V4:", newRole.name.length);
-    }
-
     function sent() {
-      console.log("V1:", newRole.name);
-      console.log("V2:", props.roleId);
-      console.log("V3:", props.roleName);
-      console.log("V4:", newRole.name.length);
-      // 會計主管
+      // console.log("V1:", newRole.name);
+      // console.log("V2:", props.roleId);
+      // console.log("V3:", props.roleName);
+      // console.log("V4:", newRole.name.length);
       if (newRole.name.length > 0) {
         axios
           .post(
@@ -62,27 +54,27 @@ export default defineComponent({
             {
               headers: {
                 Authorization: "Bearer " + token,
-                // Bearer 跟 token 中間有一個空格
+                // Bearer 跟 token 中間要有一個空格
               },
             }
           )
 
           .then((response) => {
             if (response.data.returnCode == 0) {
-              console.log(response.data.message);
+              alert(response.data.message);
+              adjustRole.value = true;
+              reload();
             } else {
-              // userAuthority.value = response.data.data;
-              console.log("編輯失敗");
+              alert("編輯失敗");
+              adjustRole.value = true;
             }
-            // 轉場回到頁面
           })
           .catch((error) => {
             alert("發生錯誤");
-            console.log("編輯失敗");
-            // 轉場回到頁面
+            adjustRole.value = true;
           });
       } else {
-        alert("本欄位請勿留白");
+        alert("欄位請勿留白");
       }
     }
 
@@ -94,7 +86,7 @@ export default defineComponent({
       sent,
       cancelEdit,
       newRole,
-      abc,
+      reload,
     };
   },
 });

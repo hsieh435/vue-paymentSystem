@@ -1,10 +1,12 @@
 <template>
   <LoadingForever v-if="loading == null"></LoadingForever>
-  <router-view />
+  <!-- <router-view></router-view> -->
+  <router-view v-if="isRouterAlive"></router-view>
+  <!-- <router-view /> -->
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, provide } from "vue";
+import { defineComponent, ref, provide, nextTick } from "vue";
 import LoadingForever from "./components/LoadingForever.vue";
 export default defineComponent({
   name: "App",
@@ -12,14 +14,26 @@ export default defineComponent({
     LoadingForever,
   },
   setup() {
+    // 以下為 loading 畫面呈現，並透過 provide 與 inject 等方式傳遞功能至各個 Component
     const loading = ref();
     loading.value = true;
 
+    // 以下為重新刷新頁面相關功能
+    const isRouterAlive = ref(true);
+    const reload = () => {
+      isRouterAlive.value = false;
+      nextTick(() => {
+        isRouterAlive.value = true;
+      });
+    };
+
     provide("valueofLoading", loading);
+    provide("reload", reload);
     // provide("要傳遞的資料名稱", "要傳遞的資料內容");
 
     return {
       loading,
+      isRouterAlive,
     };
   },
 });

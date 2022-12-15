@@ -34,7 +34,7 @@
           修改權限
         </button>
         <button class="button" @click="editRole(role.roleId, role.roleName)">
-          編輯角色
+          修改角色
         </button>
         <button
           class="button"
@@ -71,7 +71,7 @@ export default defineComponent({
         {
           headers: {
             Authorization: "Bearer " + token,
-            // Bearer 跟 token 中間有一個空格
+            // Bearer 跟 token 中間要有一個空格
           },
         }
       )

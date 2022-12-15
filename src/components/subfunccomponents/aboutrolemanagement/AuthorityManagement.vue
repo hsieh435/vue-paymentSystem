@@ -18,7 +18,7 @@
             :key="index"
           >
             <div>
-              <input type="checkbox"/>
+              <input type="checkbox" />
               <label class="labeltitle">{{ func.functionName }}</label>
             </div>
           </div>
@@ -42,6 +42,7 @@ import axios from "axios";
 export default defineComponent({
   name: "AuthorityManagement",
   props: ["roleId", "roleName"],
+  // 限制 props 傳入資料的型別
   // props: {
   //   roleId: String,
   //   roleName: String,
@@ -60,6 +61,7 @@ export default defineComponent({
     const functionGroups = reactive({ value: null });
     const permissionList = reactive({ value: null });
 
+    // 查詢所有權限選項
     axios
       .post(
         "http://localhost:8085/paymentSystem/api/functionGroup/findAllFunctionGroupWhereFunctionIdInPermission",
@@ -67,18 +69,16 @@ export default defineComponent({
         {
           headers: {
             Authorization: "Bearer " + token,
-            // Bearer 跟 token 中間有一個空格
+            // Bearer 跟 token 中間要有一個空格
           },
         }
       )
 
       .then((response) => {
         functionGroups.value = response.data.data;
-        // console.log("傳遞成功");
       })
       .catch((error) => {
         alert("發生錯誤");
-        // console.log("傳遞失敗");
       });
 
     // 透過傳送角色代碼查詢已開放之權限
@@ -89,7 +89,7 @@ export default defineComponent({
         {
           headers: {
             Authorization: "Bearer " + token,
-            // Bearer 跟 token 中間有一個空格
+            // Bearer 跟 token 中間要有一個空格
           },
         }
       )
@@ -98,7 +98,6 @@ export default defineComponent({
         permissionList.value = response.data.data.permissionList;
 
         console.log("U1:", permissionList);
-        // alert("查詢權限成功");
       })
       .catch((error) => {
         alert("發生錯誤");
@@ -120,7 +119,7 @@ export default defineComponent({
           {
             headers: {
               Authorization: "Bearer " + token,
-              // Bearer 跟 token 中間有一個空格
+              // Bearer 跟 token 中間要有一個空格
             },
           }
         )

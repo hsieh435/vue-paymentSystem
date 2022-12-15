@@ -24,6 +24,7 @@ export default defineComponent({
   props: ["roleId", "roleName"],
   setup(props) {
     const deleteRole: any = inject("deleteRole");
+    const reload: any = inject("reload");
 
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("userJWT");
@@ -36,18 +37,19 @@ export default defineComponent({
           {
             headers: {
               Authorization: "Bearer " + token,
-              // Bearer 跟 token 中間有一個空格
+              // Bearer 跟 token 中間要有一個空格
             },
           }
         )
 
         .then((response) => {
-          console.log("刪除成功");
-          // setTimeout 
+          alert("刪除成功");
+          deleteRole.value = true;
+          reload();
         })
         .catch((error) => {
-          // alert("發生錯誤");
-          console.log("刪除失敗");
+          alert("發生錯誤");
+          deleteRole.value = true;
         });
     }
 
