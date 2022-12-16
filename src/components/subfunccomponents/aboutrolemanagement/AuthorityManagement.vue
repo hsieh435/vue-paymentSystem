@@ -18,17 +18,21 @@
             v-for="(func, index) in item.functionModels"
             :key="index"
           >
-            <div>
-              <!-- v-if="func.functionName == permission" -->
-              <label>
-                <input class="checkBoxSquare" type="checkbox" />
-                {{ func.functionName }}</label
-              >
-              <label class="permission">{{ gotPromission.true }}</label>
+            <div v-if="permission.value.includes(func.functionId) == true">
+              <input class="checkBoxSquare" type="checkbox" checked />
+              <label> {{ func.functionName }}</label>
+            </div>
+            <div v-if="permission.value.includes(func.functionId) != true">
+              <input class="checkBoxSquare" type="checkbox" />
+              <label> {{ func.functionName }}</label>
             </div>
           </div>
         </div>
       </div>
+      <!-- <input type="checkbox" v-model="func.checked" v-bind="index"> -->
+      <!-- v-model=獲取權限array.contains(func.id) -->
+      <!-- v-for="(perm, index) in permission.value" :key="index" -->
+      <!-- v-if="permission.value.includes(func.functionId) == true" -->
       <div>
         <button class="updateauthority" @click="adjustThisRole()">
           確定修改
@@ -64,12 +68,7 @@ export default defineComponent({
     // const roleName = toRef(props, "roleName");
 
     const functionGroups = reactive({ value: null });
-    const permissionList = reactive({ value: null });
-
-    const gotPromission = reactive({
-      true: "",
-      false: "",
-    });
+    const permission = reactive({ value: null });
 
     // 查詢所有權限選項
     axios
@@ -85,18 +84,15 @@ export default defineComponent({
       )
 
       .then((response) => {
-        abc();
+        secondAxios();
         functionGroups.value = response.data.data;
-
         console.log("所有權限:", functionGroups.value);
-        // console.log("獲取權限:", abc.response.data.permissionList.value);
-
       })
       .catch((error) => {
-        alert("發生錯誤");
+        alert("發生錯誤A");
       });
 
-    function abc() {
+    function secondAxios() {
       // 透過傳送角色代碼查詢已開放之權限
       axios
         .post(
@@ -111,19 +107,20 @@ export default defineComponent({
         )
 
         .then((response) => {
-          permissionList.value = response.data.data.permissionList;
+          // console.log("獲取權限:", permissionList.value);
+          const functions = functionGroups.value;
+          permission.value = response.data.data.permissionList;
 
-          console.log("獲取權限:", permissionList.value);
+          // console.log("W1:", functions);
+          console.log("W2:", permission.value);
+          // console.log("W3:", permission.includes(functions));
+
+          // if(permission.includes(functions) == true){checked}else{""}
         })
         .catch((error) => {
-          alert("發生錯誤");
+          alert("發生錯誤B");
         });
     }
-
-    // class function {
-    //     public functionGroups="",
-    //     public functionModels="",
-    // }
 
     function adjustThisRole() {
       axios
@@ -153,12 +150,16 @@ export default defineComponent({
       adjustList.value = true;
     }
 
+    // class function {
+    //     public functionGroups="",
+    //     public functionModels="",
+    // }
+
     return {
       props,
       adjustList,
       functionGroups,
-      permissionList,
-      gotPromission,
+      permission,
       adjustThisRole,
       cancelAdjust,
     };
