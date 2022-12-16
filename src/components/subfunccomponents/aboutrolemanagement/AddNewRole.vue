@@ -4,11 +4,11 @@
     <form name="form">
       <label class="thislabel"
         >角色代碼：
-        <input type="text" name="code" v-model="newRole.ID" />
+        <input type="text" v-model="newRole.ID" />
       </label>
       <label class="thislabel"
         >角色名稱：
-        <input type="text" name="titlename" v-model="newRole.name" />
+        <input type="text" v-model="newRole.name" />
       </label>
     </form>
     <button class="thisbutton" @click="addNewRole()">加入</button>
