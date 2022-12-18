@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+
+  <pre class="rect"></pre>
+
+  <script>
+
+    const array = [1, 2, 3, 4, 5, 6]
+
+    const array1 = ['a', 'b', 'c', "4", "5", "6"];
+
+    array1.forEach(element => console.log(element));
+
+    const rect = document.querySelector(".rect");
+
+    for (var i = 0; i < array1.length; i++) {
+      const item = array1[i];
+      // console.log(item);
+
+      const newarray1 = array.push(item)
+      console.log("A:", array);
+
+      rect.innerHTML = array;
+    }
+
+  </script>
+
+</body>
+
+</html>
+
+<!-- 
+  https://stackblitz.com/edit/angular-ivy-ibjzi6?file=src%2Fapp%2Fapp.component.html,src%2Fapp%2Fapp.component.ts 
+-->
+
+<!-- 
+  https://ithelp.ithome.com.tw/articles/10207154
+  forEach 與 map 的用法
+ -->
+
+<!-- 
+  https://ithelp.ithome.com.tw/articles/10221912
+  filter 用法
+-->
+
+<!-- 
+  https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/push
+  push 用法
+-->
