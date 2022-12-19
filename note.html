@@ -1,41 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-</head>
+  <body>
+    <pre class="rect"></pre>
 
-<body>
+    <script>
+      const array = [1, 2, 3, 4, 5, 6];
 
-  <pre class="rect"></pre>
+      const array1 = ["a", "b", "c", "4", "5", "6"];
 
-  <script>
+      const rect = document.querySelector(".rect");
 
-    const array = [1, 2, 3, 4, 5, 6]
+      for (var i = 0; i < array1.length; i++) {
+        const item = array1[i];
+        console.log(item);
 
-    const array1 = ['a', 'b', 'c', "4", "5", "6"];
+        const newarray1 = array.push(item);
+        console.log("A:", item);
+        console.log("B:", array);
 
-    array1.forEach(element => console.log(element));
-
-    const rect = document.querySelector(".rect");
-
-    for (var i = 0; i < array1.length; i++) {
-      const item = array1[i];
-      // console.log(item);
-
-      const newarray1 = array.push(item)
-      console.log("A:", array);
-
-      rect.innerHTML = array;
-    }
-
-  </script>
-
-</body>
-
+        rect.innerHTML = array;
+      }
+    </script>
+  </body>
 </html>
 
 <!-- 

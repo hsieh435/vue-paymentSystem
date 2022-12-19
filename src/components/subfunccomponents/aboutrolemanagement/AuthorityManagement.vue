@@ -22,20 +22,16 @@
               <input
                 class="checkBoxSquare"
                 type="checkbox"
-                id="checkbox"
-                v-model="checked"
+                v-model="func.checked"
               />
-              <label> {{ func.functionName }}</label>
-              <label for="checkbox"> {{ checked }}</label>
+              <label>{{ func.functionName }}</label>
+              <!-- <label>{{ func.functionId }}</label> -->
+              <label class="checked">{{ func.checked }}</label>
+              <label>{{ func.checked }}</label>
             </div>
           </div>
         </div>
       </div>
-      <!-- <input type="checkbox" v-model="func.checked" v-bind="index"> -->
-      <!-- <input type="checkbox" v-model="func.checked" v-bind="func.id"> -->
-      <!-- v-model=獲取權限array.contains(func.id) -->
-      <!-- v-for="(perm, index) in permission.value" :key="index" -->
-      <!-- v-if="permission.value.includes(func.functionId) == true" -->
       <div>
         <button class="updateauthority" @click="adjustThisRole()">
           確定修改
@@ -72,13 +68,14 @@ export default defineComponent({
 
     const functionGroups = reactive({ value: null });
     const permission = reactive({ value: null });
+    // console.log("W1:", functionGroups);
+    // console.log("W2:", permission);
 
-    const checked = reactive({
-      hasPermission: "true",
-      notPermission: "false",
+    const hasPermission: any = reactive({
+      true: "checked",
+      false: "",
     });
 
-    // 查詢所有權限選項
     axios
       .post(
         "http://localhost:8085/paymentSystem/api/functionGroup/findAll",
@@ -94,10 +91,9 @@ export default defineComponent({
       .then((response) => {
         secondAxios();
         functionGroups.value = response.data.data;
-        // console.log("所有權限:", functionGroups.value);
       })
       .catch((error) => {
-        alert("發生錯誤A");
+        alert("查詢所有權限發生錯誤A");
       });
 
     function secondAxios() {
@@ -115,23 +111,33 @@ export default defineComponent({
         )
 
         .then((response) => {
-          // console.log("獲取權限:", permissionList.value);
           permission.value = response.data.data.permissionList;
 
-          // if (permission.includes(functions)) {
-          //   ("checked");
-          // } else {
-          //   ("");
-          // }
+          const functArray: any = functionGroups.value;
+          console.log("W3:", functArray);
 
-          console.log("W1:", functionGroups.value);
-          console.log("W2:", permission.value);
-          // console.log("W3:", permission.includes(functions));
+          const permArray: any = permission.value;
+          console.log("W4:", permArray);
 
-          // if(permission.includes(functions) == true){checked}else{""}
+          for (let i = 0; i < functArray.length; i++) {
+            // console.log("W5:", functArray[i]);
+
+            for (let j = 0; j < functArray[i].functionModels.length; j++) {
+              const w6 = functArray[i].functionModels[j];
+              // console.log("W6:", w6);
+              const w7: any = functArray[i].functionModels[j].functionId;
+              // console.log("W7:", w7);
+              const w8 = permArray.includes(w7);
+              // console.log("W8:", permArray.includes(w7));
+              const w9 = w8 == true ? "true" : "false";
+              // console.log("W9:", w9);
+              w6["checked"] = w9;
+              // console.log("W7:", w6);
+            }
+          }
         })
         .catch((error) => {
-          alert("發生錯誤B");
+          alert("搜尋角色權限發生錯誤");
         });
     }
 
@@ -173,9 +179,9 @@ export default defineComponent({
       adjustList,
       functionGroups,
       permission,
+      hasPermission,
       adjustThisRole,
       cancelAdjust,
-      checked,
     };
   },
 });
@@ -250,7 +256,7 @@ export default defineComponent({
   margin: 5px 5px 0px 5px;
 }
 
-.permission {
+.checked {
   display: none;
 }
 
