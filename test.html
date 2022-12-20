@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <pre class="rect"></pre>
+
+    <script>
+      var objArray = [
+        { id: 0, name: "Object 0", otherProp: "321" },
+        { id: 1, name: "O1", otherProp: "648" },
+        { id: 2, name: "Another Object", otherProp: "850" },
+        { id: 3, name: "Almost There", otherProp: "046" },
+        { id: 4, name: "Last Obj", otherProp: "984" },
+      ];
+
+      const abc = objArray.map((el) => el.otherProp);
+
+      console.log("A1:", objArray);
+      console.log("A1:", abc);
+      console.log("--- 分隔線 ---");
+
+      let arr = ["Jack", "John", "May", "Su", "Ada"];
+
+      let arr1 = [
+        {
+          name: "Casper",
+          like: "鍋燒意麵",
+          age: 18,
+          checked: true,
+        },
+        {
+          name: "Wang",
+          like: "炒麵",
+          age: 24,
+          checked: true,
+        },
+        {
+          name: "Bobo",
+          like: "蘿蔔泥",
+          age: 1,
+          checked: false,
+        },
+        {
+          name: "滷蛋",
+          like: "蘿蔔泥",
+          age: 3,
+          checked: false,
+        },
+      ];
+      let arr2 = arr1.filter(function (value) {
+        return value.checked == true;
+      });
+
+      let arr3 = arr.filter(function (value) {
+        return value.length > 3;
+      });
+
+      console.log("B1:", arr1);
+      console.log("B2:", arr2);
+      console.log("B3:", arr3);
+    </script>
+  </body>
+</html>

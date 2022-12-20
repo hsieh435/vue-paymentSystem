@@ -10,16 +10,17 @@
       <input
         type="text"
         v-model="msg.username"
-        class="formcon"
+        class="inputdata"
         placeholder="Username"
         aria-label="Username"
         aria-describedby="basic-addon1"
-      /><br />
+      />
+      <br />
       <label class="labelword">請輸入帳號：</label><br />
       <input
         type="text"
         v-model="msg.account"
-        class="formcon"
+        class="inputdata"
         placeholder="Useraccount"
         aria-label="Username"
         aria-describedby="basic-addon1"
@@ -72,9 +73,9 @@ export default defineComponent({
 }
 
 .labelword {
-  line-height: 3rem;
-  font-size: 20px;
-  padding-right: 10px;
+  line-height: 30px;
+  font-size: 30px;
+  margin:10px 0px 10px 0px;
 }
 
 .loginInput {
@@ -93,26 +94,21 @@ export default defineComponent({
   }
 }
 
-.formcon {
-  display: block;
-  width: 75%;
-  padding: 0.375rem 0.75rem;
-  font-size: 1.5rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  background-clip: padding-box;
-  border: 2px solid #ced4da;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+.inputdata {
+  width: 300px;
+  border: 1px solid black;
+  background-color: white;
+  margin: 10px 0px 10px 0px;
+  border-radius: 5px;
+  transition: 0.3s;
 }
 
 .buttoncon {
-  display: flex;
-  text-align: center;
-  margin-top: 10px;
-  height: 40px;
+  height: 50px;
+  width: 300px;
+  font-size: 30px;
+  line-height: 30px;
+  border-radius: 25px;
+  margin: 50px 0px 0px 0px;
 }
 </style>

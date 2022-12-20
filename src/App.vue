@@ -1,9 +1,6 @@
 <template>
-  <!-- <LoadingForever v-if="isLoading"></LoadingForever> -->
   <LoadingForever v-if="loading == null"></LoadingForever>
-  <!-- <router-view></router-view> -->
   <router-view v-if="isRouterAlive"></router-view>
-  <!-- <router-view /> -->
 </template>
 
 <script lang="ts">
@@ -43,7 +40,7 @@ export default defineComponent({
     return {
       loading,
       // isLoading,
-      isRouterAlive
+      isRouterAlive,
     };
   },
 });

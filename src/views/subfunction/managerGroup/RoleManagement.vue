@@ -9,8 +9,8 @@
 <script lang="ts">
 import { defineComponent, ref, provide, inject } from "vue";
 import "@/views/subfunction/subfunction.css";
-import AddNewRole from "../../../components/subfunccomponents/aboutrolemanagement/AddNewRole.vue";
-import RoleList from "../../../components/subfunccomponents/aboutrolemanagement/RoleList.vue";
+import AddNewRole from "../../../components/subfunccomponents/aboutpsRoleList/AddNewRole.vue";
+import RoleList from "../../../components/subfunccomponents/aboutpsRoleList/RoleList.vue";
 import BackToLoginPage from "../../../components/BackToLoginPage.vue";
 export default defineComponent({
   name: "RoleManagement",
