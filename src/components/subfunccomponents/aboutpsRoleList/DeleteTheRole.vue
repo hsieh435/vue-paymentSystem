@@ -8,10 +8,8 @@
       <h2>角色名稱：{{ roleName }}</h2>
       <h2>將被刪除！</h2>
       <div>
-        <button class="updateauthority" @click="deleteThisRole()">
-          確定刪除
-        </button>
-        <button class="updateauthority" @click="cancelEdit()">取消刪除</button>
+        <button class="updateauthority" @click="deleteThisRole()">確定</button>
+        <button class="updateauthority" @click="cancelEdit()">取消</button>
       </div>
     </div>
   </div>

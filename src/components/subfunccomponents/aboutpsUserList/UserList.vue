@@ -1,5 +1,8 @@
-<!-- 角色列表 -->
+<!-- 使用者列表 -->
 <template>
+  <Pagination></Pagination>
+  <!-- <Pagination1></Pagination1> -->
+  <!-- <PaginationComponent></PaginationComponent> -->
   <table class="table">
     <tr>
       <th>編號</th>
@@ -18,12 +21,19 @@
   </table>
 </template>
 <script lang="ts">
-import { defineComponent, ref, reactive, provide, inject } from "vue";
+import { defineComponent, onMounted, ref, reactive } from "vue";
 import axios from "axios";
+import Pagination from "./pagination/Pagination.vue";
+import Pagination1 from "./pagination/Pagination1.vue";
+// import PaginationComponent from "./pagination/PaginationComponent.vue";
 import AdjustUserRole from "./AdjustUserRole.vue";
+import { useTodosApi } from "./pagination/useTodosApi";
 export default defineComponent({
   name: "UserList",
   components: {
+    Pagination,
+    Pagination1,
+    // PaginationComponent,
     AdjustUserRole,
   },
 
@@ -32,6 +42,18 @@ export default defineComponent({
     const token = localStorage.getItem("userJWT");
 
     const userlist = reactive({ value: null });
+
+    const currentPage = ref(1);
+    const rowsPerPage = ref(20);
+
+    const { todos, todosAreLoading, loadTodos, numberOfPages } = useTodosApi(
+      currentPage,
+      rowsPerPage
+    );
+
+    onMounted(async () => loadTodos());
+
+    // onMounted 的功能為何
 
     axios
       .post(
@@ -136,7 +158,7 @@ tr:last-of-type {
   border-radius: 20px;
   background-color: rgba(79, 193, 210);
   line-height: 16px;
-  margin: 0px 5px 0px 5px;
+  margin: 10px 5px 10px 5px;
   transition: 0.2s;
 }
 

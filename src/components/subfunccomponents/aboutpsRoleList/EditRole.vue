@@ -30,7 +30,7 @@ export default defineComponent({
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("userJWT");
 
-    const { roleId, roleName } = toRefs(props);
+    // const { roleId, roleName } = toRefs(props);
     // const roleId = toRef(props, "roleId");
     // const roleName = toRef(props, "roleName");
 

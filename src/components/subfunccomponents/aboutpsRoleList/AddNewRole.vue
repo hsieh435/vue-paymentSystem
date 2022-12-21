@@ -18,6 +18,7 @@
 <script lang="ts">
 import { defineComponent, reactive, inject } from "vue";
 import axios from "axios";
+// import RoleList from "./RoleList.vue";
 export default defineComponent({
   name: "AddNewRole",
   setup() {
@@ -27,53 +28,67 @@ export default defineComponent({
     });
 
     const token = localStorage.getItem("userJWT");
+    const userId = localStorage.getItem("userId");
 
     const reload: any = inject("reload");
 
+    // const roleidlist = reactive({ value: null });
+
     function addNewRole() {
-      if (newRole.ID.length > 0 && newRole.name.length > 0) {
-        // axios
-        //     .post(
-        //       "http://localhost:8085/paymentSystem/api/psRole/findAllPSRole",
-        //       { notesId: userId },
-        //       {
-        //         headers: {
-        //           Authorization: "Bearer " + token,
-        //         },
-        //       }
-        //     )
-
-        //     .then((response) => {
-        //       alert("建立新角色成功");
-        //     })
-        //     .catch((error) => {
-        //       alert("傳遞失敗");
-        //     });
-
+      if (newRole.ID.length == 0 || newRole.name.length == 0) {
+        alert("欄位不可留白");
+      } else if (newRole.ID.length > 0 && newRole.name.length > 0) {
         axios
           .post(
-            "http://localhost:8085/paymentSystem/api/psRole/newPSRole",
-            {
-              roleId: newRole.ID,
-              roleName: newRole.name,
-            },
+            "http://localhost:8085/paymentSystem/api/psRole/findAllPSRole",
+            { notesId: userId },
             {
               headers: {
                 Authorization: "Bearer " + token,
-                // Bearer 跟 token 中間要有一個空格
               },
             }
           )
 
           .then((response) => {
-            alert("建立新角色成功");
-            reload();
+            // roleidlist.value = response.data.data;
+            const rolenameList = response.data.data;
+            const roleIdCompareArray = [];
+            for (let i = 0; i < rolenameList.length; i++) {
+              const roleidname = rolenameList[i].roleId;
+              roleIdCompareArray.push(roleidname);
+            }
+
+            if (roleIdCompareArray.includes(newRole.ID) === true) {
+              alert("角色代碼重複，請更換名稱");
+              newRole.ID = "";
+            } else {
+              axios
+                .post(
+                  "http://localhost:8085/paymentSystem/api/psRole/newPSRole",
+                  {
+                    roleId: newRole.ID,
+                    roleName: newRole.name,
+                  },
+                  {
+                    headers: {
+                      Authorization: "Bearer " + token,
+                      // Bearer 跟 token 中間要有一個空格
+                    },
+                  }
+                )
+
+                .then((response) => {
+                  alert("建立新角色成功");
+                  reload();
+                })
+                .catch((error) => {
+                  alert("建立新角色失敗");
+                });
+            }
           })
           .catch((error) => {
-            alert("傳遞失敗");
+            alert("對比角色代碼失敗，請重新輸入");
           });
-      } else {
-        alert("欄位不可留白");
       }
     }
 
@@ -84,6 +99,7 @@ export default defineComponent({
 
     return {
       newRole,
+      // roleidlist,
       addNewRole,
       cleanIt,
     };
