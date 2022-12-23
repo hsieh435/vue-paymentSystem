@@ -25,6 +25,17 @@ export default defineComponent({
     // console.log("B1:", token);
     // console.log("B2:", userId);
 
+    const msg = reactive({
+      userName: "",
+      userID: "",
+      userOrganization: "",
+      userTitle: "",
+    });
+    // console.log("C1:", msg.userName);
+    // console.log("C2:", msg.userID);
+    // console.log("C3:", msg.userOrganization);
+    // console.log("C4:", msg.userTitle);
+
     axios
       .post(
         "http://localhost:8085/paymentSystem/api/PSUser/findPSUserByNotesId",
@@ -50,17 +61,6 @@ export default defineComponent({
       .catch((error) => {
         console.log("發生錯誤");
       });
-
-    const msg = reactive({
-      userName: "",
-      userID: "",
-      userOrganization: "",
-      userTitle: "",
-    });
-    // console.log("C1:", msg.userName);
-    // console.log("C2:", msg.userID);
-    // console.log("C3:", msg.userOrganization);
-    // console.log("C4:", msg.userTitle);
 
     function logout() {
       // localStorage.removeItem("userName");
