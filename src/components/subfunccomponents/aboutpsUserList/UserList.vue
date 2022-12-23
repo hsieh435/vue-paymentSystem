@@ -1,87 +1,104 @@
 <!-- 使用者列表 -->
 <template>
-  <Pagination></Pagination>
-  <!-- <Pagination1></Pagination1> -->
-  <!-- <PaginationComponent></PaginationComponent> -->
-  <table class="table">
-    <tr>
-      <th>編號</th>
-      <th>姓名</th>
-      <th>notesId</th>
-      <th>角色名稱</th>
-      <th>修改角色</th>
-    </tr>
-    <tr v-for="(user, index) in userlist.value" :key="index">
-      <td>{{ index + 1 }}</td>
-      <td>{{ user.userInfo.userName }}</td>
-      <td>{{ user.notesId }}</td>
-      <td><AdjustUserRole></AdjustUserRole></td>
-      <td><button class="button">修改角色</button></td>
-    </tr>
-  </table>
+  <div class="container">
+    <pagination-component
+      class="pagination-component"
+      v-model="currentPage"
+      :numberOfPages="numberOfPages"
+    />
+    <table class="table-fill">
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>userId</th>
+          <th>Title</th>
+          <th>Completed</th>
+        </tr>
+      </thead>
+      <tbody class="table-hover">
+        <tr v-for="(user, index) in eachUser" :key="index">
+          <td>{{ index + 1 }}</td>
+          <td>{{ user.userId }}</td>
+          <td>{{ user.userName }}</td>
+          <td>{{ user.roleName }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
+
+<!-- 
+
+<script lang="ts" setup>
+import { onMounted, ref, watch } from "vue";
+import PaginationComponent from "./components/pagination/PaginationComponent.vue";
+import { useTodosApi } from "./composables/useTodosApi";
+
+const currentPage = ref(1);
+const rowsPerPage = ref(30);
+
+const { todos, todosAreLoading, loadTodos, numberOfPages } = useTodosApi(
+  currentPage,
+  rowsPerPage
+);
+
+onMounted(async () => loadTodos());
+</script>
+
+-->
+
 <script lang="ts">
-import { defineComponent, onMounted, ref, reactive } from "vue";
-import axios from "axios";
-import Pagination from "./pagination/Pagination.vue";
-import Pagination1 from "./pagination/Pagination1.vue";
-// import PaginationComponent from "./pagination/PaginationComponent.vue";
+import { defineComponent, onMounted, ref, watch } from "vue";
+import PaginationComponent from "./pagination/PaginationComponent.vue";
 import AdjustUserRole from "./AdjustUserRole.vue";
 import { useTodosApi } from "./pagination/useTodosApi";
+
 export default defineComponent({
   name: "UserList",
   components: {
-    Pagination,
-    Pagination1,
-    // PaginationComponent,
+    PaginationComponent,
     AdjustUserRole,
   },
 
   setup() {
-    const userId = localStorage.getItem("userId");
-    const token = localStorage.getItem("userJWT");
-
-    const userlist = reactive({ value: null });
-
     const currentPage = ref(1);
     const rowsPerPage = ref(20);
+    // console.log("currentPage:", currentPage);
+    // 1
 
-    const { todos, todosAreLoading, loadTodos, numberOfPages } = useTodosApi(
-      currentPage,
-      rowsPerPage
-    );
+    // console.log("rowsPerPage:", rowsPerPage);
+    // 20
 
-    onMounted(async () => loadTodos());
+    onMounted(async () => loadeachUser());
+    // console.log("loadeachUser:", loadeachUser);
+    // console 出 function
 
-    // onMounted 的功能為何
+    const { eachUser, eachUserAreLoading, loadeachUser, numberOfPages } =
+      useTodosApi(currentPage, rowsPerPage);
+    // console.log("eachUser:", eachUser);
+    // 各個頁面資料
 
-    axios
-      .post(
-        "http://localhost:8085/paymentSystem/api/PSUser/findAllPSUser",
-        { notesId: userId },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-            // Bearer 跟 token 中間要有一個空格
-          },
-        }
-      )
+    // console.log("eachUserAreLoading:", eachUserAreLoading);
+    // value:false
 
-      .then((response) => {
-        userlist.value = response.data.data;
-        // console.log("傳遞成功");
-        // console.log(response.data.data);
-      })
-      .catch((error) => {
-        alert("發生錯誤");
-        // console.log("傳遞失敗");
-      });
+    // console.log("loadTodos:", loadTodos);
+    // console 出 function
+
+    // console.log("numberOfPages:", numberOfPages);
+    // 分頁總數
 
     return {
-      userlist,
+      currentPage,
+      rowsPerPage,
+      useTodosApi,
+      // loadeachUser,
     };
   },
 });
+// http://localhost:8085/paymentSystem/api/PSUser/editPSUser
+// JBW
+// "roleId": "",
+// "notesId": ""
 </script>
 
 <style scoped>
