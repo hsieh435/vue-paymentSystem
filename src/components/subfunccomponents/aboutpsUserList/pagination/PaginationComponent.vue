@@ -3,6 +3,7 @@
 <template>
   <div class="pagination-container" aria-label="row pagination">
     <ul v-if="numberOfPages >= 1" class="pagination">
+      <!-- 第一頁 -->
       <li
         class="page-item"
         aria-label="go to previous page"
@@ -13,7 +14,7 @@
       >
         <span class="page-link">FIRST PAGE</span>
       </li>
-      <!-- 往前跳 -->
+      <!-- 往前跳三頁 -->
       <li
         class="page-item"
         aria-label="go to previous page"
@@ -22,7 +23,7 @@
           disabled: currentPage < 3,
         }"
       >
-        <span class="page-link">-3</span>
+        <span class="page-link">&#10218;</span>
       </li>
       <!-- 當下頁面 -->
       <li
@@ -47,7 +48,7 @@
           {{ index }}
         </div>
       </li>
-      <!-- 往後跳 -->
+      <!-- 往後跳三頁 -->
       <li
         class="page-item"
         aria-label="go to previous page"
@@ -56,7 +57,7 @@
           disabled: currentPage > numberOfPages - 3,
         }"
       >
-        <span class="page-link">+3</span>
+        <span class="page-link">&#10219;</span>
       </li>
       <!-- 最後一頁 -->
       <li

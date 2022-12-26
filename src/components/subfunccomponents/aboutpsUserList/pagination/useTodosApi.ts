@@ -1,4 +1,4 @@
-import { defineComponent, ref, Ref, reactive } from "vue";
+import { ref, Ref, reactive } from "vue";
 import axios from "axios";
 import { usePagination } from "./useClientSidePagination";
 
@@ -17,27 +17,18 @@ export function useTodosApi(
 
   const userlist = reactive({ value: null });
 
-  // const Users = reactive({ value: null });
-
   const newUserArray: any = [];
-  // console.log("newUserArray:", newUserArray);
+  console.log("newUserArray:", newUserArray);
 
-  const Users: Ref<User[]> = ref([]);
+  const users: Ref<User[]> = ref([]);
 
   const UsersAreLoading = ref(false);
 
   const { paginatedArray, numberOfPages } = usePagination<User>({
     rowsPerPage,
-    arrayToPaginate: Users,
+    arrayToPaginate: users,
     currentPage,
   });
-
-  // const userlist = reactive({
-  //   userId: "",
-  //   userName: "",
-  //   roleId: "",
-  //   roleName: "",
-  // });
 
   axios
     .post(
@@ -53,19 +44,13 @@ export function useTodosApi(
 
     .then((response) => {
       userlist.value = response.data.data;
-      // console.log("傳遞成功");
 
       const userlistArray: any = userlist.value;
-
       for (let i = 0; i < userlistArray.length; i++) {
         const userId: any = userlistArray[i].userInfo.notesId;
-
         const userName: any = userlistArray[i].userInfo.userName;
-
         const roleId: any = userlistArray[i].role.roleId;
-
         const roleName: any = userlistArray[i].role.roleName;
-
         const emptyObject: any = {};
 
         emptyObject["userId"] = userId;
@@ -75,10 +60,8 @@ export function useTodosApi(
 
         newUserArray.push(emptyObject);
       }
-      // console.log("newUserArray:", newUserArray);
     })
     .catch((error) => {
-      // alert("發生錯誤");
       console.log("傳遞失敗");
     });
 
@@ -95,7 +78,7 @@ export function useTodosApi(
           },
         }
       );
-      Users.value = result.data.data;
+      users.value = result.data.data;
       console.log("result:", result.data.data);
     } catch (error) {
       console.log("error:", error);
@@ -106,7 +89,7 @@ export function useTodosApi(
 
   return {
     userlist,
-    Users: paginatedArray,
+    users: paginatedArray,
     loadUsers,
     UsersAreLoading,
     numberOfPages,

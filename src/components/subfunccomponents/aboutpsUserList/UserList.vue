@@ -1,30 +1,28 @@
 <!-- 使用者列表 -->
 <template>
-  <div class="container">
-    <pagination-component
-      class="pagination-component"
-      v-model="currentPage"
-      :numberOfPages="numberOfPages"
-    />
-    <table class="table-fill">
-      <thead>
-        <tr>
-          <th>Index</th>
-          <th>userId</th>
-          <th>Title</th>
-          <th>Completed</th>
-        </tr>
-      </thead>
-      <tbody class="table-hover">
-        <tr v-for="(user, index) in Users" :key="index">
-          <td>{{ index + 1 }}</td>
-          <td>{{ user.userId }}</td>
-          <td>{{ user.userName }}</td>
-          <td>{{ user.roleName }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <pagination-component
+    class="pagination-component"
+    v-model="currentPage"
+    :numberOfPages="numberOfPages"
+  />
+  <table class="table-fill">
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>UserId</th>
+        <th>UserName</th>
+        <th>RoleName</th>
+      </tr>
+    </thead>
+    <tbody class="table-hover">
+      <tr v-for="(user, index) in users" :key="index">
+        <td>{{ index + 1 }}</td>
+        <td>{{ user.userId }}</td>
+        <td>{{ user.userName }}</td>
+        <td>{{ user.roleName }}</td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <!-- 
@@ -44,7 +42,6 @@ const { todos, todosAreLoading, loadTodos, numberOfPages } = useTodosApi(
 
 onMounted(async () => loadTodos());
 </script>
-
 -->
 
 <script lang="ts">
@@ -69,11 +66,11 @@ export default defineComponent({
     // console.log("rowsPerPage:", rowsPerPage);
     // 20
 
-    const { Users, UsersAreLoading, loadUsers, numberOfPages } = useTodosApi(
+    const { users, UsersAreLoading, loadUsers, numberOfPages } = useTodosApi(
       currentPage,
       rowsPerPage
     );
-    // console.log("Users:", Users);
+    // console.log("users:", users);
     // 各個頁面資料
 
     // console.log("UsersAreLoading:", UsersAreLoading);
@@ -90,11 +87,13 @@ export default defineComponent({
     // console 出 function
 
     return {
+      users,
+      UsersAreLoading,
+      loadUsers,
+      numberOfPages,
       currentPage,
       rowsPerPage,
       useTodosApi,
-      loadUsers,
-      Users,
     };
   },
 });
@@ -105,18 +104,14 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.table {
-  width: 90%;
-  margin: 0px 5% 0px 5%;
+.table-fill {
+  width: 80%;
+  margin: 0px 10% 0px 10%;
   border-radius: 20px 20px 20px 20px;
   overflow: hidden;
   font-family: "Oswald", sans-serif;
   transition: 0.3s;
-  /* border: 1px rgb(0, 0, 0) solid; */
-}
-
-.table:hover {
-  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.781);
+  border: 1px rgb(0, 0, 0) solid;
 }
 
 body {
