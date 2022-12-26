@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, toRef, toRefs } from "vue";
+import { defineComponent } from "vue";
 export default defineComponent({
   name: "ChildInfo2",
 

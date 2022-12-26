@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from "vue";
+import { defineComponent, reactive } from "vue";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
 export default defineComponent({

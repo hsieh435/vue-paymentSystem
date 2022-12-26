@@ -18,7 +18,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, reactive, toRef, toRefs, inject } from "vue";
+import { defineComponent, reactive, toRef, toRefs, inject } from "vue";
 import axios from "axios";
 export default defineComponent({
   name: "EditRole",

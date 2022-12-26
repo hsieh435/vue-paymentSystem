@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody class="table-hover">
-        <tr v-for="(user, index) in eachUser" :key="index">
+        <tr v-for="(user, index) in Users" :key="index">
           <td>{{ index + 1 }}</td>
           <td>{{ user.userId }}</td>
           <td>{{ user.userName }}</td>
@@ -69,29 +69,32 @@ export default defineComponent({
     // console.log("rowsPerPage:", rowsPerPage);
     // 20
 
-    onMounted(async () => loadeachUser());
-    // console.log("loadeachUser:", loadeachUser);
-    // console 出 function
-
-    const { eachUser, eachUserAreLoading, loadeachUser, numberOfPages } =
-      useTodosApi(currentPage, rowsPerPage);
-    // console.log("eachUser:", eachUser);
+    const { Users, UsersAreLoading, loadUsers, numberOfPages } = useTodosApi(
+      currentPage,
+      rowsPerPage
+    );
+    // console.log("Users:", Users);
     // 各個頁面資料
 
-    // console.log("eachUserAreLoading:", eachUserAreLoading);
+    // console.log("UsersAreLoading:", UsersAreLoading);
     // value:false
 
-    // console.log("loadTodos:", loadTodos);
+    // console.log("loadUsers:", loadUsers);
     // console 出 function
 
     // console.log("numberOfPages:", numberOfPages);
     // 分頁總數
 
+    onMounted(async () => loadUsers());
+    // console.log("loadUsers:", loadUsers);
+    // console 出 function
+
     return {
       currentPage,
       rowsPerPage,
       useTodosApi,
-      // loadeachUser,
+      loadUsers,
+      Users,
     };
   },
 });

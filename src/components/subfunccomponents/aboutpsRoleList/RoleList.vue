@@ -22,7 +22,7 @@
       <th>角色名稱</th>
       <th>設定</th>
     </tr>
-    <tr v-for="(role, index) in userAuthority.value" :key="index">
+    <tr v-for="(role, index) in roleAuthority.value" :key="index">
       <td>{{ index + 1 }}</td>
       <td>{{ role.roleId }}</td>
       <td>{{ role.roleName }}</td>
@@ -47,7 +47,7 @@
   </table>
 </template>
 <script lang="ts">
-import { defineComponent, ref, reactive, provide, inject } from "vue";
+import { defineComponent, ref, reactive, provide } from "vue";
 import axios from "axios";
 import AuthorityManagement from "./AuthorityManagement.vue";
 import EditRole from "./EditRole.vue";
@@ -77,8 +77,8 @@ export default defineComponent({
       )
 
       .then((response) => {
-        userAuthority.value = response.data.data;
-        // userAuthority.value = response.data.data;
+        roleAuthority.value = response.data.data;
+        // roleAuthority.value = response.data.data;
         // console.log("傳遞成功");
       })
       .catch((error) => {
@@ -86,7 +86,7 @@ export default defineComponent({
         // console.log("傳遞失敗");
       });
 
-    const userAuthority = reactive({ value: null });
+    const roleAuthority = reactive({ value: null });
 
     // 修改權限功能的 value 值，控制出現與否
     const adjustAuthority = ref();
@@ -127,7 +127,7 @@ export default defineComponent({
     provide("deleteRole", deleteRole);
 
     return {
-      userAuthority,
+      roleAuthority,
       adjustAuthority,
       role,
       adjustThisAuth,

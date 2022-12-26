@@ -9,7 +9,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, reactive, provide, inject } from "vue";
+import { defineComponent, reactive } from "vue";
 import axios from "axios";
 export default defineComponent({
   name: "AdjustUserRole",

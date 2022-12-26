@@ -35,6 +35,8 @@ export default defineComponent({
     // const roleidlist = reactive({ value: null });
 
     function addNewRole() {
+      // console.log("newRole.ID:",newRole.ID);
+      // console.log("newRole.name:",newRole.name);
       if (newRole.ID.length == 0 || newRole.name.length == 0) {
         alert("欄位不可留白");
       } else if (newRole.ID.length > 0 && newRole.name.length > 0) {
@@ -99,7 +101,6 @@ export default defineComponent({
 
     return {
       newRole,
-      // roleidlist,
       addNewRole,
       cleanIt,
     };

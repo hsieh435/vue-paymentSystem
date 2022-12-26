@@ -15,7 +15,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, inject } from "vue";
+import { defineComponent, inject } from "vue";
 import axios from "axios";
 export default defineComponent({
   name: "DeleteTheRole",

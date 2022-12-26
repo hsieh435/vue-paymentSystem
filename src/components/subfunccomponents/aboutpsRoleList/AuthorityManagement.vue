@@ -132,7 +132,7 @@ export default defineComponent({
 
               funcModels["checked"] = funcCompare;
               // console.log("W7:", funcModels);
-              // 將 funcModels 新增名為 "checked" 的 key 值，並賦予 value 值為 funcCompare 的結果，funcModels 將多出一個欄位，將開欄位用 v-model 綁定 checkbox，即可完成
+              // 此為物件增加 key 值之操作方式，將 funcModels 新增名為 "checked" 的 key 值，並賦予 value 值為 funcCompare 的結果，funcModels 物件將多出一個欄位，將開欄位用 v-model 綁定 checkbox，即可完成
             }
           }
         })
@@ -143,8 +143,6 @@ export default defineComponent({
 
     // 權限調整的 function
     function adjustThisRole() {
-      // vol.value = null;
-
       // console.log("X1:", functionGroups.value);
 
       const emptyArray: any = [];
@@ -203,9 +201,6 @@ export default defineComponent({
           alert("連線發生錯誤");
           adjustList.value = true;
         });
-      // .finally(() => {
-      //   vol.value = true;
-      // });
     }
 
     function cancelAdjust() {
