@@ -15,11 +15,6 @@ export function useTodosApi(
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("userJWT");
 
-  const userlist = reactive({ value: null });
-
-  const newUserArray: any = [];
-  console.log("newUserArray:", newUserArray);
-
   const users: Ref<User[]> = ref([]);
 
   const UsersAreLoading = ref(false);
@@ -29,41 +24,6 @@ export function useTodosApi(
     arrayToPaginate: users,
     currentPage,
   });
-
-  axios
-    .post(
-      "http://localhost:8085/paymentSystem/api/PSUser/findAllPSUser",
-      { notesId: userId },
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-          // Bearer 跟 token 中間要有一個空格
-        },
-      }
-    )
-
-    .then((response) => {
-      userlist.value = response.data.data;
-
-      const userlistArray: any = userlist.value;
-      for (let i = 0; i < userlistArray.length; i++) {
-        const userId: any = userlistArray[i].userInfo.notesId;
-        const userName: any = userlistArray[i].userInfo.userName;
-        const roleId: any = userlistArray[i].role.roleId;
-        const roleName: any = userlistArray[i].role.roleName;
-        const emptyObject: any = {};
-
-        emptyObject["userId"] = userId;
-        emptyObject["userName"] = userName;
-        emptyObject["roleId"] = roleId;
-        emptyObject["roleName"] = roleName;
-
-        newUserArray.push(emptyObject);
-      }
-    })
-    .catch((error) => {
-      console.log("傳遞失敗");
-    });
 
   const loadUsers = async () => {
     UsersAreLoading.value = true;
@@ -78,71 +38,37 @@ export function useTodosApi(
           },
         }
       );
-      users.value = result.data.data;
-      console.log("result:", result.data.data);
+      // users.value = result.data.data;
+      // console.log("result:", result.data.data);
+
+      const usersArray = result.data.data;
+      // console.log("usersArray:", usersArray);
+
+      const userwithid = [];
+
+      for (let i = 0; i < usersArray.length; i++) {
+        const eachuser = usersArray[i];
+        // console.log("eachuser:",eachuser);
+
+        eachuser["id"] = i + 1;
+        // console.log("eachuser:", eachuser);
+
+        userwithid.push(eachuser);
+        // console.log("userwithid:", userwithid);
+        users.value = userwithid;
+        // console.log("users:", users);
+      }
     } catch (error) {
-      console.log("error:", error);
+      // console.log("error:", error);
     } finally {
       UsersAreLoading.value = false;
     }
   };
 
   return {
-    userlist,
     users: paginatedArray,
     loadUsers,
     UsersAreLoading,
     numberOfPages,
   };
 }
-
-// export function useTodosApi(
-//   currentPage: Ref<number>,
-//   rowsPerPage?: Ref<number>
-// ) {}
-
-// import { ref, Ref } from "@vue/reactivity";
-// import axios from "axios";
-
-// import { usePagination } from "../components/pagination/useClientSidePagination";
-
-// const URL = "https://jsonplaceholder.typicode.com/todos/";
-
-// export interface Todo {
-//   id: number;
-//   title: string;
-// }
-
-// export function useTodosApi(
-//   currentPage: Ref<number>,
-//   rowsPerPage?: Ref<number>
-// ) {
-//   const todos: Ref<Todo[]> = ref([]);
-
-//   const todosAreLoading = ref(false);
-
-//   const { paginatedArray, numberOfPages } = usePagination<Todo>({
-//     rowsPerPage,
-//     arrayToPaginate: todos,
-//     currentPage
-//   });
-
-//   const loadTodos = async () => {
-//     todosAreLoading.value = true;
-//     try {
-//       const result = await axios.get(URL);
-//       todos.value = result.data;
-//     } catch (err) {
-//       console.log(err);
-//     } finally {
-//       todosAreLoading.value = false;
-//     }
-//   };
-
-//   return {
-//     todos: paginatedArray,
-//     loadTodos,
-//     todosAreLoading,
-//     numberOfPages
-//   };
-// }

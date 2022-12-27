@@ -12,37 +12,26 @@
         <th>UserId</th>
         <th>UserName</th>
         <th>RoleName</th>
+        <th>Adjust</th>
       </tr>
     </thead>
     <tbody class="table-hover">
-      <tr v-for="(user, index) in users" :key="index">
-        <td>{{ index + 1 }}</td>
-        <td>{{ user.userId }}</td>
-        <td>{{ user.userName }}</td>
-        <td>{{ user.roleName }}</td>
+      <tr v-for="(user, id) in users" :key="id">
+        <td>{{ user.id }}</td>
+        <td>{{ user.userInfo.notesId }}</td>
+        <td>{{ user.userInfo.userName }}</td>
+        <td>{{ user.role.roleName }}</td>
+        <td><button class="button">修改</button></td>
       </tr>
     </tbody>
   </table>
+  <pagination-component
+    class="pagination-component"
+    v-model="currentPage"
+    :numberOfPages="numberOfPages"
+  />
+  <br>
 </template>
-
-<!-- 
-
-<script lang="ts" setup>
-import { onMounted, ref, watch } from "vue";
-import PaginationComponent from "./components/pagination/PaginationComponent.vue";
-import { useTodosApi } from "./composables/useTodosApi";
-
-const currentPage = ref(1);
-const rowsPerPage = ref(30);
-
-const { todos, todosAreLoading, loadTodos, numberOfPages } = useTodosApi(
-  currentPage,
-  rowsPerPage
-);
-
-onMounted(async () => loadTodos());
-</script>
--->
 
 <script lang="ts">
 import { defineComponent, onMounted, ref, watch } from "vue";
@@ -108,6 +97,7 @@ export default defineComponent({
   width: 80%;
   margin: 0px 10% 0px 10%;
   border-radius: 20px 20px 20px 20px;
+  table-layout: auto;
   overflow: hidden;
   font-family: "Oswald", sans-serif;
   transition: 0.3s;
@@ -124,9 +114,9 @@ table {
 }
 
 th {
-  width: 25vw;
   height: 75px;
   font-size: 26px;
+  padding: 10px 10px 10px 10px;
   background-color: rgba(79, 192, 210, 0.7);
   color: #ffffff;
   outline: 1px solid black;
@@ -135,7 +125,6 @@ th {
 td {
   background-color: rgb(177, 177, 177);
   color: #000000;
-  width: 25vw;
   height: 50px;
   font-size: 22px;
   text-align: center;

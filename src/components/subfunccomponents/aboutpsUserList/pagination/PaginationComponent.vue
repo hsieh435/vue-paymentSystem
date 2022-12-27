@@ -124,87 +124,10 @@ const last = () => {
 };
 </script>
 
-<!-- 
-<template>
-  <div class="pagination-container" aria-label="row pagination">
-    <ul v-if="numberOfPages >= 1" class="pagination">
-      <li
-        class="page-item"
-        aria-label="go to previous page"
-        @click="previous()"
-        :class="{
-          disabled: currentPage === 1,
-        }"
-      >
-        <span class="page-link">&laquo;</span>
-      </li>
-      <li
-        v-for="index in numberOfPages"
-        :key="index"
-        :aria-label="'go to page ' + index"
-        class="page-item"
-        @click="setCurrentPage(index)"
-      >
-        <div
-          class="page-link"
-          :class="{
-            'active-page': currentPage === index,
-          }"
-        >
-          {{ index }}
-        </div>
-      </li>
-      <li
-        class="page-item"
-        :class="{
-          disabled: currentPage === numberOfPages || !numberOfPages,
-        }"
-        aria-label="go to next page"
-        @click="next()"
-      >
-        <div class="page-link">&raquo;</div>
-      </li>
-    </ul>
-  </div>
-</template>
-
-<script lang="ts" setup>
-import { toRefs } from "vue";
-
-const props = defineProps({
-  numberOfPages: {
-    required: true,
-  },
-  modelValue: {
-    required: true,
-    type: Number,
-  },
-});
-
-const { numberOfPages, modelValue: currentPage } = toRefs(props);
-
-const emit = defineEmits(["update:modelValue"]);
-
-const setCurrentPage = (number: Number) => {
-  emit("update:modelValue", number);
-};
-
-const previous = () => {
-  if (currentPage.value === 1) return;
-  emit("update:modelValue", currentPage.value - 1);
-};
-
-const next = () => {
-  if (currentPage.value >= numberOfPages.value) return;
-  emit("update:modelValue", currentPage.value + 1);
-};
-</script>
-
--->
-
 <style scoped lang="scss">
 .pagination-container {
   display: inline-block;
+  margin: 30px auto 30px auto;
 }
 
 .pagination {
