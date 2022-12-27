@@ -109,9 +109,9 @@ export default defineComponent({
           // 搜尋所有權限，取名 functArray
 
           permission.value = response.data.data.permissionList;
-          const permArray: any = permission.value;
-          // console.log("W2:", permArray);
-          // 搜尋角色擁有權限，取名 permArray
+          const originalPerm: any = permission.value;
+          // console.log("W2:", originalPerm);
+          // 搜尋角色擁有權限，取名 originalPerm
 
           for (let i = 0; i < functArray.length; i++) {
             // console.log("W3:", functArray[i]);
@@ -126,9 +126,9 @@ export default defineComponent({
               // console.log("W5:", funcId);
               // 搜尋出各個子權限的 functionId 名稱，取名 funcId
 
-              const funcCompare: boolean = permArray.includes(funcId);
-              // console.log("W6:", permArray.includes(funcId));
-              // 比較 functionId 是否有出現在角色權限列表中，若結果符合會呈現 true，反之則是 false，將其結果取名為 funcCompare
+              const funcCompare: boolean = originalPerm.includes(funcId);
+              // console.log("W6:", originalPerm.includes(funcId));
+              // 比較 functionId 名稱是否有出現在角色權限列表中，若結果符合會呈現 true，反之則是 false，將其結果取名為 funcCompare
 
               funcModels["checked"] = funcCompare;
               // console.log("W7:", funcModels);
@@ -147,9 +147,11 @@ export default defineComponent({
 
       const emptyArray: any = [];
       // console.log("X2:", emptyArray);
+      // 建立一空陣列，稍後將接收角色新的權限設定
 
       for (let i = 0; i < functionGroups.value.length; i++) {
         // console.log("X3:",functionGroups.value[i]);
+        // 用迴圈跑出權限七大分類
 
         for (
           let j = 0;
@@ -158,7 +160,10 @@ export default defineComponent({
         ) {
           const newFuncModels = functionGroups.value[i].functionModels[j];
           // console.log("X4:", newFuncModels);
+          // 用迴圈跑出權限七大分類下的各個子權限，取名 newFuncModels
+
           emptyArray.push(newFuncModels);
+          // 將各個子權限 push 進入先前設立的空陣列
         }
       }
 
@@ -166,11 +171,13 @@ export default defineComponent({
         return value.checked == true;
       });
       // console.log("X5:", newPermissionList);
+      // 過濾篩選出 checked 欄位值為 true 之權限選項，並將創立之新陣列取名 newPermissionList
 
       const newPermissionArray = newPermissionList.map(
         (el: any) => el.functionId
       );
       // console.log("X6:", newPermissionArray);
+      // 將 newPermissionList 中 functionId 欄位資料取出並放入新陣列，取名 newPermissionArray，並將之作為 API 傳遞資料的參數傳出
 
       axios
         .post(

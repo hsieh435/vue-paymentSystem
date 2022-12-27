@@ -1,5 +1,12 @@
 <!-- 使用者列表 -->
 <template>
+  <AdjustFunction
+    v-if="changerole == null"
+    :user-name="user.userName"
+    :user-notes-id="user.notesId"
+    :user-role-id="user.roleId"
+    :user-role-name="user.roleName"
+  ></AdjustFunction>
   <pagination-component
     class="pagination-component"
     v-model="currentPage"
@@ -8,7 +15,7 @@
   <table class="table-fill">
     <thead>
       <tr>
-        <th>Index</th>
+        <th>ID</th>
         <th>UserId</th>
         <th>UserName</th>
         <th>RoleName</th>
@@ -20,8 +27,24 @@
         <td>{{ user.id }}</td>
         <td>{{ user.userInfo.notesId }}</td>
         <td>{{ user.userInfo.userName }}</td>
-        <td>{{ user.role.roleName }}</td>
-        <td><button class="button">修改</button></td>
+        <td>
+          {{ user.role.roleName }}
+        </td>
+        <td>
+          <button
+            class="button"
+            @click="
+              adjustThisAuth(
+                user.userInfo.userName,
+                user.userInfo.notesId,
+                user.role.roleId,
+                user.role.roleName
+              )
+            "
+          >
+            修改角色
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -30,11 +53,12 @@
     v-model="currentPage"
     :numberOfPages="numberOfPages"
   />
-  <br>
+  <br />
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, watch } from "vue";
+import { defineComponent, onMounted, ref, reactive, provide } from "vue";
+import AdjustFunction from "./AdjustFunction.vue";
 import PaginationComponent from "./pagination/PaginationComponent.vue";
 import AdjustUserRole from "./AdjustUserRole.vue";
 import { useTodosApi } from "./pagination/useTodosApi";
@@ -42,11 +66,13 @@ import { useTodosApi } from "./pagination/useTodosApi";
 export default defineComponent({
   name: "UserList",
   components: {
+    AdjustFunction,
     PaginationComponent,
     AdjustUserRole,
   },
 
   setup() {
+    // 以下為 Pagination 相關
     const currentPage = ref(1);
     const rowsPerPage = ref(20);
     // console.log("currentPage:", currentPage);
@@ -75,6 +101,33 @@ export default defineComponent({
     // console.log("loadUsers:", loadUsers);
     // console 出 function
 
+    //
+    const user = reactive({
+      userName: "",
+      notesId: "",
+      roleId: "",
+      roleName: "",
+    });
+
+    // 以下為開啟調整角色 Component 相關
+    const changerole = ref();
+    changerole.value = true;
+
+    function adjustThisAuth(
+      userName: string,
+      userNotesId: string,
+      userRoleId: string,
+      userRoleName: string
+    ) {
+      changerole.value = null;
+      user.userName = userName;
+      user.notesId = userNotesId;
+      user.roleId = userRoleId;
+      user.roleName = userRoleName;
+    }
+
+    provide("changerole", changerole);
+
     return {
       users,
       UsersAreLoading,
@@ -83,6 +136,9 @@ export default defineComponent({
       currentPage,
       rowsPerPage,
       useTodosApi,
+      adjustThisAuth,
+      user,
+      changerole,
     };
   },
 });
@@ -96,7 +152,7 @@ export default defineComponent({
 .table-fill {
   width: 80%;
   margin: 0px 10% 0px 10%;
-  border-radius: 20px 20px 20px 20px;
+  /* border-radius: 20px 20px 20px 20px; */
   table-layout: auto;
   overflow: hidden;
   font-family: "Oswald", sans-serif;
@@ -118,7 +174,7 @@ th {
   font-size: 26px;
   padding: 10px 10px 10px 10px;
   background-color: rgba(79, 192, 210, 0.7);
-  color: #ffffff;
+  color: rgb(255, 255, 255);
   outline: 1px solid black;
 }
 

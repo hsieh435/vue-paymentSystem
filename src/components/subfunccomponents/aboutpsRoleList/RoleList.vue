@@ -88,13 +88,14 @@ export default defineComponent({
 
     const roleAuthority = reactive({ value: null });
 
-    // 修改權限功能的 value 值，控制出現與否
-    const adjustAuthority = ref();
-    adjustAuthority.value = true;
     const role = reactive({
       roleId: "",
       roleName: "",
     });
+
+    // 修改權限功能的 value 值，控制出現與否
+    const adjustAuthority = ref();
+    adjustAuthority.value = true;
 
     function adjustThisAuth(roleId: string, roleName: string) {
       adjustAuthority.value = null;
