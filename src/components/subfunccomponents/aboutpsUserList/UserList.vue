@@ -1,7 +1,7 @@
 <!-- 使用者列表 -->
 <template>
   <AdjustFunction
-    v-if="changerole == null"
+    v-if="closeChangeRole == null"
     :user-name="user.userName"
     :user-notes-id="user.notesId"
     :user-role-id="user.roleId"
@@ -27,9 +27,7 @@
         <td>{{ user.id }}</td>
         <td>{{ user.userInfo.notesId }}</td>
         <td>{{ user.userInfo.userName }}</td>
-        <td>
-          {{ user.role.roleName }}
-        </td>
+        <td>{{ user.role.roleName }}</td>
         <td>
           <button
             class="button"
@@ -110,8 +108,8 @@ export default defineComponent({
     });
 
     // 以下為開啟調整角色 Component 相關
-    const changerole = ref();
-    changerole.value = true;
+    const closeChangeRole = ref();
+    closeChangeRole.value = true;
 
     function adjustThisAuth(
       userName: string,
@@ -119,14 +117,14 @@ export default defineComponent({
       userRoleId: string,
       userRoleName: string
     ) {
-      changerole.value = null;
+      closeChangeRole.value = null;
       user.userName = userName;
       user.notesId = userNotesId;
       user.roleId = userRoleId;
       user.roleName = userRoleName;
     }
 
-    provide("changerole", changerole);
+    provide("closeChangeRole", closeChangeRole);
 
     return {
       users,
@@ -138,7 +136,7 @@ export default defineComponent({
       useTodosApi,
       adjustThisAuth,
       user,
-      changerole,
+      closeChangeRole,
     };
   },
 });

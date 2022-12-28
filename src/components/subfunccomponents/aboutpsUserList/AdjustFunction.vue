@@ -2,14 +2,26 @@
 <template>
   <div class="wholeareaback">
     <div class="wholearea">
-      <h2>將{{ userName }}調整角色為</h2>
-      <AdjustUserRole
+      <h2>調整{{ userName }}角色為</h2>
+      <select class="selection">
+        <!-- v-model="selected" -->
+        <option
+          v-for="(role, index) in rolelist.value"
+          :key="index"
+          :value="role.roleId"
+          :selected="role.selected"
+        >
+          {{ role.roleName }}
+        </option>
+      </select>
+      <!-- <AdjustUserRole
         :user-role-id="props.userRoleId"
         :user-role-name="props.userRoleName"
-      ></AdjustUserRole>
+      ></AdjustUserRole> -->
       <button class="closeit" @click="cancelEdit()">×</button>
       <div>
         <div>
+          <button class="updateauthority" @click="abc()">abc</button>
           <button class="updateauthority" @click="sent()">確定修改</button>
           <button class="updateauthority" @click="cancelEdit()">
             取消修改
@@ -20,7 +32,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, inject } from "vue";
+import { defineComponent, ref, reactive, inject } from "vue";
 import axios from "axios";
 import AdjustUserRole from "./AdjustUserRole.vue";
 
@@ -32,17 +44,48 @@ export default defineComponent({
   props: ["userName", "userNotesId", "userRoleId", "userRoleName"],
 
   setup(props) {
-    const changerole: any = inject("changerole");
+    const closeChangeRole: any = inject("closeChangeRole");
 
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("userJWT");
 
-    // console.log("props.userNotesId", props.userNotesId);
-    // console.log("props.userName", props.userName);
-    // console.log("props.userRoleId", props.userRoleId);
-    // console.log("props.userRoleName", props.userRoleName);
-
     const changeRole = reactive({ value: null });
+
+    const rolelist: any = reactive({ value: null });
+
+    const newselected = ref("newselect");
+
+    function abc() {
+      // console.log("newselected:", newselected);
+      // console.log();
+    }
+
+    axios
+      .post(
+        "http://localhost:8085/paymentSystem/api/psRole/findAllPSRole",
+        { notesId: userId },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            // Bearer 跟 token 中間要有一個空格
+          },
+        }
+      )
+
+      .then((response) => {
+        rolelist.value = response.data.data;
+        const originalRole = response.data.data;
+        for (let i = 0; i < originalRole.length; i++) {
+          const eachRoleId = originalRole[i].roleId;
+          const roleCompare: boolean = eachRoleId.includes(props.userRoleId);
+          originalRole[i]["selected"] = roleCompare;
+          // 此為物件增加 key 值之操作方式，將 originalRole 新增名為 "selected" 的 key 值，並賦予 value 值為 roleCompare originalRole 物件將多出一個欄位，將開欄位用 v-model 綁定下拉式選單的 selected，即可完成
+        }
+      })
+      .catch((error) => {
+        alert("發生錯誤");
+        // console.log("傳遞失敗");
+      });
 
     function sent() {
       axios
@@ -67,19 +110,21 @@ export default defineComponent({
         })
         .catch((error) => {
           alert("發生錯誤");
-          console.log("傳遞失敗");
+          // console.log("傳遞失敗");
         });
     }
 
     function cancelEdit() {
-      changerole.value = true;
+      closeChangeRole.value = true;
     }
 
     return {
       props,
+      rolelist,
       changeRole,
       sent,
       cancelEdit,
+      abc,
     };
   },
 });
@@ -99,14 +144,25 @@ export default defineComponent({
 
 .wholearea {
   width: 60%;
-  /* height: 80vh; */
+  height: auto;
   border-radius: 20px;
-  margin: 20vh 20% 10vh 20%;
-  padding: 20px 2.5% 0px 2.5%;
+  margin: 15vh 20% 10vh 20%;
+  padding: 50px 2.5% 30px 2.5%;
   background-color: rgba(255, 255, 255, 0.8);
   overflow: auto;
   position: relative;
   outline: 1px black solid;
+}
+
+.selection {
+  width: 300px;
+  height: 30px;
+  font-size: 24px;
+  margin: 20px 20px 20px 20px;
+}
+
+.selected {
+  display: none;
 }
 
 .closeit {
@@ -119,30 +175,6 @@ export default defineComponent({
   position: absolute;
   right: 0px;
   top: 0px;
-}
-
-.authmang {
-  text-align: left;
-  /* outline: 1px black solid; */
-}
-
-.authmang h2 {
-  text-align: center;
-}
-
-.funcgroupname {
-  margin: 20px 10px 20px 30px;
-  border-radius: 10px;
-  background-color: rgb(167, 255, 255);
-  padding: 10px 10px 30px 20px;
-  outline: 1px solid rgb(120, 120, 120);
-}
-
-.funcgroup {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  /* outline: 1px solid #000; */
 }
 
 .updateauthority {

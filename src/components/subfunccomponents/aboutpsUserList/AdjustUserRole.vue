@@ -2,7 +2,12 @@
 <template>
   <div>
     <select class="selection">
-      <option v-for="(role, index) in rolelist.value" :key="index">
+      <option
+        v-for="(role, index) in rolelist.value"
+        :key="index"
+        :value="role.roleId"
+        :selected="role.selected"
+      >
         {{ role.roleName }}
       </option>
     </select>
@@ -20,19 +25,7 @@ export default defineComponent({
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("userJWT");
 
-    const rolelist = reactive({ value: null });
-
-    const userRoleId = toRef(props, "userRoleId");
-    // console.log("userRoleId:", userRoleId);
-    // console.log("props.userRoleId:", props.userRoleId);
-
-    const userRoleName = toRef(props, "userRoleName");
-    // console.log("userRoleName:", userRoleName);
-    // console.log("props.userRoleName:", props.userRoleName);
-
-    // 解構 props 傳入之 userRoleId
-
-    const newRolelist = [];
+    const rolelist: any = reactive({ value: null });
 
     axios
       .post(
@@ -51,20 +44,19 @@ export default defineComponent({
         // console.log(response.data.data);
 
         const originalRole = response.data.data;
-        console.log("originalRole:", originalRole);
+        // console.log("originalRole:", originalRole);
 
         for (let i = 0; i < originalRole.length; i++) {
           const eachRoleId = originalRole[i].roleId;
-          const eachRoleName = originalRole[i].roleName;
           // console.log("eachRoleId:", eachRoleId);
-          // console.log("eachRoleName:", eachRoleName);
+
+          const roleCompare: boolean = eachRoleId.includes(props.userRoleId);
+          // console.log("roleCompare:", roleCompare);
+
+          originalRole[i]["selected"] = roleCompare;
+          // console.log("originalRole:", originalRole);
+          // 此為物件增加 key 值之操作方式，將 originalRole 新增名為 "selected" 的 key 值，並賦予 value 值為 roleCompare originalRole 物件將多出一個欄位，將開欄位用 v-model 綁定下拉式選單的 selected，即可完成
         }
-
-        // ------------------------ 有待完成 ------------------------
-
-        // const roleIDCompare: boolean = originalRole.includes(props.userRoleId);
-        // console.log("roleIDCompare:", roleIDCompare);
-        // 比較 functionId 名稱是否有出現在角色權限列表中，若結果符合會呈現 true，反之則是 false，將其結果取名為 funcCompare
       })
       .catch((error) => {
         alert("發生錯誤");
@@ -84,5 +76,9 @@ export default defineComponent({
   height: 30px;
   font-size: 24px;
   margin: 20px 20px 20px 20px;
+}
+
+.selected {
+  display: none;
 }
 </style>

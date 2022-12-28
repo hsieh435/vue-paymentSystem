@@ -3,7 +3,6 @@
   <div class="wholeareaback">
     <div class="wholearea">
       <button class="closeit" @click="cancelAdjust()">×</button>
-
       <div class="authmang">
         <h2>更新{{ roleName }}權限</h2>
         <h2>角色代碼：{{ roleId }}</h2>
@@ -58,7 +57,6 @@ export default defineComponent({
     const token = localStorage.getItem("userJWT");
 
     const adjustList: any = inject("adjustAuthority");
-    // const vol: any = inject("valueofLoading");
     const reload: any = inject("reload");
 
     // 解構 props 傳進來的值
@@ -115,12 +113,12 @@ export default defineComponent({
 
           for (let i = 0; i < functArray.length; i++) {
             // console.log("W3:", functArray[i]);
-            // 用迴圈跑出權限七大分類
+            // 用迴圈分別跑出權限七大分類
 
             for (let j = 0; j < functArray[i].functionModels.length; j++) {
               const funcModels = functArray[i].functionModels[j];
               // console.log("W4:", funcModels);
-              // 用迴圈跑出權限七大分類下的各個子權限，取名 funcModels
+              // 用迴圈分別跑出權限七大分類下的各個子權限，取名 funcModels
 
               const funcId: any = functArray[i].functionModels[j].functionId;
               // console.log("W5:", funcId);

@@ -38,8 +38,6 @@ export function useTodosApi(
           },
         }
       );
-      // users.value = result.data.data;
-      // console.log("result:", result.data.data);
 
       const usersArray = result.data.data;
       // console.log("usersArray:", usersArray);
