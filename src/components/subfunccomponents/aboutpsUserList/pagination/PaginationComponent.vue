@@ -39,8 +39,8 @@
             'active-page': currentPage === index,
           }"
           v-if="
-            index > currentPage - 3 &&
-            index < currentPage + 3 &&
+            index > currentPage - 4 &&
+            index < currentPage + 4 &&
             index > 0 &&
             index < numberOfPages + 1
           "
@@ -110,12 +110,12 @@ const first = () => {
 
 const minusthree = () => {
   if (currentPage.value < 3) return;
-  emit("update:modelValue", currentPage.value - 3);
+  emit("update:modelValue", currentPage.value - 4);
 };
 
 const plusthree = () => {
-  if (currentPage.value > numberOfPages.value - 3) return;
-  emit("update:modelValue", currentPage.value + 3);
+  if (currentPage.value > numberOfPages.value - 4) return;
+  emit("update:modelValue", currentPage.value + 4);
 };
 
 const last = () => {
@@ -149,12 +149,12 @@ const last = () => {
   display: flex;
   cursor: pointer;
   margin-bottom: 0px;
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+  -webkit-touch-callout: none; // iOS Safari
+  -webkit-user-select: none; // Safari
+  -khtml-user-select: none; // Konqueror HTML
+  -moz-user-select: none; // Old versions of Firefox
+  -ms-user-select: none; // Internet Explorer/Edge
+  user-select: none; // Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox
 }
 
 .page-link {

@@ -59,8 +59,7 @@ export default defineComponent({
         }
       })
       .catch((error) => {
-        alert("發生錯誤");
-        // console.log("傳遞失敗");
+        alert("資料傳輸發生錯誤");
       });
 
     return {
@@ -76,9 +75,5 @@ export default defineComponent({
   height: 30px;
   font-size: 24px;
   margin: 20px 20px 20px 20px;
-}
-
-.selected {
-  display: none;
 }
 </style>

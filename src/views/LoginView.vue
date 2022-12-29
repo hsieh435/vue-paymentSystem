@@ -59,7 +59,7 @@ export default defineComponent({
       })
 
       .catch((error) => {
-        console.log("發生錯誤");
+        console.log("連線發生錯誤");
       });
 
     function logout() {

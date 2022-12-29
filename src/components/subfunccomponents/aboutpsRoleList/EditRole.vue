@@ -70,7 +70,7 @@ export default defineComponent({
             }
           })
           .catch((error) => {
-            alert("發生錯誤");
+            alert("資料傳輸發生錯誤");
             adjustRole.value = true;
           });
       } else {
@@ -86,7 +86,6 @@ export default defineComponent({
       sent,
       cancelEdit,
       newRole,
-      reload,
     };
   },
 });
@@ -105,7 +104,7 @@ export default defineComponent({
 
 .wholearea {
   width: 60%;
-  /* height: 40vh; */
+  height:auto;
   margin: 200px 20% 0px 20%;
   padding: 50px 2.5% 50px 2.5%;
   border-radius: 20px;
@@ -120,10 +119,20 @@ export default defineComponent({
   width: 40px;
   font-size: 36px;
   border: 0px;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0);
   position: absolute;
   right: 10px;
   top: 0px;
+  transition: 0.3s;
+}
+
+.closeit:hover {
+  height: 60px;
+  width: 60px;
+  font-size: 60px;
+  position: absolute;
+  right: 0px;
+  top: -10px;
 }
 
 .thislabel {
@@ -134,6 +143,7 @@ export default defineComponent({
 
 .thisinput {
   height: 30px;
+  padding: 0px 0px 0px 10px;
 }
 
 .updateauthority {

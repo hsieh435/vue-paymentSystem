@@ -1,4 +1,4 @@
-import { ref, Ref, reactive } from "vue";
+import { ref, Ref } from "vue";
 import axios from "axios";
 import { usePagination } from "./useClientSidePagination";
 
@@ -7,6 +7,7 @@ export interface User {
   userName: string;
   roleName: string;
 }
+// Interface 可以用來定義物件介面，還有由物件所延伸的型別，例如：Object、Array、Function），常用於對「物件的形狀（Shape）」進行描述。
 
 export function useTodosApi(
   currentPage: Ref<number>,
@@ -16,6 +17,8 @@ export function useTodosApi(
   const token = localStorage.getItem("userJWT");
 
   const users: Ref<User[]> = ref([]);
+  // console.log("User:",User);
+  // console.log("users:",users);
 
   const UsersAreLoading = ref(false);
 
@@ -38,7 +41,6 @@ export function useTodosApi(
           },
         }
       );
-
       const usersArray = result.data.data;
       // console.log("usersArray:", usersArray);
 
@@ -57,7 +59,7 @@ export function useTodosApi(
         // console.log("users:", users);
       }
     } catch (error) {
-      // console.log("error:", error);
+      alert("資料傳輸發生錯誤");
     } finally {
       UsersAreLoading.value = false;
     }

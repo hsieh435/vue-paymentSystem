@@ -203,7 +203,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          alert("連線發生錯誤");
+          alert("資料傳輸發生錯誤");
           adjustList.value = true;
         });
     }
@@ -224,7 +224,6 @@ export default defineComponent({
       permission,
       adjustThisRole,
       cancelAdjust,
-      reload,
     };
   },
 });
@@ -262,6 +261,16 @@ export default defineComponent({
   border: 0px;
   background-color: rgb(255, 255, 255, 0);
   position: absolute;
+  right: 10px;
+  top: 10px;
+  transition: 0.3s;
+}
+
+.closeit:hover {
+  height: 60px;
+  width: 60px;
+  font-size: 60px;
+  position: absolute;
   right: 0px;
   top: 0px;
 }
@@ -279,7 +288,7 @@ export default defineComponent({
   margin: 20px 10px 20px 30px;
   border-radius: 10px;
   background-color: rgb(167, 255, 255);
-  padding: 10px 10px 30px 20px;
+  padding: 10px 10px 10px 20px;
   outline: 1px solid rgb(120, 120, 120);
 }
 
@@ -301,8 +310,8 @@ export default defineComponent({
 .updateauthority {
   height: 40px;
   width: 150px;
-  border-radius: 25px;
-  margin: 30px 10px 20px 10px;
+  border-radius: 20px;
+  margin: 20px 10px 40px 10px;
   border: 1px black solid;
   font-size: 20px;
   color: rgb(0, 0, 0);

@@ -10,3 +10,5 @@ filter 用法
 https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/push
 push 用法
 
+https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
+includes 用法

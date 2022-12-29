@@ -67,7 +67,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          alert("發生錯誤");
+          alert("連線發生錯誤");
         })
         .finally(() => {
           vol.value = true;

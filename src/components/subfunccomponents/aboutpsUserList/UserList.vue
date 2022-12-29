@@ -4,8 +4,8 @@
     v-if="closeChangeRole == null"
     :user-name="user.userName"
     :user-notes-id="user.notesId"
-    :user-role-id="user.roleId"
     :user-role-name="user.roleName"
+    :user-role-id="user.roleId"
   ></AdjustFunction>
   <pagination-component
     class="pagination-component"
@@ -35,8 +35,8 @@
               adjustThisAuth(
                 user.userInfo.userName,
                 user.userInfo.notesId,
-                user.role.roleId,
-                user.role.roleName
+                user.role.roleName,
+                user.role.roleId
               )
             "
           >
@@ -103,8 +103,8 @@ export default defineComponent({
     const user = reactive({
       userName: "",
       notesId: "",
-      roleId: "",
       roleName: "",
+      roleId: "",
     });
 
     // 以下為開啟調整角色 Component 相關
@@ -114,14 +114,14 @@ export default defineComponent({
     function adjustThisAuth(
       userName: string,
       userNotesId: string,
-      userRoleId: string,
-      userRoleName: string
+      userRoleName: string,
+      userRoleId: string
     ) {
       closeChangeRole.value = null;
       user.userName = userName;
       user.notesId = userNotesId;
-      user.roleId = userRoleId;
       user.roleName = userRoleName;
+      user.roleId = userRoleId;
     }
 
     provide("closeChangeRole", closeChangeRole);
@@ -140,17 +140,12 @@ export default defineComponent({
     };
   },
 });
-// http://localhost:8085/paymentSystem/api/PSUser/editPSUser
-// JBW
-// "roleId": "",
-// "notesId": ""
 </script>
 
 <style scoped>
 .table-fill {
   width: 80%;
   margin: 0px 10% 0px 10%;
-  /* border-radius: 20px 20px 20px 20px; */
   table-layout: auto;
   overflow: hidden;
   font-family: "Oswald", sans-serif;

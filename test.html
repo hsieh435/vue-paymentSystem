@@ -8,21 +8,41 @@
   </head>
 
   <body>
-    <pre class="rect"></pre>
+    <script lang="ts">
+      function createArray(length, value) {
+        let result = [];
+        for (let i = 0; i < length; i++) {
+          result[i] = value;
+        }
+        return result;
+      }
 
-    <script>
-      var objArray = [
+      console.log(createArray(5, "abcdef"));
+
+      function swap(tuple) {
+        return [tuple[1], tuple[0], tuple[2]];
+      }
+
+      console.log(swap([8, "seven","7"]));
+    </script>
+  </body>
+</html>
+
+<!-- var objArray = [
         { id: 0, name: "Object 0", otherProp: "321" },
         { id: 1, name: "O1", otherProp: "648" },
         { id: 2, name: "Another Object", otherProp: "850" },
         { id: 3, name: "Almost There", otherProp: "046" },
         { id: 4, name: "Last Obj", otherProp: "984" },
+        { id: 5, name: "Last Obj", otherProp: "458" },
       ];
 
       const abc = objArray.map((el) => el.otherProp);
+      const def = objArray.map((el) => el.id + 1);
 
-      console.log("A1:", objArray);
-      console.log("A1:", abc);
+      console.log("objArray:", objArray);
+      console.log("abc:", abc);
+      console.log("def:", def);
       console.log("------ 分隔線 ------");
 
       let arr = ["Jack", "John", "May", "Su", "Ada"];
@@ -57,14 +77,11 @@
         return value.checked == true;
       });
 
-      let arr3 = arr.filter(function (value) {
-        return value.length > 3;
+      let arr3 = arr1.filter(function (value) {
+        return value.name.length > 3;
       });
 
-      console.log("B1:", arr1);
-      console.log("B2:", arr2);
-      console.log("B3:", arr3);
-      console.log("------ 分隔線 ------");
-    </script>
-  </body>
-</html>
+      console.log("arr1:", arr1);
+      console.log("arr2:", arr2);
+      console.log("arr3:", arr3);
+      console.log("------ 分隔線 ------"); -->

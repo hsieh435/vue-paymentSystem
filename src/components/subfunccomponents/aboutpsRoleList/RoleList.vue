@@ -82,7 +82,7 @@ export default defineComponent({
         // console.log("傳遞成功");
       })
       .catch((error) => {
-        alert("發生錯誤");
+        alert("資料取得發生錯誤");
         // console.log("傳遞失敗");
       });
 

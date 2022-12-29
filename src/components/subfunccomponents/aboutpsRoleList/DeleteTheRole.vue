@@ -46,7 +46,7 @@ export default defineComponent({
           reload();
         })
         .catch((error) => {
-          alert("發生錯誤");
+          alert("資料傳輸發生錯誤");
           deleteRole.value = true;
         });
     }
@@ -94,10 +94,20 @@ h2 {
   width: 40px;
   font-size: 36px;
   border: 0px;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0);
   position: absolute;
   right: 10px;
   top: 0px;
+  transition: 0.3s;
+}
+
+.closeit:hover {
+  height: 60px;
+  width: 60px;
+  font-size: 60px;
+  position: absolute;
+  right: 0px;
+  top: -10px;
 }
 
 .updateauthority {
