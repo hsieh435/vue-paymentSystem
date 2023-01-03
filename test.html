@@ -8,27 +8,8 @@
   </head>
 
   <body>
-    <script lang="ts">
-      function createArray(length, value) {
-        let result = [];
-        for (let i = 0; i < length; i++) {
-          result[i] = value;
-        }
-        return result;
-      }
-
-      console.log(createArray(5, "abcdef"));
-
-      function swap(tuple) {
-        return [tuple[1], tuple[0], tuple[2]];
-      }
-
-      console.log(swap([8, "seven","7"]));
-    </script>
-  </body>
-</html>
-
-<!-- var objArray = [
+    <script>
+      var objArray = [
         { id: 0, name: "Object 0", otherProp: "321" },
         { id: 1, name: "O1", otherProp: "648" },
         { id: 2, name: "Another Object", otherProp: "850" },
@@ -84,4 +65,23 @@
       console.log("arr1:", arr1);
       console.log("arr2:", arr2);
       console.log("arr3:", arr3);
-      console.log("------ 分隔線 ------"); -->
+      console.log("------ 分隔線 ------");
+
+      function createArray(length, value) {
+        let result = [];
+        for (let i = 0; i < length; i++) {
+          result[i] = value;
+        }
+        return result;
+      }
+
+      console.log(createArray(5, "abcdef"));
+
+      function swap(tuple) {
+        return [tuple[1], tuple[0], tuple[2]];
+      }
+
+      console.log(swap([8, "seven", "7"]));
+    </script>
+  </body>
+</html>
