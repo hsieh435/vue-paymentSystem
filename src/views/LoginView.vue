@@ -54,6 +54,7 @@ export default defineComponent({
         // post 放三個參數，url、data、config(header)
 
         .then((response) => {
+          // console.log("response:",response)
           msg.userName = response.data.data.userInfo.userName;
           msg.userID = response.data.data.userInfo.notesId;
           msg.userOrganization = response.data.data.userInfo.userOrganization;

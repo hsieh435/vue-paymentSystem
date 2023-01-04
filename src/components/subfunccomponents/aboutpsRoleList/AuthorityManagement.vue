@@ -12,6 +12,11 @@
           :key="index"
         >
           <h4>{{ item.functionGroupName }}</h4>
+          <!-- <input
+            class="checkBoxSquare"
+            type="checkbox"
+            v-if="item.functionModels.length > 0"
+          /><label v-if="item.functionModels.length > 0">全選</label> -->
           <div
             class="funcgroup"
             v-for="(func, index) in item.functionModels"
@@ -80,11 +85,11 @@ export default defineComponent({
       )
 
       .then((response) => {
-        secondAxios();
         functionGroups.value = response.data.data;
+        secondAxios();
       })
       .catch((error) => {
-        alert("查詢所有權限發生錯誤");
+        alert("查詢權限發生錯誤");
       });
 
     function secondAxios() {
@@ -194,11 +199,11 @@ export default defineComponent({
 
         .then((response) => {
           if (response.data.returnCode == 0) {
-            alert("修改成功");
+            alert("權限修改成功");
             adjustList.value = true;
             reload();
           } else {
-            alert("發生錯誤");
+            alert(`returnCode:${response.data.returnCode}\n發生錯誤，修改失敗`);
             adjustList.value = true;
           }
         })

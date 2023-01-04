@@ -7,7 +7,7 @@
     :user-role-name="user.roleName"
     :user-role-id="user.roleId"
   ></AdjustFunction>
-  <search-compomnent></search-compomnent>
+  <search-compomnent @eventIsAString="gotAArray"></search-compomnent>
   <pagination-component
     class="pagination-component"
     v-model="currentPage"
@@ -23,6 +23,7 @@
         <th>Adjust</th>
       </tr>
     </thead>
+    <!-- v-model="user" -->
     <tbody class="table-hover">
       <tr v-for="(user, id) in users" :key="id">
         <td>{{ user.id }}</td>
@@ -110,6 +111,11 @@ export default defineComponent({
 
     provide("closeChangeRole", closeChangeRole);
 
+    // 將搜尋結果傳回父元件
+    function gotAArray(user: any) {
+      console.log("gotAArray:", user);
+    }
+
     return {
       users,
       UsersAreLoading,
@@ -121,6 +127,7 @@ export default defineComponent({
       adjustThisAuth,
       user,
       closeChangeRole,
+      gotAArray,
     };
   },
 });

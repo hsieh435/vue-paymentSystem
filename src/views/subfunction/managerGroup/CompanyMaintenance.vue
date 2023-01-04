@@ -1,13 +1,17 @@
 <!-- 個別功能頁面 -->
 <template>
   <h1 class="subfunctiontitle">公司別維護</h1>
-  <Xyz @eventIsANumber="gotANumber" @eventIsAString="gotAText"></Xyz>
+  <Xyz
+    @eventIsANumber="gotANumber"
+    @eventIsAString="gotAText"
+    @eventIsAArray="gotAArray"
+  ></Xyz>
   <br />
   <BackToLoginPage></BackToLoginPage>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, inject } from "vue";
+import { defineComponent, inject } from "vue";
 import "@/views/subfunction/subfunction.css";
 import Xyz from "../../../components/subfunccomponents/aboutCompanyMaintenance/Xyz.vue";
 import BackToLoginPage from "../../../components/BackToLoginPage.vue";
@@ -36,10 +40,14 @@ export default defineComponent({
     function gotAText(e: any) {
       console.log(`接收訊息：${e}`);
     }
+    function gotAArray(e: any) {
+      console.log(`接收訊息：${e}`);
+    }
 
     return {
       gotANumber,
       gotAText,
+      gotAArray,
     };
   },
 });

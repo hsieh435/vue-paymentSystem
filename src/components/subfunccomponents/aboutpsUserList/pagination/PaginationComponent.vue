@@ -102,7 +102,6 @@ const { numberOfPages, modelValue: currentPage } = toRefs(props);
 // console.log("modelValue:", props.modelValue);
 
 const emit = defineEmits(["update:modelValue"]);
-
 // console.log("emit:", emit);
 // 結果未知
 
@@ -133,7 +132,7 @@ const last = () => {
 const go = ref();
 
 const goto = () => {
-  if (go.value < numberOfPages.value + 1 && go.value > 0) {
+  if (0 < go.value && go.value < numberOfPages.value + 1) {
     emit("update:modelValue", (currentPage.value = go.value));
     go.value = "";
   } else {
