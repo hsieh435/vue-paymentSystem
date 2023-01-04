@@ -27,9 +27,9 @@ export default defineComponent({
       // console.log("keyword:", keyword, typeof keyword);
 
       let users: any = [];
-      // console.log("users:", users, typeof users);
+      console.log("users:", users, typeof users);
 
-      context.emit("eventIsAString", users);
+      // context.emit("eventIsAString", users);
 
       if (keyword.length == 0) {
         alert("欄位請勿留白");
@@ -51,21 +51,29 @@ export default defineComponent({
             // console.log("連線成功");
             const searchResult = response.data.data;
             for (let i = 0; i < searchResult.length; i++) {
-              const checkNoteId: boolean =
-                searchResult[i].userInfo.notesId.toLowerCase().includes(keyword);
-              // 比較 keyword 名稱是否有出現在使用者列表中，若結果符合會呈現 true，反之則是 false，將其結果取名為 checkNoteId
+              const checkNoteId: boolean = searchResult[i].userInfo.notesId
+                .toLowerCase()
+                .includes(keyword);
 
-              const checkUserName: boolean =
-                searchResult[i].userInfo.userName.toLowerCase().includes(keyword);
-              // 比較 keyword 名稱是否有出現在使用者列表中，若結果符合會呈現 true，反之則是 false，將其結果取名為 checkUserName
+              const checkUserName: boolean = searchResult[i].userInfo.userName
+                .toLowerCase()
+                .includes(keyword);
+
+              const checkRoleName: boolean = searchResult[i].userInfo.roleName
+                .toLowerCase()
+                .includes(keyword);
 
               searchResult[i]["checkNoteId"] = checkNoteId;
               searchResult[i]["checkUserName"] = checkUserName;
-              // 將 searchResult 新增 "checkNoteId" 與 "checkUserName" 欄位，將對比 notesId 與 userName 之結果放入欄位中
+              searchResult[i]["checkRoleName"] = checkRoleName;
             }
 
             const compareResult = searchResult.filter(function (value: any) {
-              return value.checkNoteId == true || value.checkUserName == true;
+              return (
+                value.checkNoteId == true ||
+                value.checkUserName == true ||
+                value.checkRoleName == true
+              );
             });
 
             users.push(compareResult);

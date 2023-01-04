@@ -1,7 +1,7 @@
 // 此頁面輸出來自資料
 import { Ref, ref, inject } from "vue";
 import axios from "axios";
-import { useClientSidePagination } from "./useClientSidePagination"
+import { useClientSidePagination } from "./useClientSidePagination";
 
 export interface User {
   userId: string;
@@ -21,6 +21,9 @@ export function useTodosApi(
 
   const UsersAreLoading: any = inject("valueofLoading");
   // console.log("UsersAreLoading:", UsersAreLoading.value);
+  const keyword: any = inject("keyword");
+  // console.log("keyword from useTodoApi:", keyword);
+
 
   const { paginatedArray, numberOfPages } = useClientSidePagination<User>({
     rowsPerPage,
