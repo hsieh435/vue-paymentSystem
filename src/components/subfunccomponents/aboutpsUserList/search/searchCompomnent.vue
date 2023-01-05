@@ -6,89 +6,43 @@
   <div class="search-bar">
     <input type="search" name="search" v-model.trim="searchWord" required />
     <button class="search-btn" @click="search()"></button>
+    <button class="allDatabtn" @click="allData()" v-if="keyword !== null">
+      All Data
+    </button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import axios from "axios";
+import { defineComponent, ref, inject } from "vue";
 export default defineComponent({
   name: "searchCompomnent",
   components: {},
 
-  setup(props, context) {
-    const userId = localStorage.getItem("userId");
-    const token = localStorage.getItem("userJWT");
+  setup() {
+    const keyword = localStorage.getItem("keyword");
+
+    const reload: any = inject("reload");
 
     const searchWord = ref();
 
     function search() {
       let keyword = searchWord.value.trim().toLowerCase();
-      // console.log("keyword:", keyword, typeof keyword);
+      localStorage.setItem("keyword", keyword);
+      reload();
+    }
 
-      let users: any = [];
-      console.log("users:", users, typeof users);
-
-      // context.emit("eventIsAString", users);
-
-      if (keyword.length == 0) {
-        alert("欄位請勿留白");
-      } else {
-        axios
-          .post(
-            "http://localhost:8085/paymentSystem/api/PSUser/findAllPSUser",
-            { notesId: userId },
-            {
-              headers: {
-                Authorization: "Bearer " + token,
-                // Bearer 跟 token 中間要有一個空格
-              },
-            }
-          )
-          // post 放三個參數，url、data、config(header)
-
-          .then((response) => {
-            // console.log("連線成功");
-            const searchResult = response.data.data;
-            for (let i = 0; i < searchResult.length; i++) {
-              const checkNoteId: boolean = searchResult[i].userInfo.notesId
-                .toLowerCase()
-                .includes(keyword);
-
-              const checkUserName: boolean = searchResult[i].userInfo.userName
-                .toLowerCase()
-                .includes(keyword);
-
-              const checkRoleName: boolean = searchResult[i].userInfo.roleName
-                .toLowerCase()
-                .includes(keyword);
-
-              searchResult[i]["checkNoteId"] = checkNoteId;
-              searchResult[i]["checkUserName"] = checkUserName;
-              searchResult[i]["checkRoleName"] = checkRoleName;
-            }
-
-            const compareResult = searchResult.filter(function (value: any) {
-              return (
-                value.checkNoteId == true ||
-                value.checkUserName == true ||
-                value.checkRoleName == true
-              );
-            });
-
-            users.push(compareResult);
-            // 將各個子權限 push 進入先前設立的空陣列
-          })
-
-          .catch((error) => {
-            console.log("連線發生錯誤");
-          });
+    function allData() {
+      if (keyword !== null) {
+        localStorage.removeItem("keyword");
+        reload();
       }
     }
 
     return {
+      keyword,
       searchWord,
       search,
+      allData,
     };
   },
 });
@@ -140,7 +94,7 @@ body {
 .search-bar,
 .search-bar input:focus,
 .search-bar input:valid {
-  width: 100%;
+  width: 60%;
 }
 .search-bar input:focus,
 .search-bar input:not(:focus) + .search-btn:focus {
@@ -181,6 +135,22 @@ body {
   transform: translate(0.25em, 0.25em) rotate(45deg) scale(0.25, 0.125);
   transform-origin: 0 50%;
 }
+
+.allDatabtn {
+  color: #666b85;
+  border: 0px;
+  border-radius: 5px;
+  margin-left: 20px;
+  padding: 10px 15px 10px 15px;
+  font-size: 14px;
+  font-weight: 800;
+  &:hover {
+    color: #333333;
+    background-color: #e9e9e9;
+    border: none;
+  }
+}
+
 .search-btn:before,
 .search-btn:after {
   content: "";

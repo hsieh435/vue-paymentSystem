@@ -92,15 +92,14 @@ const props = defineProps({
     required: true,
     type: Number,
   },
-  keyword: {
-    type: String,
-  },
+  // searchWord: {
+  //   type: String,
+  // },
 });
 
 const { numberOfPages, modelValue: currentPage } = toRefs(props);
 // console.log("numberOfPages:", numberOfPages);
 // console.log("modelValue:", props.modelValue);
-// console.log("keyword:", props.keyword);
 
 const emit = defineEmits(["update:modelValue"]);
 // console.log("emit:", emit);

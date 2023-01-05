@@ -7,11 +7,7 @@
     :user-role-name="user.roleName"
     :user-role-id="user.roleId"
   ></AdjustFunction>
-  <search-compomnent @eventIsAString="gotAArray"></search-compomnent>
-  <div class="searchbox">
-    <input type="search" placeholder="Search..." v-model.trim="searchWord" />
-    <button @click="abc()">Search</button>
-  </div>
+  <search-compomnent></search-compomnent>
   <pagination-component
     class="pagination-component"
     v-model="currentPage"
@@ -57,6 +53,7 @@
     v-model="currentPage"
     :numberOfPages="numberOfPages"
   />
+  <br />
 </template>
 
 <script lang="ts">
@@ -115,29 +112,6 @@ export default defineComponent({
 
     provide("closeChangeRole", closeChangeRole);
 
-    const searchWord: any = ref();
-
-    const keyword = reactive({
-      keyword: "",
-    });
-
-    function abc() {
-      // let keyword = searchWord.value.toLowerCase();
-      if (searchWord.value.length > 0) {
-        // console.log(
-        //   "searchWord.value:",
-        //   searchWord.value,
-        //   typeof searchWord.value
-        // );
-        keyword.keyword = searchWord.value;
-        console.log("keyword", keyword.keyword);
-      } else {
-        alert("請輸入欄位");
-      }
-    }
-
-    provide("keyword", keyword.keyword);
-
     return {
       users,
       UsersAreLoading,
@@ -149,9 +123,6 @@ export default defineComponent({
       adjustThisAuth,
       user,
       closeChangeRole,
-      abc,
-      searchWord,
-      keyword,
     };
   },
 });
@@ -233,46 +204,5 @@ tr:last-of-type {
 .button:hover {
   background-color: rgb(255, 255, 255);
   border: 3px solid rgba(79, 192, 210, 0.7);
-}
-
-/* 以下 search-box */
-
-.searchbox {
-  display: inline;
-}
-
-.searchbox input[type="search"] {
-  border: solid 3px #fff;
-  box-sizing: border-box;
-  height: 40px;
-  font-size: 30px;
-  width: 40%;
-  margin: 20px 20px 20px 0px;
-  padding: 0px 0px 0px 20px;
-  outline: solid #fc0 0;
-  border-radius: 25px;
-  transition: all 0.2s ease-in;
-  width: 30vw;
-  z-index: 1;
-  border: 1px solid rgb(146, 146, 146);
-}
-
-.searchbox input[type="search"]:focus {
-  border: solid 3px #09f;
-}
-
-.searchbox button {
-  height: 40px;
-  font-size: 26px;
-  margin: 20px 20px 20px 0px;
-  padding: 0px 20px 0px 20px;
-  border-radius: 25px;
-  color: rgb(0, 0, 0);
-  border: 1px solid rgb(146, 146, 146);
-  transition: all 0.2s ease-in;
-}
-
-.searchbox button:hover {
-  outline: solid 3px #09f;
 }
 </style>

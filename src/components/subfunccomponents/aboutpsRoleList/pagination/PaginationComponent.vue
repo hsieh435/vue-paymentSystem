@@ -14,13 +14,13 @@
       >
         <span class="page-link">FIRST PAGE</span>
       </li>
-      <!-- 往前跳四頁 -->
+      <!-- 往前跳兩頁 -->
       <li
         class="page-item"
         aria-label="go to previous page"
         @click="minusfour()"
         :class="{
-          disabled: currentPage < 5,
+          disabled: currentPage < 3,
         }"
       >
         <span class="page-link">&#10218;</span>
@@ -38,18 +38,18 @@
           :class="{
             'active-page': currentPage === index,
           }"
-          v-if="index > 0 && index < numberOfPages + 1"
+          v-if="0 < index && index < numberOfPages + 1"
         >
           {{ index }}
         </div>
       </li>
-      <!-- 往後跳四頁 -->
+      <!-- 往後跳兩頁 -->
       <li
         class="page-item"
         aria-label="go to previous page"
         @click="plusfour()"
         :class="{
-          disabled: currentPage > numberOfPages - 4,
+          disabled: currentPage > numberOfPages - 2,
         }"
       >
         <span class="page-link">&#10219;</span>
@@ -102,12 +102,12 @@ const first = () => {
 
 const minusfour = () => {
   if (currentPage.value < 3) return;
-  emit("update:modelValue", currentPage.value - 4);
+  emit("update:modelValue", currentPage.value - 2);
 };
 
 const plusfour = () => {
-  if (currentPage.value > numberOfPages.value - 4) return;
-  emit("update:modelValue", currentPage.value + 4);
+  if (currentPage.value > numberOfPages.value - 3) return;
+  emit("update:modelValue", currentPage.value + 2);
 };
 
 const last = () => {

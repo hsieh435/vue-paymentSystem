@@ -17,6 +17,7 @@
   ></DeleteTheRole>
   <pagination-component
     class="pagination-component"
+    v-if="numberOfPages !== 1"
     v-model="currentPage"
     :numberOfPages="numberOfPages"
   />
@@ -50,6 +51,12 @@
       </td>
     </tr>
   </table>
+  <pagination-component
+    class="pagination-component"
+    v-if="numberOfPages !== 1"
+    v-model="currentPage"
+    :numberOfPages="numberOfPages"
+  />
 </template>
 <script lang="ts">
 import { defineComponent, ref, reactive, provide, onMounted } from "vue";
@@ -73,7 +80,7 @@ export default defineComponent({
 
     // 以下為 Pagination 相關
     const currentPage = ref(1);
-    const rowsPerPage = ref(10);
+    const rowsPerPage = ref(20);
 
     const { roles, rolesAreLoading, loadRoles, numberOfPages } = roleApi(
       currentPage,

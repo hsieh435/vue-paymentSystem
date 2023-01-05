@@ -16,14 +16,6 @@ export default defineComponent({
     const loading = ref();
     loading.value = true;
 
-    // const isLoading = ref(false);
-    // const loading = () => {
-    //   isLoading.value = true;
-    //   nextTick(() => {
-    //     isLoading.value = true;
-    //   });
-    // };
-
     // 以下為重新刷新頁面相關功能
     const isRouterAlive = ref(true);
     const reload = () => {
@@ -35,7 +27,7 @@ export default defineComponent({
 
     provide("valueofLoading", loading);
     provide("reload", reload);
-    // provide("要傳遞的資料名稱", "要傳遞的資料內容");
+    // provide("要傳遞的資料名稱", "要傳遞的資料內容，型別為字串");
 
     return {
       loading,
