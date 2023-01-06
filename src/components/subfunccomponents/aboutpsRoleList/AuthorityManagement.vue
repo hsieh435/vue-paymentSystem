@@ -12,11 +12,13 @@
           :key="index"
         >
           <h4>{{ item.functionGroupName }}</h4>
-          <!-- <input
-            class="checkBoxSquare"
-            type="checkbox"
-            v-if="item.functionModels.length > 0"
-          /><label v-if="item.functionModels.length > 0">全選</label> -->
+          <div>
+            <input
+              class="checkBoxSquare"
+              type="checkbox"
+              v-if="item.functionModels.length > 0"
+            /><label v-if="item.functionModels.length > 0">全選</label>
+          </div>
           <div
             class="funcgroup"
             v-for="(func, index) in item.functionModels"

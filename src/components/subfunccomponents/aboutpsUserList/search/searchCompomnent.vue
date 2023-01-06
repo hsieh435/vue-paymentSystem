@@ -4,45 +4,35 @@
 
 <template>
   <div class="search-bar">
-    <input type="search" name="search" v-model.trim="searchWord" required />
+    <input type="search" name="search" v-model="searchWord" required />
     <button class="search-btn" @click="search()"></button>
-    <button class="allDatabtn" @click="allData()" v-if="keyword !== null">
+    <!-- <button class="allDatabtn" @click="allData()">
       All Data
-    </button>
+    </button> -->
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, inject } from "vue";
+import { defineComponent, ref } from "vue";
 export default defineComponent({
   name: "searchCompomnent",
   components: {},
 
-  setup() {
-    const keyword = localStorage.getItem("keyword");
-
-    const reload: any = inject("reload");
-
+  setup(props, context) {
     const searchWord = ref();
 
     function search() {
-      let keyword = searchWord.value.trim().toLowerCase();
-      localStorage.setItem("keyword", keyword);
-      reload();
+      const keyword = searchWord.value.trim().toLowerCase();
+      context.emit("gotAKeyword", keyword);
     }
 
-    function allData() {
-      if (keyword !== null) {
-        localStorage.removeItem("keyword");
-        reload();
-      }
-    }
+    // function allData() {
+    // }
 
     return {
-      keyword,
       searchWord,
       search,
-      allData,
+      // allData,
     };
   },
 });

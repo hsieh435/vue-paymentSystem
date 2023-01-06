@@ -204,8 +204,8 @@ const goto = () => {
 }
 
 .goto {
-  width: 50px;
-  margin: 0px 5px 0px 10px;
+  width: 40px;
+  margin: 0px 0px 0px 10px;
 }
 
 .moveto {

@@ -35,13 +35,14 @@ export default defineComponent({
 
     // 以下為 EMIT 之操作
     function gotANumber(e: any) {
-      console.log(`接收訊息：${e}`);
+      console.log(`接收訊息：${e}`,typeof e);
     }
     function gotAText(e: any) {
-      console.log(`接收訊息：${e}`);
+      console.log(`接收訊息：${e}`,typeof e);
     }
     function gotAArray(e: any) {
-      console.log(`接收訊息：${e}`);
+      // console.log(`接收訊息：${e}`);
+      console.log(e,typeof e);
     }
 
     return {

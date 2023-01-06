@@ -7,9 +7,10 @@
     :user-role-name="user.roleName"
     :user-role-id="user.roleId"
   ></AdjustFunction>
-  <search-compomnent></search-compomnent>
+  <search-compomnent @gotAKeyword="gotAKeyword"></search-compomnent>
   <pagination-component
     class="pagination-component"
+    v-if="numberOfPages !== 1"
     v-model="currentPage"
     :numberOfPages="numberOfPages"
   />
@@ -23,7 +24,6 @@
         <th>Adjust</th>
       </tr>
     </thead>
-    <!-- v-model="user" -->
     <tbody class="table-hover">
       <tr v-for="(user, id) in users" :key="id">
         <td>{{ user.id }}</td>
@@ -50,6 +50,7 @@
   </table>
   <pagination-component
     class="pagination-component"
+    v-if="numberOfPages !== 1"
     v-model="currentPage"
     :numberOfPages="numberOfPages"
   />
@@ -57,7 +58,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, reactive, provide } from "vue";
+import {
+  defineComponent,
+  onMounted,
+  ref,
+  reactive,
+  provide,
+  inject,
+} from "vue";
 import AdjustFunction from "./AdjustFunction.vue";
 import PaginationComponent from "./pagination/PaginationComponent.vue";
 import searchCompomnent from "./search/searchCompomnent.vue";
@@ -74,6 +82,8 @@ export default defineComponent({
   },
 
   setup() {
+    const reload: any = inject("reload");
+
     // 以下為 Pagination 相關
     const currentPage = ref(1);
     const rowsPerPage = ref(20);
@@ -82,6 +92,8 @@ export default defineComponent({
       currentPage,
       rowsPerPage
     );
+
+    console.log("users:", users);
 
     onMounted(async () => loadUsers());
 
@@ -112,6 +124,23 @@ export default defineComponent({
 
     provide("closeChangeRole", closeChangeRole);
 
+    // 處理 keyword 與搜尋功能
+    const gotAKeyword = (e: any) => {
+      const keyword = e;
+      // keyword.value = e.split("");
+      // const usersArray: any = users.value;
+      console.log("keyword.value:", keyword, typeof keyword);
+      // console.log("users.value:", users.value, typeof users.value);
+
+      // const compareResult = usersArray.filter(function (value: any) {
+      //     return (
+      //       value.checkNoteId == true ||
+      //       value.checkUserName == true ||
+      //       value.checkRoleName == true
+      //     );
+      //   });
+    };
+
     return {
       users,
       UsersAreLoading,
@@ -123,6 +152,7 @@ export default defineComponent({
       adjustThisAuth,
       user,
       closeChangeRole,
+      gotAKeyword,
     };
   },
 });

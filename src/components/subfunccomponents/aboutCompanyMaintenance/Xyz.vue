@@ -21,7 +21,7 @@ export default defineComponent({
     }
 
     function sentAArray() {
-      const array: any = [
+      const array = [
         {
           notesId: "amyliao",
           roleId: "manager",
@@ -119,7 +119,7 @@ export default defineComponent({
         },
       ];
       context.emit("eventIsAArray", array);
-      // console.log("A3:", typeof array);
+      console.log("A3:", typeof array);
     }
     // context.emit("傳送的資料名稱", "傳送的資料內容");
 

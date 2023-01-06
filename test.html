@@ -62,9 +62,12 @@
         return value.name.length > 3;
       });
 
+      let arr4 = arr1.forEach((element) => element.like.includes("蘿蔔泥"));
+
       console.log("arr1:", arr1);
       console.log("arr2:", arr2);
       console.log("arr3:", arr3);
+      console.log("arr4:", arr4);
       console.log("------ 分隔線 ------");
 
       function createArray(length, value) {
