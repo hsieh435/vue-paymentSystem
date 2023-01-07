@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, provide, inject } from "vue";
+import { defineComponent } from "vue";
 import "@/views/subfunction/subfunction.css";
 import AddNewRole from "../../../components/subfunccomponents/aboutpsRoleList/AddNewRole.vue";
 import RoleList from "../../../components/subfunccomponents/aboutpsRoleList/RoleList.vue";

@@ -12,3 +12,36 @@ push 用法
 
 https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 includes 用法
+
+
+未完成
+
+必輸的猜數字
+
+
+
+待完善
+
+猜數字
+0~99 或 1~100
+
+基礎代謝率
+身高體重位置互換
+
+混色
+CSS排序
+
+colorchoose
+色碼輸入方式
+
+timezone
+
+
+times
+
+
+猜拳
+畫面調整
+
+必輸的猜拳
+統計次數

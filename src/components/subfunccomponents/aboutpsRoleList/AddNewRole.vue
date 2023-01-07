@@ -52,7 +52,6 @@ export default defineComponent({
           )
 
           .then((response) => {
-            // roleidlist.value = response.data.data;
             const rolenameList = response.data.data;
             const roleIdCompareArray = [];
             for (let i = 0; i < rolenameList.length; i++) {
@@ -61,7 +60,7 @@ export default defineComponent({
             }
 
             if (roleIdCompareArray.includes(newRole.ID) === true) {
-              alert("角色代碼重複，請更換名稱");
+              alert(`${newRole.ID}已存在，請更換角色代碼`);
               newRole.ID = "";
             } else {
               axios
@@ -80,7 +79,7 @@ export default defineComponent({
                 )
 
                 .then((response) => {
-                  alert("建立新角色成功");
+                  alert(response.data.message);
                   reload();
                 })
                 .catch((error) => {

@@ -9,15 +9,15 @@ export default defineComponent({
   name: "Xyz",
   setup(props, context) {
     function sentANumber() {
-      const num: number = Math.ceil(Math.random() * 10000000000);
+      const num: number = Math.ceil(Math.random() * 1000000000000);
       context.emit("eventIsANumber", num);
-      // console.log("A1:", typeof num);
+      // console.log("A1:", num, typeof num);
     }
 
     function sentAString() {
-      const num: number = Math.ceil(Math.random() * 10000000000);
-      context.emit("eventIsAString", num.toString(36));
-      // console.log("A2:", typeof num.toString(36));
+      const num: any = Math.ceil(Math.random() * 1000000000000).toString(36);
+      context.emit("eventIsAString", num, typeof num);
+      // console.log("A2:", num, typeof num);
     }
 
     function sentAArray() {

@@ -6,7 +6,7 @@
       <div>
         <h2>修改{{ roleName }}角色名稱</h2>
         <label class="thislabel">角色名稱改為：</label>
-        <input class="thisinput" type="text" v-model="newRole.name" />
+        <input class="thisinput" type="text" v-model="newRole" />
         <div>
           <button class="updateauthority" @click="sent()">確定修改</button>
           <button class="updateauthority" @click="cancelEdit()">
@@ -18,7 +18,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRef, toRefs, inject } from "vue";
+import { defineComponent, ref, toRef, toRefs, inject } from "vue";
 import axios from "axios";
 export default defineComponent({
   name: "EditRole",
@@ -34,22 +34,20 @@ export default defineComponent({
     // const roleId = toRef(props, "roleId");
     // const roleName = toRef(props, "roleName");
 
-    const newRole = reactive({
-      name: "",
-    });
+    const newRole = ref();
 
     function sent() {
       // console.log("V1:", newRole.name);
       // console.log("V2:", props.roleId);
       // console.log("V3:", props.roleName);
       // console.log("V4:", newRole.name.length);
-      if (newRole.name.length > 0) {
+      if (newRole.value.length > 0) {
         axios
           .post(
             "http://localhost:8085/paymentSystem/api/psRole/editPSRole",
             {
               roleId: props.roleId,
-              roleName: newRole.name,
+              roleName: newRole.value,
             },
             {
               headers: {
@@ -65,7 +63,7 @@ export default defineComponent({
               adjustRole.value = true;
               reload();
             } else {
-              alert("編輯失敗");
+              alert(`returnCode:${response.data.returnCode}\n編輯失敗`);
               adjustRole.value = true;
             }
           })
@@ -104,7 +102,7 @@ export default defineComponent({
 
 .wholearea {
   width: 60%;
-  height:auto;
+  height: auto;
   margin: 200px 20% 0px 20%;
   padding: 50px 2.5% 50px 2.5%;
   border-radius: 20px;

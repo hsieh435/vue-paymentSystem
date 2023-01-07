@@ -95,7 +95,7 @@ export default defineComponent({
           )
 
           .then((response) => {
-            alert("修改成功");
+            alert(response.data.message);
             reload();
           })
           .catch((error) => {

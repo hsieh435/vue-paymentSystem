@@ -23,12 +23,10 @@ export default defineComponent({
 
   setup() {
     const lod = ref();
-    console.log("K1:", lod.value);
 
     setTimeout(loadingview, 1000);
     function loadingview() {
       lod.value = false;
-      // console.log("K2:", lod.value);
     }
     return {
       lod,

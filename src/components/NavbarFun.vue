@@ -44,6 +44,9 @@ export default defineComponent({
     const token = localStorage.getItem("userJWT");
     const router = useRouter();
 
+    const functionGroups = reactive({ value: null });
+    // console.log("D2:", functionGroups);
+
     axios
       .post(
         "http://localhost:8085/paymentSystem/api/functionGroup/findAllFunctionGroupWhereFunctionIdInPermission",
@@ -66,9 +69,6 @@ export default defineComponent({
       .catch((error) => {
         console.log("發生錯誤");
       });
-
-    const functionGroups = reactive({ value: null });
-    // console.log("D2:", functionGroups);
 
     // class function {
     //     public functionGroups="",

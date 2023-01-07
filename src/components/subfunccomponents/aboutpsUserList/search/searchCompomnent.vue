@@ -63,7 +63,7 @@ body,
   display: flex;
 }
 body {
-  background: #f1f1f1;
+  background: rgb(241, 241, 241);
   height: 100vh;
 }
 .search-bar input,

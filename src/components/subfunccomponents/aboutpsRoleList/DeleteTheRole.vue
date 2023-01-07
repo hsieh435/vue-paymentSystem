@@ -41,7 +41,7 @@ export default defineComponent({
         )
 
         .then((response) => {
-          alert("刪除成功");
+          alert(response.data.message);
           deleteRole.value = true;
           reload();
         })

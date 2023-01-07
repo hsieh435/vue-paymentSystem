@@ -199,7 +199,7 @@ export default defineComponent({
 
         .then((response) => {
           if (response.data.returnCode == 0) {
-            alert("權限修改成功");
+            alert(response.data.message);
             adjustList.value = true;
             reload();
           } else {
