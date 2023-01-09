@@ -16,32 +16,34 @@ includes 用法
 
 未完成
 
-必輸的猜數字
-
+RSS
+https://www.letswrite.tw/vue-search/
 
 
 待完善
 
-猜數字
-0~99 或 1~100
-
-基礎代謝率
-身高體重位置互換
-
-混色
-CSS排序
-
-colorchoose
-色碼輸入方式
+bmr
+bmr&&tdee
+checked
+新增說明
+input 的 label for
 
 timezone
+新增
 
+guessnumberl
+註解兩個 console.log
+if (answer == "" || 1 > answer || answer > 10)
 
-times
-
+fakeaddress.html
+嘗試將 data/address.js 匯入
+https://tw511.com/a/01/30974.html
 
 猜拳
 畫面調整
 
 必輸的猜拳
 統計次數
+
+fakedata
+日期、ID
