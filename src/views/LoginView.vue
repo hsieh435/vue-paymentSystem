@@ -6,6 +6,8 @@
     部門：{{ msg.userOrganization }} <br />
     職位：{{ msg.userTitle }}
   </h3>
+  <SendToSSO></SendToSSO>
+  <br>
   <button class="logout" @click="logout()">登出</button>
 </template>
 
@@ -13,9 +15,12 @@
 import { defineComponent, reactive, inject } from "vue";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
+import SendToSSO from "../components/SendToSSO.vue";
 export default defineComponent({
   name: "LoginView",
-  components: {},
+  components: {
+    SendToSSO,
+  },
 
   setup() {
     const userId = localStorage.getItem("userId");

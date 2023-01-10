@@ -171,8 +171,8 @@ export default defineComponent({
 }
 
 .button {
-  height: 50px;
   width: 300px;
+  height: 50px;
   border-radius: 25px;
   margin: 50px 0px 0px 0px;
   border: 0px;

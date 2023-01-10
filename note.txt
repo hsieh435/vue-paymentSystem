@@ -22,22 +22,8 @@ https://www.letswrite.tw/vue-search/
 
 待完善
 
-bmr
-bmr&&tdee
-checked
-新增說明
-input 的 label for
-
-timezone
-新增
-
-guessnumberl
-註解兩個 console.log
-if (answer == "" || 1 > answer || answer > 10)
-
-fakeaddress.html
-嘗試將 data/address.js 匯入
-https://tw511.com/a/01/30974.html
+lottery.html
+排版
 
 猜拳
 畫面調整
