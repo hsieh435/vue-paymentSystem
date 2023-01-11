@@ -1,5 +1,5 @@
 <template>
-  <button class="back" @click="sendtosso()">前往SSO</button>
+  <button class="back" @click="sendtosso()">前往 SSO 系統</button>
 </template>
 
 <script lang="ts">
@@ -12,9 +12,6 @@ export default defineComponent({
   setup() {
     function sendtosso() {
       const userId = localStorage.getItem("userId");
-      const network = window.location.href;
-      // console.log(network, typeof network);
-      // location.href="http://localhost:8081/"
       axios
         .post("http://localhost:8085/paymentSystem/public/getSystemJWT", {
           notesId: userId,
@@ -23,10 +20,8 @@ export default defineComponent({
 
         .then((response) => {
           if (response.data.returnCode == 0) {
-            console.log("response:", response.data.data);
-            // alert("123");
-
-            // location.href="http://localhost:8081/"
+            console.log("response:", response);
+            location.href = `http://localhost:8081?notesId=${userId}&systemId=paymentSystem&callBackPath=http://localhost:8081`;
           } else {
             alert("請輸入正確的USERNAME");
           }

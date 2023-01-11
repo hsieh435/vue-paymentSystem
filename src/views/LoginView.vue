@@ -2,12 +2,12 @@
 <template>
   <h3 class="welcome">
     {{ msg.userName }} 你好 <br />
-    USERNAME：{{ msg.userID }} <br />
+    USERID：{{ msg.userID }} <br />
     部門：{{ msg.userOrganization }} <br />
     職位：{{ msg.userTitle }}
   </h3>
   <SendToSSO></SendToSSO>
-  <br>
+  <br />
   <button class="logout" @click="logout()">登出</button>
 </template>
 

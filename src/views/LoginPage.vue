@@ -189,12 +189,6 @@ export default defineComponent({
   cursor: pointer;
 }
 
-.forgot {
-  font-size: 12px;
-  color: white;
-  margin-top: 25px;
-}
-
 @media only screen and (max-width: 756px) {
   .gray {
     width: 90%;

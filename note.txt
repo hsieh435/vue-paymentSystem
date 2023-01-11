@@ -22,6 +22,12 @@ https://www.letswrite.tw/vue-search/
 
 待完善
 
+bmrandtdee.html
+改名
+
+dinner.html
+增加資料量
+
 lottery.html
 排版
 
