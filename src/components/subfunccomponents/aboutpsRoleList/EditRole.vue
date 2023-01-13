@@ -41,7 +41,12 @@ export default defineComponent({
       // console.log("V2:", props.roleId);
       // console.log("V3:", props.roleName);
       // console.log("V4:", newRole.name.length);
-      if (newRole.value.length > 0) {
+      if (newRole.value == null) {
+        alert("欄位不可留白");
+      } else if (newRole.value === props.roleName) {
+        alert("角色名稱相同，無修改");
+        newRole.value = "";
+      } else {
         axios
           .post(
             "http://localhost:8085/paymentSystem/api/psRole/editPSRole",
@@ -71,8 +76,6 @@ export default defineComponent({
             alert("資料傳輸發生錯誤");
             adjustRole.value = true;
           });
-      } else {
-        alert("欄位不可留白");
       }
     }
 

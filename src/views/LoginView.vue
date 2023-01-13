@@ -6,6 +6,14 @@
     部門：{{ msg.userOrganization }} <br />
     職位：{{ msg.userTitle }}
   </h3>
+
+  <h3 class="welcome">
+    由 SSO 系統處取得使用者資料：<br />
+    姓名：{{ ssoinfo.userName }}<br />
+    systemAccount：{{ ssoinfo.systemAccount }}<br />
+    部門：{{ ssoinfo.userOrganization }}<br />
+    職位：{{ ssoinfo.userTitle }}<br />
+  </h3>
   <SendToSSO></SendToSSO>
   <br />
   <button class="logout" @click="logout()">登出</button>
@@ -35,10 +43,6 @@ export default defineComponent({
       userOrganization: "",
       userTitle: "",
     });
-    // console.log("msg.userName:", msg.userName);
-    // console.log("msg.userID:", msg.userID);
-    // console.log("msg.userOrganization:", msg.userOrganization);
-    // console.log("msg.userTitle:", msg.userTitle);
 
     const vol: any = inject("valueofLoading");
     catchData();
@@ -79,28 +83,39 @@ export default defineComponent({
     let url = new URL(window.location.href);
     const token = url.searchParams.get("token");
     const systemAccount = url.searchParams.get("systemAccount");
-    console.log("token:", token);
-    console.log("systemAccount:", systemAccount);
+    // console.log("token:", token);
+    // console.log("systemAccount:", systemAccount);
+
+    const ssoinfo = reactive({
+      userName: "",
+      systemAccount: "",
+      userOrganization: "",
+      userTitle: "",
+    });
 
     //
     // Token驗證
-    // if (token !== null || systemAccount !== null) {
-    //   axios
-    //     .post("http://localhost:9000/sso/public/checkToken", {
-    //       token: token,
-    //       systemId: "paymentSystem",
-    //     })
-
-    //     .then((response) => {
-    //       console.log("response:", response.data);
-    //     })
-
-    //     .catch((error) => {
-    //       console.log("連線發生錯誤");
-    //     });
-    // }
+    if (token !== null || systemAccount !== null) {
+      axios
+        .post("http://localhost:9000/sso/public/checkToken", {
+          token: token,
+          systemId: "paymentSystem",
+        })
+        .then((response) => {
+          // console.log("response:", response.data);
+          alert(`${response.data.message}`);
+          ssoinfo.userName = response.data.data.userName;
+          ssoinfo.systemAccount = response.data.data.systemAccount;
+          ssoinfo.userOrganization = response.data.data.userOrganization;
+          ssoinfo.userTitle = response.data.data.userTitle;
+        })
+        .catch((error) => {
+          console.log("連線發生錯誤");
+        });
+    }
 
     //
+    // 登出鍵
     function logout() {
       localStorage.removeItem("userId");
       localStorage.removeItem("userJWT");
@@ -109,6 +124,7 @@ export default defineComponent({
 
     return {
       msg,
+      ssoinfo,
       logout,
     };
   },

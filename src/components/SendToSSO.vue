@@ -1,5 +1,5 @@
 <template>
-  <button class="back" @click="sendtosso()">前往 SSO 系統</button>
+  <button class="back" @click="sendtosso()">登入 SSO 系統</button>
 </template>
 
 <script lang="ts">

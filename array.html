@@ -4,128 +4,132 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>MIX COLOR</title>
+    <style>
+      .squarearea {
+        display: flex;
+      }
+
+      .basic {
+        width: 300px;
+        height: 300px;
+        border: 1px solid black;
+      }
+
+      .square1,
+      .square2,
+      .square3 {
+        margin: 10px;
+        position: relative;
+      }
+
+      .buttonarea {
+        display: flex;
+        margin: 10px 0px 0px 0px;
+      }
+
+      .button {
+        margin: 0px 30px 0px 30px;
+      }
+
+      .rect1,
+      .rect2,
+      .rect3 {
+        font-size: 30px;
+        text-transform: uppercase;
+      }
+    </style>
   </head>
+
   <body>
+    <div class="squarearea">
+      <div class="basic square1"></div>
+      <div class="basic square2"></div>
+      <div class="basic square3"></div>
+    </div>
+    <div class="buttonarea">
+      <button class="button" onclick="changeColor1()">第一種顏色</button>
+      <button class="button" onclick="changeColor2()">第二種顏色</button>
+      <button class="button" onclick="mix()">混色</button>
+      <button class="button" onclick="clean()">清除</button>
+    </div>
+    <p class="rect1">色碼：</p>
+    <p class="rect2">色碼：</p>
+    <p class="rect3">色碼：</p>
+
     <script>
-      const people = [
-        {
-          name: "Casper",
-          like: "鍋燒意麵",
-          age: 18,
-        },
-        {
-          name: "Wang",
-          like: "炒麵",
-          age: 24,
-        },
-        {
-          name: "Bobo",
-          like: "蘿蔔泥",
-          age: 1,
-        },
-        {
-          name: "滷蛋",
-          like: "蘿蔔泥",
-          age: 3,
-        },
-      ];
+      const square1 = document.querySelector(".square1");
+      const square2 = document.querySelector(".square2");
+      const square3 = document.querySelector(".square3");
+      const rect1 = document.querySelector(".rect1");
+      const rect2 = document.querySelector(".rect2");
+      const rect3 = document.querySelector(".rect3");
 
-      console.log("filter 方法--------------------------");
+      function changeColor1() {
+        const num1 =
+          "00000" + Math.floor(Math.random() * 16777216).toString(16);
+        square1.style.backgroundColor = "#" + num1.slice(num1.length - 6);
+        // rect1.innerHTML =
+        //   "色碼：" +
+        //   square1.style.backgroundColor +
+        //   "\n" +
+        //   "#" +
+        //   num1.slice(num1.length - 6);
+        rect1.innerHTML = `
+          色碼：${square2.style.backgroundColor} # ${num1.slice(
+          num1.length - 6
+        )}`;
+      }
 
-      var filterAgeThan5 = people.filter(function (item, index, array) {
-        return item.age > 5; // 取得大於五歲的
-      });
-      console.log("A:", filterAgeThan5);
+      function changeColor2() {
+        const num1 =
+          "00000" + Math.floor(Math.random() * 16777216).toString(16);
+        square2.style.backgroundColor = "#" + num1.slice(num1.length - 6);
+        // rect2.innerHTML =
+        //   "色碼：" +
+        //   square2.style.backgroundColor +
+        //   "\n" +
+        //   "#" +
+        //   num1.slice(num1.length - 6);
+        rect2.innerHTML = `
+          色碼：${square2.style.backgroundColor} # ${num1.slice(
+          num1.length - 6
+        )}`;
+      }
 
-      console.log("find 方法--------------------------");
+      function mix() {
+        const color1 = square1.style.backgroundColor.split(/[.,(,)]/);
+        const color2 = square2.style.backgroundColor.split(/[.,(,)]/);
 
-      var findAgeThan5 = people.find(function (item, index, array) {
-        return item.age > 5; // 取得大於五歲的
-      });
-      console.log("B:", findAgeThan5);
+        let r = Math.ceil((color1[1] * 1 * (color2[1] * 1)) / 255);
+        let g = Math.ceil((color1[2] * 1 * (color2[2] * 1)) / 255);
+        let b = Math.ceil((color1[3] * 1 * (color2[3] * 1)) / 255);
 
-      console.log("forEach 方法--------------------------");
+        square3.style.backgroundColor = "RGB(" + r + "," + g + "," + b + ")";
+        // rect3.innerHTML =
+        //   "色碼：" +
+        //   square3.style.backgroundColor +
+        //   "\n" +
+        //   "#" +
+        //   r.toString(16) +
+        //   g.toString(16) +
+        //   b.toString(16);
+        rect3.innerHTML = `色碼：${
+          square3.style.backgroundColor
+        } # ${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
+      }
 
-      var forEachIt = people.forEach(function (item, index, array) {
-        console.log("C1:", item, index, array); // 物件, 索引, 全部陣列
-        return item; // forEach 沒在 return 的，所以這邊寫了也沒用
-      });
-      console.log("C2:", forEachIt); // undefined
-
-      people.forEach(function (item, index, array) {
-        item.age = item.age + 1; // forEach 就如同 for，不過寫法更容易
-      });
-
-      console.log("C3:", people);
-
-      console.log("map 方法--------------------------");
-
-      var mapEat = people.map(function (item, index, array) {
-        if (item.like !== "蘿蔔泥") {
-          return `${item.like} 好吃`;
-        } else {
-          return `${item.like} 不好吃`;
-        }
-      });
-
-      console.log("D:", mapEat);
-
-      console.log("every 方法--------------------------");
-
-      var ans = people.every(function (item, index, array) {
-        console.log("E1:", item, index, array); // 物件, 索引, 全部陣列
-        return item.age > 10; // 當全部 age 大於 10 才能回傳 true
-      });
-      console.log("E2:", ans); // false: 只要有部分不符合，則為 false
-
-      var ans2 = people.every(function (item, index, array) {
-        return item.age < 25;
-      });
-      console.log("E3:", ans2); // true: 全部 age 都小於 25
-
-      console.log("reduce 方法--------------------------");
-
-      var reduceEmpty = people.reduce(function (
-        accumulator,
-        currentValue,
-        currentIndex,
-        array
-      ) {});
-      console.log("F1:", reduceEmpty); // 沒有條件，會是 undefined
-
-      var reducePlus = people.reduce(function (
-        accumulator,
-        currentValue,
-        currentIndex,
-        array
-      ) {
-        // 分別為前一個回傳值, 目前值, 當前索引值
-        console.log("F2:", accumulator, currentValue, currentIndex);
-        return accumulator + currentValue.age; // 與前一個值相加
-      },
-      0); // 傳入初始化值為 0
-      console.log("F3:", reducePlus); // 總和為 46
-
-      var reducePlus = people.reduce(function (
-        accumulator,
-        currentValue,
-        currentIndex,
-        array
-      ) {
-        console.log("F4:", "reduce", accumulator, currentValue, currentIndex);
-        return Math.max(accumulator, currentValue.age); // 與前一個值比較哪個大
-      },
-      0);
-      console.log("F5:", reducePlus); // 最大值為 24
-
-      console.log("test--------------------------");
-
-      const odd = [1, 3, 5];
-      const arr_concat = [2, 4, 6].concat(odd);
-      console.log("G:", arr_concat);
-
-      console.log("test--------------------------");
+      function clean() {
+        const rect1 = document.querySelector(".rect1");
+        const rect2 = document.querySelector(".rect2");
+        const rect3 = document.querySelector(".rect3");
+        square1.style.backgroundColor = "#ffffff";
+        square2.style.backgroundColor = "#ffffff";
+        square3.style.backgroundColor = "#ffffff";
+        rect1.innerHTML = "色碼：";
+        rect2.innerHTML = "色碼：";
+        rect3.innerHTML = "色碼：";
+      }
     </script>
   </body>
 </html>
