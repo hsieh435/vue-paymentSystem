@@ -4,31 +4,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
 export default defineComponent({
   name: "SendToSSO",
   component: {},
   setup() {
     function sendtosso() {
-      const userId = localStorage.getItem("userId");
-      axios
-        .post("http://localhost:8085/paymentSystem/public/getSystemJWT", {
-          notesId: userId,
-        })
-        // post 放三個參數，url、data、config(header)
-
-        .then((response) => {
-          if (response.data.returnCode == 0) {
-            console.log("response:", response);
-            location.href = `http://localhost:8081?notesId=${userId}&systemId=paymentSystem&callBackPath=http://localhost:8081`;
-          } else {
-            alert("請輸入正確的USERNAME");
-          }
-        })
-        .catch((error) => {
-          alert("連線發生錯誤");
-        });
+      location.href = `http://localhost:8081?systemId=paymentSystem&callBackPath=http://localhost:8080/LoginView`;
     }
     return {
       sendtosso,

@@ -24,9 +24,9 @@ export default defineComponent({
 
   setup() {
     const userId = localStorage.getItem("userId");
-    const token = localStorage.getItem("userJWT");
+    const userJWT = localStorage.getItem("userJWT");
     const router = useRouter();
-    // console.log("token:", token);
+    // console.log("userJWT:", userJWT);
     // console.log("userId:", userId);
 
     const msg = reactive({
@@ -51,8 +51,8 @@ export default defineComponent({
           { notesId: userId },
           {
             headers: {
-              Authorization: "Bearer " + token,
-              // Bearer 跟 token 中間要有一個空格
+              Authorization: "Bearer " + userJWT,
+              // Bearer 跟 userJWT 中間要有一個空格
             },
           }
         )
@@ -74,6 +74,33 @@ export default defineComponent({
         });
     }
 
+    //
+    // 應用系統驗證 SSO 發給的 TOKEN
+    let url = new URL(window.location.href);
+    const token = url.searchParams.get("token");
+    const systemAccount = url.searchParams.get("systemAccount");
+    console.log("token:", token);
+    console.log("systemAccount:", systemAccount);
+
+    //
+    // Token驗證
+    // if (token !== null || systemAccount !== null) {
+    //   axios
+    //     .post("http://localhost:9000/sso/public/checkToken", {
+    //       token: token,
+    //       systemId: "paymentSystem",
+    //     })
+
+    //     .then((response) => {
+    //       console.log("response:", response.data);
+    //     })
+
+    //     .catch((error) => {
+    //       console.log("連線發生錯誤");
+    //     });
+    // }
+
+    //
     function logout() {
       localStorage.removeItem("userId");
       localStorage.removeItem("userJWT");
@@ -82,7 +109,6 @@ export default defineComponent({
 
     return {
       msg,
-      catchData,
       logout,
     };
   },

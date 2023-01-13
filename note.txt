@@ -22,14 +22,8 @@ https://www.letswrite.tw/vue-search/
 
 待完善
 
-bmrandtdee.html
-改名
-
-dinner.html
-增加資料量
-
-lottery.html
-排版
+colorchooseauto.html
+參考colorconverter.html的形式
 
 猜拳
 畫面調整

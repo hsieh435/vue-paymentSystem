@@ -37,9 +37,15 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const username = ref();
+    const userId: any = localStorage.getItem("userId");
 
     const vol: any = inject("valueofLoading");
     // inject("要傳遞的資料名稱");
+
+    // 如果有登入但未登出，將直接傳送至主畫面
+    if (userId != undefined) {
+      router.push({ path: "/LoginView" });
+    }
 
     const login = () => {
       if (username.value == null) {
