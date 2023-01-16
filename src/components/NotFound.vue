@@ -12,7 +12,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .notfoundword {
   line-height: 500px;
 }

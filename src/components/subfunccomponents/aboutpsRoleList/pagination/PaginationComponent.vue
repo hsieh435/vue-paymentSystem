@@ -116,7 +116,7 @@ const last = () => {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .pagination-container {
   display: inline-block;
   margin: 30px auto 30px auto;

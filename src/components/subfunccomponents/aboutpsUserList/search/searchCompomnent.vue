@@ -38,7 +38,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 * {
   // border: 1px solid black;
   box-sizing: border-box;

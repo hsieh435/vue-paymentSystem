@@ -102,7 +102,6 @@ export default defineComponent({
           systemId: "paymentSystem",
         })
         .then((response) => {
-          // console.log("response:", response.data);
           alert(`${response.data.message}`);
           ssoinfo.userName = response.data.data.userName;
           ssoinfo.systemAccount = response.data.data.systemAccount;

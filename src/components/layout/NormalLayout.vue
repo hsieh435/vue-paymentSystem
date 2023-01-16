@@ -21,17 +21,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-//  nav {
-//   z-index: 10;
-
-//   a {
-//     font-weight: bold;
-//     color: #2c3e50;
-
-//     &.router-link-exact-active {
-//       color: rgb(46, 189, 89);
-//     }
-//   }
-// }
-</style>
+<style lang="scss" scoped></style>

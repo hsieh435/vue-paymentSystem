@@ -1,19 +1,21 @@
 <template>
-  <button class="back" @click="sendtosso()">登入 SSO 系統</button>
+  <button class="back" @click="back()">返回主頁面</button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useRoute, useRouter } from "vue-router";
 export default defineComponent({
-  name: "SendToSSO",
-  component: {},
+  name: "BackToLoginView",
+  components: {},
+
   setup() {
-    function sendtosso() {
-      location.href = `http://localhost:8081?systemId=paymentSystem&callBackPath=http://localhost:8080/LoginView`;
+    const router = useRouter();
+    function back() {
+      router.push("./LoginView");
     }
     return {
-      sendtosso,
+      back,
     };
   },
 });
@@ -24,7 +26,7 @@ export default defineComponent({
   height: 50px;
   width: 300px;
   border-radius: 25px;
-  margin: 20px 0px 0px 0px;
+  margin: 50px 0px 50px 0px;
   border: 0px;
   font-size: 24px;
   color: rgb(0, 0, 0);

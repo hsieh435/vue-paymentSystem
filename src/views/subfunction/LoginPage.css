@@ -8,7 +8,7 @@ body {
 .login {
   overflow: hidden;
   background-color: white;
-  padding: 40px 30px 30px 30px;
+  padding: 40px 45px 30px 30px;
   border-radius: 10px;
   position: absolute;
   top: 50%;
@@ -23,8 +23,11 @@ body {
   -moz-transition: -moz-transform 300ms, box-shadow 300ms;
   transition: transform 300ms, box-shadow 300ms;
   box-shadow: 5px 10px 10px rgba(2, 128, 144, 0.2);
+  /* outline: 1px solid black; */
 }
-.login::before, .login::after {
+
+.login::before,
+.login::after {
   content: "";
   position: absolute;
   width: 600px;
@@ -36,6 +39,7 @@ body {
   z-index: -1;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
+
 .login::before {
   left: 40%;
   bottom: -130%;
@@ -44,6 +48,7 @@ body {
   -moz-animation: wawes 1s infinite linear;
   animation: wawes 10s infinite linear;
 }
+
 .login::after {
   left: 35%;
   bottom: -125%;
@@ -52,21 +57,22 @@ body {
   -moz-animation: wawes 7s infinite;
   animation: wawes 3s infinite;
 }
+
 .login > input {
   height: 50px;
   width: 100%;
   font-size: 20px;
-  font-family: "Asap", sans-serif;
+  /* font-family: "Asap", sans-serif; */
   display: block;
   border-radius: 30px;
   background: white;
   border: 1px solid black;
-  margin: 15px -15px 50px 10px;
+  margin: 30px -15px 50px 10px;
   padding: 0px 0px 0px 25px;
   transition: 0.3s;
 }
 
-.login > input:hover{
+.login > input:hover {
   padding: 0px 0px 0px 25px;
   font-size: 22px;
 }
@@ -89,9 +95,10 @@ body {
   transition: background-color 300ms;
   transition: 0.3s;
 }
+
 .login > button:hover {
   background-color: #f24353;
-  border: 1px solid black;
+  outline: 1px solid black;
   box-shadow: 5px 5px 10px 0px #000000;
 }
 

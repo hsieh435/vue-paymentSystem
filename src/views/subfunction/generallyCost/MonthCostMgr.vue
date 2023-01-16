@@ -2,17 +2,17 @@
 <template>
 
   <h1 class="subfunctiontitle">月結帳款管理作業</h1>
-  <BackToLoginPage></BackToLoginPage>
+  <BackToLoginView></BackToLoginView>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, inject } from "vue";
 import "@/views/subfunction/subfunction.css";
-import BackToLoginPage from "../../../components/BackToLoginPage.vue";
+import BackToLoginView from "../../../components/BackToLoginView.vue";
 export default defineComponent({
   name: "MonthCostMgr",
   components: {
-    BackToLoginPage,
+    BackToLoginView,
   },
   setup() {
     return {};

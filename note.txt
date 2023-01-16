@@ -20,6 +20,57 @@ RSS
 https://www.letswrite.tw/vue-search/
 
 
+periodictables.html
+https://codepen.io/ajlohman/pen/GRWYWw
+https://codepen.io/mikegolus/pen/OwrPgB
+
+
+1337 MATRIX
+https://codepen.io/pavi2410/pen/oNjGVgM
+https://codepen.io/MananTank/pen/rNVQKPR
+
+
+https://codepen.io/ycw/pen/KKpGBEd
+
+
+COLORFUL CIRCLES
+https://codepen.io/DonKarlssonSan/pen/poJegJx
+
+
+https://codepen.io/supah/pen/ExabJxB
+
+
+FALLING SNOW
+https://codepen.io/simeydotme/pen/NWPxKxr
+
+FIREFLIES
+https://codepen.io/Mertl/pen/GexapP
+
+
+SNAKE GAME
+https://codepen.io/sayeedmarkus/pen/vYGWqmW
+
+FLUID METER
+https://codepen.io/aarcoraci/pen/abzjaOW
+
+STARFALL
+https://codepen.io/shubniggurath/pen/QVrJjM
+
+SNOWFALL
+https://codepen.io/shubniggurath/pen/WgJZJo
+
+SONOROUS TRACK MIXER
+https://codepen.io/OpherV/pen/PoPQwaz
+
+keyboard
+https://codepen.io/collinsworth/pen/VPXVbW
+https://codepen.io/jkantner/pen/RJWrmE
+
+
+TIC TAC TOE
+https://codepen.io/yagoestevez/pen/KRevzB
+
+
 
 待完善
 

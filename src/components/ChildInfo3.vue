@@ -42,7 +42,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .productcard {
   width: 60%;
   text-align: center;

@@ -25,7 +25,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 .child-box {
   display: flex;
   flex-direction: column;

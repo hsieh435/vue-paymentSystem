@@ -24,10 +24,8 @@
 
   <!-- 
     備註：
-    1. v-if 下達的條件式之意思，為符合條件式就顯現該 html 標籤
-    v-if="item.functionModels.length > 0"
+    1. v-if 條件式之意思，為符合條件式就顯現該 html 標籤，v-if="item.functionModels.length > 0"
     2. 使用 v-for 需先創建一組 reactive，再由個別物件下去渲染，同時須下達 key 值
-    3.
   -->
 </template>
 

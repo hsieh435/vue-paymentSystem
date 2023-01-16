@@ -7,19 +7,19 @@
     @eventIsAArray="gotAArray"
   ></Xyz>
   <br />
-  <BackToLoginPage></BackToLoginPage>
+  <BackToLoginView></BackToLoginView>
 </template>
 
 <script lang="ts">
 import { defineComponent, inject } from "vue";
 import "@/views/subfunction/subfunction.css";
 import Xyz from "../../../components/subfunccomponents/aboutCompanyMaintenance/Xyz.vue";
-import BackToLoginPage from "../../../components/BackToLoginPage.vue";
+import BackToLoginView from "../../../components/BackToLoginView.vue";
 export default defineComponent({
   name: "CompanyMaintain",
   components: {
     Xyz,
-    BackToLoginPage,
+    BackToLoginView,
   },
   setup() {
     const loading: any = inject("valueofLoading");

@@ -3,7 +3,7 @@
   <h1 class="subfunctiontitle">角色與權限管理</h1>
   <AddNewRole></AddNewRole>
   <RoleList></RoleList>
-  <BackToLoginPage></BackToLoginPage>
+  <BackToLoginView></BackToLoginView>
 </template>
 
 <script lang="ts">
@@ -11,11 +11,11 @@ import { defineComponent } from "vue";
 import "@/views/subfunction/subfunction.css";
 import AddNewRole from "../../../components/subfunccomponents/aboutpsRoleList/AddNewRole.vue";
 import RoleList from "../../../components/subfunccomponents/aboutpsRoleList/RoleList.vue";
-import BackToLoginPage from "../../../components/BackToLoginPage.vue";
+import BackToLoginView from "../../../components/BackToLoginView.vue";
 export default defineComponent({
   name: "RoleManagement",
   components: {
-    BackToLoginPage,
+    BackToLoginView,
     AddNewRole,
     RoleList,
   },

@@ -110,7 +110,7 @@ export default defineComponent({
         .then((response) => {
           const functArray: any = functionGroups.value;
           // console.log("W1:", functArray);
-          // 搜尋所有權限，取名 functArray
+          // 搜尋所有權限七大分類，取名 functArray
 
           const originalPerm: any = response.data.data.permissionList;
           // console.log("W2:", originalPerm);

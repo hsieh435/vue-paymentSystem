@@ -32,8 +32,6 @@ export default defineComponent({
 
     const reload: any = inject("reload");
 
-    // const roleidlist = reactive({ value: null });
-
     function addNewRole() {
       // console.log("newRole.ID:",newRole.ID);
       // console.log("newRole.name:",newRole.name);
