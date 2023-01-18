@@ -4,132 +4,87 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MIX COLOR</title>
-    <style>
-      .squarearea {
-        display: flex;
-      }
-
-      .basic {
-        width: 300px;
-        height: 300px;
-        border: 1px solid black;
-      }
-
-      .square1,
-      .square2,
-      .square3 {
-        margin: 10px;
-        position: relative;
-      }
-
-      .buttonarea {
-        display: flex;
-        margin: 10px 0px 0px 0px;
-      }
-
-      .button {
-        margin: 0px 30px 0px 30px;
-      }
-
-      .rect1,
-      .rect2,
-      .rect3 {
-        font-size: 30px;
-        text-transform: uppercase;
-      }
-    </style>
+    <title>Document</title>
   </head>
 
   <body>
-    <div class="squarearea">
-      <div class="basic square1"></div>
-      <div class="basic square2"></div>
-      <div class="basic square3"></div>
-    </div>
-    <div class="buttonarea">
-      <button class="button" onclick="changeColor1()">第一種顏色</button>
-      <button class="button" onclick="changeColor2()">第二種顏色</button>
-      <button class="button" onclick="mix()">混色</button>
-      <button class="button" onclick="clean()">清除</button>
-    </div>
-    <p class="rect1">色碼：</p>
-    <p class="rect2">色碼：</p>
-    <p class="rect3">色碼：</p>
-
     <script>
-      const square1 = document.querySelector(".square1");
-      const square2 = document.querySelector(".square2");
-      const square3 = document.querySelector(".square3");
-      const rect1 = document.querySelector(".rect1");
-      const rect2 = document.querySelector(".rect2");
-      const rect3 = document.querySelector(".rect3");
+      var objArray = [
+        { id: 0, name: "Object 0", otherProp: "321" },
+        { id: 1, name: "O1", otherProp: "648" },
+        { id: 2, name: "Another Object", otherProp: "850" },
+        { id: 3, name: "Almost There", otherProp: "046" },
+        { id: 4, name: "Last Obj", otherProp: "984" },
+        { id: 5, name: "Last Obj", otherProp: "458" },
+      ];
 
-      function changeColor1() {
-        const num1 =
-          "00000" + Math.floor(Math.random() * 16777216).toString(16);
-        square1.style.backgroundColor = "#" + num1.slice(num1.length - 6);
-        // rect1.innerHTML =
-        //   "色碼：" +
-        //   square1.style.backgroundColor +
-        //   "\n" +
-        //   "#" +
-        //   num1.slice(num1.length - 6);
-        rect1.innerHTML = `
-          色碼：${square2.style.backgroundColor} # ${num1.slice(
-          num1.length - 6
-        )}`;
+      const abc = objArray.map((el) => el.otherProp);
+      const def = objArray.map((el) => el.id + 1);
+
+      console.log("objArray:", objArray);
+      console.log("abc:", abc);
+      console.log("def:", def);
+      console.log("------ 分隔線 ------");
+
+      let arr = ["Jack", "John", "May", "Su", "Ada"];
+
+      let arr1 = [
+        {
+          name: "Casper",
+          like: "鍋燒意麵",
+          age: 18,
+          checked: true,
+        },
+        {
+          name: "Wang",
+          like: "炒麵",
+          age: 24,
+          checked: true,
+        },
+        {
+          name: "Bobo",
+          like: "蘿蔔泥",
+          age: 1,
+          checked: false,
+        },
+        {
+          name: "滷蛋",
+          like: "蘿蔔泥",
+          age: 3,
+          checked: false,
+        },
+      ];
+      let arr2 = arr1.filter(function (value) {
+        return value.checked == true;
+      });
+
+      let arr3 = arr1.filter(function (value) {
+        return value.name.length > 3;
+      });
+
+      let arr4 = arr1.forEach((element) => element.like.includes("蘿蔔泥"));
+
+      console.log("arr1:", arr1);
+      console.log("arr2:", arr2);
+      console.log("arr3:", arr3);
+      console.log("arr4:", arr4);
+      console.log("------ 分隔線 ------");
+
+      function createArray(length, value) {
+        let result = [];
+        for (let i = 0; i < length; i++) {
+          result[i] = value;
+        }
+        return result;
       }
 
-      function changeColor2() {
-        const num1 =
-          "00000" + Math.floor(Math.random() * 16777216).toString(16);
-        square2.style.backgroundColor = "#" + num1.slice(num1.length - 6);
-        // rect2.innerHTML =
-        //   "色碼：" +
-        //   square2.style.backgroundColor +
-        //   "\n" +
-        //   "#" +
-        //   num1.slice(num1.length - 6);
-        rect2.innerHTML = `
-          色碼：${square2.style.backgroundColor} # ${num1.slice(
-          num1.length - 6
-        )}`;
+      console.log(createArray(5, "abcdef"));
+
+      function swap(tuple) {
+        return [tuple[1], tuple[0], tuple[2]];
       }
 
-      function mix() {
-        const color1 = square1.style.backgroundColor.split(/[.,(,)]/);
-        const color2 = square2.style.backgroundColor.split(/[.,(,)]/);
-
-        let r = Math.ceil((color1[1] * 1 * (color2[1] * 1)) / 255);
-        let g = Math.ceil((color1[2] * 1 * (color2[2] * 1)) / 255);
-        let b = Math.ceil((color1[3] * 1 * (color2[3] * 1)) / 255);
-
-        square3.style.backgroundColor = "RGB(" + r + "," + g + "," + b + ")";
-        // rect3.innerHTML =
-        //   "色碼：" +
-        //   square3.style.backgroundColor +
-        //   "\n" +
-        //   "#" +
-        //   r.toString(16) +
-        //   g.toString(16) +
-        //   b.toString(16);
-        rect3.innerHTML = `色碼：${
-          square3.style.backgroundColor
-        } # ${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
-      }
-
-      function clean() {
-        // const rect1 = document.querySelector(".rect1");
-        // const rect2 = document.querySelector(".rect2");
-        // const rect3 = document.querySelector(".rect3");
-        square1.style.backgroundColor = "#ffffff";
-        square2.style.backgroundColor = "#ffffff";
-        square3.style.backgroundColor = "#ffffff";
-        rect1.innerHTML = "色碼：";
-        rect2.innerHTML = "色碼：";
-        rect3.innerHTML = "色碼：";
-      }
+      console.log(swap([8, "seven", "7"]));
     </script>
   </body>
 </html>
