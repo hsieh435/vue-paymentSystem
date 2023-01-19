@@ -109,32 +109,32 @@ export default defineComponent({
 
         .then((response) => {
           const functArray: any = functionGroups.value;
-          // console.log("W1:", functArray);
+          // console.log("functArray:", functArray);
           // 搜尋所有權限七大分類，取名 functArray
 
           const originalPerm: any = response.data.data.permissionList;
-          // console.log("W2:", originalPerm);
+          // console.log("originalPerm:", originalPerm);
           // 搜尋角色擁有權限，取名 originalPerm
 
           for (let i = 0; i < functArray.length; i++) {
-            // console.log("W3:", functArray[i]);
+            // console.log("functArray[i]:", functArray[i]);
             // 用迴圈分別跑出權限七大分類
 
             for (let j = 0; j < functArray[i].functionModels.length; j++) {
               const funcModels = functArray[i].functionModels[j];
-              // console.log("W4:", funcModels);
+              // console.log("funcModels:", funcModels);
               // 用迴圈分別跑出權限七大分類下的各個子權限，取名 funcModels
 
               const funcId: any = functArray[i].functionModels[j].functionId;
-              // console.log("W5:", funcId);
+              // console.log("funcId:", funcId);
               // 搜尋出各個子權限的 functionId 名稱，取名 funcId
 
               const funcCompare: boolean = originalPerm.includes(funcId);
-              // console.log("W6:", originalPerm.includes(funcId));
+              // console.log("funcCompare:", originalPerm.includes(funcId));
               // 比較 functionId 名稱是否有出現在角色權限列表中，若結果符合會呈現 true，反之則是 false，將其結果取名為 funcCompare
 
               funcModels["checked"] = funcCompare;
-              // console.log("W7:", funcModels);
+              // console.log("funcModels:", funcModels);
               // 此為物件增加 key 值之操作方式，將 funcModels 新增名為 "checked" 的 key 值，並賦予 value 值為 funcCompare 的結果，funcModels 物件將多出一個欄位，將開欄位用 v-model 綁定 checkbox，即可完成
             }
           }
@@ -146,14 +146,14 @@ export default defineComponent({
 
     // 權限調整的 function
     function adjustThisRole() {
-      // console.log("X1:", functionGroups.value);
+      // console.log("functionGroups.value:", functionGroups.value);
 
       const emptyArray: any = [];
-      // console.log("X2:", emptyArray);
+      // console.log("emptyArray:", emptyArray);
       // 建立一空陣列，稍後將接收角色新的權限設定
 
       for (let i = 0; i < functionGroups.value.length; i++) {
-        // console.log("X3:",functionGroups.value[i]);
+        // console.log("functionGroups.value[i]:",functionGroups.value[i]);
         // 用迴圈跑出權限七大分類
 
         for (
@@ -162,7 +162,7 @@ export default defineComponent({
           j++
         ) {
           const newFuncModels = functionGroups.value[i].functionModels[j];
-          // console.log("X4:", newFuncModels);
+          // console.log("newFuncModels:", newFuncModels);
           // 用迴圈跑出權限七大分類下的各個子權限，取名 newFuncModels
 
           emptyArray.push(newFuncModels);
@@ -173,13 +173,13 @@ export default defineComponent({
       const newPermissionList: any = emptyArray.filter(function (value: any) {
         return value.checked == true;
       });
-      // console.log("X5:", newPermissionList);
+      // console.log("newPermissionList:", newPermissionList);
       // 過濾篩選出 checked 欄位值為 true 之權限選項，並將創立之新陣列取名 newPermissionList
 
       const newPermissionArray = newPermissionList.map(
         (el: any) => el.functionId
       );
-      // console.log("X6:", newPermissionArray);
+      // console.log("newPermissionArray:", newPermissionArray);
       // 將 newPermissionList 中 functionId 欄位資料取出並放入新陣列，取名 newPermissionArray，並將之作為 API 傳遞資料的參數傳出
 
       axios
@@ -233,98 +233,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-.wholeareaback {
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(255, 255, 255, 0.25);
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  padding-bottom: 100px;
-  z-index: 10000;
-}
-
-.wholearea {
-  width: 90%;
-  height: 80vh;
-  margin: 10vh 5% 10vh 5%;
-  padding: 20px 2.5% 0px 2.5%;
-  background-color: rgba(255, 255, 255, 0.8);
-  overflow: auto;
-  resize: vertical;
-  position: relative;
-  outline: 1px black solid;
-}
-
-.closeit {
-  height: 40px;
-  width: 40px;
-  font-size: 36px;
-  line-height: 26px;
-  border: 0px;
-  background-color: rgb(255, 255, 255, 0);
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  transition: 0.3s;
-}
-
-.closeit:hover {
-  height: 60px;
-  width: 60px;
-  font-size: 60px;
-  position: absolute;
-  right: 0px;
-  top: 0px;
-}
-
-.authmang {
-  text-align: left;
-  /* outline: 1px black solid; */
-}
-
-.authmang h2 {
-  text-align: center;
-}
-
-.funcgroupname {
-  margin: 20px 10px 20px 30px;
-  border-radius: 10px;
-  background-color: rgb(167, 255, 255);
-  padding: 10px 10px 10px 20px;
-  outline: 1px solid rgb(120, 120, 120);
-}
-
-.funcgroup {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  /* outline: 1px solid #000; */
-}
-
-.checkBoxSquare {
-  margin: 5px 5px 0px 5px;
-}
-
-.checked {
-  display: none;
-}
-
-.updateauthority {
-  height: 40px;
-  width: 150px;
-  border-radius: 20px;
-  margin: 20px 10px 40px 10px;
-  border: 1px black solid;
-  font-size: 20px;
-  color: rgb(0, 0, 0);
-  transition: 0.3s;
-}
-
-.updateauthority:hover {
-  background-color: rgb(167, 255, 255);
-  box-shadow: 10px 10px 10px 0px #000000;
-  border: 1px solid rgb(46, 47, 51);
-}
-</style>
+<style src="./AuthorityManagement.css" scoped></style>

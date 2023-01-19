@@ -6,28 +6,23 @@
     部門：{{ msg.userOrganization }} <br />
     職位：{{ msg.userTitle }}
   </h3>
-
-  <h3 class="welcome">
-    由 SSO 系統處取得使用者資料：<br />
-    姓名：{{ ssoinfo.userName }}<br />
-    systemAccount：{{ ssoinfo.systemAccount }}<br />
-    部門：{{ ssoinfo.userOrganization }}<br />
-    職位：{{ ssoinfo.userTitle }}<br />
-  </h3>
+  <GotSSOInfo v-if="gotssoinfo == true"></GotSSOInfo>
   <ConnectToSSO></ConnectToSSO>
   <br />
   <button class="logout" @click="logout()">登出</button>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, inject } from "vue";
+import { defineComponent, ref, reactive, provide, inject } from "vue";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
 import ConnectToSSO from "../components/ConnectToSSO.vue";
+import GotSSOInfo from "../components/GotSSOInfo.vue";
 export default defineComponent({
   name: "LoginView",
   components: {
     ConnectToSSO,
+    GotSSOInfo,
   },
 
   setup() {
@@ -86,31 +81,13 @@ export default defineComponent({
     // console.log("token:", token);
     // console.log("systemAccount:", systemAccount);
 
-    const ssoinfo = reactive({
-      userName: "",
-      systemAccount: "",
-      userOrganization: "",
-      userTitle: "",
-    });
+    // 刪除角色功能的 value 值，控制出現與否
+    const gotssoinfo = ref();
+    gotssoinfo.value = null;
 
-    //
-    // Token驗證
+    // Token驗證，開啟 GotSSOInfo 的 Components
     if (token !== null || systemAccount !== null) {
-      axios
-        .post("http://localhost:9000/sso/public/checkToken", {
-          token: token,
-          systemId: "paymentSystem",
-        })
-        .then((response) => {
-          alert(`${response.data.message}`);
-          ssoinfo.userName = response.data.data.userName;
-          ssoinfo.systemAccount = response.data.data.systemAccount;
-          ssoinfo.userOrganization = response.data.data.userOrganization;
-          ssoinfo.userTitle = response.data.data.userTitle;
-        })
-        .catch((error) => {
-          console.log("連線發生錯誤");
-        });
+      gotssoinfo.value = true;
     }
 
     //
@@ -121,9 +98,11 @@ export default defineComponent({
       router.push("./");
     }
 
+    provide("gotssoinfo", gotssoinfo);
+
     return {
       msg,
-      ssoinfo,
+      gotssoinfo,
       logout,
     };
   },

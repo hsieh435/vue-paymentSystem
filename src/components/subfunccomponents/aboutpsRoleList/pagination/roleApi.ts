@@ -47,7 +47,7 @@ export function roleApi(currentPage: Ref<number>, rowsPerPage?: Ref<number>) {
         roles.value = rolewithid;
       }
     } catch (error) {
-      alert("資料傳輸發生錯誤");
+      alert("網路連線發生錯誤");
     } finally {
       rolesAreLoading.value = true;
     }
