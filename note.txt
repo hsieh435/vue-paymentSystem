@@ -84,6 +84,7 @@ https://codepen.io/rauldronca/pen/LgXPgJ
 
 colorchooseauto.html
 參考colorconverter.html的形式
+colormix.html 更改顏色產生方式
 
 猜拳
 畫面調整

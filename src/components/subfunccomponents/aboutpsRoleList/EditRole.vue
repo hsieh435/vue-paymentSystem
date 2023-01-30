@@ -37,10 +37,9 @@ export default defineComponent({
     const newRole = ref();
 
     function sent() {
-      // console.log("V1:", newRole.name);
-      // console.log("V2:", props.roleId);
-      // console.log("V3:", props.roleName);
-      // console.log("V4:", newRole.name.length);
+      // console.log("newRole.value:", newRole.value);
+      // console.log("props.roleId:", props.roleId);
+      // console.log("props.roleName:", props.roleName);
       if (newRole.value == null) {
         alert("欄位不可留白");
       } else if (newRole.value === props.roleName) {

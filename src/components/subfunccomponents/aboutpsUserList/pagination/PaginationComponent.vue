@@ -1,6 +1,7 @@
 <!-- 分頁 Component -->
 <!-- https://axellarsson.com/blog/vue-3-pagination-composition-api/ -->
 <template>
+  <search-compomnent @gotAKeyword="gotAKeyword"></search-compomnent>
   <div class="pagination-container" aria-label="row pagination">
     <ul v-if="numberOfPages >= 1" class="pagination">
       <!-- 第一頁 -->
@@ -17,7 +18,6 @@
       <!-- 往前跳四頁 -->
       <li
         class="page-item"
-        aria-label="go to previous page"
         @click="minusfour()"
         :class="{
           disabled: currentPage < 5,
@@ -29,7 +29,7 @@
       <li
         v-for="index in numberOfPages"
         :key="index"
-        :aria-label="'go to page ' + index"
+        :aria-label="'go to page' + index"
         class="page-item"
         @click="setCurrentPage(index)"
       >
@@ -51,7 +51,6 @@
       <!-- 往後跳四頁 -->
       <li
         class="page-item"
-        aria-label="go to previous page"
         @click="plusfour()"
         :class="{
           disabled: currentPage > numberOfPages - 4,
@@ -65,7 +64,7 @@
         :class="{
           disabled: currentPage === numberOfPages || !numberOfPages,
         }"
-        aria-label="go to next page"
+        aria-label="go to last page"
         @click="last()"
       >
         <div class="page-link">LAST PAGE</div>
@@ -81,7 +80,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, toRefs } from "vue";
+import { ref, toRefs, provide } from "vue";
+import searchCompomnent from "../search/searchCompomnent.vue";
 
 const props = defineProps({
   numberOfPages: {
@@ -139,75 +139,60 @@ const goto = () => {
     go.value = "";
   }
 };
+
+// 處理 keyword 與搜尋功能
+// const keyword = ref({ value: null });
+const keyword = ref();
+const gotAKeyword = (e: any) => {
+  // console.log("e:", e);
+  keyword.value = e;
+  // console.log("users:", users);
+
+  // axios
+  //   .post(
+  //     "http://localhost:8085/paymentSystem/api/PSUser/findAllPSUser",
+  //     { notesId: userId },
+  //     {
+  //       headers: {
+  //         Authorization: "Bearer " + token,
+  //       },
+  //     }
+  //   )
+
+  //   .then((response) => {
+  //     const usersArray = response.data.data;
+
+  //     for (let i = 0; i < usersArray.length; i++) {
+  //       const eachuser = usersArray[i];
+  //       const checkNoteId: boolean = eachuser.userInfo.notesId
+  //         .toLowerCase()
+  //         .includes(e);
+  //       const checkUserName: boolean = eachuser.userInfo.userName
+  //         .toLowerCase()
+  //         .includes(e);
+  //       const checkRoleName: boolean = eachuser.role.roleName
+  //         .toLowerCase()
+  //         .includes(e);
+
+  //       eachuser["checkNoteId"] = checkNoteId;
+  //       eachuser["checkUserName"] = checkUserName;
+  //       eachuser["checkRoleName"] = checkRoleName;
+  //     }
+
+  //     const compareResult = usersArray.filter(function (value: any) {
+  //       return (
+  //         value.checkNoteId == true ||
+  //         value.checkUserName == true ||
+  //         value.checkRoleName == true
+  //       );
+  //     });
+  //     console.log("compareResult:", compareResult);
+  //   })
+  //   .catch((error) => {
+  //     alert("資料搜尋發生錯誤");
+  //   });
+};
+provide("keyword", keyword);
 </script>
 
-<style scoped lang="scss">
-.pagination-container {
-  display: inline-block;
-  margin: 10px auto 10px auto;
-}
-
-.pagination {
-  background: white;
-  margin: 0px;
-  padding: 10px;
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  border: none;
-  box-sizing: border-box;
-  overflow: hidden;
-  word-wrap: break-word;
-  align-content: center;
-  border-radius: 14px;
-}
-
-.page-item {
-  display: flex;
-  cursor: pointer;
-  margin-bottom: 0px;
-  -webkit-touch-callout: none; // iOS Safari
-  -webkit-user-select: none; // Safari
-  -khtml-user-select: none; // Konqueror HTML
-  -moz-user-select: none; // Old versions of Firefox
-  -ms-user-select: none; // Internet Explorer/Edge
-  user-select: none; // Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox
-}
-
-.page-link {
-  color: #666b85;
-  border-radius: 5px;
-  padding: 10px 15px;
-  font-size: 14px;
-  font-weight: 800;
-  &:hover {
-    color: #333333;
-    background-color: #e9e9e9;
-    border: none;
-  }
-}
-
-.active-page {
-  background-color: #60d394;
-  color: white;
-  &:hover {
-    border: none;
-  }
-}
-
-.disabled {
-  .page-link {
-    background-color: #f9fafb;
-  }
-  cursor: not-allowed;
-}
-
-.goto {
-  width: 40px;
-  margin: 0px 0px 0px 10px;
-}
-
-.moveto {
-  margin: 0px 5px 0px 0px;
-}
-</style>
+<style src="./PaginationComponent.scss" lang="scss" scoped></style>

@@ -26,13 +26,9 @@ export default defineComponent({
       context.emit("gotAKeyword", keyword);
     }
 
-    // function allData() {
-    // }
-
     return {
       searchWord,
       search,
-      // allData,
     };
   },
 });

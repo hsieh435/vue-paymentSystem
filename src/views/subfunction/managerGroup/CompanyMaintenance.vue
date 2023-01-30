@@ -24,9 +24,9 @@
     <tbody class="table-hover">
       <tr v-for="(user, index) in users.value" :key="index">
         <td>{{ index }}</td>
-        <td>{{ user.userInfo.notesId }}</td>
-        <td>{{ user.userInfo.userName }}</td>
-        <td>{{ user.role.roleName }}</td>
+        <td>{{ user.notesId }}</td>
+        <td>{{ user.userName }}</td>
+        <td>{{ user.roleName }}</td>
       </tr>
     </tbody>
   </table>
@@ -73,7 +73,7 @@ export default defineComponent({
     const users = reactive({ value: null });
     function gotAArray(c: any) {
       // console.log(`接收訊息：${c}`);
-      console.log(c, typeof c);
+      // console.log(c, typeof c);
       users.value = c;
     }
 
@@ -149,21 +149,5 @@ tr {
 
 tr:last-of-type {
   border-bottom: none;
-}
-
-.button {
-  width: 150px;
-  height: 40px;
-  border: 0;
-  border-radius: 20px;
-  background-color: rgba(79, 193, 210);
-  line-height: 16px;
-  margin: 10px 5px 10px 5px;
-  transition: 0.2s;
-}
-
-.button:hover {
-  background-color: rgb(255, 255, 255);
-  border: 3px solid rgba(79, 192, 210, 0.7);
 }
 </style>

@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import "@/views/subfunction/subfunction.css";
+import "../subfunction.css";
 import UserList from "../../../components/subfunccomponents/aboutpsUserList/UserList.vue";
 import BackToLoginView from "../../../components/BackToLoginView.vue";
 export default defineComponent({

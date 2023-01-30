@@ -64,7 +64,6 @@ export default defineComponent({
             vol.value = true;
           });
       }
-
       // 1.用.then 和.catch 去處理 axios 傳輸資料後接收成功和接收失敗結果。
       // 2.".finally(() => {})" 為 TYPE SCRIPT 之語法，做出結尾之用，以免送出後仍持續執行 LoadingForever 畫面
     };

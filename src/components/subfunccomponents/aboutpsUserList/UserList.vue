@@ -7,7 +7,6 @@
     :user-role-name="user.roleName"
     :user-role-id="user.roleId"
   ></AdjustFunction>
-  <search-compomnent @gotAKeyword="gotAKeyword"></search-compomnent>
   <pagination-component
     class="pagination-component"
     v-if="numberOfPages > 1"
@@ -66,10 +65,8 @@ import {
   provide,
   inject,
 } from "vue";
-import axios from "axios";
 import AdjustFunction from "./AdjustFunction.vue";
 import PaginationComponent from "./pagination/PaginationComponent.vue";
-import searchCompomnent from "./search/searchCompomnent.vue";
 import AdjustUserRole from "./AdjustUserRole.vue";
 import { useTodosApi } from "./pagination/useTodosApi";
 export default defineComponent({
@@ -78,7 +75,6 @@ export default defineComponent({
     AdjustFunction,
     PaginationComponent,
     AdjustUserRole,
-    searchCompomnent,
   },
 
   setup() {
@@ -87,61 +83,7 @@ export default defineComponent({
 
     // const reload: any = inject("reload");
 
-    // 處理 keyword 與搜尋功能
-    const keyword = ref({ value: null });
-    const gotAKeyword = (e: any) => {
-      // console.log("e:", e);
-      keyword.value = e;
-      console.log("keyword:", keyword.value);
-      // console.log("users:", users);
-
-      axios
-        .post(
-          "http://localhost:8085/paymentSystem/api/PSUser/findAllPSUser",
-          { notesId: userId },
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-              // Bearer 跟 token 中間要有一個空格
-            },
-          }
-        )
-
-        .then((response) => {
-          const usersArray = response.data.data;
-
-          for (let i = 0; i < usersArray.length; i++) {
-            const eachuser = usersArray[i];
-            const checkNoteId: boolean = eachuser.userInfo.notesId
-              .toLowerCase()
-              .includes(e);
-            const checkUserName: boolean = eachuser.userInfo.userName
-              .toLowerCase()
-              .includes(e);
-            const checkRoleName: boolean = eachuser.role.roleName
-              .toLowerCase()
-              .includes(e);
-
-            eachuser["checkNoteId"] = checkNoteId;
-            eachuser["checkUserName"] = checkUserName;
-            eachuser["checkRoleName"] = checkRoleName;
-          }
-
-          const compareResult = usersArray.filter(function (value: any) {
-            return (
-              value.checkNoteId == true ||
-              value.checkUserName == true ||
-              value.checkRoleName == true
-            );
-          });
-          console.log("compareResult:", compareResult);
-
-          // users.value = compareResult;
-        })
-        .catch((error) => {
-          alert("資料搜尋發生錯誤");
-        });
-    };
+    
 
     // 以下為 Pagination 相關
     const currentPage = ref(1);
@@ -199,7 +141,6 @@ export default defineComponent({
       adjustThisAuth,
       user,
       closeChangeRole,
-      gotAKeyword,
     };
   },
 });

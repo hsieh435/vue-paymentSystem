@@ -18,8 +18,8 @@ export function useTodosApi(
   const token = localStorage.getItem("userJWT");
 
   // const reload: any = inject("reload");
-  // const keyword: any = inject("keyword");
-  // console.log("keyword from API:", keyword);
+  const keyword: any = inject("keyword");
+  console.log("keyword from API:", keyword);
 
   const users: Ref<User[]> = ref([]);
 
