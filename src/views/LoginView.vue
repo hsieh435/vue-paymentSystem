@@ -1,5 +1,6 @@
 <!-- 登入後的畫面 -->
 <template>
+  <LoginTest></LoginTest>
   <h3 class="welcome">
     {{ msg.userName }} 你好 <br />
     USERID：{{ msg.userID }} <br />
@@ -18,11 +19,13 @@ import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
 import ConnectToSSO from "../components/ConnectToSSO.vue";
 import GotSSOInfo from "../components/GotSSOInfo.vue";
+import LoginTest from "../components/LoginTest.vue";
 export default defineComponent({
   name: "LoginView",
   components: {
     ConnectToSSO,
     GotSSOInfo,
+    LoginTest,
   },
 
   setup() {

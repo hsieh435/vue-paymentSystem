@@ -4,6 +4,7 @@
   <AddNewRole></AddNewRole>
   <RoleList></RoleList>
   <BackToLoginView></BackToLoginView>
+  <LoginTest></LoginTest>
 </template>
 
 <script lang="ts">
@@ -12,12 +13,14 @@ import "@/views/subfunction/subfunction.css";
 import AddNewRole from "../../../components/subfunccomponents/aboutpsRoleList/AddNewRole.vue";
 import RoleList from "../../../components/subfunccomponents/aboutpsRoleList/RoleList.vue";
 import BackToLoginView from "../../../components/BackToLoginView.vue";
+import LoginTest from "../../../components/LoginTest.vue";
 export default defineComponent({
   name: "RoleManagement",
   components: {
     BackToLoginView,
     AddNewRole,
     RoleList,
+    LoginTest,
   },
   setup() {
     return {};

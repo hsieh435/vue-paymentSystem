@@ -1,5 +1,6 @@
 <!-- 個別功能頁面 -->
 <template>
+  <LoginTest></LoginTest>
   <h1 class="subfunctiontitle">公司別維護</h1>
   <Xyz
     @eventIsANumber="gotANumber"
@@ -39,11 +40,13 @@ import { defineComponent, ref, reactive, inject } from "vue";
 import "@/views/subfunction/subfunction.css";
 import Xyz from "../../../components/subfunccomponents/aboutCompanyMaintenance/Xyz.vue";
 import BackToLoginView from "../../../components/BackToLoginView.vue";
+import LoginTest from "../../../components/LoginTest.vue";
 export default defineComponent({
   name: "CompanyMaintain",
   components: {
     Xyz,
     BackToLoginView,
+    LoginTest,
   },
   setup() {
     const loading: any = inject("valueofLoading");

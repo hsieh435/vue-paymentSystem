@@ -3,16 +3,18 @@
   畫面：https://codepen.io/davinci/pen/YxwwWd
   -->
 <template>
-  <body>
-    <div class="login">
-      <div class="lineup">
-        <div class="ball"></div>
-        <div class="signinword">付款系統</div>
-      </div>
-      <input type="text" v-model="username" placeholder="USERNAME" />
-      <button @click="login()">Login</button>
+  <div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+  <div class="form">
+    <div class="lineup">
+      <div class="signinword">付款系統</div>
     </div>
-  </body>
+    <input type="text" v-model="username" placeholder="USERNAME" />
+    <button @click="login()">Log In</button>
+    <button @click="loginSSO()">登入 SSO 系統</button>
+  </div>
 </template>
 
 <script lang="ts">
@@ -68,9 +70,14 @@ export default defineComponent({
       // 2.".finally(() => {})" 為 TYPE SCRIPT 之語法，做出結尾之用，以免送出後仍持續執行 LoadingForever 畫面
     };
 
+    function loginSSO() {
+      alert("123");
+    }
+
     return {
       username,
       login,
+      loginSSO,
     };
   },
 });

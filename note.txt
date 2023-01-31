@@ -87,10 +87,13 @@ colorchooseauto.html
 colormix.html 更改顏色產生方式
 
 猜拳
-畫面調整
+畫面調整、結果整合
 
 必輸的猜拳
-統計次數
+統計次數、結果整合
 
 fakedata
 日期、ID
+
+runes.html
+外框

@@ -25,31 +25,33 @@ export function roleApi(currentPage: Ref<number>, rowsPerPage?: Ref<number>) {
   });
 
   const loadRoles = async () => {
-    rolesAreLoading.value = null;
-    try {
-      const result = await axios.post(
-        "http://localhost:8085/paymentSystem/api/psRole/findAllPSRole",
-        { notesId: userId },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-            // Bearer 跟 token 中間要有一個空格
-          },
+    if (userId != null) {
+      rolesAreLoading.value = null;
+      try {
+        const result = await axios.post(
+          "http://localhost:8085/paymentSystem/api/psRole/findAllPSRole",
+          { notesId: userId },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+              // Bearer 跟 token 中間要有一個空格
+            },
+          }
+        );
+        const rolesArray = result.data.data;
+        // console.log("rolesArray:", rolesArray);
+        const rolewithid = [];
+        for (let i = 0; i < rolesArray.length; i++) {
+          const eachrole = rolesArray[i];
+          eachrole["id"] = i + 1;
+          rolewithid.push(eachrole);
+          roles.value = rolewithid;
         }
-      );
-      const rolesArray = result.data.data;
-      // console.log("rolesArray:", rolesArray);
-      const rolewithid = [];
-      for (let i = 0; i < rolesArray.length; i++) {
-        const eachrole = rolesArray[i];
-        eachrole["id"] = i + 1;
-        rolewithid.push(eachrole);
-        roles.value = rolewithid;
+      } catch (error) {
+        alert("網路連線發生錯誤");
+      } finally {
+        rolesAreLoading.value = true;
       }
-    } catch (error) {
-      alert("網路連線發生錯誤");
-    } finally {
-      rolesAreLoading.value = true;
     }
   };
 
