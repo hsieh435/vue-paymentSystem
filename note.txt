@@ -84,7 +84,6 @@ https://codepen.io/rauldronca/pen/LgXPgJ
 
 colorchooseauto.html
 參考colorconverter.html的形式
-colormix.html 更改顏色產生方式
 
 猜拳
 畫面調整、結果整合
@@ -95,5 +94,5 @@ colormix.html 更改顏色產生方式
 fakedata
 日期、ID
 
-runes.html
-外框
+Math.floor(Date.now() / 1000);
+(Date.now() % 1000);
