@@ -3,8 +3,8 @@
   畫面：https://codepen.io/fghty/pen/PojKNEG
   -->
 <template>
-  <LoginFromOther></LoginFromOther>
-  <div class="background">
+  <GoToSSO></GoToSSO>
+  <!-- <div class="background">
     <div class="shape"></div>
     <div class="shape"></div>
   </div>
@@ -14,18 +14,18 @@
     </div>
     <input type="text" v-model="username" placeholder="USERNAME" />
     <button @click="login()">登入付款系統</button>
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, inject } from "vue";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
-import LoginFromOther from "../components/loginPage/LoginFromOther.vue";
+import GoToSSO from "../components/loginPage/GoToSSO.vue";
 export default defineComponent({
   name: "loginpPage",
   components: {
-    LoginFromOther,
+    GoToSSO,
   },
 
   setup() {
@@ -71,14 +71,9 @@ export default defineComponent({
       // 2.".finally(() => {})" 為 TYPE SCRIPT 之語法，做出結尾之用，以免送出後仍持續執行 LoadingForever 畫面
     };
 
-    function loginSSO() {
-      alert("123");
-    }
-
     return {
       username,
       login,
-      loginSSO,
     };
   },
 });

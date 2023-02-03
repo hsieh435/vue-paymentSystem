@@ -1,12 +1,12 @@
 <!-- 登入後的畫面 -->
 <template>
+  <LoginTest></LoginTest>
   <h3 class="welcome">
-    {{ msg.userName }} 你好 <br />
+    {{ msg.userName }} 您好，歡迎使用付款系統<br />
     USERID：{{ msg.userID }} <br />
     部門：{{ msg.userOrganization }} <br />
     職位：{{ msg.userTitle }}
   </h3>
-  <GotSSOInfo v-if="gotssoinfo == true"></GotSSOInfo>
   <button class="logout" @click="logout()">登出</button>
 </template>
 
@@ -14,19 +14,23 @@
 import { defineComponent, ref, reactive, provide, inject } from "vue";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
-import GotSSOInfo from "../components/loginView/GotSSOInfo.vue";
+import LoginTest from "../components/LoginTest.vue";
 export default defineComponent({
   name: "LoginView",
   components: {
-    GotSSOInfo,
+    LoginTest,
   },
 
   setup() {
     const userId = localStorage.getItem("userId");
     const userJWT = localStorage.getItem("userJWT");
     const router = useRouter();
-    // console.log("userJWT:", userJWT);
-    // console.log("userId:", userId);
+
+    //
+    // 應用系統驗證 SSO 發給的 TOKEN
+    // let url = new URL(window.location.href);
+    // const token = url.searchParams.get("token");
+    // const systemAccount = url.searchParams.get("systemAccount");
 
     const msg = reactive({
       userName: "",
@@ -52,17 +56,15 @@ export default defineComponent({
           }
         )
         // post 放三個參數，url、data、config(header)
-
         .then((response) => {
-          // console.log("response:",response)
+          // console.log("response:", response);
           msg.userName = response.data.data.userInfo.userName;
           msg.userID = response.data.data.userInfo.notesId;
           msg.userOrganization = response.data.data.userInfo.userOrganization;
           msg.userTitle = response.data.data.userInfo.userTitle;
         })
-
         .catch((error) => {
-          console.log("連線發生錯誤");
+          console.log("連線發生錯誤:");
         })
         .finally(() => {
           vol.value = true;
@@ -70,33 +72,15 @@ export default defineComponent({
     }
 
     //
-    // 應用系統驗證 SSO 發給的 TOKEN
-    let url = new URL(window.location.href);
-    const token = url.searchParams.get("token");
-    const systemAccount = url.searchParams.get("systemAccount");
-
-    // GotSSOInfo 的 Components value 值，控制出現與否
-    const gotssoinfo = ref();
-    gotssoinfo.value = null;
-
-    // Token驗證，開啟 GotSSOInfo 的 Components
-    if (token !== null || systemAccount !== null) {
-      gotssoinfo.value = true;
-    }
-
-    //
     // 登出鍵
     function logout() {
       localStorage.removeItem("userId");
       localStorage.removeItem("userJWT");
-      router.push("./");
+      router.push("./LogOut");
     }
-
-    provide("gotssoinfo", gotssoinfo);
 
     return {
       msg,
-      gotssoinfo,
       logout,
     };
   },

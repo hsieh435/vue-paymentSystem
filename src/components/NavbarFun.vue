@@ -1,4 +1,5 @@
 <template>
+  <LoginTest></LoginTest>
   <nav class="nav">
     <ul class="nav__menu">
       <li
@@ -35,18 +36,17 @@
     1. v-if 條件式之意思，為符合條件式就顯現該 html 標籤，v-if="item.functionModels.length > 0"
     2. 使用 v-for 需先創建一組 reactive，再由個別物件下去渲染，同時須下達 key 值
   -->
-  <!-- <LoginTest></LoginTest> -->
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
-// import LoginTest from "../components/LoginTest.vue";
+import LoginTest from "../components/LoginTest.vue";
 export default defineComponent({
   name: "NavbarFun",
   components: {
-    // LoginTest,
+    LoginTest,
   },
 
   setup() {
@@ -56,32 +56,28 @@ export default defineComponent({
 
     const functionGroups = reactive({ value: null });
 
-    if (userId == null || userJWT == null) {
-      router.push("./");
-    } else {
-      axios
-        .post(
-          "http://localhost:8085/paymentSystem/api/functionGroup/findAllFunctionGroupWhereFunctionIdInPermission",
-          { token: userJWT },
-          {
-            headers: {
-              Authorization: "Bearer " + userJWT,
-              // Bearer 跟 userJWT 中間要有一個空格
-            },
-          }
-        )
-        // post 放三個參數，url、data、config(header)
+    axios
+      .post(
+        "http://localhost:8085/paymentSystem/api/functionGroup/findAllFunctionGroupWhereFunctionIdInPermission",
+        { token: userJWT },
+        {
+          headers: {
+            Authorization: "Bearer " + userJWT,
+            // Bearer 跟 userJWT 中間要有一個空格
+          },
+        }
+      )
+      // post 放三個參數，url、data、config(header)
 
-        .then((response) => {
-          functionGroups.value = response.data.data;
+      .then((response) => {
+        functionGroups.value = response.data.data;
 
-          // console.log("D1:", functionGroups);
-        })
+        // console.log("D1:", functionGroups);
+      })
 
-        .catch((error) => {
-          console.log("發生錯誤");
-        });
-    }
+      .catch((error) => {
+        console.log("發生錯誤");
+      });
 
     // class function {
     //     public functionGroups="",
@@ -96,7 +92,7 @@ export default defineComponent({
     function logout() {
       localStorage.removeItem("userId");
       localStorage.removeItem("userJWT");
-      router.push("./");
+      router.push("./LogOut");
     }
 
     function connectToSSO() {
@@ -170,7 +166,7 @@ nav ul {
   line-height: 45px;
   text-transform: uppercase; /* 字母皆以大寫呈現*/
   font-weight: 700;
-  text-align:left;
+  text-align: left;
   // outline: 1px black solid;
 }
 

@@ -1,4 +1,3 @@
-<template></template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -11,11 +10,9 @@ export default defineComponent({
     const userJWT = localStorage.getItem("userJWT");
     const router = useRouter();
 
-    // console.log("userId:", userId, typeof userId);
-
     test();
     function test() {
-      if (userId == null || userJWT == null) {
+      if (userId == null && userJWT == null) {
         router.push("./");
       }
 

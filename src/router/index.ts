@@ -440,6 +440,18 @@ const routes: Array<RouteRecordRaw> = [
     ],
   },
   {
+    path: "/GotSSOInfo",
+    name: "GotSSOInfo",
+    component: LoginLayout,
+    children: [
+      {
+        path: "",
+        name: "",
+        component: () => import("../views/GotSSOInfo.vue"),
+      },
+    ],
+  },
+  {
     path: "/LoginView",
     name: "LoginView",
     component: NormalLayout,
@@ -448,6 +460,18 @@ const routes: Array<RouteRecordRaw> = [
         path: "",
         name: "",
         component: () => import("../views/LoginView.vue"),
+      },
+    ],
+  },
+  {
+    path: "/LogOut",
+    name: "LogOut",
+    component: NormalLayout,
+    children: [
+      {
+        path: "",
+        name: "",
+        component: () => import("../views/LogOut.vue"),
       },
     ],
   },
