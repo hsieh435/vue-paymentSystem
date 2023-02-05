@@ -1,0 +1,93 @@
+.wholeareaback {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.25);
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  padding-bottom: 100px;
+  z-index: 10000;
+}
+
+.wholearea {
+  width: 90%;
+  height: 80vh;
+  margin: 10vh 5% 10vh 5%;
+  padding: 20px 2.5% 0px 2.5%;
+  background-color: rgba(255, 255, 255, 0.8);
+  overflow: auto;
+  resize: vertical;
+  position: relative;
+  outline: 1px black solid;
+}
+
+.closeit {
+  height: 40px;
+  width: 40px;
+  font-size: 36px;
+  line-height: 26px;
+  border: 0px;
+  background-color: rgb(255, 255, 255, 0);
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  transition: 0.3s;
+}
+
+.closeit:hover {
+  height: 60px;
+  width: 60px;
+  font-size: 60px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+.authmang {
+  text-align: left;
+  /* outline: 1px black solid; */
+}
+
+.authmang h2 {
+  text-align: center;
+}
+
+.funcgroupname {
+  margin: 20px 10px 20px 30px;
+  border-radius: 10px;
+  background-color: rgb(167, 255, 255);
+  padding: 10px 10px 10px 20px;
+  outline: 1px solid rgb(120, 120, 120);
+}
+
+.funcgroup {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  /* outline: 1px solid #000; */
+}
+
+.checkBoxSquare {
+  margin: 5px 5px 0px 5px;
+}
+
+.checked {
+  display: none;
+}
+
+.updateauthority {
+  height: 40px;
+  width: 150px;
+  border-radius: 20px;
+  margin: 20px 10px 40px 10px;
+  border: 1px black solid;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  transition: 0.3s;
+}
+
+.updateauthority:hover {
+  background-color: rgb(167, 255, 255);
+  box-shadow: 10px 10px 10px 0px #000000;
+  border: 1px solid rgb(46, 47, 51);
+}
