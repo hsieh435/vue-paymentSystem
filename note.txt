@@ -94,5 +94,4 @@ colorchooseauto.html
 fakedata
 日期、ID
 
-Math.floor(Date.now() / 1000);
-(Date.now() % 1000);
+https://medium.com/%E6%89%8B%E5%AF%AB%E7%AD%86%E8%A8%98/clean-code-index-51e209cc47db

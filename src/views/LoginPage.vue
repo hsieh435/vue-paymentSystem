@@ -29,10 +29,7 @@ export default defineComponent({
   },
 
   setup() {
-    const userId: any = localStorage.getItem("userId");
-    const userJWT = localStorage.getItem("userJWT");
     const router = useRouter();
-
     const username = ref();
 
     const vol: any = inject("valueofLoading");

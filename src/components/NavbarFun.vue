@@ -87,9 +87,8 @@ export default defineComponent({
     }
 
     function logout() {
-      localStorage.removeItem("userId");
-      localStorage.removeItem("userJWT");
-      router.push("./LogOut");
+      localStorage.clear();
+      location.href = `http://localhost:8081/LogoutPage?systemId=paymentSystem&callBackPath=http://localhost:8080/LogOut`;
     }
 
     return {

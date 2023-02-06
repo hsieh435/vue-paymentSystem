@@ -2,7 +2,7 @@
 <template>
   <LoginTest></LoginTest>
   <h3 class="welcome">
-    {{ msg.userName }} 您好，歡迎使用付款系統<br />
+    {{ msg.userName }}您好，歡迎使用付款系統<br />
     USERID：{{ msg.userID }} <br />
     部門：{{ msg.userOrganization }} <br />
     職位：{{ msg.userTitle }}
@@ -13,7 +13,6 @@
 <script lang="ts">
 import { defineComponent, reactive, inject } from "vue";
 import axios from "axios";
-import { useRoute, useRouter } from "vue-router";
 import LoginTest from "../components/LoginTest.vue";
 export default defineComponent({
   name: "LoginView",
@@ -24,13 +23,6 @@ export default defineComponent({
   setup() {
     const userId = localStorage.getItem("userId");
     const userJWT = localStorage.getItem("userJWT");
-    const router = useRouter();
-
-    //
-    // 應用系統驗證 SSO 發給的 TOKEN
-    // let url = new URL(window.location.href);
-    // const token = url.searchParams.get("token");
-    // const systemAccount = url.searchParams.get("systemAccount");
 
     const msg = reactive({
       userName: "",
@@ -74,9 +66,7 @@ export default defineComponent({
     //
     // 登出鍵
     function logout() {
-      localStorage.removeItem("userId");
-      localStorage.removeItem("userJWT");
-      // router.push("./LogOut");
+      localStorage.clear();
       location.href = `http://localhost:8081/LogoutPage?systemId=paymentSystem&callBackPath=http://localhost:8080/LogOut`;
     }
 
