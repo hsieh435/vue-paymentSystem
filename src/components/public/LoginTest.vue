@@ -8,14 +8,16 @@ export default defineComponent({
   setup() {
     const userId = localStorage.getItem("userId");
     const userJWT = localStorage.getItem("userJWT");
+    const now = Number(Math.floor(Date.now() / 1000));
     const expiredmoment = Number(localStorage.getItem("expiredmoment"));
+    const keeplogin = Number(localStorage.getItem("keeplogin"));
     const router = useRouter();
 
     test();
     function test() {
       if (userId == null && userJWT == null) {
         router.push("./");
-      } else if (Number(Math.floor(Date.now() / 1000)) > expiredmoment) {
+      } else if (now > expiredmoment) {
         localStorage.clear();
         router.push("./");
       }

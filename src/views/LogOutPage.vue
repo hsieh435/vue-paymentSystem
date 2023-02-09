@@ -1,8 +1,8 @@
 <template>
   <div class="wholeareaback">
     <div class="wholearea">
-      <h2>已登出</h2>
-      <h2>Log out already</h2>
+      <h2>已登出付款系統</h2>
+      <h2>Log out from payment system</h2>
       <button class="button" @click="toLoginPage">前往登入</button>
     </div>
   </div>

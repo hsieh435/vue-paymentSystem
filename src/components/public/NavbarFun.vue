@@ -44,15 +44,15 @@
 import { defineComponent, ref, reactive, provide } from "vue";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
-import LoginTest from "./LoginTest.vue";
 import DisConnected from "./DisConnected.vue";
 import LogoutAlready from "../loginView/LogoutAlready.vue";
+import LoginTest from "../public/LoginTest.vue";
 export default defineComponent({
   name: "NavbarFun",
   components: {
-    LoginTest,
     DisConnected,
     LogoutAlready,
+    LoginTest,
   },
 
   setup() {
@@ -163,15 +163,15 @@ nav ul {
   background: rgb(46, 189, 89);
   color: rgb(240, 240, 240);
   // outline: 1px black solid;
-}
 
-/* 第一層按鍵(超連結部分) */
-.nav a {
-  display: block;
-  padding: 0px 20px;
-  line-height: inherit;
-  cursor: pointer;
-  /* outline: 1px black solid; */
+  /* 第一層按鍵(超連結部分) */
+  a {
+    display: block;
+    padding: 0px 20px;
+    line-height: inherit;
+    cursor: pointer;
+    /* outline: 1px black solid; */
+  }
 }
 
 .nav__menu {
@@ -189,12 +189,6 @@ nav ul {
   transition: 0.2s;
   // outline: 1px black solid;
 }
-
-/* 第一層按鍵游標觸碰時 */
-/* .nav__menu-item:hover { */
-/* border-top: 3px solid rgb(128, 0, 182); */
-/* background-color: #9b59b6; */
-/* } */
 
 /* 第二層選單整體 */
 .nav__menu-item:hover .nav__submenu {

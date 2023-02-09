@@ -90,7 +90,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .welcome {
   line-height: 3rem;
   text-align: left;
@@ -108,12 +108,11 @@ export default defineComponent({
   font-size: 24px;
   color: rgb(0, 0, 0);
   transition: 0.3s;
-}
-
-.logout:hover {
-  background-color: rgb(46, 189, 89);
-  box-shadow: 10px 10px 10px 0px #000000;
-  border: 1px solid rgb(46, 47, 51);
-  color: rgb(255, 255, 255);
+  &:hover {
+    background-color: rgb(46, 189, 89);
+    box-shadow: 10px 10px 10px 0px #000000;
+    border: 1px solid rgb(46, 47, 51);
+    color: rgb(255, 255, 255);
+  }
 }
 </style>

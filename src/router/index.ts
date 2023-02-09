@@ -27,6 +27,19 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  // {
+  //   path: "/LoginView",
+  //   name: "LoginView",
+  //   component: NormalLayout,
+  //   children: [
+  //     {
+  //       path: "",
+  //       name: "",
+  //       component: () => import("../views/LoginView.vue"),
+  //     },
+  //   ],
+  // },
+
   {
     path: "/",
     name: "loginpage",
@@ -35,6 +48,20 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "",
         component: () => import("../views/LoginPage.vue"),
+      },
+
+      // 登入主頁面
+
+      {
+        path: "/LoginView",
+        name: "LoginView",
+        component: NormalLayout,
+        children: [
+          {
+            path: "",
+            component: () => import("../views/LoginView.vue"),
+          },
+        ],
       },
 
       // 分隔線，以下為帳號與權限管理
@@ -448,18 +475,6 @@ const routes: Array<RouteRecordRaw> = [
         path: "",
         name: "",
         component: () => import("../views/GotSSOInfo.vue"),
-      },
-    ],
-  },
-  {
-    path: "/LoginView",
-    name: "LoginView",
-    component: NormalLayout,
-    children: [
-      {
-        path: "",
-        name: "",
-        component: () => import("../views/LoginView.vue"),
       },
     ],
   },

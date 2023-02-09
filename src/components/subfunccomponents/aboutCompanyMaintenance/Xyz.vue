@@ -15,7 +15,8 @@ export default defineComponent({
     }
 
     function sentAString() {
-      const ab = "天地玄黃宇宙洪荒日月盈昃辰宿列張寒來暑往秋收冬藏閏餘成歲律呂調陽雲騰致雨露結為霜金生麗水玉出昆岡劍號巨闕";
+      const ab =
+        "天地玄黃宇宙洪荒日月盈昃辰宿列張寒來暑往秋收冬藏閏餘成歲律呂調陽雲騰致雨露結為霜金生麗水玉出昆岡劍號巨闕";
       const a: any = ab.split("");
       const num = Math.ceil(Math.random() * (a.length - 1));
       context.emit("eventIsAString", a[num], typeof a[num]);
@@ -116,7 +117,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .button {
   width: auto;
   height: 40px;
@@ -127,10 +128,9 @@ export default defineComponent({
   margin: 10px 5px 10px 5px;
   padding: 0px 30px 0px 30px;
   transition: 0.2s;
-}
-
-.button:hover {
-  background-color: rgb(255, 255, 255);
-  outline: 3px solid rgba(79, 192, 210, 0.7);
+  &:hover {
+    background-color: rgb(255, 255, 255);
+    outline: 3px solid rgba(79, 192, 210, 0.7);
+  }
 }
 </style>

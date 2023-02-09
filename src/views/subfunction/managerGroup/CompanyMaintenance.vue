@@ -30,7 +30,6 @@
       </tr>
     </tbody>
   </table>
-
   <BackToLoginView></BackToLoginView>
 </template>
 
@@ -89,7 +88,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .table-fill {
   width: 80%;
   margin: 0px 10% 0px 10%;

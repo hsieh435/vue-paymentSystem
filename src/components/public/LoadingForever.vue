@@ -27,7 +27,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .loading {
   position: absolute;
   left: 0px;

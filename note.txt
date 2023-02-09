@@ -82,6 +82,9 @@ https://codepen.io/rauldronca/pen/LgXPgJ
 
 待完善
 
+改寫成 SCSS 格式
+https://ithelp.ithome.com.tw/articles/10190746
+
 colorchooseauto.html
 參考colorconverter.html的形式
 
@@ -93,5 +96,10 @@ colorchooseauto.html
 
 fakedata
 日期、ID
+
+periodictables.html
+
+baseball.html
+OPS+
 
 https://medium.com/%E6%89%8B%E5%AF%AB%E7%AD%86%E8%A8%98/clean-code-index-51e209cc47db

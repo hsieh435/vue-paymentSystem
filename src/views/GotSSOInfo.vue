@@ -46,6 +46,7 @@ export default defineComponent({
         ssoinfo.systemAccount = response.data.data.systemAccount;
         ssoinfo.userOrganization = response.data.data.userOrganization;
         ssoinfo.userTitle = response.data.data.userTitle;
+        localStorage.setItem("keeplogin", String(keeplogin));
         localStorage.setItem("userId", response.data.data.systemAccount);
         const expiredmoment: any = now + keeplogin;
         localStorage.setItem("expiredmoment", expiredmoment);
@@ -81,7 +82,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 h2 {
   color: rgb(0, 0, 0);
 }
@@ -101,17 +102,16 @@ h3 {
   top: 0px;
   padding-bottom: 100px;
   z-index: 10000000;
-}
-
-.wholearea {
-  width: 60%;
-  height: auto;
-  margin: 20vh 20% auto 20%;
-  padding: 50px 2.5% 10px 2.5%;
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.95);
-  overflow: auto;
-  outline: 1px solid black;
+  .wholearea {
+    width: 60%;
+    height: auto;
+    margin: 20vh 20% auto 20%;
+    padding: 50px 2.5% 10px 2.5%;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    overflow: auto;
+    outline: 1px solid black;
+  }
 }
 
 .updateauthority {
@@ -124,11 +124,10 @@ h3 {
   font-weight: 700;
   color: rgb(0, 0, 0);
   transition: 0.3s;
-}
-
-.updateauthority:hover {
-  background-color: rgb(46, 189, 89);
-  box-shadow: 10px 10px 10px 0px #000000;
-  border: 1px solid rgb(46, 47, 51);
+  &:hover {
+    background-color: rgb(46, 189, 89);
+    box-shadow: 10px 10px 10px 0px #000000;
+    border: 1px solid rgb(46, 47, 51);
+  }
 }
 </style>
