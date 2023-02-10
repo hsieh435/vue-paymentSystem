@@ -21,7 +21,7 @@ export function useTodosApi(
 
   // const reload: any = inject("reload");
   const keyword: any = inject("keyword");
-  console.log("keyword from API:", keyword);
+  // console.log("keyword from API:", keyword);
 
   const users: Ref<User[]> = ref([]);
 
@@ -52,7 +52,7 @@ export function useTodosApi(
 
         const usersArray = result.data.data;
         // console.log("usersArray:", usersArray);
-        const userwithid = [];
+        const userwithid: any = [];
 
         for (let i = 0; i < usersArray.length; i++) {
           const eachuser = usersArray[i];
@@ -66,6 +66,7 @@ export function useTodosApi(
           users.value = userwithid;
           // console.log("users:", users);
         }
+        // console.table(userwithid);
       } catch (error) {
         alert("資料傳輸發生錯誤");
       } finally {

@@ -82,9 +82,6 @@ https://codepen.io/rauldronca/pen/LgXPgJ
 
 待完善
 
-改寫成 SCSS 格式
-https://ithelp.ithome.com.tw/articles/10190746
-
 colorchooseauto.html
 參考colorconverter.html的形式
 

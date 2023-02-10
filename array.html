@@ -29,31 +29,14 @@
       let arr = ["Jack", "John", "May", "Su", "Ada"];
 
       let arr1 = [
-        {
-          name: "Casper",
-          like: "鍋燒意麵",
-          age: 18,
-          checked: true,
-        },
-        {
-          name: "Wang",
-          like: "炒麵",
-          age: 24,
-          checked: true,
-        },
-        {
-          name: "Bobo",
-          like: "蘿蔔泥",
-          age: 1,
-          checked: false,
-        },
-        {
-          name: "滷蛋",
-          like: "蘿蔔泥",
-          age: 3,
-          checked: false,
-        },
+        { name: "Casper", like: "鍋燒意麵", age: 18, checked: true },
+        { name: "Wang", like: "炒麵", age: 24, checked: true },
+        { name: "Bobo", like: "蘿蔔泥", age: 1, checked: false },
+        { name: "滷蛋", like: "蘿蔔泥", age: 3, checked: false },
       ];
+
+      // console.table(arr1);
+
       let arr2 = arr1.filter(function (value) {
         return value.checked == true;
       });
@@ -78,7 +61,8 @@
         return result;
       }
 
-      console.log(createArray(5, "abcdef"));
+      console.log("createArray:", createArray(10, "abcdef"));
+      console.table(createArray);
 
       function swap(tuple) {
         return [tuple[1], tuple[0], tuple[2]];

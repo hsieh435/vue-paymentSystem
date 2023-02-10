@@ -16,6 +16,9 @@ export default defineComponent({
     BackToLoginView,
   },
   setup() {
+    // console.time("Spent");
+    // console.timeLog("Spent");
+    // console.timeEnd("Spent");
     return {};
   },
 });
