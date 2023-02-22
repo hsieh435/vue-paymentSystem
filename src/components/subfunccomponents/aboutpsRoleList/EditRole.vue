@@ -34,13 +34,13 @@ export default defineComponent({
     // const roleId = toRef(props, "roleId");
     // const roleName = toRef(props, "roleName");
 
-    const newRole = ref();
+    const newRole = ref("");
 
     function sent() {
       // console.log("newRole.value:", newRole.value);
       // console.log("props.roleId:", props.roleId);
       // console.log("props.roleName:", props.roleName);
-      if (newRole.value == null) {
+      if (newRole.value === "") {
         alert("欄位不可留白");
       } else if (newRole.value === props.roleName) {
         alert("角色名稱相同，無修改");

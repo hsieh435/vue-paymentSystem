@@ -13,9 +13,12 @@ export default defineComponent({
     const keeplogin = Number(localStorage.getItem("keeplogin"));
     const router = useRouter();
 
+    // console.log("userId:", userId);
+    // console.log("userJWT:", userJWT);
+
     test();
     function test() {
-      if (userId == null && userJWT == null) {
+      if (userId === null && userJWT === null) {
         router.push("./");
       } else if (now > expiredmoment) {
         localStorage.clear();

@@ -49,7 +49,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, toRef, toRefs, inject, reactive } from "vue";
+import { defineComponent, toRef, toRefs, inject, reactive } from "vue";
 import axios from "axios";
 export default defineComponent({
   name: "AuthorityManagement",

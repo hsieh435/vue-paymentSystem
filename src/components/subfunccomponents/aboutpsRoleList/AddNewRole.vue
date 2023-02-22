@@ -36,9 +36,9 @@ export default defineComponent({
     function addNewRole() {
       // console.log("newRole.ID:",newRole.ID);
       // console.log("newRole.name:",newRole.name);
-      if (newRole.ID.length == 0 || newRole.name.length == 0) {
+      if (newRole.ID === "" || newRole.name === "") {
         alert("欄位不可留白");
-      } else if (newRole.ID.length > 0 && newRole.name.length > 0) {
+      } else {
         axios
           .post(
             "http://localhost:8085/paymentSystem/api/psRole/findAllPSRole",

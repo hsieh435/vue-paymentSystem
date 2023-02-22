@@ -75,7 +75,9 @@
     <div class="message">
       THE RESOURCE REQUESTED COULD NOT BE FOUND ON THIS SERVER !
     </div>
-    <div class="message"><a @click="backToLastPage()">BACK TO LAST PAGE</a></div>
+    <div class="message">
+      <a @click="backToLastPage()">BACK TO LAST PAGE</a>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -133,11 +135,11 @@ path#XMLID_2_ {
     cursor: pointer;
   }
 }
-.message:after {
-  content: "]";
-}
 .message:before {
   content: "[";
+}
+.message:after {
+  content: "]";
 }
 
 .message:after,

@@ -50,12 +50,14 @@ h3 {
   right: 15px;
   text-align: center;
   font-size: 1.6em;
+  line-height: 30px;
   cursor: pointer;
   transition: 0.3s;
   &:hover {
     height: 40px;
     width: 40px;
     font-size: 35px;
+    line-height: 40px;
     position: absolute;
     top: 15px;
     right: 10px;
