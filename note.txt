@@ -100,3 +100,5 @@ baseball.html
 OPS+
 
 https://medium.com/%E6%89%8B%E5%AF%AB%E7%AD%86%E8%A8%98/clean-code-index-51e209cc47db
+
+https://www.delftstack.com/zh-tw/howto/javascript/simple-click-counter-using-javascript/#%E5%96%AE%E6%93%8A-click-me-%E6%8C%89%E9%88%95%E6%88%91%E5%80%91%E9%9C%80%E8%A6%81%E5%A2%9E%E5%8A%A0%E8%A8%88%E6%95%B8%E5%99%A8%E5%80%BC%E7%82%BA%E6%AD%A4%E6%88%91%E5%80%91%E4%BD%BF%E7%94%A8-onclick-%E4%BA%8B%E4%BB%B6%E5%81%B5%E8%81%BD%E5%99%A8%E4%B8%A6%E9%80%9A%E9%81%8E%E9%BB%9E%E9%81%B8-click-me-%E6%8C%89%E9%88%95%E8%A7%B8%E7%99%BC-incrementclick-%E5%87%BD%E5%BC%8F

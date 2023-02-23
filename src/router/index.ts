@@ -44,6 +44,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "loginpage",
     component: LoginLayout,
+    meta: { title: "Payment System" },
     children: [
       {
         path: "",

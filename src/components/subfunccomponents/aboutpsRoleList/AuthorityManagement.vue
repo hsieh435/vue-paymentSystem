@@ -198,7 +198,7 @@ export default defineComponent({
         )
 
         .then((response) => {
-          if (response.data.returnCode == 0) {
+          if (response.data.returnCode === "0") {
             alert(response.data.message);
             adjustList.value = true;
             reload();
