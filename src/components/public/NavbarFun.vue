@@ -8,8 +8,8 @@
         :key="index"
       >
         <a v-if="item.functionModels.length > 0"
-          >{{ item.functionGroupName }} ▼</a
-        >
+          >{{ item.functionGroupName }} ▼
+        </a>
         <ul class="nav__submenu">
           <li
             class="nav__submenu-item"
@@ -152,7 +152,7 @@ nav ul {
   padding-left: 0;
   margin-top: 0;
   margin-bottom: 0;
-  // outline: 1px black solid;
+  /* outline: 1px black solid; */
 }
 
 /* 橫幅整體 */
@@ -162,7 +162,7 @@ nav ul {
   margin: 0 auto;
   background: rgb(46, 189, 89);
   color: rgb(240, 240, 240);
-  // outline: 1px black solid;
+  /* outline: 1px black solid; */
 
   /* 第一層按鍵(超連結部分) */
   a {
@@ -170,7 +170,6 @@ nav ul {
     padding: 0px 20px;
     line-height: inherit;
     cursor: pointer;
-    /* outline: 1px black solid; */
   }
 }
 
@@ -179,7 +178,7 @@ nav ul {
   text-transform: uppercase; /* 字母皆以大寫呈現*/
   font-weight: 700;
   text-align: left;
-  // outline: 1px black solid;
+  /* outline: 1px black solid; */
 }
 
 /* 第一層按鍵(按鍵部分) */

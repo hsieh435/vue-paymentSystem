@@ -24,13 +24,17 @@
       </div>
     </div>
   </div>
+  <NotChange v-if="notchange == false"></NotChange>
 </template>
 <script lang="ts">
-import { defineComponent, ref, reactive, inject } from "vue";
+import { defineComponent, ref, reactive, provide, inject } from "vue";
 import axios from "axios";
+import NotChange from "./NotChange.vue";
 export default defineComponent({
   name: "AdjustFunction",
-  components: {},
+  components: {
+    NotChange,
+  },
   props: ["userName", "userNotesId", "userRoleName", "userRoleId"],
 
   setup(props) {
@@ -46,6 +50,11 @@ export default defineComponent({
     const selectedAnswer = ref(props.userRoleId);
     // console.log("props.userRoleId:", props.userRoleId);
     // console.log("selectedAnswer:", selectedAnswer.value);
+    console.log("props:", props);
+
+    const notchange: any = ref();
+    notchange.value = true;
+    provide("notchange", notchange);
 
     axios
       .post(
@@ -69,7 +78,8 @@ export default defineComponent({
     function sent() {
       // console.log(selectedAnswer.value);
       if (selectedAnswer.value === props.userRoleId) {
-        alert("選擇角色相同，無修改");
+        // alert("選擇角色相同，無修改");
+        notchange.value = false;
       } else {
         axios
           .post(
@@ -106,6 +116,7 @@ export default defineComponent({
       selectedAnswer,
       sent,
       cancelEdit,
+      notchange,
     };
   },
 });
