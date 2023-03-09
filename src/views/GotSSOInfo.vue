@@ -37,7 +37,7 @@ export default defineComponent({
     });
 
     axios
-      .post("http://localhost:9000/sso/public/checkToken", {
+      .post("http://localhost:10000/sso/public/checkToken", {
         token: token,
         systemId: "paymentSystem",
       })

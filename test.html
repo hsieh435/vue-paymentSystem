@@ -7,7 +7,33 @@
     <title>TEST</title>
   </head>
   <body>
+    <p class="rect"></p>
+    <p>16446274</p>
+    <p>v841232</p>
+    <p>spdio</p>
+    <p>FIT2300101-1-M1</p>
     <script>
+      const rect = document.querySelector(".rect");
+      const eng = [
+        "JV",
+        "JX",
+        "JU",
+        "JH",
+        "KD",
+        "KM",
+        "KN",
+        "KP",
+        "KK",
+        "KC",
+        "KJ",
+        "JH",
+        "JK",
+        "KG",
+      ];
+      const num1 = Math.floor(Math.random() * eng.length);
+      const num2 = ("00000000" + Math.random() * 10000000).slice(length - 8);
+      rect.innerHTML = eng[num1] + num2;
+
       const errorMsg = "the # is not even";
       for (let number = 2; number <= 100; number += 1) {
         console.log("the # is " + number);

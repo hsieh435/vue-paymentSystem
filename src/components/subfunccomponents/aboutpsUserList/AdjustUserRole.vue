@@ -50,7 +50,6 @@ export default defineComponent({
     const selectedAnswer = ref(props.userRoleId);
     // console.log("props.userRoleId:", props.userRoleId);
     // console.log("selectedAnswer:", selectedAnswer.value);
-    console.log("props:", props);
 
     const notchange: any = ref();
     notchange.value = true;
