@@ -1,50 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TEST</title>
-  </head>
-  <body>
-    <p class="rect"></p>
-    <p>16446274</p>
-    <p>v841232</p>
-    <p>spdio</p>
-    <p>FIT2300101-1-M1</p>
-    <script>
-      const rect = document.querySelector(".rect");
-      const eng = [
-        "JV",
-        "JX",
-        "JU",
-        "JH",
-        "KD",
-        "KM",
-        "KN",
-        "KP",
-        "KK",
-        "KC",
-        "KJ",
-        "JH",
-        "JK",
-        "KG",
-      ];
-      const num1 = Math.floor(Math.random() * eng.length);
-      const num2 = ("00000000" + Math.random() * 10000000).slice(length - 8);
-      rect.innerHTML = eng[num1] + num2;
 
-      const errorMsg = "the # is not even";
-      for (let number = 2; number <= 100; number += 1) {
-        console.log("the # is " + number);
-        console.assert(number % 2 === 0, {
-          number: number,
-          errorMsg: errorMsg,
-        });
-        // or, using ES2015 object property shorthand:
-        // console.assert(number % 2 === 0, {number, errorMsg});
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TEST</title>
+</head>
+
+<body>
+  <p class="rect1"></p>
+  <p>16446274</p>
+  <p class="rect2"></p>
+  <p>3、4月</p>
+  <p class="rect3"></p>
+  <p>v841232</p>
+  <p>spdio</p>
+  <script>
+    const rect1 = document.querySelector(".rect1");
+    const rect2 = document.querySelector(".rect2");
+    const rect3 = document.querySelector(".rect3");
+    const eng1 = ["JV", "JX", "JU", "JH", "KD", "KM", "KN", "KP", "KK", "KC", "KJ", "JH", "JK", "KG",];
+    const eng2 = ["MN", "MF", "LF", "LZ"];
+    const num1 = Math.floor(Math.random() * eng1.length);
+    const num2 = Math.floor(Math.random() * eng2.length);
+    rect1.innerHTML = eng1[num1] + ("00000000" + Math.random() * 10000000).slice(length - 8);
+    rect2.innerHTML = Math.floor(Math.random() * 10000);
+    rect3.innerHTML = eng2[num2] + ("00000000" + Math.random() * 10000000).slice(length - 8);
+    console.log('num1:', num1);
+    console.log("num2:", num2);
+
+    const errorMsg = "the # is not even";
+    for (let number = 2; number <= 100; number += 1) {
+      console.log("the # is " + number);
+      console.assert(number % 2 === 0, {
+        number: number,
+        errorMsg: errorMsg,
+      });
+      // or, using ES2015 object property shorthand:
+      // console.assert(number % 2 === 0, {number, errorMsg});
+    }
       // console.clear();
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>

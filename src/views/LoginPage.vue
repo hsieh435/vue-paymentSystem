@@ -32,6 +32,8 @@ export default defineComponent({
     const router = useRouter();
     const username = ref();
 
+    const asd = localStorage.setItem("asd","123");
+
     const loading: any = inject("valueofLoading");
     // inject("要傳遞的資料名稱");
 
