@@ -1,21 +1,12 @@
 <template>
-  <LoginTest></LoginTest>
+  <!-- <LoginTest></LoginTest> -->
   <nav class="nav">
     <ul class="nav__menu">
-      <li
-        class="nav__menu-item"
-        v-for="(item, index) in functionGroups.value"
-        :key="index"
-      >
-        <a v-if="item.functionModels.length > 0"
-          >{{ item.functionGroupName }} ▼
+      <li class="nav__menu-item" v-for="(item, index) in functionGroups.value" :key="index">
+        <a v-if="item.functionModels.length > 0">{{ item.functionGroupName }} ▼
         </a>
         <ul class="nav__submenu">
-          <li
-            class="nav__submenu-item"
-            v-for="(func, index) in item.functionModels"
-            :key="index"
-          >
+          <li class="nav__submenu-item" v-for="(func, index) in item.functionModels" :key="index">
             <a @click="routerTo(func.url)">{{ func.functionName }}</a>
           </li>
         </ul>
@@ -46,13 +37,13 @@ import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
 import DisConnected from "./DisConnected.vue";
 import LogoutAlready from "../loginView/LogoutAlready.vue";
-import LoginTest from "../public/LoginTest.vue";
+// import LoginTest from "../public/LoginTest.vue";
 export default defineComponent({
   name: "NavbarFun",
   components: {
     DisConnected,
     LogoutAlready,
-    LoginTest,
+    // LoginTest,
   },
 
   setup() {
@@ -175,7 +166,8 @@ nav ul {
 
 .nav__menu {
   line-height: 45px;
-  text-transform: uppercase; /* 字母皆以大寫呈現*/
+  text-transform: uppercase;
+  /* 字母皆以大寫呈現*/
   font-weight: 700;
   text-align: left;
   /* outline: 1px black solid; */
@@ -214,11 +206,9 @@ nav ul {
 
 /* 第二層選單游標觸碰時 */
 .nav__submenu-item:hover {
-  background: radial-gradient(
-    circle at center,
-    rgb(155, 89, 182),
-    rgb(128, 0, 182)
-  );
+  background: radial-gradient(circle at center,
+      rgb(155, 89, 182),
+      rgb(128, 0, 182));
 }
 
 .nav__submenu-item a {

@@ -13,7 +13,10 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive, provide, inject } from "vue";
+import { AxiosResponse } from "axios";
 import axios from "axios";
+import router from "../router";
+import { apiFindPSUserByNotesId } from "../api/api";
 import DisConnected from "../components/public/DisConnected.vue";
 import LogoutAlready from "../components/loginView/LogoutAlready.vue";
 export default defineComponent({
@@ -26,6 +29,8 @@ export default defineComponent({
   setup() {
     const userId = localStorage.getItem("userId");
     const userJWT = localStorage.getItem("userJWT");
+    // console.log("userId:", userId, typeof userId);
+    // console.log("userJWT:", userJWT, typeof userJWT);
 
     const msg = reactive({
       userName: "",
@@ -74,6 +79,16 @@ export default defineComponent({
         });
     }
 
+    // const gotData = async () => {
+    //   const res: AxiosResponse = await apiFindPSUserByNotesId(
+    //     {
+    //       notesId: userId,
+    //       headers: {
+    //         Authorization: "Bearer " + userJWT,
+    //       },
+    //     });
+    // };
+
     //
     // 登出鍵
     function logout() {
@@ -84,6 +99,7 @@ export default defineComponent({
       msg,
       disconnected,
       logoutalready,
+      // gotData,
       logout,
     };
   },
@@ -108,6 +124,7 @@ export default defineComponent({
   font-size: 24px;
   color: rgb(0, 0, 0);
   transition: 0.3s;
+
   &:hover {
     background-color: rgb(46, 189, 89);
     box-shadow: 10px 10px 10px 0px #000000;

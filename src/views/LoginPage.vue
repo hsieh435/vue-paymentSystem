@@ -3,8 +3,8 @@
   畫面：https://codepen.io/fghty/pen/PojKNEG
   -->
 <template>
-  <GoToSSO></GoToSSO>
-  <!-- <div class="background">
+  <!-- <GoToSSO></GoToSSO> -->
+  <div class="background">
     <div class="shape"></div>
     <div class="shape"></div>
   </div>
@@ -14,25 +14,41 @@
     </div>
     <input type="text" v-model="username" placeholder="USERNAME" />
     <button @click="login()">登入付款系統</button>
-  </div> -->
+    <button @click="abc()">登入付款系統</button>
+  </div>
+  <PasswordWrong v-if="passwordWrong === false"></PasswordWrong>
+  <EmptyColumn v-if="emptyColumn === false"></EmptyColumn>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, inject } from "vue";
+import { defineComponent, ref, provide, inject } from "vue";
+import { AxiosResponse } from "axios";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
-import GoToSSO from "../components/loginPage/GoToSSO.vue";
+import router from "../router";
+import { apiPostUserLogin } from "../api/api";
+// import GoToSSO from "../components/loginPage/GoToSSO.vue";
+import PasswordWrong from "../components/loginPage/PasswordWrong.vue";
+import EmptyColumn from "../components/loginPage/EmptyColumn.vue";
 export default defineComponent({
   name: "loginpPage",
   components: {
-    GoToSSO,
+    // GoToSSO,
+    PasswordWrong,
+    EmptyColumn
   },
 
   setup() {
     const router = useRouter();
-    const username = ref();
+    const username = ref("");
 
-    const asd = localStorage.setItem("asd","123");
+    const passwordWrong = ref();
+    passwordWrong.value = true;
+    provide("passwordWrong", passwordWrong);
+
+    const emptyColumn = ref();
+    emptyColumn.value = true;
+    provide("emptyColumn", emptyColumn);
 
     const loading: any = inject("valueofLoading");
     // inject("要傳遞的資料名稱");
@@ -42,7 +58,8 @@ export default defineComponent({
         alert("欄位請勿留白");
       } else {
         localStorage.clear();
-        loading.value = null;
+        loading.value = false;
+        // console.log("username:", username.value);
         axios
           .post("http://localhost:8085/paymentSystem/public/getSystemJWT", {
             notesId: username.value,
@@ -50,13 +67,13 @@ export default defineComponent({
           // post 放三個參數，url、data、config(header)
 
           .then((response) => {
-            if (response.data.returnCode == 0) {
+            if (response.data.returnCode === "0") {
               // console.log("response:", response.data.data);
               localStorage.setItem("userJWT", response.data.data);
               localStorage.setItem("userId", username.value);
               router.push({ path: "/LoginView" });
             } else {
-              alert("請輸入正確的USERNAME");
+              alert("請輸入正確的 USERNAME");
             }
           })
           .catch((error) => {
@@ -70,12 +87,37 @@ export default defineComponent({
       // 2.".finally(() => {})" 為 TYPE SCRIPT 之語法，做出結尾之用，以免送出後仍持續執行 LoadingForever 畫面
     };
 
+    const abc = async () => {
+      if (username.value === "") {
+        emptyColumn.value = false;
+      } else {
+        const res: AxiosResponse = await apiPostUserLogin({
+          notesId: username.value,
+        });
+
+        if (res.data.returnCode === "0") {
+          console.log(res.data);
+          localStorage.setItem("userJWT", res.data.data);
+          localStorage.setItem("userId", username.value);
+          router.push({ path: "/LoginView" });
+        } else {
+          console.log(res.data, typeof res.data.returnCode);
+          passwordWrong.value = false;
+          username.value = "";
+        }
+      }
+    };
+
     return {
       username,
+      passwordWrong,
+      emptyColumn,
       login,
+      abc,
     };
   },
 });
 </script>
 
-<style src="./subfunction/LoginPage.scss" lang="scss" scoped></style>
+<style src="./subfunction/LoginPage.scss" lang="scss" scoped>
+</style>

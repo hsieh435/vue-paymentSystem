@@ -121,5 +121,7 @@ newLine    insert final newLine
 .vscode\extensions 刪除套件
 setting editor.wordWrap 自動換行
 
+tabsize 縮排
+
 
 alt + Z 自動換行
