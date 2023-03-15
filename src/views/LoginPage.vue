@@ -87,6 +87,8 @@ export default defineComponent({
       // 2.".finally(() => {})" 為 TYPE SCRIPT 之語法，做出結尾之用，以免送出後仍持續執行 LoadingForever 畫面
     };
 
+    // 改寫
+
     const abc = async () => {
       if (username.value === "") {
         emptyColumn.value = false;
@@ -96,7 +98,7 @@ export default defineComponent({
         });
 
         if (res.data.returnCode === "0") {
-          console.log(res.data);
+          // console.log(res.data);
           localStorage.setItem("userJWT", res.data.data);
           localStorage.setItem("userId", username.value);
           router.push({ path: "/LoginView" });

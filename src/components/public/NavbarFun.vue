@@ -1,13 +1,15 @@
+<!-- Navbar -->
 <template>
   <!-- <LoginTest></LoginTest> -->
   <nav class="nav">
     <ul class="nav__menu">
-      <li class="nav__menu-item" v-for="(item, index) in functionGroups.value" :key="index">
+      <li class="nav__menu-item" v-for="(item, index) in functionGroups" :key="index">
         <a v-if="item.functionModels.length > 0">{{ item.functionGroupName }} ▼
         </a>
         <ul class="nav__submenu">
           <li class="nav__submenu-item" v-for="(func, index) in item.functionModels" :key="index">
             <a @click="routerTo(func.url)">{{ func.functionName }}</a>
+            <!-- <a :to="`/${func.url}`">{{ func.functionName }}</a> -->
           </li>
         </ul>
       </li>
@@ -22,96 +24,85 @@
       </li>
     </ul>
   </nav>
-  <!-- 
-    備註：
-    1. v-if 條件式之意思，為符合條件式就顯現該 html 標籤，v-if="item.functionModels.length > 0"
-    2. 使用 v-for 需先創建一組 reactive，再由個別物件下去渲染，同時須下達 key 值
-  -->
   <DisConnected v-if="disconnected == false"></DisConnected>
   <LogoutAlready v-if="logoutalready == false"></LogoutAlready>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, reactive, provide } from "vue";
+<script setup lang="ts">
+import { ref, reactive, provide } from "vue";
 import axios from "axios";
+import { AxiosResponse } from "axios";
+import { apiFindAllFunctionGroupWhereFunctionIdInPermission } from "../../api/api";
+import { FunctionGroupByNotesId } from "../../config/common.types";
 import { useRoute, useRouter } from "vue-router";
 import DisConnected from "./DisConnected.vue";
 import LogoutAlready from "../loginView/LogoutAlready.vue";
 // import LoginTest from "../public/LoginTest.vue";
-export default defineComponent({
-  name: "NavbarFun",
-  components: {
-    DisConnected,
-    LogoutAlready,
-    // LoginTest,
-  },
 
-  setup() {
-    const userId = localStorage.getItem("userId");
-    const userJWT = localStorage.getItem("userJWT");
-    const router = useRouter();
 
-    const disconnected = ref();
-    disconnected.value = true;
-    provide("disconnected", disconnected);
+const userId = localStorage.getItem("userId");
+const userJWT = localStorage.getItem("userJWT");
+const router = useRouter();
 
-    const functionGroups = reactive({ value: null });
+const disconnected = ref();
+disconnected.value = true;
+provide("disconnected", disconnected);
 
-    axios
-      .post(
-        "http://localhost:8085/paymentSystem/api/functionGroup/findAllFunctionGroupWhereFunctionIdInPermission",
-        { token: userJWT },
-        {
-          headers: {
-            Authorization: "Bearer " + userJWT,
-            // Bearer 跟 userJWT 中間要有一個空格
-          },
-        }
-      )
-      // post 放三個參數，url、data、config(header)
+// const functionGroups = reactive({ value: null });
 
-      .then((response) => {
-        functionGroups.value = response.data.data;
-      })
+// axios
+//   .post(
+//     "http://localhost:8085/paymentSystem/api/functionGroup/findAllFunctionGroupWhereFunctionIdInPermission",
+//     { token: userJWT },
+//     {
+//       headers: {
+//         Authorization: "Bearer " + userJWT,
+//       },
+//     }
+//   )
+//   .then((response) => {
+//     functionGroups.value = response.data.data;
+//   })
 
-      .catch((error) => {
-        disconnected.value = false;
-      });
+//   .catch((error) => {
+//     disconnected.value = false;
+//   });
 
-    // class function {
-    //     public functionGroups="",
-    //     public functionModels="",
-    //     public url="",
-    // }
 
-    function routerTo(url: string) {
-      router.push(url);
+const functionGroups = ref<FunctionGroupByNotesId[]>([]);
+
+gotNavbarFunction();
+async function gotNavbarFunction() {
+  try {
+    const res: AxiosResponse = await apiFindAllFunctionGroupWhereFunctionIdInPermission();
+
+    if (res.data.returnCode === "0") {
+      // console.log("res:", res.data.data);
+      functionGroups.value = res.data.data;
     }
+  } catch (error) {
+    disconnected.value = false;
+  }
+}
 
-    function backToMainpage() {
-      router.push("./LoginView");
-    }
 
-    const logoutalready = ref();
-    logoutalready.value = true;
-    provide("logoutalready", logoutalready);
+function routerTo(url: string) {
+  router.push(url);
+}
 
-    function logout() {
-      logoutalready.value = false;
-    }
+function backToMainpage() {
+  router.push("./LoginView");
+}
 
-    return {
-      disconnected,
-      functionGroups,
-      routerTo,
-      backToMainpage,
-      logoutalready,
-      logout,
-    };
-  },
-});
+const logoutalready = ref();
+logoutalready.value = true;
+provide("logoutalready", logoutalready);
+
+function logout() {
+  logoutalready.value = false;
+}
+
 </script>
-
 <style lang="scss" scoped>
 /* 整體 */
 html {
@@ -224,3 +215,7 @@ nav ul {
   /* border: 1px solid rgb(0, 0, 0); */
 }
 </style>
+
+<!-- 備註：
+      1. v-if 條件式之意思，為符合條件式就顯現該 html 標籤，v-if="item.functionModels.length > 0"
+      2. 使用 v-for 需先創建一組 reactive，再由個別物件下去渲染，同時須下達 key 值 -->

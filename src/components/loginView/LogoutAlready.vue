@@ -10,27 +10,20 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, inject } from "vue";
+<script setup lang="ts">
+import { inject } from "vue";
 import { useRoute, useRouter } from "vue-router";
-export default defineComponent({
-  name: "LogoutAlready",
-  components: {},
 
-  setup() {
-    const router = useRouter();
-    const logoutalready: any = inject("logoutalready");
+const router = useRouter();
+const logoutalready: any = inject("logoutalready");
 
-    function logOut() {
-      logoutalready.value = true;
-      localStorage.clear();
-      location.href = `http://localhost:8081/LogoutPage?systemId=paymentSystem&callBackPath=http://localhost:8080/LogOutPage`;
-    }
+function logOut() {
+  logoutalready.value = true;
+  localStorage.clear();
+  location.href = `http://localhost:8081/LogoutPage?systemId=paymentSystem&callBackPath=http://localhost:8080/LogOutPage`;
+}
 
-    return {
-      logOut,
-    };
-  },
-});
+
 </script>
-<style src="../public/alert.scss" lang="scss" scoped></style>
+<style src="../public/alert.scss" lang="scss" scoped>
+</style>

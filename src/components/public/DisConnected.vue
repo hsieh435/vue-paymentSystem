@@ -10,24 +10,15 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, inject } from "vue";
-export default defineComponent({
-  name: "DisConnected",
-  components: {},
+<script setup lang="ts">
+import { inject } from "vue";
 
-  setup() {
-    const disconnected: any = inject("disconnected");
+const disconnected: any = inject("disconnected");
+function closeIT() {
+  disconnected.value = true;
+}
 
-    function closeIT() {
-      disconnected.value = true;
-    }
-
-    return {
-      closeIT,
-    };
-  },
-});
 </script>
 
-<style src="../public/alert.scss" lang="scss" scoped></style>
+<style src="../public/alert.scss" lang="scss" scoped>
+</style>

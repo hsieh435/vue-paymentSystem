@@ -8,6 +8,8 @@ const getSystemJWT = "paymentSystem/public/getSystemJWT";
 // 抓取使用者基本資料 API
 const findPSUserByNotesId = "paymentSystem/api/PSUser/findPSUserByNotesId";
 
+const findAllFunctionGroupWhereFunctionIdInPermission = "paymentSystem/api/functionGroup/findAllFunctionGroupWhereFunctionIdInPermission";
+
 
 
 
@@ -15,4 +17,5 @@ export {
     baseURL,
     getSystemJWT,
     findPSUserByNotesId,
+    findAllFunctionGroupWhereFunctionIdInPermission,
 };

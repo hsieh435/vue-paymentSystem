@@ -6,104 +6,121 @@
     部門：{{ msg.userOrganization }} <br />
     職位：{{ msg.userTitle }}
   </h3>
+  <hr>
+  <p>改寫後</p>
+  <hr>
+  <h3 class="welcome">
+    {{ userInfomation.userName }} 您好，歡迎使用付款系統<br />
+    USERID：{{ userInfomation.notesId }} <br />
+    部門：{{ userInfomation.userOrganization }} <br />
+    職位：{{ userInfomation.userTitle }}
+  </h3>
   <button class="logout" @click="logout()">登出</button>
   <DisConnected v-if="disconnected == false"></DisConnected>
   <LogoutAlready v-if="logoutalready == false"></LogoutAlready>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, reactive, provide, inject } from "vue";
+<script setup lang="ts">
+import { ref, reactive, provide, inject } from "vue";
 import { AxiosResponse } from "axios";
 import axios from "axios";
-import router from "../router";
 import { apiFindPSUserByNotesId } from "../api/api";
+import { UserInfo } from "../config/common.types";
 import DisConnected from "../components/public/DisConnected.vue";
 import LogoutAlready from "../components/loginView/LogoutAlready.vue";
-export default defineComponent({
-  name: "LoginView",
-  components: {
-    DisConnected,
-    LogoutAlready,
-  },
 
-  setup() {
-    const userId = localStorage.getItem("userId");
-    const userJWT = localStorage.getItem("userJWT");
-    // console.log("userId:", userId, typeof userId);
-    // console.log("userJWT:", userJWT, typeof userJWT);
+const userId = localStorage.getItem("userId");
+const userJWT = localStorage.getItem("userJWT");
+// console.log("userId:", userId, typeof userId);
+// console.log("userJWT:", userJWT, typeof userJWT);
 
-    const msg = reactive({
-      userName: "",
-      userID: "",
-      userOrganization: "",
-      userTitle: "",
+const msg = reactive({
+  userName: "",
+  userID: "",
+  userOrganization: "",
+  userTitle: "",
+});
+
+const vol: any = inject("valueofLoading");
+
+const disconnected = ref();
+disconnected.value = true;
+provide("disconnected", disconnected);
+
+const logoutalready = ref();
+logoutalready.value = true;
+provide("logoutalready", logoutalready);
+
+catchData();
+function catchData() {
+  vol.value = null;
+  axios
+    .post(
+      "http://localhost:8085/paymentSystem/api/PSUser/findPSUserByNotesId",
+      { notesId: userId },
+      {
+        headers: {
+          Authorization: "Bearer " + userJWT,
+        },
+      }
+    )
+    .then((response) => {
+      msg.userName = response.data.data.userInfo.userName;
+      msg.userID = response.data.data.userInfo.notesId;
+      msg.userOrganization = response.data.data.userInfo.userOrganization;
+      msg.userTitle = response.data.data.userInfo.userTitle;
+    })
+    .catch((error) => {
+      disconnected.value = false;
+    })
+    .finally(() => {
+      vol.value = true;
+    });
+}
+
+// 改寫後
+
+interface UserInfo {
+  notesId: string;
+  userName: string;
+  userOrganization: string;
+  userTitle: string;
+}
+
+let userInfomation = ref<UserInfo>({
+  notesId: "",
+  userName: "",
+  userOrganization: "",
+  userTitle: ""
+});
+
+// catchData();
+gotData();
+async function gotData() {
+
+  try {
+    const res: AxiosResponse = await apiFindPSUserByNotesId({
+      notesId: userId
     });
 
-    const vol: any = inject("valueofLoading");
+    // console.log("///gotData: ", JSON.stringify(res.data));
 
-    const disconnected = ref();
-    disconnected.value = true;
-    provide("disconnected", disconnected);
+    userInfomation.value = res.data.data.userInfo;
+    console.log("///gotData: ", JSON.stringify(userInfomation.value));
 
-    const logoutalready = ref();
-    logoutalready.value = true;
-    provide("logoutalready", logoutalready);
+    // console.log(userInfomation, typeof userInfomation);
 
-    catchData();
-    function catchData() {
-      vol.value = null;
-      axios
-        .post(
-          "http://localhost:8085/paymentSystem/api/PSUser/findPSUserByNotesId",
-          { notesId: userId },
-          {
-            headers: {
-              Authorization: "Bearer " + userJWT,
-              // Bearer 跟 userJWT 中間要有一個空格
-            },
-          }
-        )
-        // post 放三個參數，url、data、config(header)
-        .then((response) => {
-          // console.log("response:", response);
-          msg.userName = response.data.data.userInfo.userName;
-          msg.userID = response.data.data.userInfo.notesId;
-          msg.userOrganization = response.data.data.userInfo.userOrganization;
-          msg.userTitle = response.data.data.userInfo.userTitle;
-        })
-        .catch((error) => {
-          disconnected.value = false;
-        })
-        .finally(() => {
-          vol.value = true;
-        });
-    }
+  } catch (error) {
+    disconnected.value = false;
+  }
+};
 
-    // const gotData = async () => {
-    //   const res: AxiosResponse = await apiFindPSUserByNotesId(
-    //     {
-    //       notesId: userId,
-    //       headers: {
-    //         Authorization: "Bearer " + userJWT,
-    //       },
-    //     });
-    // };
+//
+// 登出鍵
+function logout() {
+  logoutalready.value = false;
+}
 
-    //
-    // 登出鍵
-    function logout() {
-      logoutalready.value = false;
-    }
-
-    return {
-      msg,
-      disconnected,
-      logoutalready,
-      // gotData,
-      logout,
-    };
-  },
-});
 </script>
 
 <style lang="scss" scoped>

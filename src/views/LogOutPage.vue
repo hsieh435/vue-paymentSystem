@@ -7,24 +7,15 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
-export default defineComponent({
-  name: "LogOutPage",
-  components: {},
 
-  setup() {
-    const router = useRouter();
+const router = useRouter();
 
-    function toLoginPage() {
-      router.push({ path: "./" });
-    }
-    return {
-      toLoginPage,
-    };
-  },
-});
+function toLoginPage() {
+  router.push({ path: "./" });
+}
+
 </script>
 <style lang="scss" scoped>
 h2 {
@@ -40,6 +31,7 @@ h2 {
   top: 0px;
   padding-bottom: 100px;
   z-index: 10000000;
+
   .wholearea {
     width: 60%;
     height: auto;
@@ -61,6 +53,7 @@ h2 {
   font-size: 24px;
   color: rgb(0, 0, 0);
   transition: 0.3s;
+
   &:hover {
     background-color: rgb(46, 189, 89);
     box-shadow: 10px 10px 10px 0px #000000;
