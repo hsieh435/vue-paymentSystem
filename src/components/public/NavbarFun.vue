@@ -30,11 +30,11 @@
 
 <script setup lang="ts">
 import { ref, reactive, provide } from "vue";
-import axios from "axios";
+// import axios from "axios";
 import { AxiosResponse } from "axios";
 import { apiFindAllFunctionGroupWhereFunctionIdInPermission } from "../../api/api";
 import { FunctionGroupByNotesId } from "../../config/common.types";
-import { useRoute, useRouter } from "vue-router";
+import router from "../../router";
 import DisConnected from "./DisConnected.vue";
 import LogoutAlready from "../loginView/LogoutAlready.vue";
 // import LoginTest from "../public/LoginTest.vue";
@@ -42,7 +42,7 @@ import LogoutAlready from "../loginView/LogoutAlready.vue";
 
 const userId = localStorage.getItem("userId");
 const userJWT = localStorage.getItem("userJWT");
-const router = useRouter();
+
 
 const disconnected = ref();
 disconnected.value = true;

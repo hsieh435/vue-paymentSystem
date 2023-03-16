@@ -237,18 +237,76 @@ const routes: Array<RouteRecordRaw> = [
         ],
       },
 
-      // 分隔線，以下為零用金申請作業
+      // 分隔線，以下為財會簽核拋轉作業
 
       {
-        // 零用金支付廠區別維護
-        path: "/pettyPlantMtn",
-        name: "pettyPlantMtn",
+        // 一般帳款轉總帳系統
+        path: "/genericTransferToTotalAcc",
+        name: "genericTransferToTotalAcc",
         component: NormalLayout,
         children: [
           {
             path: "",
             component: () =>
-              import("../views/subfunction/pettyCash/PettyPlantMtn.vue"),
+              import("../views/subfunction/accountant/genericTransferToTotalAcc.vue"),
+          },
+        ],
+      },
+      {
+        // 月結帳款轉總帳系統
+        path: "/monthTransferToTotalAcc",
+        name: "monthTransferToTotalAcc",
+        component: NormalLayout,
+        children: [
+          {
+            path: "",
+            component: () =>
+              import("../views/subfunction/accountant/monthTransferToTotalAcc.vue"),
+          },
+        ],
+      },
+      {
+        // 轉票管系統
+        path: "/transferToTicket",
+        name: "transferToTicket",
+        component: NormalLayout,
+        children: [
+          {
+            path: "",
+            component: () =>
+              import("../views/subfunction/accountant/transferToTicket.vue"),
+          },
+        ],
+      },
+
+      // 分隔線，以下為零用金申請作業
+
+      {
+        // 轉票管系統
+        path: "/transferToTicket",
+        name: "transferToTicket",
+        component: NormalLayout,
+        children: [
+          {
+            path: "",
+            component: () =>
+              import("../views/subfunction/accountant/transferToTicket.vue"),
+          },
+        ],
+      },
+
+      // 分隔線，以下為資財成本結帳作業
+
+      {
+        // 資財成本結帳作業
+        path: "/capitalCost",
+        name: "capitalCost",
+        component: NormalLayout,
+        children: [
+          {
+            path: "",
+            component: () =>
+              import("../views/subfunction/capitalCost/capitalCost.vue"),
           },
         ],
       },

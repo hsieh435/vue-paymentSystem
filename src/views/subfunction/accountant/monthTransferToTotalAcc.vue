@@ -1,6 +1,6 @@
 <!-- 個別功能頁面 -->
 <template>
-  <h1 class="subfunctiontitle">登入記錄查詢</h1>
+  <h1 class="subfunctiontitle">月結帳款轉總帳系統</h1>
   <BackToLoginView></BackToLoginView>
 </template>
 <script setup lang="ts">
