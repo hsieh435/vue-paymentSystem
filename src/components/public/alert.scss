@@ -1,0 +1,96 @@
+// 訊息提醒 Components
+// 參考網址：https://codepen.io/keikaavousi/pen/eYOmOpN
+// 白色用於一般通知
+// 綠色用於成功通知
+// 黃色用於提醒
+// 紅色用於警告或失敗
+
+@import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h3 {
+  color: black;
+  margin: 20px 20px 20px 20px;
+}
+
+.wholeareaback {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.5);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  left: 0px;
+  top: 0px;
+  z-index: 10000;
+}
+
+.alert {
+  width: 60%;
+  margin: 20px auto;
+  position: relative;
+  border-radius: 5px;
+  box-shadow: 0 0 15px 5px #858585;
+}
+
+.close {
+  width: 30px;
+  height: 30px;
+  opacity: 0.5;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 50%;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  text-align: center;
+  font-size: 1.6em;
+  line-height: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    height: 40px;
+    width: 40px;
+    font-size: 35px;
+    line-height: 40px;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+@mixin alert($name, $bgColor) {
+  $accentColor: darken($bgColor, 50);
+  .#{$name} {
+    background-color: #{$bgColor};
+    border-left: 5px solid $accentColor;
+    .close {
+      border-color: $accentColor;
+      color: $accentColor;
+    }
+  }
+}
+@include alert(simple-alert, rgb(255, 255, 255));
+@include alert(success-alert, rgb(111, 255, 171));
+@include alert(warning-alert, rgb(255, 255, 113));
+@include alert(danger-alert, rgb(255, 68, 68));
+
+.button {
+  height: 30px;
+  width: 100px;
+  border-radius: 15px;
+  margin: 0px 20px 20px 20px;
+  border: 0px;
+  font-size: 20px;
+  background: linear-gradient(135deg, greenyellow, dodgerblue);
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    box-shadow: 10px 10px 10px 0px #000000;
+    outline: 1px solid rgb(46, 47, 51);
+  }
+}
