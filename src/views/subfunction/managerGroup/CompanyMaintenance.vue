@@ -1,6 +1,7 @@
 <!-- 個別功能頁面 -->
 <template>
   <h1 class="subfunctiontitle">公司別維護</h1>
+  <button class="addNewCompany" @click="openIt()">+ 公司別新增</button>
   <table class="table-fill">
     <thead>
       <tr>
@@ -16,20 +17,21 @@
       <tr v-for="(comapny, index) in comapnyInfo" :key="index">
         <td>{{ comapny.companyTaxNo }}</td>
         <td>{{ comapny.companyId }}</td>
-        <td>{{ comapny.companyName }}</td>
-        <td>{{ comapny.shortName }}</td>
-        <td>{{ comapny.prjPaymentAccountName }}</td>
-        <td>新增、刪除</td>
-        <!-- TODO：新增及刪除功能 -->
+        <td class="startLeft">{{ comapny.companyName }}</td>
+        <td class="startLeft">{{ comapny.shortName }}</td>
+        <td class="startLeft">{{ comapny.prjPaymentAccountName }}</td>
+        <td>編輯、刪除</td>
+        <!-- TODO：新增、編輯及刪除功能 -->
       </tr>
     </tbody>
   </table>
   <br />
-  <CompanyList @eventIsANumber="gotANumber" @eventIsAString="gotAText"></CompanyList>
+<!-- <CompanyList @eventIsANumber="gotANumber" @eventIsAString="gotAText"></CompanyList>
   <br />
   <br />
   <h4>EMIT 子傳父數字：{{ aNumber }}</h4>
-  <h4>EMIT 子傳父文字：{{ aString }}</h4>
+<h4>EMIT 子傳父文字：{{ aString }}</h4> -->
+  <AddNewCompany v-if="addCompanyInfo == null"></AddNewCompany>
   <BackToLoginView></BackToLoginView>
 </template>
 
@@ -38,8 +40,10 @@ import { ref, inject } from "vue";
 import { AxiosResponse } from "axios";
 import { apiFindAllCompany } from "../../../api/api";
 import { AllCompanyInformation } from "../../../config/common.types";
+import { addCompanyInfo, AddCompany } from "../../../utils/tools";
 import "../subfunction.scss";
 import CompanyList from "../../../components/subfunccomponents/aboutCompanyMaintenance/CompanyList.vue";
+import AddNewCompany from "../../../components/subfunccomponents/aboutCompanyMaintenance/AddNewCompany.vue";
 import BackToLoginView from "../../../components/public/BackToLoginView.vue";
 
 const loading: any = inject("valueofLoading");
@@ -87,8 +91,16 @@ async function sendCompanyArray() {
   }
 }
 
-</script>
+addCompanyInfo.value = true;
+function openIt() {
+  AddCompany();
+  // 鎖住底層禁止滾動穿透
+  let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
+  document.body.style.overflow = 'hidden';
+  document.addEventListener("touchmove", m, { passive: false });
+}
 
+</script>
 <style lang="scss" scoped>
 .table-fill {
   width: 90%;
@@ -111,8 +123,8 @@ table {
 
 th {
   height: 75px;
-  font-size: 26px;
-  padding: 10px 10px 10px 10px;
+  font-size: 20px;
+  padding: 0px 10px 0px 10px;
   background-color: rgba(79, 192, 210, 0.7);
   color: rgb(255, 255, 255);
   outline: 1px solid black;
@@ -122,10 +134,14 @@ td {
   background-color: rgb(177, 177, 177);
   color: #000000;
   height: 50px;
-  font-size: 22px;
-  text-align: center;
+  font-size: 16px;
   transition: all 0.3s ease-in-out;
   outline: 1px solid black;
+}
+
+.startLeft {
+  text-align: left;
+  padding: 0px 0px 0px 15px;
 }
 
 tr:hover td {
@@ -149,5 +165,19 @@ tr {
 
 tr:last-of-type {
   border-bottom: none;
+}
+
+.addNewCompany {
+  color: rgb(255, 255, 255);
+  background-color: rgb(64, 158, 255);
+  border: 0px;
+  border-radius: 5px;
+  margin: 20px 0px 20px 5%;
+  padding: 5px 10px 5px 10px;
+  float: left;
+}
+
+.lock {
+  overscroll-behavior: none;
 }
 </style>

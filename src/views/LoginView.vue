@@ -26,13 +26,12 @@ import { AxiosResponse } from "axios";
 import axios from "axios";
 import { apiFindPSUserByNotesId } from "../api/api";
 import { UserInfo } from "../config/common.types";
+import { userId,  userJWT,} from "../utils/tools"
 import DisConnected from "../components/public/DisConnected.vue";
 import LogoutAlready from "../components/loginView/LogoutAlready.vue";
 
-const userId = localStorage.getItem("userId");
-const userJWT = localStorage.getItem("userJWT");
-// console.log("userId:", userId, typeof userId);
-// console.log("userJWT:", userJWT, typeof userJWT);
+// const userId = localStorage.getItem("userId");
+// const userJWT = localStorage.getItem("userJWT");
 
 const msg = reactive({
   userName: "",

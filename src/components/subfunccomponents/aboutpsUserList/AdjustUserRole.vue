@@ -5,11 +5,7 @@
       <h2>調整{{ userName }}角色</h2>
       <h2>將{{ userRoleName }}角色改為：</h2>
       <select class="selection" v-model="selectedAnswer">
-        <option
-          v-for="(role, index) in rolelist.value"
-          :key="index"
-          :value="role.roleId"
-        >
+        <option v-for="(role, index) in rolelist.value" :key="index" :value="role.roleId">
           {{ role.roleName }}
         </option>
       </select>
@@ -131,6 +127,7 @@ export default defineComponent({
   top: 0px;
   padding-bottom: 100px;
   z-index: 10000;
+
   .wholearea {
     width: 60%;
     height: auto;
@@ -149,6 +146,7 @@ export default defineComponent({
   font-size: 24px;
   margin: 20px 20px 20px 20px;
   padding: 5px 0px 5px 5px;
+
   &:hover {
     cursor: pointer;
   }
@@ -165,6 +163,7 @@ export default defineComponent({
   right: 10px;
   top: 10px;
   transition: 0.3s;
+
   &:hover {
     height: 60px;
     width: 60px;
@@ -184,6 +183,7 @@ export default defineComponent({
   font-size: 20px;
   color: rgb(0, 0, 0);
   transition: 0.3s;
+
   &:hover {
     background-color: rgb(167, 255, 255);
     box-shadow: 10px 10px 10px 0px #000000;

@@ -6,30 +6,15 @@
       <div class="authmang">
         <h2>更新{{ roleName }}權限</h2>
         <h2>角色代碼：{{ roleId }}</h2>
-        <div
-          class="funcgroupname"
-          v-for="(item, index) in functionGroups.value"
-          :key="index"
-        >
+        <div class="funcgroupname" v-for="(item, index) in functionGroups.value" :key="index">
           <h4>{{ item.functionGroupName }}</h4>
           <div>
-            <input
-              class="checkBoxSquare"
-              type="checkbox"
-              v-if="item.functionModels.length > 0"
-            /><label v-if="item.functionModels.length > 0">全選</label>
+            <input class="checkBoxSquare" type="checkbox" v-if="item.functionModels.length > 0" /><label
+              v-if="item.functionModels.length > 0">全選</label>
           </div>
-          <div
-            class="funcgroup"
-            v-for="(func, index) in item.functionModels"
-            :key="index"
-          >
+          <div class="funcgroup" v-for="(func, index) in item.functionModels" :key="index">
             <div>
-              <input
-                class="checkBoxSquare"
-                type="checkbox"
-                v-model="func.checked"
-              />
+              <input class="checkBoxSquare" type="checkbox" v-model="func.checked" />
               <label>{{ func.functionName }}</label>
               <label class="checked">{{ func.checked }}</label>
               <!-- 將 input 與 label 欄位用 v-model 綁定連動，並運用 CSS 將其隱藏 -->
@@ -233,4 +218,5 @@ export default defineComponent({
 });
 </script>
 
-<style src="./AuthorityManagement.scss" lang="scss" scoped></style>
+<style src="./AuthorityManagement.scss" lang="scss" scoped>
+</style>

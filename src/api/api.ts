@@ -7,7 +7,8 @@ import {
     getSystemJWT,
     findPSUserByNotesId,
     findAllFunctionGroupWhereFunctionIdInPermission,
-    findAllCompany
+    findAllCompany,
+    newCompany
 } from "../config/ApiConfig";
 
 
@@ -15,6 +16,7 @@ import {
 import {
     ILogin,
     CatchDatainMainpage,
+    NewCompanyItem,
 } from "../config/common.types";
 
 
@@ -41,10 +43,14 @@ export const apiFindAllFunctionGroupWhereFunctionIdInPermission = () => {
 };
 
 
+
+// 搜尋公司 API
 export const apiFindAllCompany = () => {
     return service.post(findAllCompany);
 };
 
 
-
-// 搜尋公司 API
+// 新增公司 API
+export const apiNewCompany = (data: NewCompanyItem) => {
+    return service.post(newCompany, data);
+};

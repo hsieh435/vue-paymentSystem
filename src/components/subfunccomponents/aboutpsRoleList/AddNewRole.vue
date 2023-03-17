@@ -1,4 +1,4 @@
-<!-- 新增角色功能 -->
+<!-- 新增角色功能 Component -->
 <template>
   <div class="thisfrom">
     <div>

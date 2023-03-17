@@ -1,4 +1,4 @@
-<!-- 編輯角色功能 -->
+<!-- 編輯角色功能 Component -->
 <template>
   <div class="wholeareaback">
     <div class="wholearea">

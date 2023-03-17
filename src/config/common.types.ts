@@ -64,14 +64,17 @@ export interface AllCompanyInformation {
   prjPaymentAccountName: string;
 }
 
-
-
-
-
-
-
-
-
-
-
-// findAllFunctionGroupWhereFunctionIdInPermission
+// 新增公司
+export interface NewCompanyItem {
+  companyId: string;
+  companyName: string;
+  shortName: string;
+  companyTaxNo?: string;
+  addedBy?: string;
+  modifiedBy?: string;
+  prjPaymentAccountId?: string;
+  prjPaymentAccountName?: string;
+  addedDatetime?: string;
+  updatedDatetime?: string;
+  hibernateLazyInitializer?: null;
+}

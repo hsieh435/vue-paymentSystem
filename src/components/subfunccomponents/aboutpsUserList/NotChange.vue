@@ -27,4 +27,5 @@ export default defineComponent({
 
 // NotChange
 </script>
-<style src="../../public/alert.scss" lang="scss" scoped></style>
+<style src="../../public/alert.scss" lang="scss" scoped>
+</style>
