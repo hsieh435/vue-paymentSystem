@@ -1,26 +1,11 @@
 <!-- 權限列表 -->
 <template>
-  <AuthorityManagement
-    v-if="adjustAuthority == null"
-    :role-id="role.roleId"
-    :role-name="role.roleName"
-  ></AuthorityManagement>
-  <EditRole
-    v-if="adjustRole == null"
-    :role-id="role.roleId"
-    :role-name="role.roleName"
-  ></EditRole>
-  <DeleteTheRole
-    v-if="deleteRole == null"
-    :role-id="role.roleId"
-    :role-name="role.roleName"
-  ></DeleteTheRole>
-  <pagination-component
-    class="pagination-component"
-    v-if="numberOfPages > 1"
-    v-model="currentPage"
-    :numberOfPages="numberOfPages"
-  />
+  <AuthorityManagement v-if="adjustAuthority == null" :role-id="role.roleId" :role-name="role.roleName">
+  </AuthorityManagement>
+  <EditRole v-if="adjustRole == null" :role-id="role.roleId" :role-name="role.roleName"></EditRole>
+  <DeleteTheRole v-if="deleteRole == null" :role-id="role.roleId" :role-name="role.roleName"></DeleteTheRole>
+  <pagination-component class="pagination-component" v-if="numberOfPages > 1" v-model="currentPage"
+    :numberOfPages="numberOfPages" />
   <table class="table">
     <tr>
       <th>編號</th>
@@ -33,30 +18,20 @@
       <td>{{ role.roleId }}</td>
       <td>{{ role.roleName }}</td>
       <td>
-        <button
-          class="button"
-          @click="adjustThisAuth(role.roleId, role.roleName)"
-        >
+        <button class="button" @click="adjustThisAuth(role.roleId, role.roleName)">
           修改權限
         </button>
         <button class="button" @click="editRole(role.roleId, role.roleName)">
           修改角色
         </button>
-        <button
-          class="button"
-          @click="deleteThisRole(role.roleId, role.roleName)"
-        >
+        <button class="button" @click="deleteThisRole(role.roleId, role.roleName)">
           刪除
         </button>
       </td>
     </tr>
   </table>
-  <pagination-component
-    class="pagination-component"
-    v-if="numberOfPages > 1"
-    v-model="currentPage"
-    :numberOfPages="numberOfPages"
-  />
+  <pagination-component class="pagination-component" v-if="numberOfPages > 1" v-model="currentPage"
+    :numberOfPages="numberOfPages" />
 </template>
 <script lang="ts">
 import { defineComponent, ref, reactive, provide, onMounted } from "vue";
@@ -102,6 +77,9 @@ export default defineComponent({
       adjustAuthority.value = null;
       role.roleId = roleId;
       role.roleName = roleName;
+      let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
+      document.body.style.overflow = 'hidden';
+      document.addEventListener("touchmove", m, { passive: false });
     }
 
     // 編輯角色功能的 value 值，控制出現與否
@@ -112,6 +90,9 @@ export default defineComponent({
       adjustRole.value = null;
       role.roleId = roleId;
       role.roleName = roleName;
+      let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
+      document.body.style.overflow = 'hidden';
+      document.addEventListener("touchmove", m, { passive: false });
     }
 
     // 刪除角色功能的 value 值，控制出現與否
@@ -122,6 +103,9 @@ export default defineComponent({
       deleteRole.value = null;
       role.roleId = roleId;
       role.roleName = roleName;
+      let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
+      document.body.style.overflow = 'hidden';
+      document.addEventListener("touchmove", m, { passive: false });
     }
 
     provide("adjustAuthority", adjustAuthority);
@@ -155,6 +139,7 @@ export default defineComponent({
   font-family: "Oswald", sans-serif;
   transition: 0.3s;
   border: 1px rgb(0, 0, 0) solid;
+
   &:hover {
     box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.781);
   }

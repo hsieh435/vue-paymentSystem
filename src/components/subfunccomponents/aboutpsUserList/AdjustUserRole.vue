@@ -103,6 +103,9 @@ export default defineComponent({
 
     function cancelEdit() {
       closeChangeRole.value = true;
+      let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
+      document.body.style.overflow = '';
+      document.removeEventListener("touchmove", m);
     }
 
     return {

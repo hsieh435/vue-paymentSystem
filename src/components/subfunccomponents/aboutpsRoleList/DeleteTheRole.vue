@@ -53,6 +53,9 @@ export default defineComponent({
 
     function cancelDelete() {
       deleteRole.value = true;
+      let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
+      document.body.style.overflow = '';
+      document.removeEventListener("touchmove", m);
     }
 
     return {
@@ -69,6 +72,7 @@ p {
   line-height: 30px;
   color: rgb(255, 0, 0);
 }
+
 .wholeareaback {
   width: 100%;
   height: 100vh;
@@ -78,6 +82,7 @@ p {
   top: 0px;
   padding-bottom: 100px;
   z-index: 10000000;
+
   .wholearea {
     width: 60%;
     margin: 30vh 20% 30vh 20%;
@@ -101,6 +106,7 @@ p {
   right: 10px;
   top: 10px;
   transition: 0.3s;
+
   &:hover {
     height: 60px;
     width: 60px;
@@ -121,11 +127,11 @@ p {
   font-weight: 700;
   color: rgb(0, 0, 0);
   transition: 0.3s;
+
   &:hover {
     background-color: rgb(255, 0, 0);
     box-shadow: 10px 10px 10px 0px #000000;
     border: 1px solid rgb(46, 47, 51);
   }
 }
-
 </style>

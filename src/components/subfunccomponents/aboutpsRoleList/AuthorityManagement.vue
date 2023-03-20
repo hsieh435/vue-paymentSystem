@@ -200,6 +200,9 @@ export default defineComponent({
 
     function cancelAdjust() {
       adjustList.value = true;
+      let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
+      document.body.style.overflow = '';
+      document.removeEventListener("touchmove", m);
     }
 
     // class function {

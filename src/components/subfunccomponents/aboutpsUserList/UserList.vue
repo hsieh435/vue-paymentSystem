@@ -1,18 +1,9 @@
 <!-- 使用者列表 -->
 <template>
-  <AdjustUserRole
-    v-if="closeChangeRole == null"
-    :user-name="user.userName"
-    :user-notes-id="user.notesId"
-    :user-role-name="user.roleName"
-    :user-role-id="user.roleId"
-  ></AdjustUserRole>
-  <pagination-component
-    class="pagination-component"
-    v-if="numberOfPages > 1"
-    v-model="currentPage"
-    :numberOfPages="numberOfPages"
-  />
+  <AdjustUserRole v-if="closeChangeRole == null" :user-name="user.userName" :user-notes-id="user.notesId"
+    :user-role-name="user.roleName" :user-role-id="user.roleId"></AdjustUserRole>
+  <pagination-component class="pagination-component" v-if="numberOfPages > 1" v-model="currentPage"
+    :numberOfPages="numberOfPages" />
   <table class="table-fill">
     <thead>
       <tr>
@@ -30,29 +21,22 @@
         <td>{{ user.userInfo.userName }}</td>
         <td>{{ user.role.roleName }}</td>
         <td>
-          <button
-            class="button"
-            @click="
-              adjustThisAuth(
-                user.userInfo.userName,
-                user.userInfo.notesId,
-                user.role.roleName,
-                user.role.roleId
-              )
-            "
-          >
+          <button class="button" @click="
+            adjustThisAuth(
+              user.userInfo.userName,
+              user.userInfo.notesId,
+              user.role.roleName,
+              user.role.roleId
+            )
+          ">
             修改角色
           </button>
         </td>
       </tr>
     </tbody>
   </table>
-  <pagination-component
-    class="pagination-component"
-    v-if="numberOfPages > 1"
-    v-model="currentPage"
-    :numberOfPages="numberOfPages"
-  />
+  <pagination-component class="pagination-component" v-if="numberOfPages > 1" v-model="currentPage"
+    :numberOfPages="numberOfPages" />
   <br />
 </template>
 
@@ -106,6 +90,9 @@ export default defineComponent({
       user.notesId = userNotesId;
       user.roleName = userRoleName;
       user.roleId = userRoleId;
+      let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
+      document.body.style.overflow = 'hidden';
+      document.addEventListener("touchmove", m, { passive: false });
     }
 
     provide("closeChangeRole", closeChangeRole);
@@ -197,6 +184,7 @@ tr:last-of-type {
   line-height: 16px;
   margin: 10px 5px 10px 5px;
   transition: 0.2s;
+
   &:hover {
     background-color: rgb(255, 255, 255);
     border: 3px solid rgba(79, 192, 210, 0.7);
