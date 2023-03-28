@@ -1,74 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
 
-  <body>
-    <script>
-      var objArray = [
-        { id: 0, name: "Object 0", otherProp: "321" },
-        { id: 1, name: "O1", otherProp: "648" },
-        { id: 2, name: "Another Object", otherProp: "850" },
-        { id: 3, name: "Almost There", otherProp: "046" },
-        { id: 4, name: "Last Obj", otherProp: "984" },
-        { id: 5, name: "Last Obj", otherProp: "458" },
-      ];
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
 
-      const abc = objArray.map((el) => el.otherProp);
-      const def = objArray.map((el) => el.id + 1);
+<body>
+  <script>
+    var objArray = [
+      { id: 0, name: "Object 0", otherProp: "321" },
+      { id: 1, name: "O1", otherProp: "648" },
+      { id: 2, name: "Another Object", otherProp: "850" },
+      { id: 3, name: "Almost There", otherProp: "046" },
+      { id: 4, name: "Last Obj", otherProp: "984" },
+      { id: 5, name: "Last Obj", otherProp: "458" },
+    ];
 
-      console.log("objArray:", objArray);
-      console.log("abc:", abc);
-      console.log("def:", def);
-      console.log("------ 分隔線 ------");
+    objArray.qwer = "asdfgh";
+    objArray[0].qwer = "asdfgh";
 
-      let arr = ["Jack", "John", "May", "Su", "Ada"];
+    console.log("foodsArray:", objArray);
 
-      let arr1 = [
-        { name: "Casper", like: "鍋燒意麵", age: 18, checked: true },
-        { name: "Wang", like: "炒麵", age: 24, checked: true },
-        { name: "Bobo", like: "蘿蔔泥", age: 1, checked: false },
-        { name: "滷蛋", like: "蘿蔔泥", age: 3, checked: false },
-      ];
+    const abc = objArray.map((el) => el.otherProp);
+    const def = objArray.map((el) => el.id + 1);
 
-      // console.table(arr1);
+    console.log("objArray:", objArray);
+    console.log("abc:", abc);
+    console.log("def:", def);
+    console.log("------ 分隔線 ------");
 
-      let arr2 = arr1.filter(function (value) {
-        return value.checked == true;
-      });
+    let arr = ["Jack", "John", "May", "Su", "Ada"];
 
-      let arr3 = arr1.filter(function (value) {
-        return value.name.length > 3;
-      });
+    let arr1 = [
+      { name: "Casper", like: "鍋燒意麵", age: 18, checked: true },
+      { name: "Wang", like: "炒麵", age: 24, checked: true },
+      { name: "Bobo", like: "蘿蔔泥", age: 1, checked: false },
+      { name: "滷蛋", like: "蘿蔔泥", age: 3, checked: false },
+    ];
 
-      let arr4 = arr1.forEach((element) => element.like.includes("蘿蔔泥"));
+    console.table(arr1);
 
-      console.log("arr1:", arr1);
-      console.log("arr2:", arr2);
-      console.log("arr3:", arr3);
-      console.log("arr4:", arr4);
-      console.log("------ 分隔線 ------");
+    let arr2 = arr1.filter(function (value) {
+      return value.checked == true;
+    });
 
-      function createArray(length, value) {
-        let result = [];
-        for (let i = 0; i < length; i++) {
-          result[i] = value;
-        }
-        return result;
+    let arr3 = arr1.filter(function (value) {
+      return value.name.length > 3;
+    });
+
+    let arr4 = arr1.forEach((element) => element.like.includes("鍋燒意麵"));
+
+    console.log("arr1:", arr1);
+    console.log("arr2:", arr2);
+    console.log("arr3:", arr3);
+    console.log("arr4:", arr4);
+    console.log("------ 分隔線 ------");
+
+    function createArray(length, value) {
+      let result = [];
+      for (let i = 0; i < length; i++) {
+        result[i] = value;
       }
+      return result;
+    }
 
-      console.log("createArray:", createArray(10, "abcdef"));
-      console.table(createArray);
+    console.log("createArray:", createArray(10, "abcdef"));
+    console.table(createArray);
 
-      function swap(tuple) {
-        return [tuple[1], tuple[0], tuple[2]];
-      }
+    function swap(tuple) {
+      return [tuple[2], tuple[0], tuple[1]];
+    }
 
       console.log(swap([8, "seven", "7"]));
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>

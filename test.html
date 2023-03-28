@@ -17,11 +17,12 @@
   <p>v841232</p>
   <p>spdio</p>
   <script>
+
     const rect1 = document.querySelector(".rect1");
     const rect2 = document.querySelector(".rect2");
     const rect3 = document.querySelector(".rect3");
     const eng1 = ["JV", "JX", "JU", "JH", "KD", "KM", "KN", "KP", "KK", "KC", "KJ", "JH", "JK", "KG",];
-    const eng2 = ["MN", "MF", "LF", "LZ"];
+    const eng2 = ["MN", "MF", "MC", "LF", "LZ"];
     const num1 = Math.floor(Math.random() * eng1.length);
     const num2 = Math.floor(Math.random() * eng2.length);
     rect1.innerHTML = eng1[num1] + ("00000000" + Math.random() * 10000000).slice(length - 8);

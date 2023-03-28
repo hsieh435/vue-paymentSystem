@@ -27,13 +27,13 @@ INSERT INTO 資料表名稱 (欄位 1, 欄位 2, 欄位 3) VALUES
 
 
 資料更新
-UPDATE 資料表名稱 SET 欄位 1 = 修改資料 WHERE 欄位 2 = 特定條件;
+UPDATE 資料表名稱 SET "欄位 1" = '修改資料' WHERE "欄位 2" = '特定條件';
 
 
-UPDATE 資料表名稱 SET 欄位 1 = 欄位 1 * 1.5;
+UPDATE 資料表名稱 SET "欄位 1" = "欄位 1" * 1.5;
 更新資料表的另一種方式，資料表中欄位 1 的所有數值皆乘以 1.5
 
-UPDATE 資料表名稱 SET 欄位 1 = 修改資料1, 欄位 2 = 修改資料2 WHERE 欄位3 > 0;
+UPDATE 資料表名稱 SET "欄位 1" = '修改資料1', "欄位 2" = '修改資料2' WHERE "欄位3" > 0;
 更新資料表的另一種方式，欄位3 中數值大於 0 者，欄位 1 與欄位 2 皆會被修改
 
 
@@ -41,7 +41,7 @@ UPDATE 資料表名稱 SET 欄位 1 = 修改資料1, 欄位 2 = 修改資料2 WH
 DELETE FROM 資料表名稱;
 刪除整個資料表
 
-DELETE FROM 資料表名稱 WHERE 欄位 = 資料;
+DELETE FROM 資料表名稱 WHERE "欄位" = '資料';
 刪除符合 WHERE 敘述條件的資料列
 
 
@@ -58,14 +58,17 @@ DELETE FROM 資料表名稱 WHERE 欄位 = 資料;
 SELECT * FROM 資料表名稱;
 查詢出「資料表名稱」的所有欄位資料
 
-SELECT 欄位 1, 欄位 2,... FROM 資料表名稱;
+SELECT "欄位 1", "欄位 2",... FROM 資料表名稱;
 查出特定的欄位資料
 
+SELECT "欄位 1", "欄位 2",... FROM 資料表名稱
+WHERE "欄位 1" = '資料內容'
+
 也可利用 ORDER BY 語法設定升冪或降冪，升冪如下：
-SELECT * FROM 資料表名稱 ORDER BY 欄位 ASC;
+SELECT * FROM 資料表名稱 ORDER BY "欄位" ASC;
 
 降冪如下：
-SELECT * FROM 資料表名稱 ORDER BY 欄位 DESC;
+SELECT * FROM 資料表名稱 ORDER BY "欄位" DESC;
 
 
 
@@ -85,33 +88,33 @@ JOIN 語法是在基於兩個或多個資料表之間有著共同字段，並將
 
 CROSS JOIN：交叉連接
 語法：
-SELECT 欄位 1, 欄位 2, 欄位 3,... FROM 資料表名稱1 CROSS JOIN 資料表名稱2;
+SELECT "欄位 1", "欄位 2", "欄位 3",... FROM 資料表名稱1 CROSS JOIN 資料表名稱2;
 
 連結兩資料表
 
 
 INNER JOIN：內部連接
 語法：
-SELECT 欄位 1, 欄位 2,... FROM 資料表名稱1 INNER JOIN 資料表名稱2 ON 資料表名稱1.欄位 A= 資料表名稱2.欄位B;
+SELECT "欄位 1", "欄位 2",... FROM 資料表名稱1 INNER JOIN 資料表名稱2 ON 資料表名稱1.欄位 A= 資料表名稱2.欄位B;
 
 內部連接根據連接結合的兩個資料表的列值來創建一個新的結果表。查詢會將 table1 中的每一行與 table2 中的每一行進行比較，找到所有滿足連接的行的配對。當滿足連結條件時，A 和 B 行的每個配對的列值會合併成一個結果行。
 
 
 LEFT OUTER JOIN：左外部連接
 語法：
-SELECT 欄位 1, 欄位 2,... FROM 資料表名稱1 LEFT JOIN 資料表名稱2 ON 資料表名稱1.欄位A = 資料表名稱2.欄位B;
+SELECT "欄位 1", "欄位 2",... FROM 資料表名稱1 LEFT JOIN 資料表名稱2 ON 資料表名稱1.欄位A = 資料表名稱2.欄位B;
 LEFT OUTER JOIN 可以用來建立左外部連接，查詢的 SQL 敘述句 LEFT JOIN 左側資料表 (資料表名稱1) 的所有記錄都會加入到查詢結果中，即使右側資料表 (資料表名稱2) 中的連接欄位沒有符合的值也一樣。
 
 
 RIGHT OUTER JOIN：右外部連接
 語法：
-SELECT 欄位 1, 欄位 2,... FROM 資料表名稱1 RIGHT JOIN 資料表名稱2 ON 資料表名稱1.欄位A = 資料表名稱2.欄位B;
+SELECT "欄位 1", "欄位 2",... FROM 資料表名稱1 RIGHT JOIN 資料表名稱2 ON 資料表名稱1.欄位A = 資料表名稱2.欄位B;
 相對於 LEFT JOIN，RIGHT JOIN 可以用來建立右外部連接，查詢的 SQL 敘述句 RIGHT JOIN 右側資料表 (資料表名稱2) 的所有記錄都會加入到查詢結果中，即使左側資料表 (資料表名稱1) 中的連接欄位沒有符合的值也一樣。
 
 
 FULL OUTER JOIN：全外部連接
 語法：
-SELECT 欄位 1, 欄位 2,... FROM 資料表名稱1 FULL JOIN 資料表名稱2 ON 資料表名稱1.欄位A = 資料表名稱2.欄位B;
+SELECT "欄位 1", "欄位 2",... FROM 資料表名稱1 FULL JOIN 資料表名稱2 ON 資料表名稱1.欄位A = 資料表名稱2.欄位B;
 FULL JOIN 即為 LEFT JOIN 與 RIGHT JOIN 的聯集，它會返回左右資料表中所有的紀錄，不論是否符合連接條件。
 
 
@@ -121,6 +124,19 @@ FULL JOIN 即為 LEFT JOIN 與 RIGHT JOIN 的聯集，它會返回左右資料�
 UNION 操作符
 UNION 語法用於合併兩個或多個 SELECT 語法的結果集。
 UNION 内部的每個 SELECT 語法必需擁有相同數量的列。列也必需擁有相似的資料類型。同時每個 SELECT 語法中的列，顺序必需相同。
+
+select id,name1 as name from new_project where not name1 is null
+union
+select id,name2 as name from new_project where not name2 is null
+union
+select id,name3 as name from new_project where not name3 is null
+
+select distinct id,name1,name2,name3 from new_project
+
+
+select id,name1,name2,name3 from new_project group by id,name1,name2,name3
+
+
 
 NULL 值
 
@@ -136,3 +152,28 @@ LIMIT 和 OFFSET 允許只回傳由查詢生成的一部分資料列，LIMIT 用
 gen_random_uuid () → uuid
 
 
+
+INSERT INTO B (C, D, E)
+SELECT DISTINCT X, Y, Z FROM A;
+
+
+
+將 new_project 資料表匯入 project
+INSERT INTO project (project_id, project_main_id, project_name, category_id, requisition_date, plan_start_date, plan_end_date, dept_in_charge_id, dept_in_charge_name, application_date, applicant, quantity, unit, status, spec, purpose, attachments, proposition, countersign, payment_method, purchaser, return_plant_date, to_matl, matl_sno, matl_lock, purchasing_memo, contract_point, contract_dept, contract_no, completion_date, completion_user, start_date, end_date, construction_content, acceptance_report, abnormal_report, completion_summary, suspend_reason, prj_year, added_datetime, locked_by, project_type, pisystem_project_id, work_item, suspend_flag, prj_agent)
+SELECT DISTINCT "REQ_NO", "REQ_NO",  FROM public.new_project
+
+
+
+
+刪除 NULL
+DELETE FROM prj_cost_dept WHERE "cost_dept_name" IS NULL;
+
+
+將 new_project 資料表匯入 prj_cost_dept
+INSERT INTO prj_cost_dept (project_id,  cost_dept_id)
+SELECT DISTINCT "REQ_NO", "WRK_SNA" FROM public.new_project
+
+
+
+INSERT INTO prj_cost_dept (project_id, cost_dept_name, cost_dept_id)
+SELECT DISTINCT "REQ_NO", "PRJ_NAME", "WRK_SNA" FROM public.new_project
