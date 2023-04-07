@@ -43,7 +43,7 @@ async function addCompany() {
   // console.log("prjPaymentAccountName:", prjPaymentAccountName.value);
   // console.log("companyTaxNo:", companyTaxNo.value.toUpperCase());
   if (companyId.value === "" || companyName.value === "" || shortName.value === "" || prjPaymentAccountName.value === "") {
-    alert("123");
+    alert("請確實填寫公司資料");
   } else {
     try {
       const res: AxiosResponse = await apiNewCompany(
@@ -64,7 +64,6 @@ async function addCompany() {
     }
   }
 }
-
 
 addCompanyInfo.value = null;
 function closeIt() {

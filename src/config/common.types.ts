@@ -61,6 +61,7 @@ export interface AllCompanyInformation {
   companyId: string;
   companyName: string;
   shortName: string;
+  prjPaymentAccountId: string;
   prjPaymentAccountName: string;
 }
 

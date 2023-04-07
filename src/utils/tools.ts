@@ -19,7 +19,6 @@ export function CloseAddNewCompany() {
 }
 
 
-
 export {
   userId,
   userJWT,

@@ -19,7 +19,7 @@
         <td>{{ comapny.companyId }}</td>
         <td class="startLeft">{{ comapny.companyName }}</td>
         <td class="startLeft">{{ comapny.shortName }}</td>
-        <td class="startLeft">{{ comapny.prjPaymentAccountName }}</td>
+        <td class="startLeft">{{ comapny.prjPaymentAccountId}}-{{ comapny.prjPaymentAccountName }}</td>
         <td>編輯、刪除</td>
         <!-- TODO：新增、編輯及刪除功能 -->
       </tr>
@@ -28,9 +28,8 @@
   <br />
 <!-- <CompanyList @eventIsANumber="gotANumber" @eventIsAString="gotAText"></CompanyList>
   <br />
-  <br />
   <h4>EMIT 子傳父數字：{{ aNumber }}</h4>
-<h4>EMIT 子傳父文字：{{ aString }}</h4> -->
+    <h4>EMIT 子傳父文字：{{ aString }}</h4> -->
   <AddNewCompany v-if="addCompanyInfo == null"></AddNewCompany>
   <BackToLoginView></BackToLoginView>
 </template>
@@ -82,6 +81,7 @@ async function sendCompanyArray() {
     const res: AxiosResponse = await apiFindAllCompany();
 
     if (res.data.returnCode === "0") {
+      // console.log("res.data.data:", res.data.data);
       comapnyInfo.value = res.data.data;
       // console.log("comapnyInfo", comapnyInfo, typeof comapnyInfo);
       // console.log("comapnyInfo.value", comapnyInfo.value, typeof comapnyInfo.value);

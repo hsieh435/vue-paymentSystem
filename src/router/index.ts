@@ -522,6 +522,23 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+
+      // 分隔線，以下為其他
+
+      {
+        // numComponents
+        path: "/numComponents",
+        name: "numComponents",
+        component: NormalLayout,
+        children: [
+          {
+            path: "",
+            component: () =>
+              import("../views/subfunction/others/numComponents.vue"),
+          },
+        ],
+      },
+
       // 分隔線，結束
     ],
   },

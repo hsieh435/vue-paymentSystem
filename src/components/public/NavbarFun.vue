@@ -16,6 +16,7 @@
       <li class="nav__menu-item">
         <a>其他 ▼</a>
         <ul class="nav__submenu">
+          <li class="nav__submenu-item"><a @click="gotoNum()">NUM COMPONENTS</a></li>
           <li class="nav__submenu-item">
             <a @click="backToMainpage()">返回主畫面</a>
           </li>
@@ -88,6 +89,10 @@ async function gotNavbarFunction() {
 
 function routerTo(url: string) {
   router.push(url);
+}
+
+function gotoNum() {
+  router.push("./numComponents");
 }
 
 function backToMainpage() {

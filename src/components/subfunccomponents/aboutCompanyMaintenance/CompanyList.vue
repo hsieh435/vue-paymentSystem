@@ -8,7 +8,8 @@ export default defineComponent({
   name: "CompanyList",
   setup(props, context) {
     function sentANumber() {
-      const num: number = Math.ceil(Math.random() * 12000000000);
+      const now = new Date();
+      const num: number = (now.getMilliseconds() > 499 ? Math.ceil(Math.random() * 10000000000) : Math.ceil(Math.random() * -10000000000));
       context.emit("eventIsANumber", num);
       // console.log("A1:", num, typeof num);
     }
@@ -16,9 +17,9 @@ export default defineComponent({
     function sentAString() {
       const ab =
         "天地玄黃宇宙洪荒日月盈昃辰宿列張寒來暑往秋收冬藏閏餘成歲律呂調陽雲騰致雨露結為霜金生麗水玉出昆岡劍號巨闕珠稱夜光";
-      const a: any = ab.split("");
-      const num = Math.ceil(Math.random() * (a.length - 1));
-      context.emit("eventIsAString", a[num], typeof a[num]);
+      // const a: any = ab.split("");
+      const num = Math.floor(Math.random() * ab.length);
+      context.emit("eventIsAString", ab[num], typeof ab[num]);
       // console.log("A2:", num, typeof num);
     }
     // context.emit("傳送的資料名稱", "傳送的資料內容");

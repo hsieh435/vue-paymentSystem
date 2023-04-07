@@ -13,7 +13,7 @@
       <div class="signinword">付款系統</div>
     </div>
     <input type="text" v-model="username" placeholder="USERNAME" />
-    <button @click="login()">登入付款系統</button>
+    <!-- <button @click="login()">登入付款系統</button> -->
     <button @click="newLogin()">登入付款系統</button>
   </div>
   <PasswordWrong v-if="passwordWrong === false"></PasswordWrong>
