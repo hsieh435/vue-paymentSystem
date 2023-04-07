@@ -27,7 +27,7 @@ INSERT INTO 資料表名稱 (欄位 1, 欄位 2, 欄位 3) VALUES
 
 
 資料更新
-UPDATE 資料表名稱 SET "欄位 1" = '修改資料' WHERE "欄位 2" = '特定條件';
+UPDATE 資料表名稱 SET "欄位 1" = '修改資料' WHERE "欄位 2" = 特定條件;
 
 
 UPDATE 資料表名稱 SET "欄位 1" = "欄位 1" * 1.5;
@@ -158,15 +158,14 @@ SELECT DISTINCT X, Y, Z FROM A;
 
 
 
-將 new_project 資料表匯入 project
-INSERT INTO project (project_id, project_main_id, project_name, category_id, requisition_date, plan_start_date, plan_end_date, dept_in_charge_id, dept_in_charge_name, application_date, applicant, quantity, unit, status, spec, purpose, attachments, proposition, countersign, payment_method, purchaser, return_plant_date, to_matl, matl_sno, matl_lock, purchasing_memo, contract_point, contract_dept, contract_no, completion_date, completion_user, start_date, end_date, construction_content, acceptance_report, abnormal_report, completion_summary, suspend_reason, prj_year, added_datetime, locked_by, project_type, pisystem_project_id, work_item, suspend_flag, prj_agent)
-SELECT DISTINCT "REQ_NO", "REQ_NO",  FROM public.new_project
-
+更新
+UPDATE prj_cost_dept SET "percentage" = 100 WHERE "percentage" = 0;
 
 
 
 刪除 NULL
 DELETE FROM prj_cost_dept WHERE "cost_dept_name" IS NULL;
+
 
 
 將 new_project 資料表匯入 prj_cost_dept
@@ -177,3 +176,78 @@ SELECT DISTINCT "REQ_NO", "WRK_SNA" FROM public.new_project
 
 INSERT INTO prj_cost_dept (project_id, cost_dept_name, cost_dept_id)
 SELECT DISTINCT "REQ_NO", "PRJ_NAME", "WRK_SNA" FROM public.new_project
+
+
+
+
+INSERT INTO vendor_bid_info (project_id, cost_dept_id)
+SELECT DISTINCT "REQ_NO", "WRK_SNA" FROM public.new_project
+
+
+
+
+
+INSERT INTO payment_record (project_id, vendor_tax_no, sno, payment_date, agent, amount, acceptance_spec, acceptance_opinion, added_by, added_datetime, modified_by, updated_datetime, payment_app_no)
+SELECT "REQ_NO", COALESCE("ORD_PUB", 'null' ), "SUB_TIM", "CHK_DATE", "CHK_MAN_1", "CHK_AMT_1", "CHK_RULE", "CHK_RECO", "CHK_MAN_1", "BIL_DATE", "CHK_MAN_1", "BIL_DATE", "REQ_NO" FROM public.new_project
+
+
+ALTER TABLE public.new_project
+ALTER COLUMN "SUB_TIM" TYPE timestamp without time zone
+USING "SUB_TIM"::timestamp without time zone;
+
+
+
+
+INSERT INTO prj_cost_dept (project_id, amount)
+SELECT DISTINCT ON ("REQ_NO")"REQ_NO", "SC0_AM2" FROM public.new_project
+JOIN project_id ON "REQ_NO" = prj_cost_dept.project_id
+GROUP BY "REQ_NO", "SC0_AM2";
+
+
+INSERT INTO public.vendor_bid_info (project_id, vendor_tax_no, vendor_name, quotation, negotiation_amount)
+SELECT DISTINCT ON ("REQ_NO") "REQ_NO", "SC1_PUB", "SC1_VEN", "SC1_AMT", "SC1_AM2"  FROM public.new_project
+
+
+INSERT INTO public.vendor_bid_info (project_id, vendor_tax_no, vendor_name, quotation, negotiation_amount)
+SELECT DISTINCT ON ("REQ_NO") "REQ_NO", "SC2_PUB", "SC2_VEN", "SC2_AMT", "SC2_AM2"  FROM public.new_project
+WHERE "SC2_VEN" IS NOT NULL
+ON CONFLICT (project_id, vendor_tax_no) DO NOTHING;
+
+
+INSERT INTO public.vendor_bid_info (project_id, vendor_tax_no, vendor_name, quotation, negotiation_amount)
+SELECT DISTINCT ON ("REQ_NO") "REQ_NO", "SC3_PUB", "SC3_VEN", "SC3_AMT", "SC3_AM2"  FROM public.new_project
+WHERE "SC3_VEN" IS NOT NULL
+ON CONFLICT (project_id, vendor_tax_no) DO NOTHING;
+
+
+
+ALTER TABLE public.new_project
+ALTER COLUMN "SC1_AMT" TYPE numeric
+USING "SC1_AMT"::numeric;
+
+
+
+UPDATE public.new_project
+SET "SC1_AMT" = REPLACE("SC1_AMT", ',', '');
+    SC2_AMT = REPLACE(SC2_AMT, ',', ''),
+    SC3_AMT = REPLACE(SC3_AMT, ',', ''),
+    SC1_AM2 = REPLACE(SC1_AM2, ',', ''),
+    SC2_AM2 = REPLACE(SC2_AM2, ',', ''),
+    SC3_AM2 = REPLACE(SC3_AM2, ',', ''),
+
+
+
+UPDATE payment_record SET "currency" = 'JPY' WHERE "project_id" like '%PNB1%';
+
+
+
+INSERT INTO public.project (project_main_id, project_id, project_name, category_id, requisition_date, plan_start_date, plan_end_date, dept_in_charge_id, dept_in_charge_name, application_date, applicant, quantity, unit, spec, purpose, attachments, proposition, countersign, purchaser, purchasing_memo, completion_date, completion_user, start_date, end_date, construction_content, acceptance_report, abnormal_report, completion_summary, prj_year, added_datetime, pisystem_project_id, prj_agent)
+SELECT DISTINCT ON ("REQ_NO") "REQ_NO", "REQ_NO", "PRJ_NAME", "REQ_NO", "REQ_DATE", "PWK_DAT1", "PWK_DAT2", "WRK_DNA", "WRK_DNA", "BIL_DATE", "END_MAN", "PRJ_NUM", "NUM_UNIT", "PRJ_SPEC", "PRJ_USE", "PRJ_PS", "PRJ_PDO", "PRJ_MEET", "ORD_MAN", "SCB_MEMO", "END_DATE", "END_MAN", "RWK_DAT1", "RWK_DAT2", "END_SPEC", "END_REPO", "END_ERRO", "END_SUMA", "BIL_DATE", "BIL_DATE", "REQ_NO", "CHK_MAN_1" FROM public.new_project
+
+
+ALTER TABLE public.new_project
+ALTER COLUMN "PWK_DAT1" TYPE timestamp without time zone
+USING "PWK_DAT1"::timestamp without time zone;
+
+
+UPDATE public.new_project SET "CHK_DATE_1" = NULL WHERE "CHK_DATE_1" = '';
