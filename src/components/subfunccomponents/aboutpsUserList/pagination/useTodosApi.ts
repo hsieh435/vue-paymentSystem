@@ -5,9 +5,15 @@ import axios from "axios";
 import { useClientSidePagination } from "./useClientSidePagination";
 
 export interface User {
-  userId: string;
-  userName: string;
-  roleName: string;
+  id: number;
+  userInfo: {
+    notesId: string;
+    userName: string;
+  };
+  role: {
+    roleName: string;
+    roleId: string;
+  };
 }
 // Interface 可以用來定義物件介面，還有由物件所延伸的型別，例如：Object、Array、Function），常用於對「物件的形狀（Shape）」進行描述。
 

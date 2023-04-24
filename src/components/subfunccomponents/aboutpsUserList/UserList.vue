@@ -21,14 +21,13 @@
         <td>{{ user.userInfo.userName }}</td>
         <td>{{ user.role.roleName }}</td>
         <td>
-          <button class="button" @click="
-            adjustThisAuth(
-              user.userInfo.userName,
-              user.userInfo.notesId,
-              user.role.roleName,
-              user.role.roleId
-            )
-          ">
+          <button class="button" @click="adjustThisAuth(
+            user.userInfo.userName,
+            user.userInfo.notesId,
+            user.role.roleName,
+            user.role.roleId
+          )
+            ">
             修改角色
           </button>
         </td>
@@ -40,77 +39,57 @@
   <br />
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { defineComponent, onMounted, ref, reactive, provide } from "vue";
 import AdjustUserRole from "./AdjustUserRole.vue";
 import PaginationComponent from "./pagination/PaginationComponent.vue";
 import { useTodosApi } from "./pagination/useTodosApi";
-export default defineComponent({
-  name: "UserList",
-  components: {
-    AdjustUserRole,
-    PaginationComponent,
-  },
 
-  setup() {
-    const userId = localStorage.getItem("userId");
-    const userJWT = localStorage.getItem("userJWT");
+const userId = localStorage.getItem("userId");
+const userJWT = localStorage.getItem("userJWT");
 
-    // 以下為 Pagination 相關
-    const currentPage = ref(1);
-    const rowsPerPage = ref(20);
+// 以下為 Pagination 相關
+const currentPage = ref(1);
+const rowsPerPage = ref(20);
 
-    const { users, UsersAreLoading, loadUsers, numberOfPages } = useTodosApi(
-      currentPage,
-      rowsPerPage
-    );
+const { users, UsersAreLoading, loadUsers, numberOfPages } = useTodosApi(
+  currentPage,
+  rowsPerPage
+);
 
-    onMounted(async () => loadUsers());
+onMounted(async () => loadUsers());
 
-    // props 傳遞資料至 AdjustFunction Component
-    const user = reactive({
-      userName: "",
-      notesId: "",
-      roleName: "",
-      roleId: "",
-    });
-
-    // 以下為開啟調整角色 Component 相關
-    const closeChangeRole = ref();
-    closeChangeRole.value = true;
-
-    function adjustThisAuth(
-      userName: string,
-      userNotesId: string,
-      userRoleName: string,
-      userRoleId: string
-    ) {
-      closeChangeRole.value = null;
-      user.userName = userName;
-      user.notesId = userNotesId;
-      user.roleName = userRoleName;
-      user.roleId = userRoleId;
-      let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
-      document.body.style.overflow = 'hidden';
-      document.addEventListener("touchmove", m, { passive: false });
-    }
-
-    provide("closeChangeRole", closeChangeRole);
-
-    return {
-      users,
-      UsersAreLoading,
-      loadUsers,
-      numberOfPages,
-      currentPage,
-      rowsPerPage,
-      useTodosApi,
-      adjustThisAuth,
-      user,
-      closeChangeRole,
-    };
-  },
+// props 傳遞資料至 AdjustFunction Component
+const user = reactive({
+  userName: "",
+  notesId: "",
+  roleName: "",
+  roleId: "",
 });
+
+// 以下為開啟調整角色 Component 相關
+const closeChangeRole = ref();
+closeChangeRole.value = true;
+
+function adjustThisAuth(
+  userName: string,
+  userNotesId: string,
+  userRoleName: string,
+  userRoleId: string
+) {
+  closeChangeRole.value = null;
+  user.userName = userName;
+  user.notesId = userNotesId;
+  user.roleName = userRoleName;
+  user.roleId = userRoleId;
+  let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
+  document.body.style.overflow = 'hidden';
+  document.addEventListener("touchmove", m, { passive: false });
+}
+
+provide("closeChangeRole", closeChangeRole);
+
+
 </script>
 
 <style lang="scss" scoped>

@@ -5,6 +5,7 @@
   <table class="table-fill">
     <thead>
       <tr>
+        <th>NO.</th>
         <th>公司統編</th>
         <th>公司代碼</th>
         <th>公司名稱</th>
@@ -15,18 +16,19 @@
     </thead>
     <tbody class="table-hover">
       <tr v-for="(comapny, index) in comapnyInfo" :key="index">
+        <td>{{ comapny.index }}</td>
         <td>{{ comapny.companyTaxNo }}</td>
         <td>{{ comapny.companyId }}</td>
         <td class="startLeft">{{ comapny.companyName }}</td>
         <td class="startLeft">{{ comapny.shortName }}</td>
-        <td class="startLeft">{{ comapny.prjPaymentAccountId}}-{{ comapny.prjPaymentAccountName }}</td>
+        <td class="startLeft">{{ comapny.prjPaymentAccountId }}-{{ comapny.prjPaymentAccountName }}</td>
         <td>編輯、刪除</td>
         <!-- TODO：新增、編輯及刪除功能 -->
       </tr>
     </tbody>
   </table>
   <br />
-<!-- <CompanyList @eventIsANumber="gotANumber" @eventIsAString="gotAText"></CompanyList>
+  <!-- <CompanyList @eventIsANumber="gotANumber" @eventIsAString="gotAText"></CompanyList>
   <br />
   <h4>EMIT 子傳父數字：{{ aNumber }}</h4>
     <h4>EMIT 子傳父文字：{{ aString }}</h4> -->
@@ -81,8 +83,13 @@ async function sendCompanyArray() {
     const res: AxiosResponse = await apiFindAllCompany();
 
     if (res.data.returnCode === "0") {
-      // console.log("res.data.data:", res.data.data);
+      console.log("res.data.data:", res.data.data);
       comapnyInfo.value = res.data.data;
+      for (let i = 0; i < res.data.data.length; i++) {
+        const eachCompany = res.data.data[i];
+        eachCompany["index"] = i + 1;
+      }
+
       // console.log("comapnyInfo", comapnyInfo, typeof comapnyInfo);
       // console.log("comapnyInfo.value", comapnyInfo.value, typeof comapnyInfo.value);
     }

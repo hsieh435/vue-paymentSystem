@@ -33,101 +33,77 @@
   <pagination-component class="pagination-component" v-if="numberOfPages > 1" v-model="currentPage"
     :numberOfPages="numberOfPages" />
 </template>
-<script lang="ts">
+<script setup lang="ts">
 import { defineComponent, ref, reactive, provide, onMounted } from "vue";
 import AuthorityManagement from "./AuthorityManagement.vue";
 import EditRole from "./EditRole.vue";
 import DeleteTheRole from "./DeleteTheRole.vue";
 import PaginationComponent from "./pagination/PaginationComponent.vue";
 import { roleApi } from "./pagination/roleApi";
-export default defineComponent({
-  name: "RoleList",
-  components: {
-    AuthorityManagement,
-    EditRole,
-    DeleteTheRole,
-    PaginationComponent,
-  },
+import { } from "../../../config/common.types";
 
-  setup() {
-    const userId = localStorage.getItem("userId");
-    const userJWT = localStorage.getItem("userJWT");
+const userId = localStorage.getItem("userId");
+const userJWT = localStorage.getItem("userJWT");
 
-    // 以下為 Pagination 相關
-    const currentPage = ref(1);
-    const rowsPerPage = ref(20);
+// 以下為 Pagination 相關
+const currentPage = ref(1);
+const rowsPerPage = ref(20);
 
-    const { roles, rolesAreLoading, loadRoles, numberOfPages } = roleApi(
-      currentPage,
-      rowsPerPage
-    );
+const { roles, rolesAreLoading, loadRoles, numberOfPages } = roleApi(
+  currentPage,
+  rowsPerPage
+);
 
-    onMounted(async () => loadRoles());
+onMounted(async () => loadRoles());
 
-    const role = reactive({
-      roleId: "",
-      roleName: "",
-    });
-
-    // 修改權限功能的 value 值，控制出現與否
-    const adjustAuthority = ref();
-    adjustAuthority.value = true;
-
-    function adjustThisAuth(roleId: string, roleName: string) {
-      adjustAuthority.value = null;
-      role.roleId = roleId;
-      role.roleName = roleName;
-      let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
-      document.body.style.overflow = 'hidden';
-      document.addEventListener("touchmove", m, { passive: false });
-    }
-
-    // 編輯角色功能的 value 值，控制出現與否
-    const adjustRole = ref();
-    adjustRole.value = true;
-
-    function editRole(roleId: string, roleName: string) {
-      adjustRole.value = null;
-      role.roleId = roleId;
-      role.roleName = roleName;
-      let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
-      document.body.style.overflow = 'hidden';
-      document.addEventListener("touchmove", m, { passive: false });
-    }
-
-    // 刪除角色功能的 value 值，控制出現與否
-    const deleteRole = ref();
-    deleteRole.value = true;
-
-    function deleteThisRole(roleId: string, roleName: string) {
-      deleteRole.value = null;
-      role.roleId = roleId;
-      role.roleName = roleName;
-      let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
-      document.body.style.overflow = 'hidden';
-      document.addEventListener("touchmove", m, { passive: false });
-    }
-
-    provide("adjustAuthority", adjustAuthority);
-    provide("adjustRole", adjustRole);
-    provide("deleteRole", deleteRole);
-
-    return {
-      roles,
-      role,
-      rolesAreLoading,
-      loadRoles,
-      numberOfPages,
-      currentPage,
-      adjustAuthority,
-      adjustThisAuth,
-      adjustRole,
-      editRole,
-      deleteRole,
-      deleteThisRole,
-    };
-  },
+const role = reactive({
+  roleId: "",
+  roleName: "",
 });
+
+// 修改權限功能的 value 值，控制出現與否
+const adjustAuthority = ref();
+adjustAuthority.value = true;
+
+function adjustThisAuth(roleId: string, roleName: string) {
+  adjustAuthority.value = null;
+  role.roleId = roleId;
+  role.roleName = roleName;
+  let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
+  document.body.style.overflow = 'hidden';
+  document.addEventListener("touchmove", m, { passive: false });
+}
+
+// 編輯角色功能的 value 值，控制出現與否
+const adjustRole = ref();
+adjustRole.value = true;
+
+function editRole(roleId: string, roleName: string) {
+  adjustRole.value = null;
+  role.roleId = roleId;
+  role.roleName = roleName;
+  let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
+  document.body.style.overflow = 'hidden';
+  document.addEventListener("touchmove", m, { passive: false });
+}
+
+// 刪除角色功能的 value 值，控制出現與否
+const deleteRole = ref();
+deleteRole.value = true;
+
+function deleteThisRole(roleId: string, roleName: string) {
+  deleteRole.value = null;
+  role.roleId = roleId;
+  role.roleName = roleName;
+  let m = function (e: { preventDefault: () => void; }) { e.preventDefault(); };
+  document.body.style.overflow = 'hidden';
+  document.addEventListener("touchmove", m, { passive: false });
+}
+
+provide("adjustAuthority", adjustAuthority);
+provide("adjustRole", adjustRole);
+provide("deleteRole", deleteRole);
+
 </script>
 
 <style lang="scss" scoped>

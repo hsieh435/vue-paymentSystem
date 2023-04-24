@@ -2,23 +2,14 @@
   <button class="back" @click="back()">返回主頁面</button>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
-export default defineComponent({
-  name: "BackToLoginView",
-  components: {},
 
-  setup() {
-    const router = useRouter();
-    function back() {
-      router.push("./LoginView");
-    }
-    return {
-      back,
-    };
-  },
-});
+const router = useRouter();
+function back() {
+  router.push("./LoginView");
+}
+
 </script>
 
 <style scoped>

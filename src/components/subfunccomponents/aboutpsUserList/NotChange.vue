@@ -6,26 +6,15 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, inject } from "vue";
-export default defineComponent({
-  name: "NotChange",
-  components: {},
+<script setup lang="ts">
+import { inject } from "vue";
 
-  setup() {
-    const notchange: any = inject("notchange");
+const notchange: any = inject("notchange");
 
-    function closeIT() {
-      notchange.value = true;
-    }
+function closeIT() {
+  notchange.value = true;
+}
 
-    return {
-      closeIT,
-    };
-  },
-});
-
-// NotChange
 </script>
 <style src="../../public/alert.scss" lang="scss" scoped>
 </style>

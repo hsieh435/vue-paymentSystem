@@ -4,17 +4,10 @@
   <BackToLoginView></BackToLoginView>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, inject } from "vue";
+<script setup lang="ts">
+import { ref, inject } from "vue";
 import BackToLoginView from "../../../components/public/BackToLoginView.vue";
-export default defineComponent({
-  name: "MonthCost",
-  components: {
-    BackToLoginView,
-  },
-  setup() {
-    return {};
-  },
-});
+
 </script>
-<style src="../subfunction.scss" lang="scss" scoped></style>
+<style src="../subfunction.scss" lang="scss" scoped>
+</style>

@@ -4,6 +4,7 @@
 // 登入資料
 export interface ILogin {
   notesId: string;
+  password: string;
 }
 
 
@@ -57,6 +58,7 @@ interface EachFunctionModels {
 
 // 公司資料
 export interface AllCompanyInformation {
+  index: number;
   companyTaxNo: string;
   companyId: string;
   companyName: string;

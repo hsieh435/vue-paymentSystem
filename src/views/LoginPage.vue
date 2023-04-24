@@ -13,6 +13,7 @@
       <div class="signinword">付款系統</div>
     </div>
     <input type="text" v-model="username" placeholder="USERNAME" />
+    <input type="password" v-model="password" placeholder="PASSWORD" />
     <!-- <button @click="login()">登入付款系統</button> -->
     <button @click="newLogin()">登入付款系統</button>
   </div>
@@ -21,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, ref, provide, inject } from "vue";
+import { ref, provide, inject } from "vue";
 import { AxiosResponse } from "axios";
 import axios from "axios";
 import router from "../router";
@@ -31,7 +32,8 @@ import PasswordWrong from "../components/loginPage/PasswordWrong.vue";
 import EmptyColumn from "../components/loginPage/EmptyColumn.vue";
 
 
-const username = ref("");
+const username = ref<string>("");
+const password = ref<string>("");
 
 const passwordWrong = ref();
 passwordWrong.value = true;
@@ -54,6 +56,7 @@ const login = () => {
     axios
       .post("http://localhost:8085/paymentSystem/public/getSystemJWT", {
         notesId: username.value,
+        password: password.value
       })
       // post 放三個參數，url、data、config(header)
 
@@ -86,6 +89,7 @@ const newLogin = async () => {
   } else {
     const res: AxiosResponse = await apiPostUserLogin({
       notesId: username.value,
+      password: password.value
     });
 
     if (res.data.returnCode === "0") {

@@ -1,14 +1,6 @@
 <template></template>
-<script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "GoToSSO",
-  components: {},
+<script setup lang="ts">
 
-  setup() {
-    location.href = `http://localhost:8081?systemId=paymentSystem&callBackPath=http://localhost:8080/GotSSOInfo`;
+location.href = `http://localhost:8081?systemId=paymentSystem&callBackPath=http://localhost:8080/GotSSOInfo`;
 
-    return {};
-  },
-});
 </script>

@@ -16,7 +16,7 @@ export default defineComponent({
 
     function sentAString() {
       const ab =
-        "天地玄黃宇宙洪荒日月盈昃辰宿列張寒來暑往秋收冬藏閏餘成歲律呂調陽雲騰致雨露結為霜金生麗水玉出昆岡劍號巨闕珠稱夜光";
+        "天地玄黃宇宙洪荒日月盈昃辰宿列張寒來暑往秋收冬藏閏餘成歲律呂調陽雲騰致雨露結為霜金生麗水玉出昆岡劍號巨闕珠稱夜光果珍李柰菜重芥薑海鹹河淡鱗潛羽翔龍師火帝鳥官人皇始制文字乃服衣裳推位讓國有虞陶唐弔民伐罪周發殷湯坐朝問道垂拱平章"
       // const a: any = ab.split("");
       const num = Math.floor(Math.random() * ab.length);
       context.emit("eventIsAString", ab[num], typeof ab[num]);

@@ -11,14 +11,10 @@
   <router-view />
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import NavbarFun from "../public/NavbarFun.vue";
-export default {
-  name: "NormalLayout",
-  components: {
-    NavbarFun,
-  },
-};
+
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

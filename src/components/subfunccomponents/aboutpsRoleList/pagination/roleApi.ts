@@ -4,9 +4,11 @@ import axios from "axios";
 import { roleUseClientSidePagination } from "./roleUseClientSidePagination";
 
 export interface Role {
+  id: number;
   userId: string;
   userName: string;
   roleName: string;
+  roleId: string;
 }
 // Interface 可以用來定義物件介面，還有由物件所延伸的型別，例如：Object、Array、Function），常用於對「物件的形狀（Shape）」進行描述。
 

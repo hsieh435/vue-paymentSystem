@@ -3,38 +3,27 @@
   <router-view v-if="isRouterAlive"></router-view>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { defineComponent, ref, provide, nextTick } from "vue";
 import LoadingForever from "./components/public/LoadingForever.vue";
-export default defineComponent({
-  name: "App",
-  components: {
-    LoadingForever,
-  },
-  setup() {
-    // 以下為 loading 畫面呈現，並透過 provide 與 inject 等方式傳遞功能至各個 Component
-    const loading = ref();
-    loading.value = true;
 
-    // 以下為重新刷新頁面相關功能
-    const isRouterAlive = ref(true);
-    const reload = () => {
-      isRouterAlive.value = false;
-      nextTick(() => {
-        isRouterAlive.value = true;
-      });
-    };
+// 以下為 loading 畫面呈現，並透過 provide 與 inject 等方式傳遞功能至各個 Component
+const loading = ref();
+loading.value = true;
 
-    provide("valueofLoading", loading);
-    provide("reload", reload);
-    // provide("要傳遞的資料名稱", "要傳遞的資料內容，型別為字串");
+// 以下為重新刷新頁面相關功能
+const isRouterAlive = ref(true);
+const reload = () => {
+  isRouterAlive.value = false;
+  nextTick(() => {
+    isRouterAlive.value = true;
+  });
+};
 
-    return {
-      loading,
-      isRouterAlive,
-    };
-  },
-});
+provide("valueofLoading", loading);
+provide("reload", reload);
+// provide("要傳遞的資料名稱", "要傳遞的資料內容，型別為字串");
+
 </script>
 
 <style lang="scss">

@@ -5,68 +5,40 @@
   <div class="pagination-container" aria-label="row pagination">
     <ul v-if="numberOfPages >= 1" class="pagination">
       <!-- 第一頁 -->
-      <li
-        class="page-item"
-        aria-label="go to previous page"
-        @click="first()"
-        :class="{
+      <li class="page-item" aria-label="go to previous page" @click="first()" :class="{
           disabled: currentPage === 1,
-        }"
-      >
+        }">
         <span class="page-link">FIRST PAGE</span>
       </li>
       <!-- 往前跳四頁 -->
-      <li
-        class="page-item"
-        @click="minusfour()"
-        :class="{
+      <li class="page-item" @click="minusfour()" :class="{
           disabled: currentPage < 5,
-        }"
-      >
+        }">
         <span class="page-link">&#10218;</span>
       </li>
       <!-- 當下頁面 -->
-      <li
-        v-for="index in numberOfPages"
-        :key="index"
-        :aria-label="'go to page' + index"
-        class="page-item"
-        @click="setCurrentPage(index)"
-      >
-        <div
-          class="page-link"
-          :class="{
+      <li v-for="index in numberOfPages" :key="index" :aria-label="'go to page' + index" class="page-item"
+        @click="setCurrentPage(index)">
+        <div class="page-link" :class="{
             'active-page': currentPage === index,
-          }"
-          v-if="
-            index > 0 &&
-            index < numberOfPages + 1 &&
-            index > currentPage - 4 &&
-            index < currentPage + 4
-          "
-        >
+          }" v-if="index > 0 &&
+    index < numberOfPages + 1 &&
+    index > currentPage - 4 &&
+    index < currentPage + 4
+    ">
           {{ index }}
         </div>
       </li>
       <!-- 往後跳四頁 -->
-      <li
-        class="page-item"
-        @click="plusfour()"
-        :class="{
+      <li class="page-item" @click="plusfour()" :class="{
           disabled: currentPage > numberOfPages - 4,
-        }"
-      >
+        }">
         <span class="page-link">&#10219;</span>
       </li>
       <!-- 最後一頁 -->
-      <li
-        class="page-item"
-        :class="{
+      <li class="page-item" :class="{
           disabled: currentPage === numberOfPages || !numberOfPages,
-        }"
-        aria-label="go to last page"
-        @click="last()"
-      >
+        }" aria-label="go to last page" @click="last()">
         <div class="page-link">LAST PAGE</div>
       </li>
       <!-- 輸入頁數 -->
@@ -79,7 +51,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref, toRefs, provide } from "vue";
 import searchCompomnent from "../search/searchCompomnent.vue";
 
@@ -151,4 +123,5 @@ const gotAKeyword = (e: any) => {
 provide("keyword", keyword);
 </script>
 
-<style src="./PaginationComponent.scss" lang="scss" scoped></style>
+<style src="./PaginationComponent.scss" lang="scss" scoped>
+</style>

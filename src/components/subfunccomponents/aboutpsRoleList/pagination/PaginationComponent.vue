@@ -4,72 +4,43 @@
   <div class="pagination-container" aria-label="row pagination">
     <ul v-if="numberOfPages >= 1" class="pagination">
       <!-- 第一頁 -->
-      <li
-        class="page-item"
-        aria-label="go to previous page"
-        @click="first()"
-        :class="{
+      <li class="page-item" aria-label="go to previous page" @click="first()" :class="{
           disabled: currentPage === 1,
-        }"
-      >
+        }">
         <span class="page-link">FIRST PAGE</span>
       </li>
       <!-- 往前跳兩頁 -->
-      <li
-        class="page-item"
-        aria-label="go to previous page"
-        @click="minusfour()"
-        :class="{
+      <li class="page-item" aria-label="go to previous page" @click="minusfour()" :class="{
           disabled: currentPage < 3,
-        }"
-      >
+        }">
         <span class="page-link">&#10218;</span>
       </li>
       <!-- 當下頁面 -->
-      <li
-        v-for="index in numberOfPages"
-        :key="index"
-        :aria-label="'go to page ' + index"
-        class="page-item"
-        @click="setCurrentPage(index)"
-      >
-        <div
-          class="page-link"
-          :class="{
+      <li v-for="index in numberOfPages" :key="index" :aria-label="'go to page ' + index" class="page-item"
+        @click="setCurrentPage(index)">
+        <div class="page-link" :class="{
             'active-page': currentPage === index,
-          }"
-          v-if="0 < index && index < numberOfPages + 1"
-        >
+          }" v-if="0 < index && index < numberOfPages + 1">
           {{ index }}
         </div>
       </li>
       <!-- 往後跳兩頁 -->
-      <li
-        class="page-item"
-        aria-label="go to previous page"
-        @click="plusfour()"
-        :class="{
+      <li class="page-item" aria-label="go to previous page" @click="plusfour()" :class="{
           disabled: currentPage > numberOfPages - 2,
-        }"
-      >
+        }">
         <span class="page-link">&#10219;</span>
       </li>
       <!-- 最後一頁 -->
-      <li
-        class="page-item"
-        :class="{
+      <li class="page-item" :class="{
           disabled: currentPage === numberOfPages || !numberOfPages,
-        }"
-        aria-label="go to next page"
-        @click="last()"
-      >
+        }" aria-label="go to next page" @click="last()">
         <div class="page-link">LAST PAGE</div>
       </li>
     </ul>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { toRefs } from "vue";
 
 const props = defineProps({
@@ -155,6 +126,7 @@ const last = () => {
   padding: 10px 15px;
   font-size: 14px;
   font-weight: 800;
+
   &:hover {
     color: #333333;
     background-color: #e9e9e9;
@@ -165,6 +137,7 @@ const last = () => {
 .active-page {
   background-color: #60d394;
   color: white;
+
   &:hover {
     border: none;
   }
@@ -174,6 +147,7 @@ const last = () => {
   .page-link {
     background-color: #f9fafb;
   }
+
   cursor: not-allowed;
 }
 </style>

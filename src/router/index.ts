@@ -121,6 +121,19 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+      {
+        // 付款對象查詢與新增
+        path: "/payeeMaintenance",
+        name: "PayeeMaintenance",
+        component: NormalLayout,
+        children: [
+          {
+            path: "",
+            component: () =>
+              import("../views/subfunction/managerGroup/PayeeMaintenance.vue"),
+          },
+        ],
+      },
 
       // 分隔線，以下為一般帳款作業申請
 

@@ -5,22 +5,10 @@
   <BackToLoginView></BackToLoginView>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import UserList from "../../../components/subfunccomponents/aboutpsUserList/UserList.vue";
 import BackToLoginView from "../../../components/public/BackToLoginView.vue";
-export default defineComponent({
-  name: "UserMaintain",
-  components: {
-    UserList,
-    BackToLoginView,
-  },
-  setup() {
-    // console.time("Spent");
-    // console.timeLog("Spent");
-    // console.timeEnd("Spent");
-    return {};
-  },
-});
+
 </script>
-<style src="../subfunction.scss" lang="scss" scoped></style>
+<style src="../subfunction.scss" lang="scss" scoped>
+</style>

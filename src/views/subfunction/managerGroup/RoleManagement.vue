@@ -6,21 +6,21 @@
   <BackToLoginView></BackToLoginView>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { defineComponent } from "vue";
 import BackToLoginView from "../../../components/public/BackToLoginView.vue";
 import AddNewRole from "../../../components/subfunccomponents/aboutpsRoleList/AddNewRole.vue";
 import RoleList from "../../../components/subfunccomponents/aboutpsRoleList/RoleList.vue";
-export default defineComponent({
-  name: "RoleManagement",
-  components: {
-    BackToLoginView,
-    AddNewRole,
-    RoleList,
-  },
-  setup() {
-    return {};
-  },
-});
+// export default defineComponent({
+//   name: "RoleManagement",
+//   components: {
+//     BackToLoginView,
+//     AddNewRole,
+//     RoleList,
+//   },
+//   setup() {
+//     return {};
+//   },
+// });
 </script>
 <style src="../subfunction.scss" lang="scss" scoped></style>
