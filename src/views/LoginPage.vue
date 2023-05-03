@@ -62,8 +62,8 @@ const login = () => {
 
       .then((response) => {
         if (response.data.returnCode === "0") {
-          // console.log("response:", response.data.data);
-          localStorage.setItem("userJWT", response.data.data);
+          console.log(response.data.data);
+          localStorage.setItem("userJWT", response.data.data.jwt);
           localStorage.setItem("userId", username.value);
           router.push({ path: "/LoginView" });
         } else {
@@ -93,8 +93,8 @@ const newLogin = async () => {
     });
 
     if (res.data.returnCode === "0") {
-      // console.log(res.data);
-      localStorage.setItem("userJWT", res.data.data);
+      console.log(res.data.data);
+      localStorage.setItem("userJWT", res.data.data.jwt);
       localStorage.setItem("userId", username.value);
       router.push({ path: "/LoginView" });
     } else {
