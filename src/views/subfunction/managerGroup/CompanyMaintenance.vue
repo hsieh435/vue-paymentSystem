@@ -23,7 +23,6 @@
         <td class="startLeft">{{ comapny.shortName }}</td>
         <td class="startLeft">{{ comapny.prjPaymentAccountId }}-{{ comapny.prjPaymentAccountName }}</td>
         <td>編輯、刪除</td>
-        <!-- TODO：新增、編輯及刪除功能 -->
       </tr>
     </tbody>
   </table>

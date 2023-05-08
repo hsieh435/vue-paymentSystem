@@ -134,6 +134,19 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+      {
+        // 月結廠商帳款設定
+        path: "/monthlyVendorProfile",
+        name: "MonthlyVendorProfile",
+        component: NormalLayout,
+        children: [
+          {
+            path: "",
+            component: () =>
+              import("../views/subfunction/managerGroup/MonthlyVendorProfile.vue"),
+          },
+        ],
+      },
 
       // 分隔線，以下為一般帳款作業申請
 
